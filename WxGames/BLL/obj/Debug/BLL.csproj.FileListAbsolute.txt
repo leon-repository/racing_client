@@ -1,0 +1,16 @@
+E:\C#\WxGames\BLL\bin\Debug\BLL.dll
+E:\C#\WxGames\BLL\bin\Debug\BLL.pdb
+E:\C#\WxGames\BLL\bin\Debug\EntityFramework.dll
+E:\C#\WxGames\BLL\bin\Debug\EntityFramework.SqlServer.dll
+E:\C#\WxGames\BLL\bin\Debug\Model.dll
+E:\C#\WxGames\BLL\bin\Debug\System.Data.SQLite.dll
+E:\C#\WxGames\BLL\bin\Debug\System.Data.SQLite.EF6.dll
+E:\C#\WxGames\BLL\bin\Debug\System.Data.SQLite.Linq.dll
+E:\C#\WxGames\BLL\bin\Debug\Model.pdb
+E:\C#\WxGames\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+E:\C#\WxGames\BLL\obj\Debug\BLL.dll
+E:\C#\WxGames\BLL\obj\Debug\BLL.pdb
+E:\C#\WxGames\BLL\bin\Debug\lib\C5.dll
+E:\C#\WxGames\BLL\bin\Debug\lib\Common.Logging.Core.dll
+E:\C#\WxGames\BLL\bin\Debug\lib\Common.Logging.dll
+E:\C#\WxGames\BLL\bin\Debug\lib\Quartz.dll

@@ -1,0 +1,15 @@
+E:\C#\WxGames\BLLTests\bin\Debug\lib\C5.dll
+E:\C#\WxGames\BLLTests\bin\Debug\lib\Common.Logging.Core.dll
+E:\C#\WxGames\BLLTests\bin\Debug\lib\Common.Logging.dll
+E:\C#\WxGames\BLLTests\bin\Debug\lib\Quartz.dll
+E:\C#\WxGames\BLLTests\bin\Debug\BLLTests.dll
+E:\C#\WxGames\BLLTests\bin\Debug\BLLTests.pdb
+E:\C#\WxGames\BLLTests\bin\Debug\BLL.dll
+E:\C#\WxGames\BLLTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\C#\WxGames\BLLTests\bin\Debug\EntityFramework.dll
+E:\C#\WxGames\BLLTests\bin\Debug\Model.dll
+E:\C#\WxGames\BLLTests\bin\Debug\BLL.pdb
+E:\C#\WxGames\BLLTests\bin\Debug\Model.pdb
+E:\C#\WxGames\BLLTests\obj\Debug\BLLTests.csprojResolveAssemblyReference.cache
+E:\C#\WxGames\BLLTests\obj\Debug\BLLTests.dll
+E:\C#\WxGames\BLLTests\obj\Debug\BLLTests.pdb
