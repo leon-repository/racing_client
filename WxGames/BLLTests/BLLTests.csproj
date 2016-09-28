@@ -59,6 +59,13 @@
       <Project>{2632E902-6719-4CAE-807A-70942222E22A}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WxGames\WxGames.csproj">
+      <Project>{25CE8FAB-7CC4-469D-9369-FBE9D83E4BF6}</Project>
+      <Name>WxGames</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Job\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

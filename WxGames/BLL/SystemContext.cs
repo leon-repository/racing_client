@@ -35,5 +35,11 @@ namespace BLL
         public DbSet<LoginModel> Logins { get; set; }
 
         public DbSet<QunTb> QunTbs { get; set; }
+
+        public DbSet<Contact> Contacts { get; set; }
+
+        public DbSet<OriginMsg> OriginMsgs { get; set; }
+
+        public DbSet<NowMsg> NowMsgs { get; set; }
     }
 }

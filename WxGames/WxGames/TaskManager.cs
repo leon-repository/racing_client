@@ -25,7 +25,7 @@ namespace WxGames
             ISimpleTrigger trigger = (ISimpleTrigger)TriggerBuilder.Create()
                 .WithIdentity("sendMessageTri", "Trigger")
                 .StartNow()
-                .WithSimpleSchedule(x => x.WithIntervalInSeconds(2).WithRepeatCount(int.MaxValue))
+                .WithSimpleSchedule(x => x.WithIntervalInSeconds(10).WithRepeatCount(3))
                 .ForJob(job)
                 .Build();
 
@@ -36,12 +36,12 @@ namespace WxGames
             ISimpleTrigger trigger2 = (ISimpleTrigger)TriggerBuilder.Create()
                 .WithIdentity("receiveMessageTri", "Trigger")
                 .StartNow()
-                .WithSimpleSchedule(x => x.WithIntervalInSeconds(2).WithRepeatCount(int.MaxValue))
+                .WithSimpleSchedule(x => x.WithIntervalInSeconds(3).WithRepeatCount(int.MaxValue))
                 .ForJob(job2)
                 .Build();
 
             //把job，trigger添加到任务中
-           // sched.ScheduleJob(job, trigger);
+            sched.ScheduleJob(job, trigger);
             sched.ScheduleJob(job2, trigger2);
 
             Scheduler = sched;
