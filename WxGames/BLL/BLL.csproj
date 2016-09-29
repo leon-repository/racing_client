@@ -39,6 +39,7 @@
       <HintPath>lib\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.103.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -59,9 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataHelper.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderManager.cs" />
     <Compile Include="PanKou.cs" />
+    <Compile Include="ScoreManager.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="SystemContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

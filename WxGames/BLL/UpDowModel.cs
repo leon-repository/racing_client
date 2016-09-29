@@ -20,6 +20,11 @@ namespace BLL
         public string CommandType { get; set; }
 
         /// <summary>
+        /// 分数
+        /// </summary>
+        public string Socre { get; set; }
+
+        /// <summary>
         /// 是否同意
         /// </summary>
         public string IsSucc { get; set; }

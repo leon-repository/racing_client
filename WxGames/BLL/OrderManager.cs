@@ -149,9 +149,15 @@ namespace BLL
 
             //类型三：冠军简写
             List<KeyValuePair<string, string>> guanKey3 = new List<KeyValuePair<string, string>>();
-            guanKey3.Add(new KeyValuePair<string, string>(".", ".|"));
+            guanKey3.Add(new KeyValuePair<string, string>(".", ".|/"));
             foreach (KeyValuePair<string, string> key in guanKey3)
             {
+                //检查是否存在汉字
+                if (order.ExitHanZi())
+                {
+                    break;
+                }
+
                 string[] keyA = key.Value.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 
                 for (int i = 0; i < keyA.Length; i++)

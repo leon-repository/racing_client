@@ -91,15 +91,18 @@
             this.不同意ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabSearch = new System.Windows.Forms.TabPage();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.dtpBegin = new System.Windows.Forms.DateTimePicker();
-            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txtNickName = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.dgbHistory = new System.Windows.Forms.DataGridView();
+            this.NickName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsSucc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CommandType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtNickName = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.dtpBegin = new System.Windows.Forms.DateTimePicker();
             this.bottomStatus.SuspendLayout();
             this.tab.SuspendLayout();
             this.tabPankou.SuspendLayout();
@@ -118,8 +121,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvUp)).BeginInit();
             this.menuRight.SuspendLayout();
             this.tabSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgbHistory)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // bottomStatus
@@ -157,7 +160,7 @@
             this.tab.Location = new System.Drawing.Point(0, 0);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
-            this.tab.Size = new System.Drawing.Size(1139, 997);
+            this.tab.Size = new System.Drawing.Size(1121, 997);
             this.tab.TabIndex = 1;
             // 
             // tabPankou
@@ -170,7 +173,7 @@
             this.tabPankou.Location = new System.Drawing.Point(4, 28);
             this.tabPankou.Name = "tabPankou";
             this.tabPankou.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPankou.Size = new System.Drawing.Size(1131, 965);
+            this.tabPankou.Size = new System.Drawing.Size(1113, 965);
             this.tabPankou.TabIndex = 0;
             this.tabPankou.Text = "盘口登陆";
             this.tabPankou.UseVisualStyleBackColor = true;
@@ -225,7 +228,7 @@
             this.tabZhangDan.Location = new System.Drawing.Point(4, 28);
             this.tabZhangDan.Name = "tabZhangDan";
             this.tabZhangDan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabZhangDan.Size = new System.Drawing.Size(1137, 965);
+            this.tabZhangDan.Size = new System.Drawing.Size(1113, 965);
             this.tabZhangDan.TabIndex = 1;
             this.tabZhangDan.Text = "账单";
             this.tabZhangDan.UseVisualStyleBackColor = true;
@@ -281,7 +284,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label5);
             this.splitContainer2.Panel2.Controls.Add(this.txtWxUserName);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Size = new System.Drawing.Size(1131, 959);
+            this.splitContainer2.Size = new System.Drawing.Size(1107, 959);
             this.splitContainer2.SplitterDistance = 746;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -292,7 +295,7 @@
             this.dgvZhanDan.Location = new System.Drawing.Point(0, 0);
             this.dgvZhanDan.Name = "dgvZhanDan";
             this.dgvZhanDan.RowTemplate.Height = 30;
-            this.dgvZhanDan.Size = new System.Drawing.Size(1131, 746);
+            this.dgvZhanDan.Size = new System.Drawing.Size(1107, 746);
             this.dgvZhanDan.TabIndex = 0;
             // 
             // btnUpdate
@@ -639,7 +642,7 @@
             this.tabZhiling.Location = new System.Drawing.Point(4, 28);
             this.tabZhiling.Name = "tabZhiling";
             this.tabZhiling.Padding = new System.Windows.Forms.Padding(3);
-            this.tabZhiling.Size = new System.Drawing.Size(1137, 965);
+            this.tabZhiling.Size = new System.Drawing.Size(1119, 965);
             this.tabZhiling.TabIndex = 2;
             this.tabZhiling.Text = "指令设置";
             this.tabZhiling.UseVisualStyleBackColor = true;
@@ -649,7 +652,7 @@
             this.tabXiaoxi.Location = new System.Drawing.Point(4, 28);
             this.tabXiaoxi.Name = "tabXiaoxi";
             this.tabXiaoxi.Padding = new System.Windows.Forms.Padding(3);
-            this.tabXiaoxi.Size = new System.Drawing.Size(1137, 965);
+            this.tabXiaoxi.Size = new System.Drawing.Size(1119, 965);
             this.tabXiaoxi.TabIndex = 3;
             this.tabXiaoxi.Text = "消息设置";
             this.tabXiaoxi.UseVisualStyleBackColor = true;
@@ -659,7 +662,7 @@
             this.tabYingkui.Location = new System.Drawing.Point(4, 28);
             this.tabYingkui.Name = "tabYingkui";
             this.tabYingkui.Padding = new System.Windows.Forms.Padding(3);
-            this.tabYingkui.Size = new System.Drawing.Size(1137, 965);
+            this.tabYingkui.Size = new System.Drawing.Size(1119, 965);
             this.tabYingkui.TabIndex = 4;
             this.tabYingkui.Text = "盈亏计算";
             this.tabYingkui.UseVisualStyleBackColor = true;
@@ -682,7 +685,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.tabPanel);
             this.splitContainer1.Panel2MinSize = 0;
             this.splitContainer1.Size = new System.Drawing.Size(1530, 999);
-            this.splitContainer1.SplitterDistance = 1141;
+            this.splitContainer1.SplitterDistance = 1123;
             this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -694,7 +697,7 @@
             this.tabPanel.Location = new System.Drawing.Point(0, 0);
             this.tabPanel.Name = "tabPanel";
             this.tabPanel.SelectedIndex = 0;
-            this.tabPanel.Size = new System.Drawing.Size(377, 997);
+            this.tabPanel.Size = new System.Drawing.Size(395, 997);
             this.tabPanel.TabIndex = 0;
             // 
             // tabUp
@@ -703,7 +706,7 @@
             this.tabUp.Location = new System.Drawing.Point(4, 28);
             this.tabUp.Name = "tabUp";
             this.tabUp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUp.Size = new System.Drawing.Size(369, 965);
+            this.tabUp.Size = new System.Drawing.Size(387, 965);
             this.tabUp.TabIndex = 0;
             this.tabUp.Text = "上下分操作";
             this.tabUp.UseVisualStyleBackColor = true;
@@ -721,7 +724,7 @@
             this.dgvUp.ReadOnly = true;
             this.dgvUp.RowTemplate.Height = 30;
             this.dgvUp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUp.Size = new System.Drawing.Size(363, 959);
+            this.dgvUp.Size = new System.Drawing.Size(381, 959);
             this.dgvUp.TabIndex = 0;
             // 
             // menuRight
@@ -755,76 +758,50 @@
             // 
             // tabSearch
             // 
-            this.tabSearch.Controls.Add(this.dataGridView1);
+            this.tabSearch.Controls.Add(this.dgbHistory);
             this.tabSearch.Controls.Add(this.panel1);
             this.tabSearch.Location = new System.Drawing.Point(4, 28);
             this.tabSearch.Name = "tabSearch";
             this.tabSearch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSearch.Size = new System.Drawing.Size(369, 965);
+            this.tabSearch.Size = new System.Drawing.Size(381, 965);
             this.tabSearch.TabIndex = 1;
             this.tabSearch.Text = "操作记录";
             this.tabSearch.UseVisualStyleBackColor = true;
             // 
-            // label17
+            // dgbHistory
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 20);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(44, 18);
-            this.label17.TabIndex = 0;
-            this.label17.Text = "开始";
+            this.dgbHistory.AllowUserToAddRows = false;
+            this.dgbHistory.AllowUserToDeleteRows = false;
+            this.dgbHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgbHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NickName,
+            this.IsSucc,
+            this.CommandType});
+            this.dgbHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgbHistory.Location = new System.Drawing.Point(3, 103);
+            this.dgbHistory.MultiSelect = false;
+            this.dgbHistory.Name = "dgbHistory";
+            this.dgbHistory.ReadOnly = true;
+            this.dgbHistory.Size = new System.Drawing.Size(375, 859);
+            this.dgbHistory.TabIndex = 6;
             // 
-            // label18
+            // NickName
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(3, 54);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(44, 18);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "结束";
+            this.NickName.HeaderText = "昵称";
+            this.NickName.Name = "NickName";
+            this.NickName.ReadOnly = true;
             // 
-            // dtpBegin
+            // IsSucc
             // 
-            this.dtpBegin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpBegin.CustomFormat = "yyyy-MM-dd";
-            this.dtpBegin.Location = new System.Drawing.Point(53, 13);
-            this.dtpBegin.Name = "dtpBegin";
-            this.dtpBegin.Size = new System.Drawing.Size(178, 28);
-            this.dtpBegin.TabIndex = 1;
+            this.IsSucc.HeaderText = "是否同意";
+            this.IsSucc.Name = "IsSucc";
+            this.IsSucc.ReadOnly = true;
             // 
-            // dtpEnd
+            // CommandType
             // 
-            this.dtpEnd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpEnd.CustomFormat = "yyyy-MM-dd";
-            this.dtpEnd.Location = new System.Drawing.Point(53, 47);
-            this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.Size = new System.Drawing.Size(178, 28);
-            this.dtpEnd.TabIndex = 1;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(245, 16);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(44, 18);
-            this.label19.TabIndex = 2;
-            this.label19.Text = "昵称";
-            // 
-            // txtNickName
-            // 
-            this.txtNickName.Location = new System.Drawing.Point(295, 12);
-            this.txtNickName.Name = "txtNickName";
-            this.txtNickName.Size = new System.Drawing.Size(135, 28);
-            this.txtNickName.TabIndex = 3;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(260, 45);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(106, 35);
-            this.btnSearch.TabIndex = 4;
-            this.btnSearch.Text = "查询";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            this.CommandType.HeaderText = "操作";
+            this.CommandType.Name = "CommandType";
+            this.CommandType.ReadOnly = true;
             // 
             // panel1
             // 
@@ -838,20 +815,70 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(363, 100);
+            this.panel1.Size = new System.Drawing.Size(375, 100);
             this.panel1.TabIndex = 5;
             // 
-            // dataGridView1
+            // dtpEnd
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 103);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(363, 859);
-            this.dataGridView1.TabIndex = 6;
+            this.dtpEnd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtpEnd.CustomFormat = "yyyy-MM-dd";
+            this.dtpEnd.Location = new System.Drawing.Point(53, 47);
+            this.dtpEnd.Name = "dtpEnd";
+            this.dtpEnd.Size = new System.Drawing.Size(178, 28);
+            this.dtpEnd.TabIndex = 1;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(260, 45);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(106, 35);
+            this.btnSearch.TabIndex = 4;
+            this.btnSearch.Text = "查询";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 20);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(44, 18);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "开始";
+            // 
+            // txtNickName
+            // 
+            this.txtNickName.Location = new System.Drawing.Point(295, 12);
+            this.txtNickName.Name = "txtNickName";
+            this.txtNickName.Size = new System.Drawing.Size(135, 28);
+            this.txtNickName.TabIndex = 3;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(3, 54);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(44, 18);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "结束";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(245, 16);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(44, 18);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "昵称";
+            // 
+            // dtpBegin
+            // 
+            this.dtpBegin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtpBegin.CustomFormat = "yyyy-MM-dd";
+            this.dtpBegin.Location = new System.Drawing.Point(53, 13);
+            this.dtpBegin.Name = "dtpBegin";
+            this.dtpBegin.Size = new System.Drawing.Size(178, 28);
+            this.dtpBegin.TabIndex = 1;
             // 
             // frmMainForm
             // 
@@ -886,9 +913,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvUp)).EndInit();
             this.menuRight.ResumeLayout(false);
             this.tabSearch.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgbHistory)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -951,9 +978,7 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.TabControl tabPanel;
-        private System.Windows.Forms.TabPage tabUp;
         private System.Windows.Forms.TabPage tabSearch;
-        private System.Windows.Forms.DataGridView dgvUp;
         private System.Windows.Forms.ContextMenuStrip menuRight;
         private System.Windows.Forms.ToolStripMenuItem 同意ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 不同意ToolStripMenuItem;
@@ -966,6 +991,11 @@
         private System.Windows.Forms.TextBox txtNickName;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgbHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NickName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsSucc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CommandType;
+        private System.Windows.Forms.TabPage tabUp;
+        private System.Windows.Forms.DataGridView dgvUp;
     }
 }

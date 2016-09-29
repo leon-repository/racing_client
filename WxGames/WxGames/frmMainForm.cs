@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using WxGames.HTTP;
 
@@ -42,11 +43,7 @@ namespace WxGames
             dgvUp.Columns.Add(columnOp);
             dgvUp.Columns.Add(columnUin);
 
-            List<UpDowModel> list = new List<UpDowModel>();
-            list.Add(new UpDowModel() { NickName = "1", Uin = "1", CommandType = "上分", IsSucc = "未操作" });
-            list.Add(new UpDowModel() { NickName = "2", Uin = "2", CommandType = "上分", IsSucc = "未操作" });
-            dgvUp.DataSource = list;
-
+            dgvUp.DataSource = ScoreManager.Instance.GetUpDowModel();
         }
 
         /// <summary>
@@ -73,6 +70,11 @@ namespace WxGames
         /// 当前期号
         /// </summary>
         public static string Perioid;
+
+        /// <summary>
+        /// 刷新dgvUp
+        /// </summary>
+        Thread dgvThead=null;
 
         private void frmMainForm_Load(object sender, EventArgs e)
         {
@@ -189,8 +191,8 @@ namespace WxGames
                 btnStart.Text = "结束";
 
                 CurrentQun = cmbQun.SelectedValue.ToString();
-                TaskManager.Instance.Start(true);
                 //开始定时处理消息
+                TaskManager.Instance.Start(true);
                 //开始更新dataGridView数据表
             }
             else
@@ -229,6 +231,11 @@ namespace WxGames
             string uin = row.Cells["Uin"].Value.ToString();
 
             MessageBox.Show(nickName + "_" + uin);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

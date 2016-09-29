@@ -60,7 +60,7 @@ namespace Model
         /// <summary>
         /// 指令分数
         /// </summary>
-        public string Socre { get; set; }
+        public string Score { get; set; }
 
         /// <summary>
         /// 指令类型
