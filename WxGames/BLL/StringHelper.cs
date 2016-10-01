@@ -40,5 +40,12 @@ namespace BLL
             }
             return false;
         }
+
+        public static string String2HanZi(this string str)
+        {
+            String reg = "[^\u4e00-\u9fa5]";
+            str = str.Replace(reg, "");
+            return str;
+        }
     }
 }

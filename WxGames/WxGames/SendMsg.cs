@@ -1,21 +1,20 @@
-﻿using System;
+﻿using BLL;
+using Model;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
-using Common.Logging;
-using Quartz;
-using WxGames;
-using BLL;
-using Model;
-using System.Configuration;
 
-namespace WxGames.Job
+namespace WxGames
 {
-    public class SendMessageJob : IJob
+    class SendMsg
     {
-        public string JObject { get; private set; }
+        private SendMsg() { }
 
-        public void Execute(IJobExecutionContext context)
+        public static readonly SendMsg Instance = new SendMsg();
+
+        public void Send()
         {
             string conn = ConfigurationManager.AppSettings["conn"].ToString();
             DataHelper data = new DataHelper(conn);
@@ -46,18 +45,7 @@ namespace WxGames.Job
                 nowMsg.IsDeal = "0";
                 nowMsg.Period = frmMainForm.Perioid;
 
-                //先查消息id是否重复，如果重复，则跳过不处理
-                List<KeyValuePair<string, object>> pkList = new List<KeyValuePair<string, object>>();
-                pkList.Add(new KeyValuePair<string, object>("MsgId",msg.MsgId));
-                NowMsg exitNowMsg=data.First<NowMsg>(pkList, "");
-                if (exitNowMsg == null)
-                {
-                    data.Insert<NowMsg>(nowMsg, "");
-                }
-                else
-                {
-                    Log.WriteLogByDate("NowMsg消息重复：msgID=" + msg.MsgId);
-                }
+                data.Insert<NowMsg>(nowMsg, "");
                 data.ExecuteSql(string.Format("update OriginMsg set IsSucc = '1' where MsgId = '{0}'", msg.MsgId));
             }
 
@@ -73,9 +61,10 @@ namespace WxGames.Job
                 //成功提示，错误格式提示，余额不足提示，投注限制提示，封盘提示，
                 if (model != null)
                 {
-                    frmMainForm.CurrentWX.SendMsg(model, false);
+                    //frmMainForm.CurrentWX.SendMsg(model, false);
                 }
             }
         }
     }
+    
 }

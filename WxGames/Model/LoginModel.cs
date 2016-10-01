@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -14,7 +13,6 @@ namespace Model
         /// <summary>
         /// 盘口ID
         /// </summary>
-        [Key]
         public string PankouId { get; set; }
 
         /// <summary>

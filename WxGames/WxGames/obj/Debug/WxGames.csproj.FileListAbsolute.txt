@@ -10,12 +10,8 @@ E:\C#\WxGames\WxGames\bin\Debug\Newtonsoft.Json.dll
 E:\C#\WxGames\WxGames\obj\Debug\WxGames.frmMainForm.resources
 E:\C#\WxGames\WxGames\bin\Debug\WxGames.exe.config
 E:\C#\WxGames\WxGames\bin\Debug\BLL.dll
-E:\C#\WxGames\WxGames\bin\Debug\EntityFramework.dll
-E:\C#\WxGames\WxGames\bin\Debug\EntityFramework.SqlServer.dll
 E:\C#\WxGames\WxGames\bin\Debug\Model.dll
 E:\C#\WxGames\WxGames\bin\Debug\System.Data.SQLite.dll
-E:\C#\WxGames\WxGames\bin\Debug\System.Data.SQLite.EF6.dll
-E:\C#\WxGames\WxGames\bin\Debug\System.Data.SQLite.Linq.dll
 E:\C#\WxGames\WxGames\bin\Debug\BLL.pdb
 E:\C#\WxGames\WxGames\bin\Debug\Model.pdb
 E:\C#\WxGames\WxGames\bin\Debug\lib\C5.dll
@@ -26,14 +22,10 @@ E:\C#\WxGames\WxGames\bin\Debug\C5.dll
 E:\C#\WxGames\WxGames\bin\Debug\Common.Logging.Core.dll
 E:\C#\WxGames\WxGames\bin\Debug\Common.Logging.dll
 E:\C#\WxGames\WxGames\bin\Debug\Quartz.dll
-E:\C#\WxGames\WxGames\bin\Debug\lib\EntityFramework.dll
-E:\C#\WxGames\WxGames\bin\Debug\lib\EntityFramework.SqlServer.dll
 E:\C#\WxGames\WxGames\bin\Debug\lib\EnvDTE.dll
 E:\C#\WxGames\WxGames\bin\Debug\lib\SQLite.Designer.dll
 E:\C#\WxGames\WxGames\bin\Debug\lib\stdole.dll
 E:\C#\WxGames\WxGames\bin\Debug\lib\System.Data.SQLite.dll
-E:\C#\WxGames\WxGames\bin\Debug\lib\System.Data.SQLite.EF6.dll
-E:\C#\WxGames\WxGames\bin\Debug\lib\System.Data.SQLite.Linq.dll
 E:\C#\WxGames\WxGames\bin\Debug\lib\webbrowsers\CFLite.dll
 E:\C#\WxGames\WxGames\bin\Debug\lib\webbrowsers\icudt40.dll
 E:\C#\WxGames\WxGames\bin\Debug\lib\webbrowsers\icuin40.dll

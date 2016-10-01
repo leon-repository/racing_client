@@ -16,5 +16,16 @@ namespace BLL.Tests
             ScoreManager.Instance.GetUpDowModel();
 
         }
+
+        [TestMethod()]
+        public void UpScoreTest()
+        {
+            //Assert.IsTrue(ScoreManager.Instance.UpScore("2328346900", 500));
+
+            //Assert.IsTrue(ScoreManager.Instance.UpScore("437364022", 500));
+            Assert.IsTrue(ScoreManager.Instance.UpScore("1470491868", 2000));
+            
+
+        }
     }
 }

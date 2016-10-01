@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -11,7 +10,6 @@ namespace Model
     /// </summary>
     public class Contact
     {
-        [Key]
         public string Uuid { get; set; }
 
         /// <summary>

@@ -1,24 +1,22 @@
-﻿using System;
+﻿using BLL;
+using Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
-using Quartz;
-using WxGames;
-using Newtonsoft.Json.Linq;
-using System.IO;
-using Model;
-using BLL;
-using Newtonsoft.Json;
-using System.Configuration;
 
-namespace WxGames.Job
+namespace WxGames
 {
-    /// <summary>
-    /// 接受群消息，并保存到数据库
-    /// </summary>
-    class ReceiveMessageJob : IJob
+    public class ReciveMsg
     {
-        public void Execute(IJobExecutionContext context)
+        private ReciveMsg() { }
+
+        public static ReciveMsg Instance = new ReciveMsg();
+
+        public void Receive()
         {
             //获取消息列表，并原样输出
             string sync_flag = frmMainForm.wxs.WxSyncCheck();//同步检查
@@ -148,25 +146,13 @@ namespace WxGames.Job
                             msg.FromNickName = model3.NickName;
                             msg.FromUin = model3.Uin;
                             msg.QnickName = qNickName;
-                            //插入消息前检查
-                            List<KeyValuePair<string, object>> pkList4 = new List<KeyValuePair<string, object>>();
-                            pkList4.Add(new KeyValuePair<string, object>("MsgId",msg.MsgId));
-
-                            OriginMsg orginMsg2=data.First<OriginMsg>(pkList4, "");
-                            if (orginMsg2 == null)
-                            {
-                                data.Insert<OriginMsg>(msg, "");
-                            }
-                            else
-                            {
-                                Log.WriteLogByDate("OriginMsg消息重复：msgID=" + msg.MsgId);
-                            }
+                            data.Insert<OriginMsg>(msg, "");
                         }
                         else
                         {
                             Log.WriteLogByDate("无法获取到uin，读取到的消息不保存");
                         }
-                        
+
                     }
                 }
             }

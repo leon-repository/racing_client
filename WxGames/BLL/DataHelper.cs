@@ -32,7 +32,7 @@ namespace BLL
     ///             }
     ///        }
     /// B:使用ExecuteSqlTran
-    /// 3，包括常用方法，增删改查，单表操作(带事务和不带事务)，请使用Insert,Update,DeleteT,First,GetList
+    /// 3，包括常用方法，增删改查，单表操作(带事务和不带事务)，请使用Insert,Update,Delete,First,GetList
     /// 4，join查询操作，请使用 GetListNonTable
     /// </summary>
     public class DataHelper
@@ -63,9 +63,9 @@ namespace BLL
                 cmd.Parameters.Clear();
                 return rows;
             }
-            catch (SQLiteException ex)
+            catch
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -78,9 +78,9 @@ namespace BLL
                 if (tran != null) command.SelectCommand.Transaction = tran;
                 command.Fill(dt);
             }
-            catch (SQLiteException ex)
+            catch
             {
-                throw ex;
+                throw;
             }
             return dt;
         }
@@ -843,13 +843,13 @@ namespace BLL
 
             foreach (var key in data.Keys.Except(pkList.Select(p => p.Key.ToUpper()).ToList()))
             {
-                sqlBuilder.AppendFormat("{0}=:{0},", key);
+                sqlBuilder.AppendFormat("{0}=@{0},", key);
             }
             sqlBuilder.Remove(sqlBuilder.Length - 1, 1);
             sqlBuilder.Append(" WHERE ");
             foreach (var key in pkList)
             {
-                sqlBuilder.AppendFormat(" {0}=:{0} AND", key.Key.ToUpper());
+                sqlBuilder.AppendFormat(" {0}=@{0} AND", key.Key.ToUpper());
             }
             sqlBuilder.Remove(sqlBuilder.Length - 3, 3);
 
@@ -858,7 +858,7 @@ namespace BLL
             foreach (string key in data.Keys.Except(pkList.Select(p => p.Key.ToUpper()).ToList()))
             {
                 SQLiteParameter para = new SQLiteParameter();
-                para.ParameterName = ":" + key;
+                para.ParameterName = "@" + key;
                 para.DbType = Convert2SQLiteType(objType.GetProperty(key, BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance).PropertyType.Name, objType.GetProperty(key, BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance).PropertyType.FullName);
 
                 if (data[key] == null)
@@ -877,7 +877,7 @@ namespace BLL
             foreach (var key in pkList)
             {
                 SQLiteParameter para = new SQLiteParameter();
-                para.ParameterName = ":" + key.Key;
+                para.ParameterName = "@" + key.Key;
                 para.DbType = Convert2SQLiteType(objType.GetProperty(key.Key, BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance).PropertyType.Name, objType.GetProperty(key.Key, BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance).PropertyType.FullName);
 
                 if (key.Value == null)
