@@ -61,6 +61,8 @@ namespace WxGames
 
         private DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
 
+        public static List<Config> Configs = new List<Config>();
+
         /// <summary>
         /// 设置dgvUp的数据源
         /// </summary>
@@ -114,25 +116,25 @@ namespace WxGames
             cmbPankou.DisplayMember = "PankouName";
             cmbPankou.ValueMember = "PankouId";
 
-            //微信心跳
-            ((Action)(delegate ()
-            {
-                string sync_flag = "";
-                while (true)
-                {
-                    sync_flag = wxs.WxSyncCheck();  //同步检查,为的是保持与服务器的通讯
+            ////微信心跳
+            //((Action)(delegate ()
+            //{
+            //    string sync_flag = "";
+            //    while (true)
+            //    {
+            //        sync_flag = wxs.WxSyncCheck();  //同步检查,为的是保持与服务器的通讯
 
-                    if (!sync_flag.Contains("retcode:\"0\"")||sync_flag==null)
-                    {
-                        lblStatus.Text = "刷新中";
-                    }
-                    else
-                    {
-                        lblStatus.Text = "正常登陆";
-                    }
-                }
+            //        if (!sync_flag.Contains("retcode:\"0\"")||sync_flag==null)
+            //        {
+            //            lblStatus.Text = "刷新中";
+            //        }
+            //        else
+            //        {
+            //            lblStatus.Text = "正常登陆";
+            //        }
+            //    }
 
-            })).BeginInvoke(null, null);
+            //})).BeginInvoke(null, null);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -143,6 +145,7 @@ namespace WxGames
             if (PanKou.Instance.Login(userName, pwd))
             {
                 QunInit();
+                Configs= data.GetList<Config>("type='MSG'", "");
             }
             else
             {
@@ -235,6 +238,22 @@ namespace WxGames
                 //账单信息显示
                 dgvZhanDan.DataSource = ScoreManager.Instance.GetZhanDan();
                 dgvUp.Enabled = true;
+
+                //在点开始按钮的时候，启动消息
+               List<Config> configs = data.GetList<Config>(" Type='MSG' and Key in ('CHKSTART','STARTCONTENT') ", "");
+                if (configs != null && configs.Count == 2)
+                {
+                    //发消息
+                    Config chkStart = configs.Find(p => p.Key == "CHKSTART");
+                    if (chkStart != null)
+                    {
+                       Config content = configs.Find(p => p.Key == "STARTCONTENT");
+                        if (content != null)
+                        {
+                            CurrentWX.SendMsg(new WXMsg() { From=CurrentWX.UserName, Msg=content.Value, Readed=false, Time= DateTime.Now, To=CurrentQun, Type=1 }, false);
+                        }
+                    }
+                }
             }
             else
             {
@@ -245,26 +264,37 @@ namespace WxGames
                 cmbQun.Enabled = true;
                 btnRefresh.Enabled = true;
                 dgvUp.Enabled = false;
+
+                //在点结束按钮的时候，发送结束消息
+                //清理垃圾数据
+                data.ExecuteSql(" update OriginMsg set issucc='1' ");//原始消息，全部删除
+                data.ExecuteSql("update nowmsg set issucc=1");
+                data.ExecuteSql("update nowmsg set isdeal='1'");
+                data.ExecuteSql("update nowmsg set isdelete='1'");
+
+                data.ExecuteSql(" update game set issucc=1 ");//期数全部结束
+                data.ExecuteSql(" update gamemsg set issend=1");//期数消息全部发送
+
             }
 
-            ((Action)(delegate ()
-            {
-                string sync_flag = "";
-                while (true)
-                {
-                    sync_flag = wxs.WxSyncCheck();  //同步检查,为的是保持与服务器的通讯
+            //((Action)(delegate ()
+            //{
+            //    string sync_flag = "";
+            //    while (true)
+            //    {
+            //        sync_flag = wxs.WxSyncCheck();  //同步检查,为的是保持与服务器的通讯
 
-                    if (sync_flag == null)
-                    {
-                        lblStatus.Text = "刷新中";
-                    }
-                    else
-                    {
-                        lblStatus.Text = "正常登陆";
-                    }
-                }
+            //        if (sync_flag == null)
+            //        {
+            //            lblStatus.Text = "刷新中";
+            //        }
+            //        else
+            //        {
+            //            lblStatus.Text = "正常登陆";
+            //        }
+            //    }
 
-            })).BeginInvoke(null, null);
+            //})).BeginInvoke(null, null);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -287,6 +317,8 @@ namespace WxGames
             List<UpDowModel> list = ScoreManager.Instance.GetUpDowModel();
 
             SetDgvPost(list);
+
+            //刷新界面展示开奖号码，倒计时，到期时间
         }
 
         private void dgvUp_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -478,7 +510,50 @@ namespace WxGames
                     tab.SelectedIndex = 0;
                     tabPankou.Show();
                 }
+                else
+                {
+                    if (tab.SelectedIndex == 3)
+                    {
+                        InitMsgConfig();
+                    }
+                }
             }
+        }
+
+        private void InitMsgConfig()
+        {
+            List<Config> list = data.GetList<Config>("type='MSG'", "");
+            ///封盘
+            txtFp.Text = list.Find(p => p.Type == "MSG" && p.Key == "FPTIME").Value;
+            ckbFp.Checked = Convert.ToBoolean(list.Find(p => p.Type == "MSG" && p.Key == "FPCHK").Value);
+            txtMulFp.Text = list.Find(p => p.Type == "MSG" && p.Key == "FPCONTENT").Value;
+
+            //普通
+            txtPt.Text = list.Find(p => p.Type == "MSG" && p.Key == "PTTIME").Value;
+            ckbPt.Checked = Convert.ToBoolean(list.Find(p => p.Type == "MSG" && p.Key == "PTCHK").Value);
+            txtMulPt.Text = list.Find(p => p.Type == "MSG" && p.Key == "PTCONTENT").Value;
+
+            //普通2
+            txtPt2.Text = list.Find(p => p.Type == "MSG" && p.Key == "PTTIME2").Value; ;
+            ckbpt2.Checked = Convert.ToBoolean(list.Find(p => p.Type == "MSG" && p.Key == "PTCHK2").Value);
+            txtMulPt2.Text = list.Find(p => p.Type == "MSG" && p.Key == "PTCONTENT2").Value;
+
+            //普通3
+            txtPt3.Text = list.Find(p => p.Type == "MSG" && p.Key == "PTTIME3").Value;
+            ckbpt3.Checked = Convert.ToBoolean(list.Find(p => p.Type == "MSG" && p.Key == "PTCHK3").Value);
+            txtMulPt3.Text = list.Find(p => p.Type == "MSG" && p.Key == "PTCONTENT3").Value;
+
+            //开奖信息
+            ckbkj.Checked = Convert.ToBoolean(list.Find(p => p.Type == "MSG" && p.Key == "KJCHK").Value);
+            txtMulKj.Text = list.Find(p => p.Type == "MSG" && p.Key == "KJCONTENT").Value;
+
+            //启用信息
+            ckbStart.Checked = Convert.ToBoolean(list.Find(p => p.Type == "MSG" && p.Key == "CHKSTART").Value);
+            txtMulStart.Text = list.Find(p => p.Type == "MSG" && p.Key == "STARTCONTENT").Value;
+
+            //开奖后
+            txtkjh.Text = list.Find(p => p.Type == "MSG" && p.Key == "KJHTIME").Value;
+            ckbkjh.Checked = Convert.ToBoolean(list.Find(p => p.Type == "MSG" && p.Key == "KJHCHK").Value);
         }
 
         private void dgvZhanDan_DoubleClick(object sender, EventArgs e)
@@ -586,6 +661,62 @@ namespace WxGames
             {
                 MessageBox.Show("改分失败");
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //删除消息配置
+            data.ExecuteSql("delete from config where type='MSG' ");
+
+            ///封盘
+            string fpTime = txtFp.Text;
+            string fpChk = ckbFp.Checked.ToString();
+            string fpContent = txtMulFp.Text;
+            data.Insert<Config>(new Config() { Uuid=Guid.NewGuid().ToString(), Type="MSG", Typetwo="", Key="FPTIME", Value=fpTime }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "FPCHK", Value = fpChk }, "");
+            data.Insert<Config>(new Config() { Uuid=Guid.NewGuid().ToString(), Type="MSG",Typetwo="", Key="FPCONTENT",Value=fpContent }, "");
+
+            //普通
+            string ptTime = txtPt.Text;
+            string ptChk = ckbPt.Checked.ToString();
+            string ptContent = txtMulPt.Text;
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "PTTIME", Value = ptTime }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "PTCHK", Value = ptChk }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "PTCONTENT", Value = ptContent }, "");
+
+            //普通2
+            string ptTime2 = txtPt2.Text;
+            string ptChk2 = ckbpt2.Checked.ToString();
+            string ptContent2 = txtMulPt2.Text;
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "PTTIME2", Value = ptTime2 }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "PTCHK2", Value = ptChk2 }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "PTCONTENT2", Value = ptContent2 }, "");
+
+            //普通3
+            string ptTime3 = txtPt3.Text;
+            string ptChk3 = ckbpt3.Checked.ToString();
+            string ptContent3 = txtMulPt3.Text;
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "PTTIME3", Value = ptTime3 }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "PTCHK3", Value = ptChk3 }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "PTCONTENT3", Value = ptContent3 }, "");
+
+            //开奖信息
+            string kjChk = ckbkj.Checked.ToString();
+            string kjContent = txtMulKj.Text;
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "KJCHK", Value = kjChk }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "KJCONTENT", Value = kjContent }, "");
+
+            //启用信息
+            string chkStart = ckbStart.Checked.ToString();
+            string startContent = txtMulStart.Text.ToString();
+            data.Insert<Config>(new Config() {Uuid=Guid.NewGuid().ToString(),Type="MSG",Typetwo="",Key="CHKSTART",Value=chkStart },"");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "STARTCONTENT", Value = startContent }, "");
+
+            //开奖后
+            string kjhTime = txtkjh.Text;
+            string kjhChk = ckbkjh.Checked.ToString();
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "KJHTIME", Value = kjhTime }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "KJHCHK", Value = kjhChk }, "");
         }
     }
 }

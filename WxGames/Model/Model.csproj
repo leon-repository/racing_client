@@ -43,8 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="ContactScore.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="GameMsg.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="NowMsg.cs" />
     <Compile Include="OriginMsg.cs" />

@@ -80,8 +80,10 @@
     <Compile Include="HTTP\BaseService.cs" />
     <Compile Include="HTTP\LoginService.cs" />
     <Compile Include="HTTP\WXService.cs" />
+    <Compile Include="Job\LobbyJob.cs" />
     <Compile Include="Job\ReceiveMessageJob.cs" />
     <Compile Include="Job\SendMessageJob.cs" />
+    <Compile Include="Lobby.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>

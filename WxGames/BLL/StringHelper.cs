@@ -47,5 +47,40 @@ namespace BLL
             str = str.Replace(reg, "");
             return str;
         }
+
+        /// <summary>
+        /// 日期转换成unix时间戳
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        public static long DateTimeToUnixTimestamp(this DateTime dateTime)
+        {
+            var start = new DateTime(1970, 1, 1, 0, 0, 0, dateTime.Kind);
+            return Convert.ToInt64((dateTime - start).TotalSeconds);
+        }
+
+        /// <summary>
+        /// unix时间戳转换成日期
+        /// </summary>
+        /// <param name="unixTimeStamp">时间戳（秒）</param>
+        /// <returns></returns>
+        public static DateTime UnixTimestampToDateTime(this long timestamp,DateTimeKind kind)
+        {
+            var start = new DateTime(1970, 1, 1, 0, 0, 0, kind);
+            return start.AddSeconds(timestamp);
+        }
+
+        public static int ToInt(this string s)
+        {
+            try
+            {
+                return Convert.ToInt32(s);
+            }
+            catch (Exception e)
+            {
+                Log.WriteLog(e);
+                return 0;
+            }
+        }
     }
 }
