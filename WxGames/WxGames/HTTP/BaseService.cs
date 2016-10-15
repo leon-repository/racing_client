@@ -4,6 +4,9 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Collections;
+using BLL;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WxGames.HTTP
 {
@@ -25,21 +28,19 @@ namespace WxGames.HTTP
         {
             try
             {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback =
+                        new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
+                System.Net.ServicePointManager.DefaultConnectionLimit = 512;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                //request.Headers.Add(HttpRequestHeader.UserAgent.ToString(), "Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5");
                 request.Method = "get";
-                //request.Timeout = 600;
-
                 if (CookiesContainer == null)
                 {
                     CookiesContainer = new CookieContainer();
                 }
-
                 request.CookieContainer = CookiesContainer;  //启用cookie
-
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream response_stream = response.GetResponseStream();
-
+                
                 int count = (int)response.ContentLength;
                 int offset = 0;
                 byte[] buf = new byte[count];
@@ -50,13 +51,23 @@ namespace WxGames.HTTP
                     count -= n;
                     offset += n;
                 }
+
+                //response.Close();
+
                 return buf;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                Log.WriteLog(ex);
                 return null;
             }
         }
+
+        private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
+
         /// <summary>
         /// 向服务器发送post请求 返回服务器回复数据
         /// </summary>
@@ -68,7 +79,7 @@ namespace WxGames.HTTP
             try
             {
                 byte[] request_body = Encoding.UTF8.GetBytes(body);
-
+                System.Net.ServicePointManager.DefaultConnectionLimit = 512;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 //request.Headers.Add(HttpRequestHeader.UserAgent.ToString(), "Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5");
                 request.Method = "post";
@@ -97,6 +108,9 @@ namespace WxGames.HTTP
                     count -= n;
                     offset += n;
                 }
+
+                response.Close();
+
                 return buf;
             }
             catch

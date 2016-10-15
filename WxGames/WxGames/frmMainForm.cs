@@ -12,6 +12,9 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using WxGames.HTTP;
+using WxGames.Body;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace WxGames
 {
@@ -34,6 +37,11 @@ namespace WxGames
         /// 当前群userName
         /// </summary>
         public static string CurrentQun;
+
+        /// <summary>
+        /// 当前群昵称
+        /// </summary>
+        public static string CurrentQunNick;
 
         /// <summary>
         /// 任务开始状态
@@ -59,6 +67,11 @@ namespace WxGames
 
         public bool IsLogin = false;
 
+        /// <summary>
+        /// 是否处于押注状态，false是不可以押注的
+        /// </summary>
+        public static bool IsContinue = true;
+
         private DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
 
         public static List<Config> Configs = new List<Config>();
@@ -69,7 +82,7 @@ namespace WxGames
         /// <param name="list"></param>
         private void SetDgvPost(List<UpDowModel> list)
         {
-            if (dgvUp.Rows.Count >= CurrentRow&&CurrentRow>=0)
+            if (dgvUp.Rows.Count >= CurrentRow && CurrentRow >= 0)
             {
                 this.dgvUp.DataSource = list;
 
@@ -92,25 +105,24 @@ namespace WxGames
         {
             ///请求服务器获取盘口数据
             List<LoginModel> list = new List<LoginModel>();
-            list.Add(new LoginModel() { PankouId = "1", PankouName = "盘口A", IsLogin = 0, IsSum = 0 });
-            list.Add(new LoginModel() { PankouId = "2", PankouName = "盘口B", IsLogin = 0, IsSum = 0 });
+            list.Add(new LoginModel() { PankouId = "1", PankouName = "香港赛车PK10", IsLogin = 0, IsSum = 0 });
+            //list.Add(new LoginModel() { PankouId = "2", PankouName = "盘口B", IsLogin = 0, IsSum = 0 });
 
-            DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
-
-            foreach (var item in list)
-            {
-                List<KeyValuePair<string, object>> pkList = new List<KeyValuePair<string, object>>();
-                pkList.Add(new KeyValuePair<string, object>("PankouId",item.PankouId));
-                LoginModel pankou=data.First<LoginModel>(pkList, "");
-                if (pankou == null)
-                {
-                    data.Insert<LoginModel>(item, "");
-                }
-                else
-                {
-                    data.Update<LoginModel>(item, pkList, "");
-                }
-            }
+            //DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
+            //foreach (var item in list)
+            //{
+            //    List<KeyValuePair<string, object>> pkList = new List<KeyValuePair<string, object>>();
+            //    pkList.Add(new KeyValuePair<string, object>("PankouId",item.PankouId));
+            //    LoginModel pankou=data.First<LoginModel>(pkList, "");
+            //    if (pankou == null)
+            //    {
+            //        data.Insert<LoginModel>(item, "");
+            //    }
+            //    else
+            //    {
+            //        data.Update<LoginModel>(item, pkList, "");
+            //    }
+            //}
 
             cmbPankou.DataSource = list;
             cmbPankou.DisplayMember = "PankouName";
@@ -124,7 +136,7 @@ namespace WxGames
             //    {
             //        sync_flag = wxs.WxSyncCheck();  //同步检查,为的是保持与服务器的通讯
 
-            //        if (!sync_flag.Contains("retcode:\"0\"")||sync_flag==null)
+            //        if (!sync_flag.Contains("retcode:\"0\"") || sync_flag == null)
             //        {
             //            lblStatus.Text = "刷新中";
             //        }
@@ -139,17 +151,18 @@ namespace WxGames
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string userName = cmbPankou.SelectedValue.ToString();
+            string userName = txtUser.Text;
             string pwd = txtPwd.Text;
+            string msg = "";
 
-            if (PanKou.Instance.Login(userName, pwd))
+            if (PanKou.Instance.Login(userName, pwd, ref msg))
             {
                 QunInit();
-                Configs= data.GetList<Config>("type='MSG'", "");
+                Configs = data.GetList<Config>("type='MSG'", "");
             }
             else
             {
-                MessageBox.Show("登陆失败");
+                MessageBox.Show(msg);
             }
         }
 
@@ -196,7 +209,6 @@ namespace WxGames
 
                 //获取微信群，并存到数据库
                 //删除旧数据
-                
                 data.ExecuteSql("delete from quntb");
 
                 foreach (WXUser user in contact_all)
@@ -229,6 +241,7 @@ namespace WxGames
                 Start = true;
                 btnStart.Text = "结束";
                 CurrentQun = cmbQun.SelectedValue.ToString();
+                CurrentQunNick = cmbQun.SelectedText;
                 cmbQun.Enabled = false;
                 btnRefresh.Enabled = false;
                 //开始定时处理消息
@@ -240,17 +253,17 @@ namespace WxGames
                 dgvUp.Enabled = true;
 
                 //在点开始按钮的时候，启动消息
-               List<Config> configs = data.GetList<Config>(" Type='MSG' and Key in ('CHKSTART','STARTCONTENT') ", "");
+                List<Config> configs = data.GetList<Config>(" Type='MSG' and Key in ('CHKSTART','STARTCONTENT') ", "");
                 if (configs != null && configs.Count == 2)
                 {
                     //发消息
                     Config chkStart = configs.Find(p => p.Key == "CHKSTART");
                     if (chkStart != null)
                     {
-                       Config content = configs.Find(p => p.Key == "STARTCONTENT");
+                        Config content = configs.Find(p => p.Key == "STARTCONTENT");
                         if (content != null)
                         {
-                            CurrentWX.SendMsg(new WXMsg() { From=CurrentWX.UserName, Msg=content.Value, Readed=false, Time= DateTime.Now, To=CurrentQun, Type=1 }, false);
+                            CurrentWX.SendMsg(new WXMsg() { From = CurrentWX.UserName, Msg = content.Value, Readed = false, Time = DateTime.Now, To = CurrentQun, Type = 1 }, false);
                         }
                     }
                 }
@@ -319,6 +332,18 @@ namespace WxGames
             SetDgvPost(list);
 
             //刷新界面展示开奖号码，倒计时，到期时间
+            //string urlConfiger = "/user/client/stake/configer";
+            //string auth = PanKou.Instance.GetSha1("", urlConfiger);
+
+            //string json = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger, auth, PanKou.accessKey);
+
+            //JObject configHelper = JsonConvert.DeserializeObject(json) as JObject;
+
+            //if (IsContinue&& configHelper!=null)
+            //{
+            //    lblykj.Text = configHelper["data"]["racingNum"].ToString();
+            //    toolStripStatusLabel3.Text= configHelper["data"]["startRacingTime"].ToString();
+            //}
         }
 
         private void dgvUp_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -356,19 +381,80 @@ namespace WxGames
 
                 if (command == "上")
                 {
-                    model.TotalScore = model.TotalScore + Convert.ToInt32(score);
-                    data.Update<ContactScore>(model, pkList, "");
-                }
-                else if (command == "下")
-                {
-                    if (model.TotalScore >= Convert.ToInt32(score))
+                    if (score == "0")
                     {
-                        model.TotalScore = model.TotalScore - Convert.ToInt32(score);
+                        MessageBox.Show("上分不能为0");
+                        return;
+                    }
+
+                    UpPoint upPoint = new UpPoint();
+                    upPoint.nickName = nickName;
+                    upPoint.updatePoints = Convert.ToInt32(score);
+                    upPoint.wechatSn = uin;
+                    string auth = PanKou.Instance.GetSha1(JsonConvert.SerializeObject(upPoint), "/members/point/add");
+                    string body = JsonConvert.SerializeObject(upPoint);
+                    body = body.Replace(" ", "");
+                    body = Regex.Replace(body, "\\s{2,}", ",");
+
+                    string json = WebService.SendPutRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + "/members/point/add",body,auth,PanKou.accessKey);
+                    JObject result = JsonConvert.DeserializeObject(json) as JObject;
+                    if (result["result"].ToString() == "SUCCESS")
+                    {
+                        model.TotalScore = model.TotalScore + Convert.ToInt32(score);
                         data.Update<ContactScore>(model, pkList, "");
                     }
                     else
                     {
-                        MessageBox.Show("余额不足：" + model.TotalScore);
+                        MessageBox.Show(result["message"].ToString());
+                        return;
+                    }
+                }
+                else if (command == "下")
+                {
+                    //先检查这期有没有参与，有参与不能下分
+                    List<NowMsg> listMsg = data.GetList<NowMsg>(string.Format(" period='{0}' and CommandType not in ('上下查','指令格式错误') ", Perioid), "");
+                    if (listMsg != null && listMsg.Count <= 0)
+                    {
+                        if (model.TotalScore >= Convert.ToInt32(score))
+                        {
+                            if (score == "0")
+                            {
+                                MessageBox.Show("下分不能为0");
+                                return;
+                            }
+
+                            UpPoint upPoint = new UpPoint();
+                            upPoint.nickName = nickName;
+                            upPoint.updatePoints = Convert.ToInt32(score);
+                            upPoint.wechatSn = uin;
+
+                            string auth = PanKou.Instance.GetSha1(JsonConvert.SerializeObject(upPoint), "/members/point/subtract");
+                            string body = JsonConvert.SerializeObject(upPoint);
+                            body = body.Replace(" ", "");
+                            body = Regex.Replace(body, "\\s{2,}", ",");
+
+                            string json = WebService.SendPutRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + "/members/point/subtract",body,auth,PanKou.accessKey );
+                            JObject result = JsonConvert.DeserializeObject(json) as JObject;
+                            if (result["result"].ToString() == "SUCCESS")
+                            {
+                                model.TotalScore = model.TotalScore - Convert.ToInt32(score);
+                                data.Update<ContactScore>(model, pkList, "");
+                            }
+                            else
+                            {
+                                MessageBox.Show(result["message"].ToString());
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("余额不足：" + model.TotalScore);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("当期有交易，不能下分");
                         return;
                     }
                 }
@@ -433,7 +519,7 @@ namespace WxGames
             //不同意消息（IsSucc=2）,IsDelete=1
             string msgId = row.Cells["MsgId"].Value.ToString();
             string succ = row.Cells["Succ"].Value.ToString();
-            
+
             if (succ != "不同意")
             {
                 List<KeyValuePair<string, object>> pkMsgList = new List<KeyValuePair<string, object>>();
@@ -565,7 +651,7 @@ namespace WxGames
                 return;
             }
 
-            string nickName= row.Cells["NickName2"].Value.ToString();
+            string nickName = row.Cells["NickName2"].Value.ToString();
             string uin = row.Cells["Uid"].Value.ToString();
             txtWxUserName.Text = nickName;
             txtUin.Text = uin;
@@ -589,14 +675,40 @@ namespace WxGames
                 return;
             }
 
-            if (ScoreManager.Instance.UpScore(txtUin.Text, Convert.ToInt32(txtMoney.Text)))
+            if (Convert.ToInt32(txtMoney.Text)==0)
             {
-                dgvZhanDan.DataSource = ScoreManager.Instance.GetZhanDan();
-                MessageBox.Show("上分成功");
+                MessageBox.Show("上分不能为0");
+                return;
+            }
+
+            UpPoint upPoint = new UpPoint();
+            upPoint.nickName = txtNickName.Text;
+            upPoint.updatePoints = Convert.ToInt32(txtMoney.Text);
+            upPoint.wechatSn = txtUin.Text;
+
+            string auth = PanKou.Instance.GetSha1(JsonConvert.SerializeObject(upPoint), "/members/point/add");
+            string body = JsonConvert.SerializeObject(upPoint);
+            body = body.Replace(" ", "");
+            body = Regex.Replace(body, "\\s{2,}", ",");
+
+            string json = WebService.SendPutRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + "/members/point/add", body, auth, PanKou.accessKey);
+            JObject result = JsonConvert.DeserializeObject(json) as JObject;
+            if (result["result"].ToString() == "SUCCESS")
+            {
+                if (ScoreManager.Instance.UpScore(txtUin.Text, Convert.ToInt32(txtMoney.Text)))
+                {
+                    dgvZhanDan.DataSource = ScoreManager.Instance.GetZhanDan();
+                    MessageBox.Show("上分成功");
+                }
+                else
+                {
+                    MessageBox.Show("上分失败");
+                }
             }
             else
             {
-                MessageBox.Show("上分失败");
+                MessageBox.Show(result["message"].ToString());
+                return;
             }
         }
 
@@ -618,14 +730,49 @@ namespace WxGames
                 return;
             }
 
-            if (ScoreManager.Instance.DownScore(txtUin.Text, Convert.ToInt32(txtMoney.Text)))
+            if (Convert.ToInt32(txtMoney.Text) == 0)
             {
-                dgvZhanDan.DataSource = ScoreManager.Instance.GetZhanDan();
-                MessageBox.Show("下分成功");
+                MessageBox.Show("下分不能为0");
+                return;
+            }
+
+            List<NowMsg> listMsg = data.GetList<NowMsg>(string.Format(" period='{0}' ", Perioid), "");
+            if (listMsg != null && listMsg.Count <= 0)
+            {
+
+                UpPoint upPoint = new UpPoint();
+                upPoint.nickName = txtNickName.Text;
+                upPoint.updatePoints = Convert.ToInt32(txtMoney.Text);
+                upPoint.wechatSn = txtUin.Text;
+                string auth = PanKou.Instance.GetSha1(JsonConvert.SerializeObject(upPoint), "/members/point/subtract");
+                string body = JsonConvert.SerializeObject(upPoint);
+                body = body.Replace(" ", "");
+                body = Regex.Replace(body, "\\s{2,}", ",");
+
+                string json = WebService.SendPutRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + "/members/point/subtract", body, auth, PanKou.accessKey);
+                JObject result = JsonConvert.DeserializeObject(json) as JObject;
+                if (result["result"].ToString() == "SUCCESS")
+                {
+                    if (ScoreManager.Instance.DownScore(txtUin.Text, Convert.ToInt32(txtMoney.Text)))
+                    {
+                        dgvZhanDan.DataSource = ScoreManager.Instance.GetZhanDan();
+                        MessageBox.Show("下分成功");
+                    }
+                    else
+                    {
+                        MessageBox.Show("下分失败,请核对余额");
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(result["message"].ToString());
+                    return;
+                }
             }
             else
             {
-                MessageBox.Show("下分失败,请核对余额");
+                MessageBox.Show("当期有交易，不能下分");
             }
         }
 
@@ -639,7 +786,7 @@ namespace WxGames
 
             try
             {
-              int score =  Convert.ToInt32(txtMoney.Text);
+                int score = Convert.ToInt32(txtMoney.Text);
                 if (score < 0)
                 {
                     MessageBox.Show("积分不能为负数");
@@ -672,9 +819,9 @@ namespace WxGames
             string fpTime = txtFp.Text;
             string fpChk = ckbFp.Checked.ToString();
             string fpContent = txtMulFp.Text;
-            data.Insert<Config>(new Config() { Uuid=Guid.NewGuid().ToString(), Type="MSG", Typetwo="", Key="FPTIME", Value=fpTime }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "FPTIME", Value = fpTime }, "");
             data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "FPCHK", Value = fpChk }, "");
-            data.Insert<Config>(new Config() { Uuid=Guid.NewGuid().ToString(), Type="MSG",Typetwo="", Key="FPCONTENT",Value=fpContent }, "");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "FPCONTENT", Value = fpContent }, "");
 
             //普通
             string ptTime = txtPt.Text;
@@ -709,7 +856,7 @@ namespace WxGames
             //启用信息
             string chkStart = ckbStart.Checked.ToString();
             string startContent = txtMulStart.Text.ToString();
-            data.Insert<Config>(new Config() {Uuid=Guid.NewGuid().ToString(),Type="MSG",Typetwo="",Key="CHKSTART",Value=chkStart },"");
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "CHKSTART", Value = chkStart }, "");
             data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "STARTCONTENT", Value = startContent }, "");
 
             //开奖后
@@ -717,6 +864,11 @@ namespace WxGames
             string kjhChk = ckbkjh.Checked.ToString();
             data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "KJHTIME", Value = kjhTime }, "");
             data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "KJHCHK", Value = kjhChk }, "");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

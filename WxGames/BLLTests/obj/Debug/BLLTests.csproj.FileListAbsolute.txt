@@ -46,3 +46,4 @@ E:\C#\WxGames\BLLTests\bin\Debug\Common.Logging.dll
 E:\C#\WxGames\BLLTests\bin\Debug\WxGames.pdb
 E:\C#\WxGames\BLLTests\bin\Debug\System.Data.SQLite.dll
 E:\C#\WxGames\BLLTests\bin\Debug\BLLTests.dll.config
+E:\C#\WxGames\BLLTests\bin\Debug\Config.config

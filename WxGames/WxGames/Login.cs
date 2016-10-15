@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,15 @@ namespace WxGames
 
         private void DoLogin()
         {
+            ////先check客户端是否合法
+            //string msg = PanKou.Instance.Check();
+
+            //if (!string.IsNullOrEmpty(msg))
+            //{
+            //    MessageBox.Show(msg);
+            //    this.Close();
+            //}
+
             picLogin.Image = null;
             picLogin.SizeMode = PictureBoxSizeMode.Zoom;
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WxGames", "WxGames\WxGames.csproj", "{25CE8FAB-7CC4-469D-9369-FBE9D83E4BF6}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{2632E902-6719-4CAE-807A-70942222E22A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLLTests", "BLLTests\BLLTests.csproj", "{A7AFCBE4-4AE3-4608-BF38-85689251C788}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformerLogin", "PerformerLogin\PerformerLogin.csproj", "{A9CFFBE6-C499-4A58-B028-9FECB0FAFC45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{A7AFCBE4-4AE3-4608-BF38-85689251C788}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7AFCBE4-4AE3-4608-BF38-85689251C788}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7AFCBE4-4AE3-4608-BF38-85689251C788}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9CFFBE6-C499-4A58-B028-9FECB0FAFC45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9CFFBE6-C499-4A58-B028-9FECB0FAFC45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9CFFBE6-C499-4A58-B028-9FECB0FAFC45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9CFFBE6-C499-4A58-B028-9FECB0FAFC45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -50,10 +50,22 @@ namespace WxGames
                 .ForJob(job3)
                 .Build();
 
+
+            IJobDetail job4 = JobBuilder.Create<PerformJob>()
+               .WithIdentity("perform", "job").Build();
+
+            ISimpleTrigger trigger4 = (ISimpleTrigger)TriggerBuilder.Create()
+                .WithIdentity("performTri", "Trigger")
+                .StartNow()
+                .WithSimpleSchedule(x => x.WithIntervalInSeconds(60).WithRepeatCount(int.MaxValue))
+                .ForJob(job4)
+                .Build();
+
             //把job，trigger添加到任务中
             sched.ScheduleJob(job, trigger);
             sched.ScheduleJob(job2, trigger2);
             sched.ScheduleJob(job3, trigger3);
+            sched.ScheduleJob(job4, trigger4);
 
             Scheduler = sched;
         }

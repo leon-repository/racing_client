@@ -1,0 +1,698 @@
+发生时间：
+星期六 2016-10-15 17:59:41
+wxChat=2100569538
+发生时间：
+星期六 2016-10-15 17:59:41
+wxChat2=2100569538
+发生时间：
+星期六 2016-10-15 17:59:41
+买名次
+发生时间：
+星期六 2016-10-15 17:59:41
+买名次
+发生时间：
+星期六 2016-10-15 18:00:23
+wxChat=2328346900
+发生时间：
+星期六 2016-10-15 18:00:23
+wxChat2=2328346900
+发生时间：
+星期六 2016-10-15 18:00:23
+买名次
+发生时间：
+星期六 2016-10-15 18:00:23
+买名次
+发生时间：
+星期六 2016-10-15 18:00:42
+提示信息：
+输入字符串的格式不正确。
+
+发生时间：
+星期六 2016-10-15 18:00:45
+wxChat=2328346900
+发生时间：
+星期六 2016-10-15 18:00:45
+wxChat2=2328346900
+发生时间：
+星期六 2016-10-15 18:00:45
+买名次
+发生时间：
+星期六 2016-10-15 18:00:46
+提示信息：
+输入字符串的格式不正确。
+
+发生时间：
+星期六 2016-10-15 18:00:46
+wxChat=2328346900
+发生时间：
+星期六 2016-10-15 18:00:46
+wxChat=2328346900
+发生时间：
+星期六 2016-10-15 18:00:46
+wxChat2=2328346900
+发生时间：
+星期六 2016-10-15 18:00:46
+买名次
+发生时间：
+星期六 2016-10-15 18:00:48
+提示信息：
+输入字符串的格式不正确。
+
+发生时间：
+星期六 2016-10-15 18:00:48
+wxChat=2328346900
+发生时间：
+星期六 2016-10-15 18:00:48
+wxChat=2328346900
+发生时间：
+星期六 2016-10-15 18:00:48
+wxChat2=2328346900
+发生时间：
+星期六 2016-10-15 18:00:48
+wxChat2=2328346900
+发生时间：
+星期六 2016-10-15 18:00:48
+买名次
+发生时间：
+星期六 2016-10-15 18:00:48
+买名次
+发生时间：
+星期六 2016-10-15 18:01:02
+提示信息：
+输入字符串的格式不正确。
+
+发生时间：
+星期六 2016-10-15 18:01:02
+提示信息：
+输入字符串的格式不正确。
+
+发生时间：
+星期六 2016-10-15 18:01:07
+wxChat=2328346900
+发生时间：
+星期六 2016-10-15 18:01:07
+wxChat2=2328346900
+发生时间：
+星期六 2016-10-15 18:01:07
+买名次
+发生时间：
+星期六 2016-10-15 18:13:25
+wxChat=2328346900
+发生时间：
+星期六 2016-10-15 18:13:25
+wxChat2=2328346900
+发生时间：
+星期六 2016-10-15 18:13:25
+买名次
+发生时间：
+星期六 2016-10-15 18:13:25
+提示信息：
+输入字符串的格式不正确。
+
+发生时间：
+星期六 2016-10-15 22:26:52
+wxChat=2328346900
+发生时间：
+星期六 2016-10-15 22:26:52
+wxChat2=2328346900
+发生时间：
+星期六 2016-10-15 22:27:00
+买名次
+发生时间：
+星期六 2016-10-15 22:27:24
+买名次
+发生时间：
+星期六 2016-10-15 22:27:31
+买名次
+发生时间：
+星期六 2016-10-15 22:27:43
+买名次
+发生时间：
+星期六 2016-10-15 22:27:49
+买名次
+发生时间：
+星期六 2016-10-15 22:27:50
+买名次
+发生时间：
+星期六 2016-10-15 22:28:01
+买名次
+发生时间：
+星期六 2016-10-15 22:28:01
+买名次
+发生时间：
+星期六 2016-10-15 22:28:01
+[{"wechatSn":"2328346900","stakeVo":{"racingNum":null,"appointStakeList":[{"carNum":1,"first":37,"second":6,"third":18,"fourth":15,"fifth":13,"sixth":13,"seventh":0,"eighth":28,"ninth":5,"tenth":10},{"carNum":2,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":3,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":4,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":5,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":6,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":7,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":8,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":9,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":10,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0}],"commonStake":{"firstUp":0,"firstDowm":0,"secondUp":0,"secondDowm":0,"thirdUp":0,"thirdDowm":0,"fourthUp":0,"fourthDowm":0,"fifthUp":0,"fifthDowm":0,"firstSecondOdd":0,"firstSecondEven":0,"firstSecondBig":0,"firstSecondSmall":0,"firstSecond3":0,"firstSecond4":0,"firstSecond5":0,"firstSecond6":0,"firstSecond7":0,"firstSecond8":0,"firstSecond9":0,"firstSecond10":0,"firstSecond11":0,"firstSecond12":0,"firstSecond13":0,"firstSecond14":0,"firstSecond15":0,"firstSecond16":0,"firstSecond17":0,"firstSecond18":0,"firstSecond19":0},"rankingStakeList":[{"rankingNum":1,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":2,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":3,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":4,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":5,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":6,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":7,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":8,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":9,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":10,"big":0,"small":0,"odd":0,"even":0}]}}]
+发生时间：
+星期六 2016-10-15 22:28:01
+F8F2B8A8EC344E4592118B121C3D1262_UC
+发生时间：
+星期六 2016-10-15 22:30:53
+wxChat=1470491868
+发生时间：
+星期六 2016-10-15 22:30:53
+wxChat=1470491868
+发生时间：
+星期六 2016-10-15 22:30:53
+wxChat2=1470491868
+发生时间：
+星期六 2016-10-15 22:30:53
+wxChat2=1470491868
+发生时间：
+星期六 2016-10-15 22:30:53
+wxChat=1470491868
+发生时间：
+星期六 2016-10-15 22:30:53
+wxChat2=1470491868
+发生时间：
+星期六 2016-10-15 22:30:54
+买名次
+发生时间：
+星期六 2016-10-15 22:30:54
+wxChat=1470491868
+发生时间：
+星期六 2016-10-15 22:30:54
+wxChat2=1470491868
+发生时间：
+星期六 2016-10-15 22:30:55
+买名次
+发生时间：
+星期六 2016-10-15 22:30:59
+买名次
+发生时间：
+星期六 2016-10-15 22:30:59
+买名次
+发生时间：
+星期六 2016-10-15 22:30:59
+wxChat=1470491868
+发生时间：
+星期六 2016-10-15 22:30:59
+wxChat2=1470491868
+发生时间：
+星期六 2016-10-15 22:31:03
+买名次
+发生时间：
+星期六 2016-10-15 22:31:03
+买名次
+发生时间：
+星期六 2016-10-15 22:31:03
+买名次
+发生时间：
+星期六 2016-10-15 22:31:03
+买名次
+发生时间：
+星期六 2016-10-15 22:31:07
+买名次
+发生时间：
+星期六 2016-10-15 22:31:07
+买名次
+发生时间：
+星期六 2016-10-15 22:31:07
+买名次
+发生时间：
+星期六 2016-10-15 22:31:07
+wxChat=437364022
+发生时间：
+星期六 2016-10-15 22:31:07
+wxChat2=437364022
+发生时间：
+星期六 2016-10-15 22:31:07
+买名次
+发生时间：
+星期六 2016-10-15 22:31:08
+买名次
+发生时间：
+星期六 2016-10-15 22:31:09
+买名次
+发生时间：
+星期六 2016-10-15 22:31:15
+买名次
+发生时间：
+星期六 2016-10-15 22:31:18
+买名次
+发生时间：
+星期六 2016-10-15 22:46:01
+wxChat=437364022
+发生时间：
+星期六 2016-10-15 22:46:01
+wxChat2=437364022
+发生时间：
+星期六 2016-10-15 22:46:01
+买名次
+发生时间：
+星期六 2016-10-15 22:46:01
+买名次
+发生时间：
+星期六 2016-10-15 22:46:01
+买名次
+发生时间：
+星期六 2016-10-15 22:46:01
+买名次
+发生时间：
+星期六 2016-10-15 22:46:01
+买名次
+发生时间：
+星期六 2016-10-15 22:46:02
+买名次
+发生时间：
+星期六 2016-10-15 22:46:02
+买名次
+发生时间：
+星期六 2016-10-15 22:46:02
+买名次
+发生时间：
+星期六 2016-10-15 22:46:02
+买名次
+发生时间：
+星期六 2016-10-15 22:46:02
+买名次
+发生时间：
+星期六 2016-10-15 22:46:02
+买名次
+发生时间：
+星期六 2016-10-15 22:46:02
+买名次
+发生时间：
+星期六 2016-10-15 22:46:02
+买名次
+发生时间：
+星期六 2016-10-15 22:46:02
+买名次
+发生时间：
+星期六 2016-10-15 22:46:02
+买名次
+发生时间：
+星期六 2016-10-15 22:46:03
+买名次
+发生时间：
+星期六 2016-10-15 22:46:03
+买名次
+发生时间：
+星期六 2016-10-15 22:46:03
+买名次
+发生时间：
+星期六 2016-10-15 22:46:03
+买名次
+发生时间：
+星期六 2016-10-15 22:46:03
+买名次
+发生时间：
+星期六 2016-10-15 22:46:03
+买名次
+发生时间：
+星期六 2016-10-15 22:46:03
+买名次
+发生时间：
+星期六 2016-10-15 22:46:03
+买名次
+发生时间：
+星期六 2016-10-15 22:46:03
+买名次
+发生时间：
+星期六 2016-10-15 22:46:03
+买名次
+发生时间：
+星期六 2016-10-15 22:46:04
+买名次
+发生时间：
+星期六 2016-10-15 22:46:04
+买名次
+发生时间：
+星期六 2016-10-15 22:46:04
+[{"wechatSn":"437364022","stakeVo":{"racingNum":null,"appointStakeList":[{"carNum":1,"first":198,"second":80,"third":440,"fourth":180,"fifth":440,"sixth":540,"seventh":140,"eighth":90,"ninth":170,"tenth":168},{"carNum":2,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":3,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":4,"first":0,"second":140,"third":0,"fourth":0,"fifth":140,"sixth":140,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":5,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":6,"first":0,"second":70,"third":180,"fourth":180,"fifth":180,"sixth":0,"seventh":70,"eighth":70,"ninth":0,"tenth":0},{"carNum":7,"first":200,"second":200,"third":0,"fourth":0,"fifth":200,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":8,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":9,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":10,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0}],"commonStake":{"firstUp":0,"firstDowm":0,"secondUp":0,"secondDowm":0,"thirdUp":0,"thirdDowm":0,"fourthUp":0,"fourthDowm":0,"fifthUp":0,"fifthDowm":0,"firstSecondOdd":0,"firstSecondEven":0,"firstSecondBig":0,"firstSecondSmall":0,"firstSecond3":0,"firstSecond4":0,"firstSecond5":0,"firstSecond6":0,"firstSecond7":0,"firstSecond8":0,"firstSecond9":0,"firstSecond10":0,"firstSecond11":0,"firstSecond12":0,"firstSecond13":0,"firstSecond14":0,"firstSecond15":0,"firstSecond16":0,"firstSecond17":0,"firstSecond18":0,"firstSecond19":0},"rankingStakeList":[{"rankingNum":1,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":2,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":3,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":4,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":5,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":6,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":7,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":8,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":9,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":10,"big":0,"small":0,"odd":0,"even":0}]}}]
+发生时间：
+星期六 2016-10-15 22:46:04
+9B695EE6BE3E4D0C943B25152B274B7E_UC
+发生时间：
+星期六 2016-10-15 22:48:33
+wxChat=
+发生时间：
+星期六 2016-10-15 22:48:33
+wxChat=713293422
+发生时间：
+星期六 2016-10-15 22:48:33
+wxChat2=713293422
+发生时间：
+星期六 2016-10-15 22:48:33
+买名次
+发生时间：
+星期六 2016-10-15 22:48:34
+买名次
+发生时间：
+星期六 2016-10-15 22:53:29
+买名次
+发生时间：
+星期六 2016-10-15 22:53:29
+买名次
+发生时间：
+星期六 2016-10-15 22:53:29
+买名次
+发生时间：
+星期六 2016-10-15 22:53:29
+买名次
+发生时间：
+星期六 2016-10-15 22:53:29
+买名次
+发生时间：
+星期六 2016-10-15 22:53:29
+买名次
+发生时间：
+星期六 2016-10-15 22:53:30
+买名次
+发生时间：
+星期六 2016-10-15 22:53:30
+买名次
+发生时间：
+星期六 2016-10-15 22:53:30
+买名次
+发生时间：
+星期六 2016-10-15 22:53:30
+买名次
+发生时间：
+星期六 2016-10-15 22:53:32
+买名次
+发生时间：
+星期六 2016-10-15 22:53:43
+买名次
+发生时间：
+星期六 2016-10-15 22:53:44
+买名次
+发生时间：
+星期六 2016-10-15 22:53:44
+买名次
+发生时间：
+星期六 2016-10-15 22:53:46
+买名次
+发生时间：
+星期六 2016-10-15 22:53:47
+买名次
+发生时间：
+星期六 2016-10-15 22:53:51
+买名次
+发生时间：
+星期六 2016-10-15 22:56:00
+wxChat=
+发生时间：
+星期六 2016-10-15 22:56:00
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 22:56:00
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 22:56:00
+买名次
+发生时间：
+星期六 2016-10-15 22:56:01
+买名次
+发生时间：
+星期六 2016-10-15 22:56:02
+wxChat=
+发生时间：
+星期六 2016-10-15 22:56:02
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 22:56:02
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 22:56:02
+买名次
+发生时间：
+星期六 2016-10-15 22:56:02
+wxChat=
+发生时间：
+星期六 2016-10-15 22:56:02
+wxChat=
+发生时间：
+星期六 2016-10-15 22:56:02
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 22:56:02
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 22:56:02
+买名次
+发生时间：
+星期六 2016-10-15 22:56:02
+冠亚和
+发生时间：
+星期六 2016-10-15 22:56:02
+买名次
+发生时间：
+星期六 2016-10-15 22:56:03
+买名次
+发生时间：
+星期六 2016-10-15 22:56:03
+冠亚和
+发生时间：
+星期六 2016-10-15 22:56:03
+上报阶段
+发生时间：
+星期六 2016-10-15 22:56:03
+提示信息：
+索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+
+发生时间：
+星期六 2016-10-15 22:56:03
+wxChat=2802815226
+发生时间：
+星期六 2016-10-15 22:56:03
+wxChat2=2802815226
+发生时间：
+星期六 2016-10-15 22:56:03
+买名次
+发生时间：
+星期六 2016-10-15 22:56:03
+买名次
+发生时间：
+星期六 2016-10-15 22:56:03
+买名次
+发生时间：
+星期六 2016-10-15 22:56:03
+上报阶段
+发生时间：
+星期六 2016-10-15 22:56:03
+提示信息：
+索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+
+发生时间：
+星期六 2016-10-15 22:56:03
+wxChat=2802815226
+发生时间：
+星期六 2016-10-15 22:56:03
+wxChat2=2802815226
+发生时间：
+星期六 2016-10-15 22:56:03
+买名次
+发生时间：
+星期六 2016-10-15 22:56:03
+冠亚和
+发生时间：
+星期六 2016-10-15 22:56:03
+买名次
+发生时间：
+星期六 2016-10-15 22:56:03
+买名次
+发生时间：
+星期六 2016-10-15 22:56:03
+上报阶段
+发生时间：
+星期六 2016-10-15 22:56:03
+提示信息：
+索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+
+发生时间：
+星期六 2016-10-15 22:56:03
+wxChat=2802815226
+发生时间：
+星期六 2016-10-15 22:56:03
+wxChat2=2802815226
+发生时间：
+星期六 2016-10-15 22:56:03
+买名次
+发生时间：
+星期六 2016-10-15 23:11:28
+wxChat=
+发生时间：
+星期六 2016-10-15 23:11:28
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 23:11:28
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 23:11:28
+买名次
+发生时间：
+星期六 2016-10-15 23:11:28
+上报阶段
+发生时间：
+星期六 2016-10-15 23:11:28
+提示信息：
+索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+
+发生时间：
+星期六 2016-10-15 23:11:28
+wxChat=2099322710
+发生时间：
+星期六 2016-10-15 23:11:28
+wxChat2=2099322710
+发生时间：
+星期六 2016-10-15 23:11:28
+买名次
+发生时间：
+星期六 2016-10-15 23:11:29
+[{"wechatSn":"2099322710","stakeVo":{"racingNum":null,"appointStakeList":[{"carNum":1,"first":1200,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":2,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":3,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":4,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":5,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":6,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":7,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":8,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":9,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":10,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0}],"commonStake":{"firstUp":0,"firstDowm":0,"secondUp":0,"secondDowm":0,"thirdUp":0,"thirdDowm":0,"fourthUp":0,"fourthDowm":0,"fifthUp":0,"fifthDowm":0,"firstSecondOdd":0,"firstSecondEven":0,"firstSecondBig":0,"firstSecondSmall":0,"firstSecond3":0,"firstSecond4":0,"firstSecond5":0,"firstSecond6":0,"firstSecond7":0,"firstSecond8":0,"firstSecond9":0,"firstSecond10":0,"firstSecond11":0,"firstSecond12":0,"firstSecond13":0,"firstSecond14":0,"firstSecond15":0,"firstSecond16":0,"firstSecond17":0,"firstSecond18":0,"firstSecond19":0},"rankingStakeList":[{"rankingNum":1,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":2,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":3,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":4,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":5,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":6,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":7,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":8,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":9,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":10,"big":0,"small":0,"odd":0,"even":0}]}}]
+发生时间：
+星期六 2016-10-15 23:11:29
+1A61A3B0FC6849E2BC8EA3342241F53C_UC
+发生时间：
+星期六 2016-10-15 23:13:16
+wxChat=713293422
+发生时间：
+星期六 2016-10-15 23:13:16
+wxChat2=713293422
+发生时间：
+星期六 2016-10-15 23:13:16
+买名次
+发生时间：
+星期六 2016-10-15 23:13:17
+买名次
+发生时间：
+星期六 2016-10-15 23:13:17
+买名次
+发生时间：
+星期六 2016-10-15 23:13:17
+买名次
+发生时间：
+星期六 2016-10-15 23:13:17
+买名次
+发生时间：
+星期六 2016-10-15 23:13:17
+[{"wechatSn":"713293422","stakeVo":{"racingNum":null,"appointStakeList":[{"carNum":1,"first":56,"second":50,"third":0,"fourth":0,"fifth":0,"sixth":100,"seventh":180,"eighth":180,"ninth":180,"tenth":56},{"carNum":2,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":3,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":4,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":5,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":6,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":7,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":8,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":9,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":10,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0}],"commonStake":{"firstUp":0,"firstDowm":0,"secondUp":0,"secondDowm":0,"thirdUp":0,"thirdDowm":0,"fourthUp":0,"fourthDowm":0,"fifthUp":0,"fifthDowm":0,"firstSecondOdd":0,"firstSecondEven":0,"firstSecondBig":0,"firstSecondSmall":0,"firstSecond3":0,"firstSecond4":0,"firstSecond5":0,"firstSecond6":0,"firstSecond7":0,"firstSecond8":0,"firstSecond9":0,"firstSecond10":0,"firstSecond11":0,"firstSecond12":0,"firstSecond13":0,"firstSecond14":0,"firstSecond15":0,"firstSecond16":0,"firstSecond17":0,"firstSecond18":0,"firstSecond19":0},"rankingStakeList":[{"rankingNum":1,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":2,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":3,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":4,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":5,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":6,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":7,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":8,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":9,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":10,"big":0,"small":0,"odd":0,"even":0}]}}]
+发生时间：
+星期六 2016-10-15 23:13:17
+1A61A3B0FC6849E2BC8EA3342241F53C_UC
+发生时间：
+星期六 2016-10-15 23:15:55
+wxChat=
+发生时间：
+星期六 2016-10-15 23:15:55
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 23:15:55
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 23:15:55
+买名次
+发生时间：
+星期六 2016-10-15 23:15:55
+上报阶段
+发生时间：
+星期六 2016-10-15 23:15:55
+提示信息：
+索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+
+发生时间：
+星期六 2016-10-15 23:16:04
+wxChat=
+发生时间：
+星期六 2016-10-15 23:16:04
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 23:16:04
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 23:16:04
+买名次
+发生时间：
+星期六 2016-10-15 23:16:50
+wxChat=
+发生时间：
+星期六 2016-10-15 23:16:50
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 23:16:50
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 23:16:50
+买名次
+发生时间：
+星期六 2016-10-15 23:16:50
+wxChat=
+发生时间：
+星期六 2016-10-15 23:16:50
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 23:16:50
+上报阶段
+发生时间：
+星期六 2016-10-15 23:16:50
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 23:16:50
+提示信息：
+索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+
+发生时间：
+星期六 2016-10-15 23:16:50
+上报阶段
+发生时间：
+星期六 2016-10-15 23:16:50
+提示信息：
+文件“E:\C#\WxGames\WxGames\bin\Debug\Log\Log20161015.txt”正由另一进程使用，因此该进程无法访问此文件。
+
+发生时间：
+星期六 2016-10-15 23:51:23
+wxChat=
+发生时间：
+星期六 2016-10-15 23:51:23
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 23:51:27
+wxChat=
+发生时间：
+星期六 2016-10-15 23:51:27
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 23:51:29
+wxChat=
+发生时间：
+星期六 2016-10-15 23:51:29
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 23:51:29
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 23:51:29
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 23:51:31
+wxChat=
+发生时间：
+星期六 2016-10-15 23:51:31
+wxChat=662320216
+发生时间：
+星期六 2016-10-15 23:51:31
+wxChat2=662320216
+发生时间：
+星期六 2016-10-15 23:51:31
+买名次
+发生时间：
+星期六 2016-10-15 23:51:31
+买名次
+发生时间：
+星期六 2016-10-15 23:51:31
+买名次
+发生时间：
+星期六 2016-10-15 23:51:31
+上报阶段
+发生时间：
+星期六 2016-10-15 23:51:31
+提示信息：
+索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+

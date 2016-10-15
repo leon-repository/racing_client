@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -51,9 +52,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LobbyTests.cs" />
     <Compile Include="Msg2WxMsgTests.cs" />
     <Compile Include="OrderManagerTests.cs" />
+    <Compile Include="PanKouTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomOrderTests.cs" />
     <Compile Include="ScoreManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Config.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="x64\SQLite.Interop.dll" />

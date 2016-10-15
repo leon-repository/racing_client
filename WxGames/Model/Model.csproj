@@ -46,11 +46,14 @@
     <Compile Include="Config.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="ContactScore.cs" />
+    <Compile Include="CookieTable.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameMsg.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="NowMsg.cs" />
     <Compile Include="OriginMsg.cs" />
+    <Compile Include="Performer.cs" />
+    <Compile Include="PerformerQun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QunTb.cs" />
   </ItemGroup>
