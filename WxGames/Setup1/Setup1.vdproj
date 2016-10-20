@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_1156063B98D5417E99B469675B2604A2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2B351B09EBD4476599C5228786683614"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -29,6 +35,12 @@
         {
         "MsmKey" = "8:_3B5C5C7E8475FA6B732AD7EC4ACA48BE"
         "OwnerKey" = "8:_6A18EC700FDC4514A6ECB0788CBD3741"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3B5C5C7E8475FA6B732AD7EC4ACA48BE"
+        "OwnerKey" = "8:_CD6A64FA9001A00091E4CE2DF9D347CE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -75,6 +87,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_88CF6693991549EFAF5B23F7E4FCAA9B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8FB2919F25774CA697C610FE2B1AE16C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -83,6 +101,18 @@
         {
         "MsmKey" = "8:_9AAF9370E89C5B5C0D83BD5FA9911363"
         "OwnerKey" = "8:_6A18EC700FDC4514A6ECB0788CBD3741"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9AAF9370E89C5B5C0D83BD5FA9911363"
+        "OwnerKey" = "8:_CD6A64FA9001A00091E4CE2DF9D347CE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9AAF9370E89C5B5C0D83BD5FA9911363"
+        "OwnerKey" = "8:_88CF6693991549EFAF5B23F7E4FCAA9B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -99,8 +129,26 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CD6A64FA9001A00091E4CE2DF9D347CE"
+        "OwnerKey" = "8:_88CF6693991549EFAF5B23F7E4FCAA9B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DBE5A06E8B842B5A4FB6B2673B0EE056"
         "OwnerKey" = "8:_9AAF9370E89C5B5C0D83BD5FA9911363"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DBE5A06E8B842B5A4FB6B2673B0EE056"
+        "OwnerKey" = "8:_CD6A64FA9001A00091E4CE2DF9D347CE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DBE5A06E8B842B5A4FB6B2673B0EE056"
+        "OwnerKey" = "8:_88CF6693991549EFAF5B23F7E4FCAA9B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -113,6 +161,18 @@
         {
         "MsmKey" = "8:_E01983875AADCC7EE0053FA9C71E2D25"
         "OwnerKey" = "8:_9AAF9370E89C5B5C0D83BD5FA9911363"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E01983875AADCC7EE0053FA9C71E2D25"
+        "OwnerKey" = "8:_CD6A64FA9001A00091E4CE2DF9D347CE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E01983875AADCC7EE0053FA9C71E2D25"
+        "OwnerKey" = "8:_88CF6693991549EFAF5B23F7E4FCAA9B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -125,6 +185,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_6A18EC700FDC4514A6ECB0788CBD3741"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_88CF6693991549EFAF5B23F7E4FCAA9B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CD6A64FA9001A00091E4CE2DF9D347CE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -270,6 +342,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1156063B98D5417E99B469675B2604A2"
+            {
+            "SourcePath" = "8:..\\WxGames\\bin\\Debug\\PerformerLogin.exe.config"
+            "TargetName" = "8:PerformerLogin.exe.config"
+            "Tag" = "8:"
+            "Folder" = "8:_738D87DAAA6A4F3EA241EE761D515374"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2B351B09EBD4476599C5228786683614"
             {
             "SourcePath" = "8:..\\WxGames\\bin\\Debug\\x86\\SQLite.Interop.dll"
@@ -505,6 +597,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_88CF6693991549EFAF5B23F7E4FCAA9B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:PerformerLogin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_88CF6693991549EFAF5B23F7E4FCAA9B"
+                    {
+                    "Name" = "8:PerformerLogin.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\WxGames\\bin\\Debug\\PerformerLogin.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_738D87DAAA6A4F3EA241EE761D515374"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8FB2919F25774CA697C610FE2B1AE16C"
             {
             "SourcePath" = "8:..\\WxGames\\bin\\Debug\\x64\\SQLite.Interop.dll"
@@ -605,6 +728,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CD6A64FA9001A00091E4CE2DF9D347CE"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:WxGames, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_CD6A64FA9001A00091E4CE2DF9D347CE"
+                    {
+                    "Name" = "8:WxGames.EXE"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:WxGames.EXE"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_738D87DAAA6A4F3EA241EE761D515374"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DBE5A06E8B842B5A4FB6B2673B0EE056"
@@ -759,7 +913,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup1"
         "ProductCode" = "8:{73864B29-B6B5-4ED0-A545-2C257A9D9123}"
-        "PackageCode" = "8:{3FDDADB3-1BC0-474D-AD18-3D4914B0CF2C}"
+        "PackageCode" = "8:{1D7A45A8-C18E-48E2-8BFF-37C48BDDFD7E}"
         "UpgradeCode" = "8:{E905018E-A2D5-40C2-8DA6-416D171B4753}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

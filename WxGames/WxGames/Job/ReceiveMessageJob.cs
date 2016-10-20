@@ -17,21 +17,24 @@ namespace WxGames.Job
     /// <summary>
     /// 接受群消息，并保存到数据库
     /// </summary>
+    [DisallowConcurrentExecution]
     class ReceiveMessageJob : IJob
     {
         public void Execute(IJobExecutionContext context)
         {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            NewMethod();
-            sw.Stop();
-
-            //Log.WriteLogByDate("接受群消息使用时间："+sw.ElapsedTicks);
+            try
+            {
+                NewMethod();
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLogByDate("接收群消息，保存到数据库JOB失败，原因是:");
+                Log.WriteLog(ex);
+            }
         }
 
         public static void NewMethod()
         {
-            //Log.WriteLogByDate("开始同步检查");
             ////获取消息列表，并原样输出
             //string sync_flag = frmMainForm.wxs.WxSyncCheck();//同步检查
 
@@ -44,15 +47,12 @@ namespace WxGames.Job
             //{
             //    return;
             //}
-            //Log.WriteLogByDate("结束同步检查");
 
-            Log.WriteLogByDate("开始消息同步检查");
             JObject sync_result = frmMainForm.wxs.WxSync();//进行同步
             if (sync_result == null)
             {
                 return;
             }
-            Log.WriteLogByDate("结束消息同步检查");
             string conn = ConfigurationManager.AppSettings["conn"].ToString();
             DataHelper data = new DataHelper(conn);
             //保存微信群联系人
@@ -115,7 +115,6 @@ namespace WxGames.Job
 
             //获取群里所有联系人，无uuin，根据昵称来更新userName和uin
             string qun1 = frmMainForm.wxs.GetQun(frmMainForm.CurrentQun);
-            Log.WriteLogByDate("群json:"+qun1);
             JObject qunObj = JsonConvert.DeserializeObject(qun1) as JObject;
 
             if (qunObj["MemberList"] != null)

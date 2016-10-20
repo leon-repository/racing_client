@@ -89,6 +89,17 @@ namespace WxGames
 
         public string WxTuanDui = "";
 
+        public Thread t = new Thread(new ThreadStart(ReceiveMsg));
+
+        private static void ReceiveMsg()
+        {
+            Log.WriteLogByDate("调用1次");
+            while (true)
+            {
+                ReceiveMessageJob.NewMethod();
+                Thread.Sleep(1000);
+            }
+        }
 
         /// <summary>
         /// 设置dgvUp的数据源
@@ -352,6 +363,8 @@ namespace WxGames
                         }
                     }
                 }
+
+                t.Start();
             }
             else
             {
@@ -362,6 +375,15 @@ namespace WxGames
                 cmbQun.Enabled = true;
                 btnRefresh.Enabled = true;
                 dgvUp.Enabled = false;
+
+                try
+                {
+                    t.Abort();
+                }
+                catch (Exception ex)
+                {
+                    //结束线程
+                }
 
                 //在点结束按钮的时候，发送结束消息
                 //清理垃圾数据
@@ -375,21 +397,17 @@ namespace WxGames
 
             }
 
-            //((Action)(delegate ()
-            //{
-            //    while (Start)
-            //    {
-            //        //获取消息列表，并原样输出
-            //        string sync_flag = frmMainForm.wxs.WxSyncCheck();//同步检查
+            ((Action)(delegate ()
+            {
+                while (Start)
+                {
+                    //获取消息列表，并原样输出
+                    string sync_flag = frmMainForm.wxs.WxSyncCheck();//同步检查
 
-            //        if (sync_flag.Contains("11"))
-            //        {
-            //            return;
-            //        }
-            //        Thread.Sleep(1);
-            //    }
+                    Thread.Sleep(1000);
+                }
 
-            //})).BeginInvoke(null, null);
+            })).BeginInvoke(null, null);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -426,8 +444,6 @@ namespace WxGames
                 return;
             }
             JObject configHelper = JsonConvert.DeserializeObject(json) as JObject;
-            Log.WriteLogByDate("开始调取期号信息");
-            Log.WriteLogByDate(json);
             //if (IsContinue && configHelper != null)
             if (configHelper != null)
             {
@@ -459,12 +475,10 @@ namespace WxGames
             //        queryValue = queryValue + item.Value.ToString();
             //    }
 
-            //    Log.WriteLogByDate("调取开奖结果");
             //    string urlConfiger2 = "/user/record/result";
             //    string auth2 = PanKou.Instance.GetSha1("", urlConfiger2 + queryValue);
 
             //    string json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2 + "?racingNum=" + frmMainForm.Perioid, auth2, PanKou.accessKey);
-            //    Log.WriteLogByDate(json2);
             //    if (string.IsNullOrEmpty(json2))
             //    {
             //        return;
@@ -475,7 +489,6 @@ namespace WxGames
             //    if (result == "SUCCESS")
             //    {
             //        string resultArray = configHelper2["data"]["result"].ToString();
-            //        Log.WriteLogByDate("开奖信息："+ resultArray);
 
             //        string racingNum = configHelper2["data"]["racingNum"].ToString();
             //        resultArray = resultArray.Replace("\r\n", "");
@@ -489,9 +502,7 @@ namespace WxGames
             //        toolStripStatusLabel3.Text = (racingTime / 1000).ToString();
             //    }
 
-            //    Log.WriteLogByDate("结束调用开奖结果");
             //}
-            //Log.WriteLogByDate("结束调取期号信息");
         }
 
         private void dgvUp_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -737,17 +748,7 @@ namespace WxGames
             MessageBox.Show("未开发");
         }
 
-        private void timerRecive_Tick(object sender, EventArgs e)
-        {
-            //接收消息
-            ReciveMsg.Instance.Receive();
-        }
-
-        private void timerSend_Tick(object sender, EventArgs e)
-        {
-            //处理消息
-            SendMsg.Instance.Send();
-        }
+        
 
         private void tab_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1034,6 +1035,16 @@ namespace WxGames
         private void button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmMainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
+
+        private void frmMainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(0);
         }
     }
 }

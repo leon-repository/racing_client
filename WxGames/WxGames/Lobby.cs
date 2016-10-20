@@ -20,17 +20,12 @@ namespace WxGames
 
         public void Start()
         {
-            Log.WriteLogByDate("开始获取获取加密");
             DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
             //获取开奖信息，并将开奖信息保存到数据库
             string urlConfiger = "/user/client/stake/configer";
             string auth = PanKou.Instance.GetSha1("", urlConfiger);
-            Log.WriteLogByDate("结束获取获取加密");
 
-            Log.WriteLogByDate("开始获取开奖信息");
             string json = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger, auth, PanKou.accessKey);
-            Log.WriteLogByDate("结束获取开奖信息");
-            //Log.WriteLogByDate("获取开奖信息：" + json);
             if (string.IsNullOrEmpty(json))
             {
                 return;
@@ -71,7 +66,6 @@ namespace WxGames
                     Game gameInit2 = data.First<Game>(pkrace, "");
                     if (gameInit2 == null)
                     {
-                        Log.WriteLogByDate("开始插入数据库消息");
                         data.Insert<Game>(game, "");
                         //把以前的消息全修改为发送
                         data.ExecuteSql(" update GameMsg set issend='1' ");
@@ -124,7 +118,6 @@ namespace WxGames
                             gameMsg1.IsSend = "0";
                             data.Insert<GameMsg>(gameMsg1, "");
                         }
-                        Log.WriteLogByDate("结束插入数据库消息");
                     }
                 }
             }
@@ -152,7 +145,7 @@ namespace WxGames
                                 //1,处理指令
                                 WXMsg model = Msg2WxMsg.Instance.GetMsg2(nowMsg);
                                 string msgMessage = model.Msg;
-                                content = content + msgMessage;
+                                content = content +"\r\n"+ msgMessage;
                             }
                         }
                         catch (Exception ex)
@@ -162,9 +155,7 @@ namespace WxGames
                         }
                     }
 
-                    Log.WriteLogByDate("发送开奖结果消息");
                     frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = content, To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
-                    Log.WriteLogByDate("结束开奖结果消息");
                 }
             }
 
@@ -172,8 +163,6 @@ namespace WxGames
             //下注信息上传
             if (stage == "2")
             {
-                //Log.WriteLogByDate("当前期号：" + frmMainForm.Perioid);
-                Log.WriteLogByDate("开始上报");
                 frmMainForm.IsContinue = false;
                 List<NowMsg> msgList = new List<NowMsg>();
                 msgList = data.GetList<NowMsg>(" isdelete=1 and CommandType in ('买名次','冠亚和','名次大小单双龙虎') and period= " + frmMainForm.Perioid, "");
@@ -191,11 +180,10 @@ namespace WxGames
                     }
                     catch (Exception ex)
                     {
-                        Log.WriteLogByDate("上报阶段");
+                        Log.WriteLogByDate("上报阶段异常");
                         Log.WriteLog(ex);
                     }
                 }
-                Log.WriteLogByDate("结束上报");
                 frmMainForm.IsKaiJian = true;
             }
             //查询开奖结果，发送本期开奖结果
@@ -252,11 +240,8 @@ namespace WxGames
                             //strList = "[" + strList + "]";
 
                             string authStake = PanKou.Instance.GetSha1("", url + frmMainForm.Perioid + strList);
-                            Log.WriteLogByDate("开始请求下注结果");
                             //请求开奖结果
                             string jsonStake = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url + "?racingNum=" + frmMainForm.Perioid + "&wechatSns=" + strList, authStake, PanKou.accessKey);
-
-                            Log.WriteLogByDate("请求结束下注结果是：" + jsonStake);
 
                             JObject jobject = JsonConvert.DeserializeObject(jsonStake) as JObject;
 
@@ -276,9 +261,7 @@ namespace WxGames
 
                         }
 
-                        Log.WriteLogByDate("开始发送开奖结果消息");
                         frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = msg, To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
-                        Log.WriteLogByDate("结束发送开奖结果消息");
                         frmMainForm.IsContinue = true;
                         frmMainForm.IsKaiJian = false;
                     }
@@ -340,8 +323,6 @@ namespace WxGames
             body = "[" + body + "]";
             string auth = PanKou.Instance.GetSha1(body, url);
 
-            Log.WriteLogByDate(body);
-            Log.WriteLogByDate(PanKou.accessKey);
             //请求押注接口
             string json = WebService.SendPostRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url, body, auth, PanKou.accessKey);
 
@@ -354,7 +335,6 @@ namespace WxGames
             switch (item.CommandType)
             {
                 case "买名次":
-                    Log.WriteLogByDate("买名次");
                     item.CommandOne = item.CommandOne.Replace("冠", "1");
                     item.CommandOne = item.CommandOne.Replace("亚", "2");
                     item.CommandOne = item.CommandOne.Replace("季", "3");
@@ -458,7 +438,6 @@ namespace WxGames
                     }
                     break;
                 case "冠亚和":
-                    Log.WriteLogByDate("冠亚和");
                     string comTwo = item.CommandTwo.Replace("/", "");
                     if (Convert.ToInt32(comTwo) <= 19)
                     {
@@ -581,7 +560,6 @@ namespace WxGames
                     }
                     break;
                 case "名次大小单双龙虎":
-                    Log.WriteLogByDate("名次大小单双龙虎");
                     string comTwo3 = item.CommandTwo.Replace("/", "");
                     switch (item.CommandOne)
                     {

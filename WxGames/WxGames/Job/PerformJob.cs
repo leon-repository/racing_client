@@ -11,9 +11,24 @@ using WxGames.HTTP;
 
 namespace WxGames.Job
 {
+    [DisallowConcurrentExecution]
     class PerformJob : IJob
     {
         public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                NewMethod();
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLogByDate("托运行发送错误，原因是：");
+                Log.WriteLog(ex);
+            }
+
+        }
+
+        private static void NewMethod()
         {
             DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
             List<Performer> performerList = new List<Performer>();
@@ -21,13 +36,13 @@ namespace WxGames.Job
 
             foreach (Performer performer in performerList)
             {
-                List<CookieTable> cookieList = data.GetList<CookieTable>(string.Format("uin='{0}'",performer.Uin), "");
+                List<CookieTable> cookieList = data.GetList<CookieTable>(string.Format("uin='{0}'", performer.Uin), "");
                 List<Cookie> cookies = new List<Cookie>();
                 foreach (CookieTable cookietb in cookieList)
                 {
                     Cookie cookie = new Cookie();
                     cookie.Comment = cookietb.Comment;
-                    cookie.Discard =Convert.ToBoolean(cookietb.Discard);
+                    cookie.Discard = Convert.ToBoolean(cookietb.Discard);
                     cookie.Domain = cookietb.Domain;
                     cookie.Expired = Convert.ToBoolean(cookietb.Expired);
                     cookie.HttpOnly = Convert.ToBoolean(cookietb.HttpOnly);
@@ -45,7 +60,7 @@ namespace WxGames.Job
                 string to = list.FirstOrDefault(p => p.NickName == frmMainForm.CurrentQunNick).UserName;
 
                 PerFormerService service = new PerFormerService();
-                
+
                 //编写托发消息的逻辑
                 //先检查能否下注
                 if (frmMainForm.IsContinue)
@@ -53,7 +68,6 @@ namespace WxGames.Job
                     service.SendMsg(RandomOrder.Instance.GetRandomOrder(), performer.UserName, to, 1, cookies, performer.Skey, performer.PassTick);
                 }
             }
-
         }
     }
 }

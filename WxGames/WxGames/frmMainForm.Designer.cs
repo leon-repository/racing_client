@@ -274,7 +274,7 @@
             this.tab.Location = new System.Drawing.Point(0, 0);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
-            this.tab.Size = new System.Drawing.Size(1248, 977);
+            this.tab.Size = new System.Drawing.Size(1218, 977);
             this.tab.TabIndex = 1;
             this.tab.SelectedIndexChanged += new System.EventHandler(this.tab_SelectedIndexChanged);
             // 
@@ -291,7 +291,7 @@
             this.tabPankou.Location = new System.Drawing.Point(4, 28);
             this.tabPankou.Name = "tabPankou";
             this.tabPankou.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPankou.Size = new System.Drawing.Size(1240, 945);
+            this.tabPankou.Size = new System.Drawing.Size(1210, 945);
             this.tabPankou.TabIndex = 0;
             this.tabPankou.Text = "盘口登陆";
             this.tabPankou.UseVisualStyleBackColor = true;
@@ -372,7 +372,7 @@
             this.tabZhangDan.Location = new System.Drawing.Point(4, 28);
             this.tabZhangDan.Name = "tabZhangDan";
             this.tabZhangDan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabZhangDan.Size = new System.Drawing.Size(1240, 945);
+            this.tabZhangDan.Size = new System.Drawing.Size(1216, 945);
             this.tabZhangDan.TabIndex = 1;
             this.tabZhangDan.Text = "账单";
             this.tabZhangDan.UseVisualStyleBackColor = true;
@@ -429,7 +429,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label5);
             this.splitContainer2.Panel2.Controls.Add(this.txtWxUserName);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Size = new System.Drawing.Size(1234, 939);
+            this.splitContainer2.Size = new System.Drawing.Size(1210, 939);
             this.splitContainer2.SplitterDistance = 668;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -450,7 +450,7 @@
             this.dgvZhanDan.ReadOnly = true;
             this.dgvZhanDan.RowTemplate.Height = 30;
             this.dgvZhanDan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvZhanDan.Size = new System.Drawing.Size(1234, 668);
+            this.dgvZhanDan.Size = new System.Drawing.Size(1210, 668);
             this.dgvZhanDan.TabIndex = 0;
             this.dgvZhanDan.DoubleClick += new System.EventHandler(this.dgvZhanDan_DoubleClick);
             // 
@@ -849,7 +849,7 @@
             this.tabZhiling.Location = new System.Drawing.Point(4, 28);
             this.tabZhiling.Name = "tabZhiling";
             this.tabZhiling.Padding = new System.Windows.Forms.Padding(3);
-            this.tabZhiling.Size = new System.Drawing.Size(1246, 945);
+            this.tabZhiling.Size = new System.Drawing.Size(1216, 945);
             this.tabZhiling.TabIndex = 2;
             this.tabZhiling.Text = "指令设置";
             this.tabZhiling.UseVisualStyleBackColor = true;
@@ -861,7 +861,7 @@
             this.tabXiaoxi.Location = new System.Drawing.Point(4, 28);
             this.tabXiaoxi.Name = "tabXiaoxi";
             this.tabXiaoxi.Padding = new System.Windows.Forms.Padding(3);
-            this.tabXiaoxi.Size = new System.Drawing.Size(1240, 945);
+            this.tabXiaoxi.Size = new System.Drawing.Size(1216, 945);
             this.tabXiaoxi.TabIndex = 3;
             this.tabXiaoxi.Text = "消息设置";
             this.tabXiaoxi.UseVisualStyleBackColor = true;
@@ -903,7 +903,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 134);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1234, 808);
+            this.groupBox1.Size = new System.Drawing.Size(1210, 808);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "消息设置";
@@ -1209,7 +1209,7 @@
             this.pnlBianLiang.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBianLiang.Location = new System.Drawing.Point(3, 3);
             this.pnlBianLiang.Name = "pnlBianLiang";
-            this.pnlBianLiang.Size = new System.Drawing.Size(1234, 131);
+            this.pnlBianLiang.Size = new System.Drawing.Size(1210, 131);
             this.pnlBianLiang.TabIndex = 0;
             // 
             // label34
@@ -1352,7 +1352,7 @@
             this.tabYingkui.Location = new System.Drawing.Point(4, 28);
             this.tabYingkui.Name = "tabYingkui";
             this.tabYingkui.Padding = new System.Windows.Forms.Padding(3);
-            this.tabYingkui.Size = new System.Drawing.Size(1246, 945);
+            this.tabYingkui.Size = new System.Drawing.Size(1216, 945);
             this.tabYingkui.TabIndex = 4;
             this.tabYingkui.Text = "盈亏计算";
             this.tabYingkui.UseVisualStyleBackColor = true;
@@ -1375,7 +1375,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.tabPanel);
             this.splitContainer1.Panel2MinSize = 0;
             this.splitContainer1.Size = new System.Drawing.Size(1678, 979);
-            this.splitContainer1.SplitterDistance = 1250;
+            this.splitContainer1.SplitterDistance = 1220;
             this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -1387,7 +1387,7 @@
             this.tabPanel.Location = new System.Drawing.Point(0, 0);
             this.tabPanel.Name = "tabPanel";
             this.tabPanel.SelectedIndex = 0;
-            this.tabPanel.Size = new System.Drawing.Size(416, 977);
+            this.tabPanel.Size = new System.Drawing.Size(446, 977);
             this.tabPanel.TabIndex = 0;
             // 
             // tabUp
@@ -1396,7 +1396,7 @@
             this.tabUp.Location = new System.Drawing.Point(4, 28);
             this.tabUp.Name = "tabUp";
             this.tabUp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUp.Size = new System.Drawing.Size(408, 945);
+            this.tabUp.Size = new System.Drawing.Size(438, 945);
             this.tabUp.TabIndex = 0;
             this.tabUp.Text = "上下分操作";
             this.tabUp.UseVisualStyleBackColor = true;
@@ -1424,7 +1424,7 @@
             this.dgvUp.ReadOnly = true;
             this.dgvUp.RowTemplate.Height = 30;
             this.dgvUp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUp.Size = new System.Drawing.Size(402, 939);
+            this.dgvUp.Size = new System.Drawing.Size(432, 939);
             this.dgvUp.TabIndex = 0;
             this.dgvUp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUp_CellClick);
             // 
@@ -1497,26 +1497,26 @@
             this.不同意ToolStripMenuItem,
             this.删除ToolStripMenuItem});
             this.menuRight.Name = "menuRight";
-            this.menuRight.Size = new System.Drawing.Size(148, 94);
+            this.menuRight.Size = new System.Drawing.Size(135, 88);
             // 
             // 同意ToolStripMenuItem
             // 
             this.同意ToolStripMenuItem.Name = "同意ToolStripMenuItem";
-            this.同意ToolStripMenuItem.Size = new System.Drawing.Size(211, 30);
+            this.同意ToolStripMenuItem.Size = new System.Drawing.Size(134, 28);
             this.同意ToolStripMenuItem.Text = "同意";
             this.同意ToolStripMenuItem.Click += new System.EventHandler(this.同意ToolStripMenuItem_Click);
             // 
             // 不同意ToolStripMenuItem
             // 
             this.不同意ToolStripMenuItem.Name = "不同意ToolStripMenuItem";
-            this.不同意ToolStripMenuItem.Size = new System.Drawing.Size(211, 30);
+            this.不同意ToolStripMenuItem.Size = new System.Drawing.Size(134, 28);
             this.不同意ToolStripMenuItem.Text = "不同意";
             this.不同意ToolStripMenuItem.Click += new System.EventHandler(this.不同意ToolStripMenuItem_Click);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(211, 30);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(134, 28);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
@@ -1527,7 +1527,7 @@
             this.tabSearch.Location = new System.Drawing.Point(4, 28);
             this.tabSearch.Name = "tabSearch";
             this.tabSearch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSearch.Size = new System.Drawing.Size(402, 945);
+            this.tabSearch.Size = new System.Drawing.Size(432, 945);
             this.tabSearch.TabIndex = 1;
             this.tabSearch.Text = "操作记录";
             this.tabSearch.UseVisualStyleBackColor = true;
@@ -1542,7 +1542,7 @@
             this.dgbHistory.MultiSelect = false;
             this.dgbHistory.Name = "dgbHistory";
             this.dgbHistory.ReadOnly = true;
-            this.dgbHistory.Size = new System.Drawing.Size(396, 839);
+            this.dgbHistory.Size = new System.Drawing.Size(426, 839);
             this.dgbHistory.TabIndex = 6;
             // 
             // panel1
@@ -1557,7 +1557,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(396, 100);
+            this.panel1.Size = new System.Drawing.Size(426, 100);
             this.panel1.TabIndex = 5;
             // 
             // dtpEnd
@@ -1638,6 +1638,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "操作台";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMainForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMainForm_FormClosed);
             this.Load += new System.EventHandler(this.frmMainForm_Load);
             this.bottomStatus.ResumeLayout(false);
             this.bottomStatus.PerformLayout();

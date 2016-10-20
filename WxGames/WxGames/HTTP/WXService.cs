@@ -26,7 +26,7 @@ namespace WxGames.HTTP
         //获取好友列表
         private static string _getcontact_url = "https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetcontact";
         //同步检查url
-        private static string _synccheck_url = "https://webpush2.weixin.qq.com/cgi-bin/mmwebwx-bin/synccheck?sid={0}&uin={1}&synckey={2}&r={3}&skey={4}&deviceid={5}";
+        private static string _synccheck_url = "https://wx2.qq.com/cgi-bin/mmwebwx-bin/synccheck?sid={0}&uin={1}&synckey={2}&r={3}&skey={4}&deviceid={5}";
         //同步url
         private static string _sync_url = "https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid=";
         //发送消息url
@@ -60,6 +60,11 @@ namespace WxGames.HTTP
                     ///cgi-bin/mmwebwx-bin/webwxupdatechatroom?fun=delmember&lang=zh_CN&pass_ticket=
                     string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxupdatechatroom?fun=delmember&lang=zh_CN";
                     bytes = BaseService.SendPostRequest(url + "&pass_ticket=" + LoginService.Pass_Ticket, msg_json);
+                    if (bytes == null)
+                    {
+                        continue;
+                    }
+
                     string send_result = Encoding.UTF8.GetString(bytes);
 
                     if (!send_result.Contains("\"Ret\": 0"))
@@ -423,6 +428,11 @@ namespace WxGames.HTTP
                 {
                     string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxbatchgetcontact?type=ex";
                     bytes = BaseService.SendPostRequest(url+"&r="+ DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds.ToString().Split(new char[] { '.' })[0] + "&pass_ticket=" + LoginService.Pass_Ticket, msg_json);
+
+                    if (bytes == null)
+                    {
+                        continue;
+                    }
                     string send_result = Encoding.UTF8.GetString(bytes);
 
                     if (!send_result.Contains("\"Ret\": 0"))

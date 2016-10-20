@@ -13,21 +13,20 @@ namespace WxGames.Job
     /// <summary>
     /// 获取开奖信息，并发送开奖过程中的消息
     /// </summary>
+    [DisallowConcurrentExecution]
     public class LobbyJob : IJob
     {
         public void Execute(IJobExecutionContext context)
         {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            NewMethod();
-            sw.Stop();
-
-            Log.WriteLogByDate("获取开奖时间：" + sw.ElapsedTicks);
-        }
-
-        private void NewMethod()
-        {
-            Lobby.Instanc.Start();
+            try
+            {
+                Lobby.Instanc.Start();
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLogByDate("获取开奖信息JOB失败，原因是：");
+                Log.WriteLog(ex);
+            }
         }
     }
 }

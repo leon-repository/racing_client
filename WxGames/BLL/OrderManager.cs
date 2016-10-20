@@ -23,9 +23,9 @@ namespace BLL
             daKey.Add(new KeyValuePair<string, string>("下", "下|下分"));
             daKey.Add(new KeyValuePair<string, string>("查", "查|查分"));
 
-            foreach (KeyValuePair<string,string> pair in daKey)
+            foreach (KeyValuePair<string, string> pair in daKey)
             {
-                string[] key = pair.Value.Split(new char[] {'|'},StringSplitOptions.RemoveEmptyEntries);
+                string[] key = pair.Value.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 
                 for (int i = 0; i < key.Length; i++)
                 {
@@ -36,14 +36,16 @@ namespace BLL
                         result.Score = order.GetNumber();
                         result.CommandType = OrderType.上下查;
 
-                        //
-                        if (Convert.ToInt32(result.Score) >= 100000)
+                        if (!string.IsNullOrEmpty(result.Score))
                         {
-                            result.CommandType = OrderType.指令格式错误;
-                        }
-                        if (Convert.ToInt32(result.Score) <= 0)
-                        {
-                            result.CommandType = OrderType.指令格式错误;
+                            if (result.Score.ToInt() >= 100000)
+                            {
+                                result.CommandType = OrderType.指令格式错误;
+                            }
+                            if (result.Score.ToInt() <= 0)
+                            {
+                                result.CommandType = OrderType.指令格式错误;
+                            }
                         }
 
                         return result;
@@ -70,7 +72,7 @@ namespace BLL
                     {
                         result.OrderContent = order;
 
-                        string[] command = order.Split(new string[] { key[i].ToString()}, StringSplitOptions.RemoveEmptyEntries);
+                        string[] command = order.Split(new string[] { key[i].ToString() }, StringSplitOptions.RemoveEmptyEntries);
                         if (command.Length != 2)
                         {
                             continue;
@@ -87,8 +89,8 @@ namespace BLL
             //买名次
             //指令类型一
             List<KeyValuePair<string, string>> guanKey = new List<KeyValuePair<string, string>>();
-            guanKey.Add(new KeyValuePair<string, string>("/","/"));
-            foreach (KeyValuePair<string,string> key in guanKey)
+            guanKey.Add(new KeyValuePair<string, string>("/", "/"));
+            foreach (KeyValuePair<string, string> key in guanKey)
             {
                 //检查是否存在汉字
                 if (order.ExitHanZi())
@@ -105,7 +107,7 @@ namespace BLL
                 {
                     continue;
                 }
-                
+
 
                 result.OrderContent = order;
                 result.CommandOne = command[0];
@@ -136,7 +138,7 @@ namespace BLL
                 {
                     if (order.Contains(keyA[i]))
                     {
-                        string command=order.Substring(order.IndexOf(keyA[i])+1);
+                        string command = order.Substring(order.IndexOf(keyA[i]) + 1);
                         string[] commanPair = command.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
                         if (commanPair == null)
                         {
@@ -172,7 +174,7 @@ namespace BLL
 
                 for (int i = 0; i < keyA.Length; i++)
                 {
-                    string[] command= order.Split(new string[] { keyA[i] }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] command = order.Split(new string[] { keyA[i] }, StringSplitOptions.RemoveEmptyEntries);
                     if (command == null)
                     {
                         continue;
@@ -200,8 +202,8 @@ namespace BLL
                 {
                     if (order.Contains(keyA[i]))
                     {
-                        string command = order.Substring(order.IndexOf(keyA[i])+1);
-                        string[] commandA = command.Split(new char[] { '/'},StringSplitOptions.RemoveEmptyEntries);
+                        string command = order.Substring(order.IndexOf(keyA[i]) + 1);
+                        string[] commandA = command.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                         if (commandA == null)
                         {
                             continue;
@@ -212,11 +214,11 @@ namespace BLL
                         }
                         result.OrderContent = order;
                         result.CommandOne = keyA[i];
-                        for (int j = 0; j < commandA.Length-1; j++)
+                        for (int j = 0; j < commandA.Length - 1; j++)
                         {
-                            result.CommandTwo +=commandA[j]+"/";
+                            result.CommandTwo += commandA[j] + "/";
                         }
-                        
+
                         result.Score = commandA[commandA.Length - 1];
                         result.CommandType = OrderType.冠亚和;
                         return result;

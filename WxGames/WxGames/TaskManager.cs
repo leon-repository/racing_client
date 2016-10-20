@@ -20,7 +20,7 @@ namespace WxGames
             var properties = new NameValueCollection();
             properties[""] = "微信游戏";
             properties["quartz.threadPool.type"] = "Quartz.Simpl.SimpleThreadPool,Quartz";
-            properties["quartz.threadPool.threadCount"] = "100";
+            properties["quartz.threadPool.threadCount"] = "50";
             properties["quartz.threadPool.threadPriority"] = "Normal";
 
 
@@ -38,16 +38,16 @@ namespace WxGames
                 .ForJob(job)
                 .Build();
 
-            //接收消息
-            IJobDetail job2 = JobBuilder.Create<ReceiveMessageJob>()
-                .WithIdentity("receiveMessage", "job").Build();
+            ////接收消息
+            //IJobDetail job2 = JobBuilder.Create<ReceiveMessageJob>()
+            //    .WithIdentity("receiveMessage", "job").Build();
 
-            ISimpleTrigger trigger2 = (ISimpleTrigger)TriggerBuilder.Create()
-                .WithIdentity("receiveMessageTri", "Trigger")
-                .StartNow()
-                .WithSimpleSchedule(x => x.WithIntervalInSeconds(1).WithRepeatCount(int.MaxValue))
-                .ForJob(job2)
-                .Build();
+            //ISimpleTrigger trigger2 = (ISimpleTrigger)TriggerBuilder.Create()
+            //    .WithIdentity("receiveMessageTri", "Trigger")
+            //    .StartNow()
+            //    .WithSimpleSchedule(x => x.WithIntervalInSeconds(1).WithRepeatCount(int.MaxValue))
+            //    .ForJob(job2)
+            //    .Build();
 
             IJobDetail job3 = JobBuilder.Create<LobbyJob>()
                 .WithIdentity("lobby", "job").Build();
@@ -72,7 +72,7 @@ namespace WxGames
 
             //把job，trigger添加到任务中
             sched.ScheduleJob(job, trigger);
-            sched.ScheduleJob(job2, trigger2);
+            //sched.ScheduleJob(job2, trigger2);
             sched.ScheduleJob(job3, trigger3);
             //sched.ScheduleJob(job4, trigger4);
 
@@ -104,6 +104,11 @@ namespace WxGames
                 Scheduler.PauseAll();
             }
 
+        }
+
+        public void End()
+        {
+            Scheduler.Shutdown();
         }
     }
 }

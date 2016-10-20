@@ -12,18 +12,22 @@ using System.Diagnostics;
 
 namespace WxGames.Job
 {
+    [DisallowConcurrentExecution]
     public class SendMessageJob : IJob
     {
         public string JObject { get; private set; }
 
         public void Execute(IJobExecutionContext context)
         {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            NewMethod();
-            sw.Stop();
-
-            //Log.WriteLogByDate("发送群消息使用时间：" + sw.ElapsedTicks);
+            try
+            {
+                NewMethod();
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLogByDate("发送消息JOB失败，原因是:");
+                Log.WriteLog(ex);
+            }
         }
 
         private static void NewMethod()
