@@ -8,6 +8,7 @@ using WxGames;
 using BLL;
 using Model;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace WxGames.Job
 {
@@ -16,6 +17,16 @@ namespace WxGames.Job
         public string JObject { get; private set; }
 
         public void Execute(IJobExecutionContext context)
+        {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            NewMethod();
+            sw.Stop();
+
+            //Log.WriteLogByDate("发送群消息使用时间：" + sw.ElapsedTicks);
+        }
+
+        private static void NewMethod()
         {
             string conn = ConfigurationManager.AppSettings["conn"].ToString();
             DataHelper data = new DataHelper(conn);
@@ -48,8 +59,8 @@ namespace WxGames.Job
 
                 //先查消息id是否重复，如果重复，则跳过不处理
                 List<KeyValuePair<string, object>> pkList = new List<KeyValuePair<string, object>>();
-                pkList.Add(new KeyValuePair<string, object>("MsgId",msg.MsgId));
-                NowMsg exitNowMsg=data.First<NowMsg>(pkList, "");
+                pkList.Add(new KeyValuePair<string, object>("MsgId", msg.MsgId));
+                NowMsg exitNowMsg = data.First<NowMsg>(pkList, "");
                 if (exitNowMsg == null)
                 {
                     data.Insert<NowMsg>(nowMsg, "");

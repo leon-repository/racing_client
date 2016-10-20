@@ -33,6 +33,7 @@ namespace WxGames.HTTP
                 System.Net.ServicePointManager.DefaultConnectionLimit = 512;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "get";
+                
                 if (CookiesContainer == null)
                 {
                     CookiesContainer = new CookieContainer();
@@ -78,6 +79,9 @@ namespace WxGames.HTTP
         {
             try
             {
+                Log.WriteLogByDate("调用URL:" + url);
+                Log.WriteLogByDate(body);
+
                 byte[] request_body = Encoding.UTF8.GetBytes(body);
                 System.Net.ServicePointManager.DefaultConnectionLimit = 512;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);

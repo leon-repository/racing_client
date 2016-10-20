@@ -10,6 +10,7 @@ using Model;
 using BLL;
 using Newtonsoft.Json;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace WxGames.Job
 {
@@ -20,19 +21,38 @@ namespace WxGames.Job
     {
         public void Execute(IJobExecutionContext context)
         {
-            //获取消息列表，并原样输出
-            string sync_flag = frmMainForm.wxs.WxSyncCheck();//同步检查
-            if (sync_flag == null)
-            {
-                return;
-            }
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            NewMethod();
+            sw.Stop();
 
+            //Log.WriteLogByDate("接受群消息使用时间："+sw.ElapsedTicks);
+        }
+
+        public static void NewMethod()
+        {
+            //Log.WriteLogByDate("开始同步检查");
+            ////获取消息列表，并原样输出
+            //string sync_flag = frmMainForm.wxs.WxSyncCheck();//同步检查
+
+            //if (sync_flag.Contains("11"))
+            //{
+            //    return;
+            //}
+
+            //if (sync_flag == null)
+            //{
+            //    return;
+            //}
+            //Log.WriteLogByDate("结束同步检查");
+
+            Log.WriteLogByDate("开始消息同步检查");
             JObject sync_result = frmMainForm.wxs.WxSync();//进行同步
             if (sync_result == null)
             {
                 return;
             }
-
+            Log.WriteLogByDate("结束消息同步检查");
             string conn = ConfigurationManager.AppSettings["conn"].ToString();
             DataHelper data = new DataHelper(conn);
             //保存微信群联系人
@@ -95,9 +115,10 @@ namespace WxGames.Job
 
             //获取群里所有联系人，无uuin，根据昵称来更新userName和uin
             string qun1 = frmMainForm.wxs.GetQun(frmMainForm.CurrentQun);
+            Log.WriteLogByDate("群json:"+qun1);
             JObject qunObj = JsonConvert.DeserializeObject(qun1) as JObject;
 
-            if (qunObj["MemberCount"] != null && qunObj["MemberCount"].ToString() != "0")
+            if (qunObj["MemberList"] != null)
             {
                 foreach (JObject member in qunObj["MemberList"])
                 {
@@ -150,9 +171,9 @@ namespace WxGames.Job
                             msg.QnickName = qNickName;
                             //插入消息前检查
                             List<KeyValuePair<string, object>> pkList4 = new List<KeyValuePair<string, object>>();
-                            pkList4.Add(new KeyValuePair<string, object>("MsgId",msg.MsgId));
+                            pkList4.Add(new KeyValuePair<string, object>("MsgId", msg.MsgId));
 
-                            OriginMsg orginMsg2=data.First<OriginMsg>(pkList4, "");
+                            OriginMsg orginMsg2 = data.First<OriginMsg>(pkList4, "");
                             if (orginMsg2 == null)
                             {
                                 data.Insert<OriginMsg>(msg, "");
@@ -166,7 +187,7 @@ namespace WxGames.Job
                         {
                             Log.WriteLogByDate("无法获取到uin，读取到的消息不保存");
                         }
-                        
+
                     }
                 }
             }

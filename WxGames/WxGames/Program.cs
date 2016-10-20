@@ -32,7 +32,7 @@ namespace WxGames
             catch (Exception ex)
             {
                 Log.WriteLog(ex);
-                MessageBox.Show("系统出现未知异常，请重启系统！");
+               // MessageBox.Show("系统出现未知异常，请重启系统！");
             }
         }
 
@@ -44,7 +44,7 @@ namespace WxGames
                 Log.WriteLog((Exception)ex);
             }
 
-            MessageBox.Show("系统出现未知异常，请重启系统！");
+            //MessageBox.Show("系统出现未知异常，请重启系统！");
         }
 
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
@@ -55,7 +55,7 @@ namespace WxGames
                Log.WriteLog(ex);
             }
 
-            MessageBox.Show("系统出现未知异常，请重启系统！");
+            //MessageBox.Show("系统出现未知异常，请重启系统！");
         }
     }
 }

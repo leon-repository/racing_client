@@ -4,6 +4,7 @@ using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -15,6 +16,16 @@ namespace WxGames.Job
     public class LobbyJob : IJob
     {
         public void Execute(IJobExecutionContext context)
+        {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            NewMethod();
+            sw.Stop();
+
+            Log.WriteLogByDate("获取开奖时间：" + sw.ElapsedTicks);
+        }
+
+        private void NewMethod()
         {
             Lobby.Instanc.Start();
         }

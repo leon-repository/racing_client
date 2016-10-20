@@ -16,7 +16,7 @@ namespace WxGames.Tests
         {
             NowMsg msg = new NowMsg();
 
-            WXMsg wxMsg=Msg2WxMsg.Instance.GetMsg(msg);
+            WXMsg wxMsg = Msg2WxMsg.Instance.GetMsg(msg);
             Assert.IsNull(wxMsg);
 
             //msg = new NowMsg();
@@ -50,7 +50,7 @@ namespace WxGames.Tests
             //WXMsg wxMsg3= Msg2WxMsg.Instance.GetMsg(msg);
             //Assert.IsTrue(wxMsg3.From == null);
             //Assert.IsTrue(wxMsg3.Type == 1);
-            //Assert.IsTrue(wxMsg3.Msg.ToString() == "@厚德载物  下单成功<br/>六名[4]20<br/>当前积分：760".ToString());
+            //Assert.IsTrue(wxMsg3.Msg.ToString() == "@厚德载物  下注成功<br/>六名[4]20<br/>当前积分：760".ToString());
 
             //3,无积分 买冠军
             //msg = new NowMsg();
@@ -100,7 +100,7 @@ namespace WxGames.Tests
             //msg.CommandOne = "冠";
 
             //WXMsg wxMsg4 = Msg2WxMsg.Instance.GetMsg(msg);
-            //Assert.IsTrue(wxMsg4.Msg.ToString() == "@厚德载物  下单成功<br/>冠军[2]6 <br/>当前积分：488".ToString());
+            //Assert.IsTrue(wxMsg4.Msg.ToString() == "@厚德载物  下注成功<br/>冠军[2]6 <br/>当前积分：488".ToString());
 
 
             //5,无积分 买名次大小单双龙虎
@@ -150,7 +150,7 @@ namespace WxGames.Tests
             //msg.Period = null;
             //msg.CommandOne = "五";
             //WXMsg wxMsg4 = Msg2WxMsg.Instance.GetMsg(msg);
-            //Assert.IsTrue(wxMsg4.Msg.ToString() == "@浅雪沁心  下单成功<br/>五名 双 100<br/>当前积分：200".ToString());
+            //Assert.IsTrue(wxMsg4.Msg.ToString() == "@浅雪沁心  下注成功<br/>五名 双 100<br/>当前积分：200".ToString());
 
             //7,无积分 冠亚和
             //msg = new NowMsg();
@@ -198,7 +198,7 @@ namespace WxGames.Tests
             //msg.Period = null;
             //msg.CommandOne = "和";
             //WXMsg wxMsg8 = Msg2WxMsg.Instance.GetMsg(msg);
-            //Assert.IsTrue(wxMsg8.Msg.ToString() == "@浅雪沁心  下单成功<br/>和 13 50<br/>和 19 50<br/>当前积分：350".ToString());
+            //Assert.IsTrue(wxMsg8.Msg.ToString() == "@浅雪沁心  下注成功<br/>和 13 50<br/>和 19 50<br/>当前积分：350".ToString());
 
             //9,取消
             msg = new NowMsg();
@@ -251,6 +251,37 @@ namespace WxGames.Tests
 
 
             //11,暂不支持此指令，异常情况
+        }
+
+        [TestMethod()]
+        public void GetMsg2Test()
+        {
+            NowMsg msg = new NowMsg();
+            msg = new NowMsg();
+            msg.MsgId = "7825310389402061516";
+            msg.MsgFromId = "2328346900";
+            msg.MsgFromName = "厚德载物";
+            msg.ReciveId = "@51735995a2af400b7e8bc5bbc54bb06951bc4ba61e6ca537119d2a44ae1dc182";
+            msg.ReciveName = "@51735995a2af400b7e8bc5bbc54bb06951bc4ba61e6ca537119d2a44ae1dc182";
+            msg.MsgContent = "";
+            msg.CreateDate = "1475163056";
+            msg.OpDate = "星期四 2016-9-29 23:58:49";
+            msg.IsSucc = 0;
+            msg.IsDelete = "0";
+            msg.IsMsg = "买名次";
+            msg.IsDeal = "0";
+            msg.Result = null;
+            msg.OrderContect = "2/6";
+            msg.CommandTwo = "2";
+            msg.Score = "6";
+            msg.CommandType = "买名次";
+            msg.Period = null;
+            msg.CommandOne = "冠";
+
+            WXMsg wxMsg4 = Msg2WxMsg.Instance.GetMsg2(msg);
+            //Assert.IsTrue(wxMsg4.Msg.ToString() == "@厚德载物  下注成功<br/>冠军[2]6 <br/>当前积分：488".ToString());
+
+            //Assert.Fail();
         }
     }
 }

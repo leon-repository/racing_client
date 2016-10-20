@@ -36,6 +36,16 @@ namespace BLL
                         result.Score = order.GetNumber();
                         result.CommandType = OrderType.上下查;
 
+                        //
+                        if (Convert.ToInt32(result.Score) >= 100000)
+                        {
+                            result.CommandType = OrderType.指令格式错误;
+                        }
+                        if (Convert.ToInt32(result.Score) <= 0)
+                        {
+                            result.CommandType = OrderType.指令格式错误;
+                        }
+
                         return result;
                     }
                 }

@@ -62,17 +62,13 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebKit.Interop">
-      <HintPath>lib\webbrowsers\WebKit.Interop.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="WebKitBrowser">
-      <HintPath>lib\webbrowsers\WebKitBrowser.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Body\AppointStake.cs" />
     <Compile Include="Body\CommonStake.cs" />
+    <Compile Include="Body\KaiJianBody.cs" />
+    <Compile Include="Body\MemberStake.cs" />
+    <Compile Include="Body\Members.cs" />
     <Compile Include="Body\StakeInfoByRacingNumVo.cs" />
     <Compile Include="Body\RankingStake.cs" />
     <Compile Include="Body\stakevo.cs" />
@@ -130,6 +126,7 @@
     <None Include="bin\Debug\WxGames.vshost.exe.manifest" />
     <None Include="Config.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="lib\webbrowsers\WebKitBrowser.dll.manifest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

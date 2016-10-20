@@ -223,6 +223,7 @@ namespace BLL
                 Log.WriteLogByDate("请求body:" + body);
                 Log.WriteLogByDate("请求authorization:" + authorization);
                 Log.WriteLogByDate("请求acckey:" + acckey);
+                Log.WriteLog(ex);
                 return null;
             }
         }

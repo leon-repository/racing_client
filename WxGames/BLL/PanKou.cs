@@ -95,6 +95,9 @@ namespace BLL
             body = body.Replace(" ", "");
             body = Regex.Replace(body, "\\s{2,}", ",");
 
+            url = url.Replace(" ","");
+            url= Regex.Replace(url, "\\s{2,}", ",");
+
             string auth = url + body + securityKey;
             byte[] data = Encoding.UTF8.GetBytes(auth);
             SHA1 sha = new SHA1CryptoServiceProvider();

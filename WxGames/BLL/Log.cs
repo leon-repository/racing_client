@@ -22,7 +22,13 @@ namespace BLL
             objStr.AppendLine("发生时间：\r\n" + DateTime.Now.ToString() + "");
             objStr.AppendLine("提示信息：\r\n" + objException.Message);
             objStr.AppendLine((objException.InnerException == null ? "" : objException.InnerException.Message));
-            File.AppendAllText(logPath, objStr.ToString());
+            try
+            {
+                File.AppendAllText(logPath, objStr.ToString());
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>
@@ -35,7 +41,13 @@ namespace BLL
             StringBuilder objStr = new StringBuilder();
             objStr.AppendLine("发生时间：\r\n" + DateTime.Now.ToString());
             objStr.AppendLine(msg);
-            File.AppendAllText(logPath, objStr.ToString());
+            try
+            {
+                File.AppendAllText(logPath, objStr.ToString());
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

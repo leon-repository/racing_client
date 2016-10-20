@@ -4,3 +4,9 @@ E:\C#\WxGames\Model\bin\Debug\System.Data.SQLite.dll
 E:\C#\WxGames\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 E:\C#\WxGames\Model\obj\Debug\Model.dll
 E:\C#\WxGames\Model\obj\Debug\Model.pdb
+C:\Users\huidong\Desktop\WxGames\Model\bin\Debug\Model.dll
+C:\Users\huidong\Desktop\WxGames\Model\bin\Debug\Model.pdb
+C:\Users\huidong\Desktop\WxGames\Model\bin\Debug\System.Data.SQLite.dll
+C:\Users\huidong\Desktop\WxGames\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\Users\huidong\Desktop\WxGames\Model\obj\Debug\Model.dll
+C:\Users\huidong\Desktop\WxGames\Model\obj\Debug\Model.pdb

@@ -123,7 +123,7 @@ namespace WxGames
                         continue;
                     }
 
-                    string[] content = m["Content"].ToString().Split(new string[] { "<br/>" }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] content = m["Content"].ToString().Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                     if (content != null && content.Length == 2)
                     {
                         OriginMsg msg = new OriginMsg();
