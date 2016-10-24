@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLLTests", "BLLTests\BLLTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformerLogin", "PerformerLogin\PerformerLogin.csproj", "{A9CFFBE6-C499-4A58-B028-9FECB0FAFC45}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{20339D9E-D432-4A9A-A653-0B3ED52C5307}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WxGame", "WxGame\WxGame.vdproj", "{596D812E-CEE3-4F03-AAE9-898DDE676F78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,8 +41,8 @@ Global
 		{A9CFFBE6-C499-4A58-B028-9FECB0FAFC45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9CFFBE6-C499-4A58-B028-9FECB0FAFC45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9CFFBE6-C499-4A58-B028-9FECB0FAFC45}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20339D9E-D432-4A9A-A653-0B3ED52C5307}.Debug|Any CPU.ActiveCfg = Debug
-		{20339D9E-D432-4A9A-A653-0B3ED52C5307}.Release|Any CPU.ActiveCfg = Release
+		{596D812E-CEE3-4F03-AAE9-898DDE676F78}.Debug|Any CPU.ActiveCfg = Debug
+		{596D812E-CEE3-4F03-AAE9-898DDE676F78}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

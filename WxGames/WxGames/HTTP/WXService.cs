@@ -7,6 +7,8 @@ using Newtonsoft.Json.Linq;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using System.Collections.Specialized;
+using BLL;
 
 namespace WxGames.HTTP
 {
@@ -28,7 +30,7 @@ namespace WxGames.HTTP
         //同步检查url
         private static string _synccheck_url = "https://wx2.qq.com/cgi-bin/mmwebwx-bin/synccheck?sid={0}&uin={1}&synckey={2}&r={3}&skey={4}&deviceid={5}";
         //同步url
-        private static string _sync_url = "https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid=";
+        private static string _sync_url = "https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid=";
         //发送消息url
         private static string _sendmsg_url = "https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxsendmsg?sid=";
 
@@ -50,9 +52,9 @@ namespace WxGames.HTTP
 
             if (sid != null && uin != null)
             {
-                msg_json = "{\"BaseRequest\":{ \"DeviceID\":\"e" + s.ToString() + "\",\"Sid\":\"" + sid.Value + "\",\"Skey\":\"" + LoginService.SKey + "\",\"Uin\":" + uin.Value + "},\"DelMemberList\":\"" + cUserName+"\",\"ChatRoomName\":\""+gUserName+"\"}";
+                msg_json = "{\"BaseRequest\":{ \"DeviceID\":\"e" + s.ToString() + "\",\"Sid\":\"" + sid.Value + "\",\"Skey\":\"" + LoginService.SKey + "\",\"Uin\":" + uin.Value + "},\"DelMemberList\":\"" + cUserName + "\",\"ChatRoomName\":\"" + gUserName + "\"}";
                 List<string> listCheckUrl = new List<string>();
-                //listCheckUrl.Add("wx.qq.com");
+                listCheckUrl.Add("wx.qq.com");
                 listCheckUrl.Add("wx2.qq.com");
                 byte[] bytes = null;
                 foreach (string item in listCheckUrl)
@@ -100,7 +102,7 @@ namespace WxGames.HTTP
 
             if (sid != null && uin != null)
             {
-                init_json = string.Format(init_json, uin.Value, sid.Value,LoginService.SKey,s.ToString());
+                init_json = string.Format(init_json, uin.Value, sid.Value, LoginService.SKey, s.ToString());
 
                 string r = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds.ToString().Split(new char[] { '.' })[0];
 
@@ -108,12 +110,12 @@ namespace WxGames.HTTP
                 listCheckUrl.Add("wx.qq.com");
                 listCheckUrl.Add("wx2.qq.com");
                 byte[] bytes = null;
-                string init_str="";
+                string init_str = "";
                 foreach (string item in listCheckUrl)
                 {
                     string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxinit?";
                     bytes = BaseService.SendPostRequest(url + "r=" + r + "&lang=zh_CN&pass_ticket=" + LoginService.Pass_Ticket, init_json);
-                    if (bytes!= null)
+                    if (bytes != null)
                     {
                         init_str = Encoding.UTF8.GetString(bytes);
                         if (init_str.Contains("1100"))
@@ -127,7 +129,7 @@ namespace WxGames.HTTP
 
                 foreach (JObject synckey in init_result["SyncKey"]["List"])  //同步键值
                 {
-                    if(_syncKey.ContainsKey(synckey["Key"].ToString()))
+                    if (_syncKey.ContainsKey(synckey["Key"].ToString()))
                     {
                         continue;
                     }
@@ -150,7 +152,7 @@ namespace WxGames.HTTP
             byte[] bytes = BaseService.SendGetRequest(_geticon_url + username);
 
 
-            if (bytes == null||bytes.Length == 0)
+            if (bytes == null || bytes.Length == 0)
             {
                 return null;
             }
@@ -227,9 +229,12 @@ namespace WxGames.HTTP
                     }
                 }
             }
-       
+            if (bytes == null)
+            {
+                return null;
+            }
             string contact_str = Encoding.UTF8.GetString(bytes);
-            return JsonConvert.DeserializeObject(contact_str) as JObject;     
+            return JsonConvert.DeserializeObject(contact_str) as JObject;
         }
         /// <summary>
         /// 微信同步检测
@@ -242,7 +247,7 @@ namespace WxGames.HTTP
             {
                 sync_key += p.Key + "_" + p.Value + "%7C";
             }
-            sync_key = sync_key.TrimEnd('%','7','C');
+            sync_key = sync_key.TrimEnd('%', '7', 'C');
 
             Cookie sid = BaseService.GetCookie("wxsid");
             Cookie uin = BaseService.GetCookie("wxuin");
@@ -261,21 +266,21 @@ namespace WxGames.HTTP
                 listCheckUrl.Add("webpush2.wx2.qq.com");
 
                 byte[] bytes = null;
-                string ret_msg="";
+                string ret_msg = "";
                 foreach (var item in listCheckUrl)
                 {
                     string url = "https://" + item + "/cgi-bin/mmwebwx-bin/synccheck?sid={0}&uin={1}&synckey={2}&r={3}&skey={4}&deviceid={5}";
                     _synccheck_url = string.Format(url, sid.Value, uin.Value, sync_key, (long)(DateTime.Now.ToUniversalTime() - new System.DateTime(1970, 1, 1)).TotalMilliseconds, LoginService.SKey.Replace("@", "%40"), "e1615250492");
 
                     //string url = "https://" + item + "/cgi-bin/mmwebwx-bin/synccheck?sid={0}&skey={1}";
-                   // _synccheck_url = string.Format(url, sid.Value,LoginService.SKey.Replace("@", "%40"));
+                    // _synccheck_url = string.Format(url, sid.Value,LoginService.SKey.Replace("@", "%40"));
                     bytes = BaseService.SendGetRequest(_synccheck_url + "&_=" + DateTime.Now.Ticks);
                     //bytes = BaseService.SendGetRequest(_synccheck_url);
                     if (bytes != null)
                     {
                         ret_msg = Encoding.UTF8.GetString(bytes);
 
-                        if (ret_msg.Contains("1100") || ret_msg.Contains("1101")|| ret_msg.Contains("1102"))
+                        if (ret_msg.Contains("1100") || ret_msg.Contains("1101") || ret_msg.Contains("1102"))
                         {
                             continue;
                         }
@@ -314,6 +319,7 @@ namespace WxGames.HTTP
 
             if (sid != null && uin != null)
             {
+
                 byte[] bytes = BaseService.SendPostRequest(_sync_url + sid.Value + "&lang=zh_CN&skey=" + LoginService.SKey + "&pass_ticket=" + LoginService.Pass_Ticket, sync_json);
 
                 if (bytes == null || bytes.Length == 0)
@@ -380,14 +386,14 @@ namespace WxGames.HTTP
                 byte[] bytes = null;
                 foreach (string item in listCheckUrl)
                 {
-                    string url = "https://"+item+"/cgi-bin/mmwebwx-bin/webwxsendmsg?sid=";
+                    string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxsendmsg?sid=";
                     bytes = BaseService.SendPostRequest(url + sid.Value + "&lang=zh_CN&pass_ticket=" + LoginService.Pass_Ticket, msg_json);
                     if (bytes == null)
                     {
                         continue;
                     }
                     string send_result = Encoding.UTF8.GetString(bytes);
-                    
+
                     if (!send_result.Contains("\"Ret\": 0"))
                     {
                         continue;
@@ -417,7 +423,7 @@ namespace WxGames.HTTP
 
             if (sid != null && uin != null)
             {
-                msg_json = "{\"BaseRequest\":{ \"Uin\":" + uin.Value+",\"Sid\":\""+sid.Value+"\",\"Skey\":\""+LoginService.SKey+"\",\"DeviceID\":\"e"+s.ToString()+"\"},\"Count\":1,\"List\":[{\"UserName\":\""+qunUserName+"\",\"EncryChatRoomId\":\"\"}]}";
+                msg_json = "{\"BaseRequest\":{ \"Uin\":" + uin.Value + ",\"Sid\":\"" + sid.Value + "\",\"Skey\":\"" + LoginService.SKey + "\",\"DeviceID\":\"e" + s.ToString() + "\"},\"Count\":1,\"List\":[{\"UserName\":\"" + qunUserName + "\",\"EncryChatRoomId\":\"\"}]}";
 
 
                 List<string> listCheckUrl = new List<string>();
@@ -427,7 +433,7 @@ namespace WxGames.HTTP
                 foreach (string item in listCheckUrl)
                 {
                     string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxbatchgetcontact?type=ex";
-                    bytes = BaseService.SendPostRequest(url+"&r="+ DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds.ToString().Split(new char[] { '.' })[0] + "&pass_ticket=" + LoginService.Pass_Ticket, msg_json);
+                    bytes = BaseService.SendPostRequest(url + "&r=" + DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds.ToString().Split(new char[] { '.' })[0] + "&pass_ticket=" + LoginService.Pass_Ticket, msg_json);
 
                     if (bytes == null)
                     {
@@ -446,6 +452,99 @@ namespace WxGames.HTTP
                 }
             }
             return "";
-    }
+        }
+
+
+        public string SendImage(string fileName, string filePath, string fileSize, string fromUser, string toUser, string fileMD5)
+        {
+            string ret="";
+            string send_result = "";
+            List<string> listCheckUrl = new List<string>();
+            listCheckUrl.Add("file.wx.qq.com");
+            listCheckUrl.Add("file2.wx.qq.com");
+            foreach (string item in listCheckUrl)
+            {
+                StringBuilder s = new StringBuilder();//s数组中存放着需要的数字
+                Random ra = new Random();
+                for (int i = 0; i < 15; i++)//遍历数组显示结果
+                {
+                    s.Append(ra.Next(1, 10));
+                }
+
+                string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxuploadmedia?f=json";
+
+                string date = DateTime.Now.ToString("yyyy-MM-dd");
+                date = date.Replace("-", "/");
+                string time = DateTime.Now.ToString("ttH:mm:ss");
+
+                NameValueCollection nav = new NameValueCollection();
+                nav.Add("id", "WU_FILE_0");
+                nav.Add("name", fileName);
+                nav.Add("type", "image/png");
+                //nav.Add("type", "application/octet-stream");
+                nav.Add("lastModifiedDate", date+" "+time);
+                nav.Add("size", fileSize);
+                nav.Add("mediatype", "pic");
+
+                Cookie sid = BaseService.GetCookie("wxsid");
+                Cookie uin = BaseService.GetCookie("wxuin");
+                string baseRequest = "{ \"UploadType\":2,\"BaseRequest\":{ \"Uin\":" + uin.Value + ",\"Sid\":\"" + sid.Value + "\",\"Skey\":\"" + LoginService.SKey + "\",\"DeviceID\":\"e"+ s.ToString() + "\"},\"ClientMediaId\":" + DateTime.Now.DateTimeToUnixTimestamp() + ",\"TotalLen\":" + fileSize + ",\"StartPos\":0,\"DataLen\":" + fileSize + ",\"MediaType\":4,\"FromUserName\":\"" + fromUser + "\",\"ToUserName\":\"" + toUser + "\",\"FileMd5\":\"" + fileMD5 + "\"}";
+
+                nav.Add("uploadmediarequest", baseRequest);
+                string webwx_data_ticket = BaseService.GetCookie("webwx_data_ticket").Value;
+                nav.Add("webwx_data_ticket", webwx_data_ticket);
+                nav.Add("pass_ticket", LoginService.Pass_Ticket);
+
+                ret = BaseService.HttpUploadFile(url, fileName, fileName, "image/png", nav);
+
+                if (!ret.Contains("\"Ret\": 0"))
+                {
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            //发送图片
+            JObject jobject = JsonConvert.DeserializeObject(ret) as JObject;
+            string mediaId = jobject["MediaId"].ToString();
+
+            List<string> listCheckUrl2 = new List<string>();
+            listCheckUrl2.Add("wx.qq.com");
+            listCheckUrl2.Add("wx2.qq.com");
+
+            foreach (string item in listCheckUrl2)
+            {
+                StringBuilder s = new StringBuilder();//s数组中存放着需要的数字
+                Random ra = new Random();
+                for (int i = 0; i < 15; i++)//遍历数组显示结果
+                {
+                    s.Append(ra.Next(1, 10));
+                }
+
+                string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxsendmsgimg?fun=async&f=json&pass_ticket="+LoginService.Pass_Ticket;
+
+                Cookie sid = BaseService.GetCookie("wxsid");
+                Cookie uin = BaseService.GetCookie("wxuin");
+                string baseRequest = "{\"BaseRequest\":{ \"Uin\":" + uin.Value + ",\"Sid\":\"" + sid.Value + "\",\"Skey\":\"" + LoginService.SKey + "\",\"DeviceID\":\"e" + s.ToString() + "\"},\"Msg\":{\"Type\":3,\"MediaId\":\""+ mediaId + "\",\"FromUserName\":\""+fromUser+"\",\"ToUserName\":\""+toUser+"\",\"LocalID\":"+ DateTime.Now.DateTimeToUnixTimestamp() + ",\"ClientMsgId\":"+ DateTime.Now.DateTimeToUnixTimestamp() + "}}";
+
+                byte[] bytes = null;
+                bytes = BaseService.SendPostRequest(url, baseRequest);
+                if (bytes == null)
+                {
+                    continue;
+                }
+                send_result = Encoding.UTF8.GetString(bytes);
+                if (!send_result.Contains("\"Ret\":0"))
+                {
+                    continue;
+                }
+            }
+
+
+            return send_result;
+        }
     }
 }

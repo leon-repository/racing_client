@@ -54,7 +54,6 @@
             this.NickName2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Uid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtUin = new System.Windows.Forms.TextBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
@@ -94,6 +93,73 @@
             this.txtWxUserName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabZhiling = new System.Windows.Forms.TabPage();
+            this.label86 = new System.Windows.Forms.Label();
+            this.txtZhiLin = new System.Windows.Forms.Button();
+            this.txtShang = new System.Windows.Forms.TextBox();
+            this.label62 = new System.Windows.Forms.Label();
+            this.txtMC8 = new System.Windows.Forms.TextBox();
+            this.txtQu = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.txtHe = new System.Windows.Forms.TextBox();
+            this.txtshuang = new System.Windows.Forms.TextBox();
+            this.txtMC4 = new System.Windows.Forms.TextBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.txtMC7 = new System.Windows.Forms.TextBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.txtCha = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.txtdan = new System.Windows.Forms.TextBox();
+            this.txtMC10 = new System.Windows.Forms.TextBox();
+            this.txtMC3 = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.txtMC6 = new System.Windows.Forms.TextBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.txtXia = new System.Windows.Forms.TextBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.txtMC9 = new System.Windows.Forms.TextBox();
+            this.txtHu = new System.Windows.Forms.TextBox();
+            this.txtXiao = new System.Windows.Forms.TextBox();
+            this.txtMC2 = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
+            this.txtMC5 = new System.Windows.Forms.TextBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.txtDaGao = new System.Windows.Forms.TextBox();
+            this.txtDaDi = new System.Windows.Forms.TextBox();
+            this.txtDanGao = new System.Windows.Forms.TextBox();
+            this.txtDanDi = new System.Windows.Forms.TextBox();
+            this.txtLongGao = new System.Windows.Forms.TextBox();
+            this.txtLongDi = new System.Windows.Forms.TextBox();
+            this.label85 = new System.Windows.Forms.Label();
+            this.txtMCgao = new System.Windows.Forms.TextBox();
+            this.label82 = new System.Windows.Forms.Label();
+            this.txtMCdi = new System.Windows.Forms.TextBox();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.txtLong = new System.Windows.Forms.TextBox();
+            this.label81 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label74 = new System.Windows.Forms.Label();
+            this.txtDa = new System.Windows.Forms.TextBox();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.txtMC1 = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label73 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
             this.tabXiaoxi = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -129,22 +195,19 @@
             this.label38 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.pnlBianLiang = new System.Windows.Forms.Panel();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.tabYingkui = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabPanel = new System.Windows.Forms.TabControl();
             this.tabUp = new System.Windows.Forms.TabPage();
@@ -163,6 +226,11 @@
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabSearch = new System.Windows.Forms.TabPage();
             this.dgbHistory = new System.Windows.Forms.DataGridView();
+            this.ChaNickName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Order = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Perorid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -181,6 +249,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvZhanDan)).BeginInit();
+            this.tabZhiling.SuspendLayout();
             this.tabXiaoxi.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.pnlBianLiang.SuspendLayout();
@@ -269,12 +338,11 @@
             this.tab.Controls.Add(this.tabZhangDan);
             this.tab.Controls.Add(this.tabZhiling);
             this.tab.Controls.Add(this.tabXiaoxi);
-            this.tab.Controls.Add(this.tabYingkui);
             this.tab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tab.Location = new System.Drawing.Point(0, 0);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
-            this.tab.Size = new System.Drawing.Size(1218, 977);
+            this.tab.Size = new System.Drawing.Size(1274, 977);
             this.tab.TabIndex = 1;
             this.tab.SelectedIndexChanged += new System.EventHandler(this.tab_SelectedIndexChanged);
             // 
@@ -291,7 +359,7 @@
             this.tabPankou.Location = new System.Drawing.Point(4, 28);
             this.tabPankou.Name = "tabPankou";
             this.tabPankou.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPankou.Size = new System.Drawing.Size(1210, 945);
+            this.tabPankou.Size = new System.Drawing.Size(1266, 945);
             this.tabPankou.TabIndex = 0;
             this.tabPankou.Text = "盘口登陆";
             this.tabPankou.UseVisualStyleBackColor = true;
@@ -372,7 +440,7 @@
             this.tabZhangDan.Location = new System.Drawing.Point(4, 28);
             this.tabZhangDan.Name = "tabZhangDan";
             this.tabZhangDan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabZhangDan.Size = new System.Drawing.Size(1216, 945);
+            this.tabZhangDan.Size = new System.Drawing.Size(1266, 945);
             this.tabZhangDan.TabIndex = 1;
             this.tabZhangDan.Text = "账单";
             this.tabZhangDan.UseVisualStyleBackColor = true;
@@ -429,7 +497,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label5);
             this.splitContainer2.Panel2.Controls.Add(this.txtWxUserName);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Size = new System.Drawing.Size(1210, 939);
+            this.splitContainer2.Size = new System.Drawing.Size(1260, 939);
             this.splitContainer2.SplitterDistance = 668;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -441,8 +509,7 @@
             this.dgvZhanDan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NickName2,
             this.Uid,
-            this.TotalScore,
-            this.LastScore});
+            this.TotalScore});
             this.dgvZhanDan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvZhanDan.Location = new System.Drawing.Point(0, 0);
             this.dgvZhanDan.MultiSelect = false;
@@ -450,7 +517,7 @@
             this.dgvZhanDan.ReadOnly = true;
             this.dgvZhanDan.RowTemplate.Height = 30;
             this.dgvZhanDan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvZhanDan.Size = new System.Drawing.Size(1210, 668);
+            this.dgvZhanDan.Size = new System.Drawing.Size(1260, 668);
             this.dgvZhanDan.TabIndex = 0;
             this.dgvZhanDan.DoubleClick += new System.EventHandler(this.dgvZhanDan_DoubleClick);
             // 
@@ -474,13 +541,6 @@
             this.TotalScore.HeaderText = "余额";
             this.TotalScore.Name = "TotalScore";
             this.TotalScore.ReadOnly = true;
-            // 
-            // LastScore
-            // 
-            this.LastScore.DataPropertyName = "LastScore";
-            this.LastScore.HeaderText = "上期盈亏";
-            this.LastScore.Name = "LastScore";
-            this.LastScore.ReadOnly = true;
             // 
             // txtUin
             // 
@@ -846,13 +906,663 @@
             // 
             // tabZhiling
             // 
+            this.tabZhiling.Controls.Add(this.label86);
+            this.tabZhiling.Controls.Add(this.txtZhiLin);
+            this.tabZhiling.Controls.Add(this.txtShang);
+            this.tabZhiling.Controls.Add(this.label62);
+            this.tabZhiling.Controls.Add(this.txtMC8);
+            this.tabZhiling.Controls.Add(this.txtQu);
+            this.tabZhiling.Controls.Add(this.label58);
+            this.tabZhiling.Controls.Add(this.txtHe);
+            this.tabZhiling.Controls.Add(this.txtshuang);
+            this.tabZhiling.Controls.Add(this.txtMC4);
+            this.tabZhiling.Controls.Add(this.label65);
+            this.tabZhiling.Controls.Add(this.txtMC7);
+            this.tabZhiling.Controls.Add(this.label70);
+            this.tabZhiling.Controls.Add(this.label61);
+            this.tabZhiling.Controls.Add(this.label54);
+            this.tabZhiling.Controls.Add(this.txtCha);
+            this.tabZhiling.Controls.Add(this.label57);
+            this.tabZhiling.Controls.Add(this.txtdan);
+            this.tabZhiling.Controls.Add(this.txtMC10);
+            this.tabZhiling.Controls.Add(this.txtMC3);
+            this.tabZhiling.Controls.Add(this.label64);
+            this.tabZhiling.Controls.Add(this.txtMC6);
+            this.tabZhiling.Controls.Add(this.label69);
+            this.tabZhiling.Controls.Add(this.label60);
+            this.tabZhiling.Controls.Add(this.label53);
+            this.tabZhiling.Controls.Add(this.txtXia);
+            this.tabZhiling.Controls.Add(this.label56);
+            this.tabZhiling.Controls.Add(this.txtMC9);
+            this.tabZhiling.Controls.Add(this.txtHu);
+            this.tabZhiling.Controls.Add(this.txtXiao);
+            this.tabZhiling.Controls.Add(this.txtMC2);
+            this.tabZhiling.Controls.Add(this.label63);
+            this.tabZhiling.Controls.Add(this.label72);
+            this.tabZhiling.Controls.Add(this.txtMC5);
+            this.tabZhiling.Controls.Add(this.label68);
+            this.tabZhiling.Controls.Add(this.label59);
+            this.tabZhiling.Controls.Add(this.txtDaGao);
+            this.tabZhiling.Controls.Add(this.txtDaDi);
+            this.tabZhiling.Controls.Add(this.txtDanGao);
+            this.tabZhiling.Controls.Add(this.txtDanDi);
+            this.tabZhiling.Controls.Add(this.txtLongGao);
+            this.tabZhiling.Controls.Add(this.txtLongDi);
+            this.tabZhiling.Controls.Add(this.label85);
+            this.tabZhiling.Controls.Add(this.txtMCgao);
+            this.tabZhiling.Controls.Add(this.label82);
+            this.tabZhiling.Controls.Add(this.txtMCdi);
+            this.tabZhiling.Controls.Add(this.label79);
+            this.tabZhiling.Controls.Add(this.label84);
+            this.tabZhiling.Controls.Add(this.txtLong);
+            this.tabZhiling.Controls.Add(this.label81);
+            this.tabZhiling.Controls.Add(this.label76);
+            this.tabZhiling.Controls.Add(this.label83);
+            this.tabZhiling.Controls.Add(this.label78);
+            this.tabZhiling.Controls.Add(this.label80);
+            this.tabZhiling.Controls.Add(this.label52);
+            this.tabZhiling.Controls.Add(this.label77);
+            this.tabZhiling.Controls.Add(this.label75);
+            this.tabZhiling.Controls.Add(this.label74);
+            this.tabZhiling.Controls.Add(this.txtDa);
+            this.tabZhiling.Controls.Add(this.label71);
+            this.tabZhiling.Controls.Add(this.label55);
+            this.tabZhiling.Controls.Add(this.label67);
+            this.tabZhiling.Controls.Add(this.txtMC1);
+            this.tabZhiling.Controls.Add(this.label51);
+            this.tabZhiling.Controls.Add(this.label73);
+            this.tabZhiling.Controls.Add(this.label66);
+            this.tabZhiling.Controls.Add(this.label50);
             this.tabZhiling.Location = new System.Drawing.Point(4, 28);
             this.tabZhiling.Name = "tabZhiling";
             this.tabZhiling.Padding = new System.Windows.Forms.Padding(3);
-            this.tabZhiling.Size = new System.Drawing.Size(1216, 945);
+            this.tabZhiling.Size = new System.Drawing.Size(1272, 945);
             this.tabZhiling.TabIndex = 2;
             this.tabZhiling.Text = "指令设置";
             this.tabZhiling.UseVisualStyleBackColor = true;
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.ForeColor = System.Drawing.Color.Red;
+            this.label86.Location = new System.Drawing.Point(59, 854);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(125, 18);
+            this.label86.TabIndex = 4;
+            this.label86.Text = "[|]用来分割符";
+            // 
+            // txtZhiLin
+            // 
+            this.txtZhiLin.Location = new System.Drawing.Point(820, 641);
+            this.txtZhiLin.Name = "txtZhiLin";
+            this.txtZhiLin.Size = new System.Drawing.Size(119, 74);
+            this.txtZhiLin.TabIndex = 3;
+            this.txtZhiLin.Text = "保存";
+            this.txtZhiLin.UseVisualStyleBackColor = true;
+            this.txtZhiLin.Click += new System.EventHandler(this.txtZhiLin_Click);
+            // 
+            // txtShang
+            // 
+            this.txtShang.Location = new System.Drawing.Point(937, 176);
+            this.txtShang.Name = "txtShang";
+            this.txtShang.Size = new System.Drawing.Size(162, 28);
+            this.txtShang.TabIndex = 2;
+            this.txtShang.Text = "上|上分";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(861, 179);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(44, 18);
+            this.label62.TabIndex = 1;
+            this.label62.Text = "上分";
+            // 
+            // txtMC8
+            // 
+            this.txtMC8.Location = new System.Drawing.Point(937, 126);
+            this.txtMC8.Name = "txtMC8";
+            this.txtMC8.Size = new System.Drawing.Size(162, 28);
+            this.txtMC8.TabIndex = 2;
+            this.txtMC8.Text = "八";
+            // 
+            // txtQu
+            // 
+            this.txtQu.Location = new System.Drawing.Point(656, 229);
+            this.txtQu.Name = "txtQu";
+            this.txtQu.Size = new System.Drawing.Size(162, 28);
+            this.txtQu.TabIndex = 2;
+            this.txtQu.Text = "取消";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(861, 129);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(62, 18);
+            this.label58.TabIndex = 1;
+            this.label58.Text = "第八名";
+            // 
+            // txtHe
+            // 
+            this.txtHe.Location = new System.Drawing.Point(656, 176);
+            this.txtHe.Name = "txtHe";
+            this.txtHe.Size = new System.Drawing.Size(162, 28);
+            this.txtHe.TabIndex = 2;
+            this.txtHe.Text = "和";
+            // 
+            // txtshuang
+            // 
+            this.txtshuang.Location = new System.Drawing.Point(937, 350);
+            this.txtshuang.Name = "txtshuang";
+            this.txtshuang.Size = new System.Drawing.Size(162, 28);
+            this.txtshuang.TabIndex = 2;
+            this.txtshuang.Text = "双";
+            // 
+            // txtMC4
+            // 
+            this.txtMC4.Location = new System.Drawing.Point(937, 71);
+            this.txtMC4.Name = "txtMC4";
+            this.txtMC4.Size = new System.Drawing.Size(162, 28);
+            this.txtMC4.TabIndex = 2;
+            this.txtMC4.Text = "四";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(562, 232);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(80, 18);
+            this.label65.TabIndex = 1;
+            this.label65.Text = "取消下注";
+            // 
+            // txtMC7
+            // 
+            this.txtMC7.Location = new System.Drawing.Point(656, 126);
+            this.txtMC7.Name = "txtMC7";
+            this.txtMC7.Size = new System.Drawing.Size(162, 28);
+            this.txtMC7.TabIndex = 2;
+            this.txtMC7.Text = "七";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(861, 353);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(26, 18);
+            this.label70.TabIndex = 1;
+            this.label70.Text = "双";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(580, 179);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(62, 18);
+            this.label61.TabIndex = 1;
+            this.label61.Text = "冠亚和";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(861, 74);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(62, 18);
+            this.label54.TabIndex = 1;
+            this.label54.Text = "第四名";
+            // 
+            // txtCha
+            // 
+            this.txtCha.Location = new System.Drawing.Point(380, 226);
+            this.txtCha.Name = "txtCha";
+            this.txtCha.Size = new System.Drawing.Size(162, 28);
+            this.txtCha.TabIndex = 2;
+            this.txtCha.Text = "查|查分";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(580, 129);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(62, 18);
+            this.label57.TabIndex = 1;
+            this.label57.Text = "第七名";
+            // 
+            // txtdan
+            // 
+            this.txtdan.Location = new System.Drawing.Point(656, 350);
+            this.txtdan.Name = "txtdan";
+            this.txtdan.Size = new System.Drawing.Size(162, 28);
+            this.txtdan.TabIndex = 2;
+            this.txtdan.Text = "单";
+            // 
+            // txtMC10
+            // 
+            this.txtMC10.Location = new System.Drawing.Point(380, 173);
+            this.txtMC10.Name = "txtMC10";
+            this.txtMC10.Size = new System.Drawing.Size(162, 28);
+            this.txtMC10.TabIndex = 2;
+            this.txtMC10.Text = "十";
+            // 
+            // txtMC3
+            // 
+            this.txtMC3.Location = new System.Drawing.Point(656, 71);
+            this.txtMC3.Name = "txtMC3";
+            this.txtMC3.Size = new System.Drawing.Size(162, 28);
+            this.txtMC3.TabIndex = 2;
+            this.txtMC3.Text = "三";
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(304, 229);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(44, 18);
+            this.label64.TabIndex = 1;
+            this.label64.Text = "查分";
+            // 
+            // txtMC6
+            // 
+            this.txtMC6.Location = new System.Drawing.Point(380, 123);
+            this.txtMC6.Name = "txtMC6";
+            this.txtMC6.Size = new System.Drawing.Size(162, 28);
+            this.txtMC6.TabIndex = 2;
+            this.txtMC6.Text = "六";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(580, 353);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(26, 18);
+            this.label69.TabIndex = 1;
+            this.label69.Text = "单";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(304, 176);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(62, 18);
+            this.label60.TabIndex = 1;
+            this.label60.Text = "第十名";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(580, 74);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(62, 18);
+            this.label53.TabIndex = 1;
+            this.label53.Text = "第三名";
+            // 
+            // txtXia
+            // 
+            this.txtXia.Location = new System.Drawing.Point(114, 226);
+            this.txtXia.Name = "txtXia";
+            this.txtXia.Size = new System.Drawing.Size(162, 28);
+            this.txtXia.TabIndex = 2;
+            this.txtXia.Text = "下|下分";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(304, 126);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(62, 18);
+            this.label56.TabIndex = 1;
+            this.label56.Text = "第六名";
+            // 
+            // txtMC9
+            // 
+            this.txtMC9.Location = new System.Drawing.Point(114, 173);
+            this.txtMC9.Name = "txtMC9";
+            this.txtMC9.Size = new System.Drawing.Size(162, 28);
+            this.txtMC9.TabIndex = 2;
+            this.txtMC9.Text = "九";
+            // 
+            // txtHu
+            // 
+            this.txtHu.Location = new System.Drawing.Point(380, 402);
+            this.txtHu.Name = "txtHu";
+            this.txtHu.Size = new System.Drawing.Size(162, 28);
+            this.txtHu.TabIndex = 2;
+            this.txtHu.Text = "虎";
+            // 
+            // txtXiao
+            // 
+            this.txtXiao.Location = new System.Drawing.Point(380, 350);
+            this.txtXiao.Name = "txtXiao";
+            this.txtXiao.Size = new System.Drawing.Size(162, 28);
+            this.txtXiao.TabIndex = 2;
+            this.txtXiao.Text = "小";
+            // 
+            // txtMC2
+            // 
+            this.txtMC2.Location = new System.Drawing.Point(380, 68);
+            this.txtMC2.Name = "txtMC2";
+            this.txtMC2.Size = new System.Drawing.Size(162, 28);
+            this.txtMC2.TabIndex = 2;
+            this.txtMC2.Text = "亚|亚军";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(38, 229);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(44, 18);
+            this.label63.TabIndex = 1;
+            this.label63.Text = "下分";
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(304, 405);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(26, 18);
+            this.label72.TabIndex = 1;
+            this.label72.Text = "虎";
+            // 
+            // txtMC5
+            // 
+            this.txtMC5.Location = new System.Drawing.Point(114, 123);
+            this.txtMC5.Name = "txtMC5";
+            this.txtMC5.Size = new System.Drawing.Size(162, 28);
+            this.txtMC5.TabIndex = 2;
+            this.txtMC5.Text = "五";
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(304, 353);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(26, 18);
+            this.label68.TabIndex = 1;
+            this.label68.Text = "小";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(38, 176);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(62, 18);
+            this.label59.TabIndex = 1;
+            this.label59.Text = "第九名";
+            // 
+            // txtDaGao
+            // 
+            this.txtDaGao.Location = new System.Drawing.Point(509, 694);
+            this.txtDaGao.Name = "txtDaGao";
+            this.txtDaGao.Size = new System.Drawing.Size(162, 28);
+            this.txtDaGao.TabIndex = 2;
+            this.txtDaGao.Text = "10000";
+            // 
+            // txtDaDi
+            // 
+            this.txtDaDi.Location = new System.Drawing.Point(213, 694);
+            this.txtDaDi.Name = "txtDaDi";
+            this.txtDaDi.Size = new System.Drawing.Size(162, 28);
+            this.txtDaDi.TabIndex = 2;
+            this.txtDaDi.Text = "1";
+            // 
+            // txtDanGao
+            // 
+            this.txtDanGao.Location = new System.Drawing.Point(509, 641);
+            this.txtDanGao.Name = "txtDanGao";
+            this.txtDanGao.Size = new System.Drawing.Size(162, 28);
+            this.txtDanGao.TabIndex = 2;
+            this.txtDanGao.Text = "10000";
+            // 
+            // txtDanDi
+            // 
+            this.txtDanDi.Location = new System.Drawing.Point(213, 641);
+            this.txtDanDi.Name = "txtDanDi";
+            this.txtDanDi.Size = new System.Drawing.Size(162, 28);
+            this.txtDanDi.TabIndex = 2;
+            this.txtDanDi.Text = "1";
+            // 
+            // txtLongGao
+            // 
+            this.txtLongGao.Location = new System.Drawing.Point(509, 593);
+            this.txtLongGao.Name = "txtLongGao";
+            this.txtLongGao.Size = new System.Drawing.Size(162, 28);
+            this.txtLongGao.TabIndex = 2;
+            this.txtLongGao.Text = "10000";
+            // 
+            // txtLongDi
+            // 
+            this.txtLongDi.Location = new System.Drawing.Point(213, 593);
+            this.txtLongDi.Name = "txtLongDi";
+            this.txtLongDi.Size = new System.Drawing.Size(162, 28);
+            this.txtLongDi.TabIndex = 2;
+            this.txtLongDi.Text = "1";
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(407, 697);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(80, 18);
+            this.label85.TabIndex = 1;
+            this.label85.Text = "最高下注";
+            // 
+            // txtMCgao
+            // 
+            this.txtMCgao.Location = new System.Drawing.Point(509, 543);
+            this.txtMCgao.Name = "txtMCgao";
+            this.txtMCgao.Size = new System.Drawing.Size(162, 28);
+            this.txtMCgao.TabIndex = 2;
+            this.txtMCgao.Text = "10000";
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(407, 644);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(80, 18);
+            this.label82.TabIndex = 1;
+            this.label82.Text = "最高下注";
+            // 
+            // txtMCdi
+            // 
+            this.txtMCdi.Location = new System.Drawing.Point(213, 543);
+            this.txtMCdi.Name = "txtMCdi";
+            this.txtMCdi.Size = new System.Drawing.Size(162, 28);
+            this.txtMCdi.TabIndex = 2;
+            this.txtMCdi.Text = "1";
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(407, 596);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(80, 18);
+            this.label79.TabIndex = 1;
+            this.label79.Text = "最高下注";
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(111, 697);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(80, 18);
+            this.label84.TabIndex = 1;
+            this.label84.Text = "最低下注";
+            // 
+            // txtLong
+            // 
+            this.txtLong.Location = new System.Drawing.Point(114, 402);
+            this.txtLong.Name = "txtLong";
+            this.txtLong.Size = new System.Drawing.Size(162, 28);
+            this.txtLong.TabIndex = 2;
+            this.txtLong.Text = "龙";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(111, 644);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(80, 18);
+            this.label81.TabIndex = 1;
+            this.label81.Text = "最低下注";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(407, 546);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(80, 18);
+            this.label76.TabIndex = 1;
+            this.label76.Text = "最高下注";
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.ForeColor = System.Drawing.Color.Red;
+            this.label83.Location = new System.Drawing.Point(38, 694);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(44, 18);
+            this.label83.TabIndex = 1;
+            this.label83.Text = "大小";
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(111, 596);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(80, 18);
+            this.label78.TabIndex = 1;
+            this.label78.Text = "最低下注";
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.ForeColor = System.Drawing.Color.Red;
+            this.label80.Location = new System.Drawing.Point(38, 641);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(44, 18);
+            this.label80.TabIndex = 1;
+            this.label80.Text = "单双";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(304, 71);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(44, 18);
+            this.label52.TabIndex = 1;
+            this.label52.Text = "亚军";
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.ForeColor = System.Drawing.Color.Red;
+            this.label77.Location = new System.Drawing.Point(38, 593);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(44, 18);
+            this.label77.TabIndex = 1;
+            this.label77.Text = "龙虎";
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(111, 546);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(80, 18);
+            this.label75.TabIndex = 1;
+            this.label75.Text = "最低下注";
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.ForeColor = System.Drawing.Color.Red;
+            this.label74.Location = new System.Drawing.Point(38, 543);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(44, 18);
+            this.label74.TabIndex = 1;
+            this.label74.Text = "名次";
+            // 
+            // txtDa
+            // 
+            this.txtDa.Location = new System.Drawing.Point(114, 350);
+            this.txtDa.Name = "txtDa";
+            this.txtDa.Size = new System.Drawing.Size(162, 28);
+            this.txtDa.TabIndex = 2;
+            this.txtDa.Text = "大";
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(38, 405);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(26, 18);
+            this.label71.TabIndex = 1;
+            this.label71.Text = "龙";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(38, 126);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(62, 18);
+            this.label55.TabIndex = 1;
+            this.label55.Text = "第五名";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(38, 353);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(26, 18);
+            this.label67.TabIndex = 1;
+            this.label67.Text = "大";
+            // 
+            // txtMC1
+            // 
+            this.txtMC1.Location = new System.Drawing.Point(114, 68);
+            this.txtMC1.Name = "txtMC1";
+            this.txtMC1.Size = new System.Drawing.Size(162, 28);
+            this.txtMC1.TabIndex = 2;
+            this.txtMC1.Text = "冠|冠军";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(38, 71);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(44, 18);
+            this.label51.TabIndex = 1;
+            this.label51.Text = "冠军";
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.ForeColor = System.Drawing.Color.Green;
+            this.label73.Location = new System.Drawing.Point(38, 466);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(116, 18);
+            this.label73.TabIndex = 0;
+            this.label73.Text = "指令下注设置";
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.ForeColor = System.Drawing.Color.Green;
+            this.label66.Location = new System.Drawing.Point(38, 294);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(116, 18);
+            this.label66.TabIndex = 0;
+            this.label66.Text = "下注指令设置";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.ForeColor = System.Drawing.Color.Green;
+            this.label50.Location = new System.Drawing.Point(35, 28);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(116, 18);
+            this.label50.TabIndex = 0;
+            this.label50.Text = "名次指令设置";
             // 
             // tabXiaoxi
             // 
@@ -861,7 +1571,7 @@
             this.tabXiaoxi.Location = new System.Drawing.Point(4, 28);
             this.tabXiaoxi.Name = "tabXiaoxi";
             this.tabXiaoxi.Padding = new System.Windows.Forms.Padding(3);
-            this.tabXiaoxi.Size = new System.Drawing.Size(1216, 945);
+            this.tabXiaoxi.Size = new System.Drawing.Size(1272, 945);
             this.tabXiaoxi.TabIndex = 3;
             this.tabXiaoxi.Text = "消息设置";
             this.tabXiaoxi.UseVisualStyleBackColor = true;
@@ -903,7 +1613,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 134);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1210, 808);
+            this.groupBox1.Size = new System.Drawing.Size(1266, 808);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "消息设置";
@@ -926,6 +1636,7 @@
             this.label48.Size = new System.Drawing.Size(62, 18);
             this.label48.TabIndex = 5;
             this.label48.Text = "开奖后";
+            this.label48.Visible = false;
             // 
             // ckbStart
             // 
@@ -966,6 +1677,7 @@
             this.ckbkjh.TabIndex = 4;
             this.ckbkjh.Text = "开";
             this.ckbkjh.UseVisualStyleBackColor = true;
+            this.ckbkjh.Visible = false;
             // 
             // ckbpt2
             // 
@@ -1042,6 +1754,7 @@
             this.txtkjh.Name = "txtkjh";
             this.txtkjh.Size = new System.Drawing.Size(75, 28);
             this.txtkjh.TabIndex = 2;
+            this.txtkjh.Visible = false;
             // 
             // txtPt2
             // 
@@ -1126,6 +1839,7 @@
             this.label49.Size = new System.Drawing.Size(116, 18);
             this.label49.TabIndex = 1;
             this.label49.Text = "秒发送开奖图";
+            this.label49.Visible = false;
             // 
             // txtFp
             // 
@@ -1191,49 +1905,29 @@
             // 
             // pnlBianLiang
             // 
-            this.pnlBianLiang.Controls.Add(this.label34);
-            this.pnlBianLiang.Controls.Add(this.label33);
             this.pnlBianLiang.Controls.Add(this.label32);
             this.pnlBianLiang.Controls.Add(this.label31);
-            this.pnlBianLiang.Controls.Add(this.label30);
-            this.pnlBianLiang.Controls.Add(this.label29);
             this.pnlBianLiang.Controls.Add(this.label26);
             this.pnlBianLiang.Controls.Add(this.label25);
-            this.pnlBianLiang.Controls.Add(this.label36);
-            this.pnlBianLiang.Controls.Add(this.label35);
             this.pnlBianLiang.Controls.Add(this.label28);
             this.pnlBianLiang.Controls.Add(this.label27);
+            this.pnlBianLiang.Controls.Add(this.label34);
+            this.pnlBianLiang.Controls.Add(this.label33);
+            this.pnlBianLiang.Controls.Add(this.label30);
+            this.pnlBianLiang.Controls.Add(this.label29);
             this.pnlBianLiang.Controls.Add(this.label24);
             this.pnlBianLiang.Controls.Add(this.label23);
             this.pnlBianLiang.Controls.Add(this.label22);
             this.pnlBianLiang.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBianLiang.Location = new System.Drawing.Point(3, 3);
             this.pnlBianLiang.Name = "pnlBianLiang";
-            this.pnlBianLiang.Size = new System.Drawing.Size(1210, 131);
+            this.pnlBianLiang.Size = new System.Drawing.Size(1266, 131);
             this.pnlBianLiang.TabIndex = 0;
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(993, 27);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(98, 18);
-            this.label34.TabIndex = 1;
-            this.label34.Text = "[余额信息]";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(889, 27);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(80, 18);
-            this.label33.TabIndex = 0;
-            this.label33.Text = "余额信息";
             // 
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(772, 26);
+            this.label32.Location = new System.Drawing.Point(617, 26);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(98, 18);
             this.label32.TabIndex = 1;
@@ -1242,29 +1936,11 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(668, 26);
+            this.label31.Location = new System.Drawing.Point(513, 26);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(80, 18);
             this.label31.TabIndex = 0;
             this.label31.Text = "开奖结果";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(594, 26);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(62, 18);
-            this.label30.TabIndex = 1;
-            this.label30.Text = "[人数]";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(490, 26);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(98, 18);
-            this.label29.TabIndex = 0;
-            this.label29.Text = "在线人数：";
             // 
             // label26
             // 
@@ -1284,28 +1960,10 @@
             this.label25.TabIndex = 0;
             this.label25.Text = "历史号码：";
             // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(426, 68);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(98, 18);
-            this.label36.TabIndex = 1;
-            this.label36.Text = "[所有总分]";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(331, 67);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(89, 18);
-            this.label35.TabIndex = 0;
-            this.label35.Text = "所有总分:";
-            // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(222, 68);
+            this.label28.Location = new System.Drawing.Point(848, 27);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(98, 18);
             this.label28.TabIndex = 1;
@@ -1314,11 +1972,47 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(127, 67);
+            this.label27.Location = new System.Drawing.Point(753, 26);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(89, 18);
             this.label27.TabIndex = 0;
             this.label27.Text = "下注信息:";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(429, 71);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(62, 18);
+            this.label34.TabIndex = 1;
+            this.label34.Text = "[盈亏]";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(361, 70);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(62, 18);
+            this.label33.TabIndex = 0;
+            this.label33.Text = "盈亏：";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(222, 71);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(98, 18);
+            this.label30.TabIndex = 1;
+            this.label30.Text = "[冠军走势]";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(127, 70);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(89, 18);
+            this.label29.TabIndex = 0;
+            this.label29.Text = "冠军走势:";
             // 
             // label24
             // 
@@ -1347,16 +2041,6 @@
             this.label22.TabIndex = 0;
             this.label22.Text = "变量信息";
             // 
-            // tabYingkui
-            // 
-            this.tabYingkui.Location = new System.Drawing.Point(4, 28);
-            this.tabYingkui.Name = "tabYingkui";
-            this.tabYingkui.Padding = new System.Windows.Forms.Padding(3);
-            this.tabYingkui.Size = new System.Drawing.Size(1216, 945);
-            this.tabYingkui.TabIndex = 4;
-            this.tabYingkui.Text = "盈亏计算";
-            this.tabYingkui.UseVisualStyleBackColor = true;
-            // 
             // splitContainer1
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1375,7 +2059,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.tabPanel);
             this.splitContainer1.Panel2MinSize = 0;
             this.splitContainer1.Size = new System.Drawing.Size(1678, 979);
-            this.splitContainer1.SplitterDistance = 1220;
+            this.splitContainer1.SplitterDistance = 1276;
             this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -1387,7 +2071,7 @@
             this.tabPanel.Location = new System.Drawing.Point(0, 0);
             this.tabPanel.Name = "tabPanel";
             this.tabPanel.SelectedIndex = 0;
-            this.tabPanel.Size = new System.Drawing.Size(446, 977);
+            this.tabPanel.Size = new System.Drawing.Size(390, 977);
             this.tabPanel.TabIndex = 0;
             // 
             // tabUp
@@ -1396,7 +2080,7 @@
             this.tabUp.Location = new System.Drawing.Point(4, 28);
             this.tabUp.Name = "tabUp";
             this.tabUp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUp.Size = new System.Drawing.Size(438, 945);
+            this.tabUp.Size = new System.Drawing.Size(382, 945);
             this.tabUp.TabIndex = 0;
             this.tabUp.Text = "上下分操作";
             this.tabUp.UseVisualStyleBackColor = true;
@@ -1424,7 +2108,7 @@
             this.dgvUp.ReadOnly = true;
             this.dgvUp.RowTemplate.Height = 30;
             this.dgvUp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUp.Size = new System.Drawing.Size(432, 939);
+            this.dgvUp.Size = new System.Drawing.Size(376, 939);
             this.dgvUp.TabIndex = 0;
             this.dgvUp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUp_CellClick);
             // 
@@ -1527,7 +2211,7 @@
             this.tabSearch.Location = new System.Drawing.Point(4, 28);
             this.tabSearch.Name = "tabSearch";
             this.tabSearch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSearch.Size = new System.Drawing.Size(432, 945);
+            this.tabSearch.Size = new System.Drawing.Size(376, 945);
             this.tabSearch.TabIndex = 1;
             this.tabSearch.Text = "操作记录";
             this.tabSearch.UseVisualStyleBackColor = true;
@@ -1537,13 +2221,54 @@
             this.dgbHistory.AllowUserToAddRows = false;
             this.dgbHistory.AllowUserToDeleteRows = false;
             this.dgbHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgbHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ChaNickName,
+            this.Order,
+            this.Time,
+            this.Perorid,
+            this.Result});
             this.dgbHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgbHistory.Location = new System.Drawing.Point(3, 103);
             this.dgbHistory.MultiSelect = false;
             this.dgbHistory.Name = "dgbHistory";
             this.dgbHistory.ReadOnly = true;
-            this.dgbHistory.Size = new System.Drawing.Size(426, 839);
+            this.dgbHistory.Size = new System.Drawing.Size(370, 839);
             this.dgbHistory.TabIndex = 6;
+            // 
+            // ChaNickName
+            // 
+            this.ChaNickName.DataPropertyName = "MsgFromName";
+            this.ChaNickName.HeaderText = "昵称";
+            this.ChaNickName.Name = "ChaNickName";
+            this.ChaNickName.ReadOnly = true;
+            // 
+            // Order
+            // 
+            this.Order.DataPropertyName = "OrderContect";
+            this.Order.HeaderText = "指令";
+            this.Order.Name = "Order";
+            this.Order.ReadOnly = true;
+            // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "OpDate";
+            this.Time.HeaderText = "时间";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            // 
+            // Perorid
+            // 
+            this.Perorid.DataPropertyName = "Period";
+            this.Perorid.HeaderText = "期号";
+            this.Perorid.Name = "Perorid";
+            this.Perorid.ReadOnly = true;
+            // 
+            // Result
+            // 
+            this.Result.DataPropertyName = "Result";
+            this.Result.HeaderText = "结果";
+            this.Result.Name = "Result";
+            this.Result.ReadOnly = true;
             // 
             // panel1
             // 
@@ -1557,7 +2282,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(426, 100);
+            this.panel1.Size = new System.Drawing.Size(370, 100);
             this.panel1.TabIndex = 5;
             // 
             // dtpEnd
@@ -1653,6 +2378,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvZhanDan)).EndInit();
+            this.tabZhiling.ResumeLayout(false);
+            this.tabZhiling.PerformLayout();
             this.tabXiaoxi.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1686,7 +2413,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabPage tabZhiling;
         private System.Windows.Forms.TabPage tabXiaoxi;
-        private System.Windows.Forms.TabPage tabYingkui;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbPankou;
         private System.Windows.Forms.Label label2;
@@ -1757,10 +2483,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Succ;
         private System.Windows.Forms.DataGridViewTextBoxColumn MsgId;
         private System.Windows.Forms.DataGridViewTextBoxColumn CommandOne;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NickName2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Uid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalScore;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LastScore;
         private System.Windows.Forms.TextBox txtUin;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox txtUser;
@@ -1775,12 +2497,6 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Label label35;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label38;
@@ -1820,5 +2536,84 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.TextBox txtMC1;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.TextBox txtMC2;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.TextBox txtMC3;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.TextBox txtMC4;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.TextBox txtMC8;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TextBox txtMC7;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.TextBox txtMC6;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TextBox txtMC5;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.TextBox txtShang;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.TextBox txtHe;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.TextBox txtMC10;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.TextBox txtMC9;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.TextBox txtQu;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.TextBox txtCha;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.TextBox txtXia;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.TextBox txtshuang;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.TextBox txtdan;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.TextBox txtXiao;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.TextBox txtDa;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.TextBox txtHu;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.TextBox txtLong;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.TextBox txtMCdi;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.TextBox txtMCgao;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.TextBox txtLongGao;
+        private System.Windows.Forms.TextBox txtLongDi;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.TextBox txtDanGao;
+        private System.Windows.Forms.TextBox txtDanDi;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.TextBox txtDaGao;
+        private System.Windows.Forms.TextBox txtDaDi;
+        private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.Button txtZhiLin;
+        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ChaNickName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Order;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Perorid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Result;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NickName2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Uid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalScore;
     }
 }

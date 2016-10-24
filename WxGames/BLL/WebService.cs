@@ -91,6 +91,7 @@ namespace BLL
             {
                 Log.WriteLogByDate("请求url:" + url);
                 Log.WriteLogByDate("请求acckey:" + acckey);
+                Log.WriteLog(ex);
                 return null;
             }
         }
@@ -146,6 +147,7 @@ namespace BLL
             {
                 Log.WriteLogByDate("请求url:" + url);
                 Log.WriteLogByDate("请求body:" + body);
+                Log.WriteLog(ex);
                 return null;
             }
         }

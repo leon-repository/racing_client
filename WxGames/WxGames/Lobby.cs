@@ -1,10 +1,13 @@
 ﻿using BLL;
+using DrawTool;
 using Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -16,9 +19,22 @@ namespace WxGames
     {
         private Lobby() { }
 
-        public static readonly Lobby Instanc = new Lobby();
+        public static readonly Lobby Instance = new Lobby();
 
         public void Start()
+        {
+            try
+            {
+                Begin();
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLogByDate("获取开奖信息功能失败，原因是：");
+                Log.WriteLog(ex);
+            }
+        }
+
+        private static void Begin()
         {
             DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
             //获取开奖信息，并将开奖信息保存到数据库
@@ -30,7 +46,6 @@ namespace WxGames
             {
                 return;
             }
-
             JObject configHelper = JsonConvert.DeserializeObject(json) as JObject;
             if (configHelper == null)
             {
@@ -49,9 +64,10 @@ namespace WxGames
 
             string nextStartTime = configHelper["data"]["startRacingTime"].ToString();
             string stage = configHelper["data"]["stage"].ToString();//stage=1,押注阶段；stage=2,上报阶段；stage=3,封盘阶段
-            if (frmMainForm.IsContinue)
+            if (stage=="1")
             {
                 frmMainForm.Perioid = gameId;
+                frmMainForm.IsFengPan = false;
                 List<KeyValuePair<string, object>> pkrace = new List<KeyValuePair<string, object>>();
                 pkrace.Add(new KeyValuePair<string, object>("GameId", gameId));
                 Game game = data.First<Game>(pkrace, "");
@@ -139,13 +155,13 @@ namespace WxGames
                         try
                         {
                             content = msg.Content.Replace("[下注信息]", "");
-                            List<NowMsg> nowMsgList = data.GetList<NowMsg>(string.Format(" CommandType not in ('上下查') and isdelete='2' and period='{0}' ", frmMainForm.Perioid), "");
+                            List<NowMsg> nowMsgList = data.GetList<NowMsg>(string.Format(" CommandType not in ('上下查','下注积分范围错误','取消','指令格式错误') and isdelete='2' and period='{0}' ", frmMainForm.Perioid), "");
                             foreach (NowMsg nowMsg in nowMsgList)
                             {
                                 //1,处理指令
                                 WXMsg model = Msg2WxMsg.Instance.GetMsg2(nowMsg);
                                 string msgMessage = model.Msg;
-                                content = content +"\r\n"+ msgMessage;
+                                content = content + "\r\n" + msgMessage;
                             }
                         }
                         catch (Exception ex)
@@ -154,16 +170,68 @@ namespace WxGames
                             Log.WriteLog(ex);
                         }
                     }
+                    else if (content.Contains("[历史]"))
+                    {
+                        try
+                        {
+                            frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = "历史开奖图", To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.WriteLog(ex);
+                        }
+                        //生成图片，并发送
+                        string urlConfiger2 = "/racing/web/history";
+                        string json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2, "", PanKou.accessKey);
+                        string strJson = json2;
+                        DrawImage image = new DrawImage(1400, 700);
+                        image.SetSavePath(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
+                        image.SetFramePen(Color.Gray);
+                        image.SetNumberBackgroundColor(1, Color.FromArgb(245, 245, 245));
+                        image.SetNumberBackgroundColor(2, Color.FromArgb(249, 140, 21));
+                        image.SetNumberBackgroundColor(3, Color.FromArgb(40, 83, 141));
+                        image.SetNumberBackgroundColor(4, Color.FromArgb(251, 227, 24));
+                        image.SetNumberBackgroundColor(5, Color.FromArgb(102, 102, 102));
+                        image.SetNumberBackgroundColor(6, Color.FromArgb(41, 134, 73));
+                        image.SetNumberBackgroundColor(7, Color.FromArgb(162, 163, 164));
+                        image.SetNumberBackgroundColor(8, Color.FromArgb(60, 214, 233));
+                        image.SetNumberBackgroundColor(9, Color.FromArgb(224, 57, 58));
+                        image.SetNumberBackgroundColor(10, Color.FromArgb(46, 52, 180));
+                        JArray jData = new JArray();
+                        jData = DataFormat.FormatString(strJson);
+                        image.Draw(jData);
+                        image.Save();
+                        FileInfo file = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
+                        frmMainForm.wxs.SendImage("DramImage.png", AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png", file.Length.ToString(),frmMainForm.CurrentWX.UserName, frmMainForm.CurrentQun, Log.GetMD5HashFromFile(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png"));
+
+                        content= content.Replace("[历史]", "");
+                    }
+                    if (content.Contains("[冠军走势]"))
+                    {
+                        string url2 = "/user/client/history/champion";
+                        string authStake2 = PanKou.Instance.GetSha1("" + 10, url2);
+                        string jsonStake2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url2 + "?nper=10", authStake2, PanKou.accessKey);
+
+                        if (!string.IsNullOrEmpty(jsonStake2))
+                        {
+                            JObject jobject= JsonConvert.DeserializeObject(jsonStake2) as JObject;
+                            if (jobject != null)
+                            {
+                                content = content.Replace("[冠军走势]", "冠军走势：" + jobject["message"].ToString());
+                            }
+                        }
+                    }
 
                     frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = content, To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
                 }
             }
 
             //判断阶段
-            //下注信息上传
+            //上报阶段 下注信息上传
             if (stage == "2")
             {
-                frmMainForm.IsContinue = false;
+                frmMainForm.IsFengPan = true;
                 List<NowMsg> msgList = new List<NowMsg>();
                 msgList = data.GetList<NowMsg>(" isdelete=1 and CommandType in ('买名次','冠亚和','名次大小单双龙虎') and period= " + frmMainForm.Perioid, "");
                 //下注信息解析成押注信息上传到服务器
@@ -229,6 +297,7 @@ namespace WxGames
 
 
                         //获取本期参与押注的人员
+                        string strYinKui = "";
                         List<NowMsg> msgList = new List<NowMsg>();
                         msgList = data.GetList<NowMsg>(" isdelete=2 and CommandType in ('买名次','冠亚和','名次大小单双龙虎') and period= " + frmMainForm.Perioid, "");
                         List<string> listUin = msgList.Select(p => p.MsgFromId).Distinct().ToList();
@@ -237,7 +306,6 @@ namespace WxGames
                         {
                             string url = "/members/stake";
                             string strList = string.Join(",", listUin);
-                            //strList = "[" + strList + "]";
 
                             string authStake = PanKou.Instance.GetSha1("", url + frmMainForm.Perioid + strList);
                             //请求开奖结果
@@ -254,16 +322,21 @@ namespace WxGames
                                 {
                                     data.ExecuteSql(string.Format(" update contactscore set totalScore={0} where uin={1}", item.members.points, item.members.wechatSn));
 
-                                    msg += "\r\n" + item.members.nickName + "剩余积分：" + item.members.points;
-                                    msg += "盈亏：" + item.memberStake.totalDeficitAmount;
+                                    strYinKui += "\r\n" + item.members.nickName + "剩余积分：" + item.members.points;
+                                    strYinKui += "盈亏：" + item.memberStake.totalDeficitAmount;
                                 }
                             }
 
+                            msg = msg.Replace("[盈亏]", strYinKui);
                         }
 
                         frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = msg, To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
-                        frmMainForm.IsContinue = true;
+
+                        //把所有未处理的指令，全部失效
+                        data.ExecuteSql(" update OriginMsg set issucc='9' where issucc=0 ");
+                        data.ExecuteSql(" update NowMsg set issucc=2 where issucc=1 ");
                         frmMainForm.IsKaiJian = false;
+                        frmMainForm.IsFengPan = false;
                     }
                 }
                 catch (Exception ex)
@@ -272,7 +345,6 @@ namespace WxGames
                     Log.WriteLog(ex);
                 }
             }
-
         }
 
         public static void NewMethod(DataHelper data, List<NowMsg> msgList, string fromId)
@@ -358,35 +430,44 @@ namespace WxGames
                                     switch (commandone2)
                                     {
                                         case "1":
-                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].first = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].first + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].first = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].first + item.Score.ToInt();
                                             break;
                                         case "2":
-                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].second = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].second + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].second = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].second + item.Score.ToInt();
                                             break;
                                         case "3":
-                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].third = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].third + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].third = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].third + item.Score.ToInt();
                                             break;
                                         case "4":
-                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].fourth = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].fourth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].fourth = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].fourth + item.Score.ToInt();
                                             break;
 
                                         case "5":
-                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].fifth = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].fifth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].fifth = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].fifth + item.Score.ToInt();
                                             break;
                                         case "6":
-                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].sixth = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].sixth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].sixth = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].sixth + item.Score.ToInt();
                                             break;
                                         case "7":
-                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].seventh = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].seventh + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].seventh = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].seventh + item.Score.ToInt();
                                             break;
                                         case "8":
-                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].eighth = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].eighth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].eighth = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].eighth + item.Score.ToInt();
                                             break;
                                         case "9":
-                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].ninth = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].ninth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].ninth = vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].ninth + item.Score.ToInt();
                                             break;
                                         case "0":
-                                            vo2.appointStakeList[9].tenth = vo2.appointStakeList[9].tenth + Convert.ToInt32(item.Score);
+                                            if (comdTwo.ToString() == "0")
+                                            {
+                                                vo2.appointStakeList[9].tenth = vo2.appointStakeList[9].tenth + item.Score.ToInt();
+                                            }
+                                            else
+                                            {
+                                                vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString())-1].tenth = vo2.appointStakeList[9].tenth + item.Score.ToInt();
+
+                                            }
+
                                             break;
                                     }
                                 }
@@ -401,35 +482,35 @@ namespace WxGames
                                     switch (commandone2)
                                     {
                                         case "1":
-                                            vo2.appointStakeList[9].first = vo2.appointStakeList[9].first + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[9].first = vo2.appointStakeList[9].first + item.Score.ToInt();
                                             break;
                                         case "2":
-                                            vo2.appointStakeList[9].second = vo2.appointStakeList[9].second + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[9].second = vo2.appointStakeList[9].second + item.Score.ToInt();
                                             break;
                                         case "3":
-                                            vo2.appointStakeList[9].third = vo2.appointStakeList[9].third + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[9].third = vo2.appointStakeList[9].third + item.Score.ToInt();
                                             break;
                                         case "4":
-                                            vo2.appointStakeList[9].fourth = vo2.appointStakeList[9].fourth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[9].fourth = vo2.appointStakeList[9].fourth + item.Score.ToInt();
                                             break;
 
                                         case "5":
-                                            vo2.appointStakeList[9].fifth = vo2.appointStakeList[9].fifth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[9].fifth = vo2.appointStakeList[9].fifth + item.Score.ToInt();
                                             break;
                                         case "6":
-                                            vo2.appointStakeList[9].sixth = vo2.appointStakeList[9].sixth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[9].sixth = vo2.appointStakeList[9].sixth + item.Score.ToInt();
                                             break;
                                         case "7":
-                                            vo2.appointStakeList[9].seventh = vo2.appointStakeList[9].seventh + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[9].seventh = vo2.appointStakeList[9].seventh + item.Score.ToInt();
                                             break;
                                         case "8":
-                                            vo2.appointStakeList[9].eighth = vo2.appointStakeList[9].eighth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[9].eighth = vo2.appointStakeList[9].eighth + item.Score.ToInt();
                                             break;
                                         case "9":
-                                            vo2.appointStakeList[9].ninth = vo2.appointStakeList[9].ninth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[9].ninth = vo2.appointStakeList[9].ninth + item.Score.ToInt();
                                             break;
                                         case "0":
-                                            vo2.appointStakeList[9].tenth = vo2.appointStakeList[9].tenth + Convert.ToInt32(item.Score);
+                                            vo2.appointStakeList[9].tenth = vo2.appointStakeList[9].tenth + item.Score.ToInt();
                                             break;
                                     }
                                 }
@@ -444,55 +525,55 @@ namespace WxGames
                         switch (comTwo)
                         {
                             case "3":
-                                vo2.commonStake.firstSecond3 = vo2.commonStake.firstSecond3 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond3 = vo2.commonStake.firstSecond3 + item.Score.ToInt();
                                 break;
                             case "4":
-                                vo2.commonStake.firstSecond4 = vo2.commonStake.firstSecond4 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond4 = vo2.commonStake.firstSecond4 + item.Score.ToInt();
                                 break;
                             case "5":
-                                vo2.commonStake.firstSecond5 = vo2.commonStake.firstSecond5 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond5 = vo2.commonStake.firstSecond5 + item.Score.ToInt();
                                 break;
                             case "6":
-                                vo2.commonStake.firstSecond6 = vo2.commonStake.firstSecond6 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond6 = vo2.commonStake.firstSecond6 + item.Score.ToInt();
                                 break;
                             case "7":
-                                vo2.commonStake.firstSecond7 = vo2.commonStake.firstSecond7 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond7 = vo2.commonStake.firstSecond7 + item.Score.ToInt();
                                 break;
                             case "8":
-                                vo2.commonStake.firstSecond8 = vo2.commonStake.firstSecond8 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond8 = vo2.commonStake.firstSecond8 + item.Score.ToInt();
                                 break;
                             case "9":
-                                vo2.commonStake.firstSecond9 = vo2.commonStake.firstSecond9 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond9 = vo2.commonStake.firstSecond9 + item.Score.ToInt();
                                 break;
                             case "10":
-                                vo2.commonStake.firstSecond10 = vo2.commonStake.firstSecond10 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond10 = vo2.commonStake.firstSecond10 + item.Score.ToInt();
                                 break;
                             case "11":
-                                vo2.commonStake.firstSecond11 = vo2.commonStake.firstSecond11 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond11 = vo2.commonStake.firstSecond11 + item.Score.ToInt();
                                 break;
                             case "12":
-                                vo2.commonStake.firstSecond12 = vo2.commonStake.firstSecond12 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond12 = vo2.commonStake.firstSecond12 + item.Score.ToInt();
                                 break;
                             case "13":
-                                vo2.commonStake.firstSecond13 = vo2.commonStake.firstSecond13 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond13 = vo2.commonStake.firstSecond13 + item.Score.ToInt();
                                 break;
                             case "14":
-                                vo2.commonStake.firstSecond14 = vo2.commonStake.firstSecond14 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond14 = vo2.commonStake.firstSecond14 + item.Score.ToInt();
                                 break;
                             case "15":
-                                vo2.commonStake.firstSecond15 = vo2.commonStake.firstSecond15 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond15 = vo2.commonStake.firstSecond15 + item.Score.ToInt();
                                 break;
                             case "16":
-                                vo2.commonStake.firstSecond16 = vo2.commonStake.firstSecond16 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond16 = vo2.commonStake.firstSecond16 + item.Score.ToInt();
                                 break;
                             case "17":
-                                vo2.commonStake.firstSecond17 = vo2.commonStake.firstSecond17 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond17 = vo2.commonStake.firstSecond17 + item.Score.ToInt();
                                 break;
                             case "18":
-                                vo2.commonStake.firstSecond18 = vo2.commonStake.firstSecond18 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond18 = vo2.commonStake.firstSecond18 + item.Score.ToInt();
                                 break;
                             case "19":
-                                vo2.commonStake.firstSecond19 = vo2.commonStake.firstSecond19 + Convert.ToInt32(item.Score);
+                                vo2.commonStake.firstSecond19 = vo2.commonStake.firstSecond19 + item.Score.ToInt();
                                 break;
                         }
                     }
@@ -505,55 +586,55 @@ namespace WxGames
                         //    switch (commanTwo)
                         //    {
                         //        case "3":
-                        //            vo2.commonStake.firstSecond3 = vo2.commonStake.firstSecond3 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond3 = vo2.commonStake.firstSecond3 + item.Score.ToInt();
                         //            break;
                         //        case "4":
-                        //            vo2.commonStake.firstSecond4 = vo2.commonStake.firstSecond4 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond4 = vo2.commonStake.firstSecond4 + item.Score.ToInt();
                         //            break;
                         //        case "5":
-                        //            vo2.commonStake.firstSecond5 = vo2.commonStake.firstSecond5 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond5 = vo2.commonStake.firstSecond5 + item.Score.ToInt();
                         //            break;
                         //        case "6":
-                        //            vo2.commonStake.firstSecond6 = vo2.commonStake.firstSecond6 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond6 = vo2.commonStake.firstSecond6 + item.Score.ToInt();
                         //            break;
                         //        case "7":
-                        //            vo2.commonStake.firstSecond7 = vo2.commonStake.firstSecond7 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond7 = vo2.commonStake.firstSecond7 + item.Score.ToInt();
                         //            break;
                         //        case "8":
-                        //            vo2.commonStake.firstSecond8 = vo2.commonStake.firstSecond8 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond8 = vo2.commonStake.firstSecond8 + item.Score.ToInt();
                         //            break;
                         //        case "9":
-                        //            vo2.commonStake.firstSecond9 = vo2.commonStake.firstSecond9 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond9 = vo2.commonStake.firstSecond9 + item.Score.ToInt();
                         //            break;
                         //        case "10":
-                        //            vo2.commonStake.firstSecond10 = vo2.commonStake.firstSecond10 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond10 = vo2.commonStake.firstSecond10 + item.Score.ToInt();
                         //            break;
                         //        case "11":
-                        //            vo2.commonStake.firstSecond11 = vo2.commonStake.firstSecond11 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond11 = vo2.commonStake.firstSecond11 + item.Score.ToInt();
                         //            break;
                         //        case "12":
-                        //            vo2.commonStake.firstSecond12 = vo2.commonStake.firstSecond12 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond12 = vo2.commonStake.firstSecond12 + item.Score.ToInt();
                         //            break;
                         //        case "13":
-                        //            vo2.commonStake.firstSecond13 = vo2.commonStake.firstSecond13 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond13 = vo2.commonStake.firstSecond13 + item.Score.ToInt();
                         //            break;
                         //        case "14":
-                        //            vo2.commonStake.firstSecond14 = vo2.commonStake.firstSecond14 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond14 = vo2.commonStake.firstSecond14 + item.Score.ToInt();
                         //            break;
                         //        case "15":
-                        //            vo2.commonStake.firstSecond15 = vo2.commonStake.firstSecond15 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond15 = vo2.commonStake.firstSecond15 + item.Score.ToInt();
                         //            break;
                         //        case "16":
-                        //            vo2.commonStake.firstSecond16 = vo2.commonStake.firstSecond16 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond16 = vo2.commonStake.firstSecond16 + item.Score.ToInt();
                         //            break;
                         //        case "17":
-                        //            vo2.commonStake.firstSecond17 = vo2.commonStake.firstSecond17 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond17 = vo2.commonStake.firstSecond17 + item.Score.ToInt();
                         //            break;
                         //        case "18":
-                        //            vo2.commonStake.firstSecond18 = vo2.commonStake.firstSecond18 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond18 = vo2.commonStake.firstSecond18 + item.Score.ToInt();
                         //            break;
                         //        case "19":
-                        //            vo2.commonStake.firstSecond19 = vo2.commonStake.firstSecond19 + Convert.ToInt32(item.Score);
+                        //            vo2.commonStake.firstSecond19 = vo2.commonStake.firstSecond19 + item.Score.ToInt();
                         //            break;
                         //    }
                         //}
@@ -561,203 +642,203 @@ namespace WxGames
                     break;
                 case "名次大小单双龙虎":
                     string comTwo3 = item.CommandTwo.Replace("/", "");
-                    switch (item.CommandOne)
+                    switch (comTwo3)
                     {
                         case "大":
-                            foreach (char comdTwo in item.CommandTwo)
+                            foreach (char comdTwo in item.CommandOne)
                             {
                                 switch (comdTwo)
                                 {
                                     case '1':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + item.Score.ToInt();
                                         break;
                                     case '2':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + item.Score.ToInt();
                                         break;
                                     case '3':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + item.Score.ToInt();
                                         break;
                                     case '4':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + item.Score.ToInt();
                                         break;
                                     case '5':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + item.Score.ToInt();
                                         break;
                                     case '6':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + item.Score.ToInt();
                                         break;
                                     case '7':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + item.Score.ToInt();
                                         break;
                                     case '8':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + item.Score.ToInt();
                                         break;
                                     case '9':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].big + item.Score.ToInt();
                                         break;
                                     case '0':
-                                        vo2.rankingStakeList[9].big = vo2.rankingStakeList[9].big + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[9].big = vo2.rankingStakeList[9].big + item.Score.ToInt();
                                         break;
                                 }
                             }
                             break;
                         case "小":
-                            foreach (char comdTwo in item.CommandTwo)
+                            foreach (char comdTwo in item.CommandOne)
                             {
                                 switch (comdTwo)
                                 {
                                     case '1':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + item.Score.ToInt();
                                         break;
                                     case '2':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + item.Score.ToInt();
                                         break;
                                     case '3':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + item.Score.ToInt();
                                         break;
                                     case '4':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + item.Score.ToInt();
                                         break;
                                     case '5':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + item.Score.ToInt();
                                         break;
                                     case '6':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + item.Score.ToInt();
                                         break;
                                     case '7':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + item.Score.ToInt();
                                         break;
                                     case '8':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + item.Score.ToInt();
                                         break;
                                     case '9':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].small + item.Score.ToInt();
                                         break;
                                     case '0':
-                                        vo2.rankingStakeList[9].small = vo2.rankingStakeList[9].small + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[9].small = vo2.rankingStakeList[9].small + item.Score.ToInt();
                                         break;
                                 }
                             }
                             break;
                         case "单":
-                            foreach (char comdTwo in item.CommandTwo)
+                            foreach (char comdTwo in item.CommandOne)
                             {
                                 switch (comdTwo)
                                 {
                                     case '1':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + item.Score.ToInt();
                                         break;
                                     case '2':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + item.Score.ToInt();
                                         break;
                                     case '3':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + item.Score.ToInt();
                                         break;
                                     case '4':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + item.Score.ToInt();
                                         break;
                                     case '5':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + item.Score.ToInt();
                                         break;
                                     case '6':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + item.Score.ToInt();
                                         break;
                                     case '7':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + item.Score.ToInt();
                                         break;
                                     case '8':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + item.Score.ToInt();
                                         break;
                                     case '9':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].odd + item.Score.ToInt();
                                         break;
                                     case '0':
-                                        vo2.rankingStakeList[9].odd = vo2.rankingStakeList[9].odd + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[9].odd = vo2.rankingStakeList[9].odd + item.Score.ToInt();
                                         break;
                                 }
                             }
 
                             break;
                         case "双":
-                            foreach (char comdTwo in item.CommandTwo)
+                            foreach (char comdTwo in item.CommandOne)
                             {
                                 switch (comdTwo)
                                 {
                                     case '1':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + item.Score.ToInt();
                                         break;
                                     case '2':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + item.Score.ToInt();
                                         break;
                                     case '3':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + item.Score.ToInt();
                                         break;
                                     case '4':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + item.Score.ToInt();
                                         break;
                                     case '5':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + item.Score.ToInt();
                                         break;
                                     case '6':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + item.Score.ToInt();
                                         break;
                                     case '7':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + item.Score.ToInt();
                                         break;
                                     case '8':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + item.Score.ToInt();
                                         break;
                                     case '9':
-                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even = vo2.rankingStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].even + item.Score.ToInt();
                                         break;
                                     case '0':
-                                        vo2.rankingStakeList[9].even = vo2.rankingStakeList[9].even + Convert.ToInt32(item.Score);
+                                        vo2.rankingStakeList[9].even = vo2.rankingStakeList[9].even + item.Score.ToInt();
                                         break;
                                 }
                             }
                             break;
                         case "龙":
-                            foreach (char comdTwo in comTwo3)
+                            foreach (char comdTwo in item.CommandOne)
                             {
                                 switch (comdTwo)
                                 {
                                     case '1':
-                                        vo2.commonStake.firstUp = vo2.commonStake.firstUp + Convert.ToInt32(item.Score);
+                                        vo2.commonStake.firstUp = vo2.commonStake.firstUp + item.Score.ToInt();
                                         break;
                                     case '2':
-                                        vo2.commonStake.secondUp = vo2.commonStake.secondUp + Convert.ToInt32(item.Score);
+                                        vo2.commonStake.secondUp = vo2.commonStake.secondUp + item.Score.ToInt();
                                         break;
                                     case '3':
-                                        vo2.commonStake.thirdUp = vo2.commonStake.thirdUp + Convert.ToInt32(item.Score);
+                                        vo2.commonStake.thirdUp = vo2.commonStake.thirdUp + item.Score.ToInt();
                                         break;
                                     case '4':
-                                        vo2.commonStake.fourthUp = vo2.commonStake.fourthUp + Convert.ToInt32(item.Score);
+                                        vo2.commonStake.fourthUp = vo2.commonStake.fourthUp + item.Score.ToInt();
                                         break;
                                     case '5':
-                                        vo2.commonStake.fifthUp = vo2.commonStake.fifthUp + Convert.ToInt32(item.Score);
+                                        vo2.commonStake.fifthUp = vo2.commonStake.fifthUp + item.Score.ToInt();
                                         break;
                                 }
                             }
                             break;
                         case "虎":
-                            foreach (char comdTwo in comTwo3)
+                            foreach (char comdTwo in item.CommandOne)
                             {
                                 switch (comdTwo)
                                 {
                                     case '1':
-                                        vo2.commonStake.firstDowm = vo2.commonStake.firstDowm + Convert.ToInt32(item.Score);
+                                        vo2.commonStake.firstDowm = vo2.commonStake.firstDowm + item.Score.ToInt();
                                         break;
                                     case '2':
-                                        vo2.commonStake.secondDowm = vo2.commonStake.secondDowm + Convert.ToInt32(item.Score);
+                                        vo2.commonStake.secondDowm = vo2.commonStake.secondDowm + item.Score.ToInt();
                                         break;
                                     case '3':
-                                        vo2.commonStake.thirdDowm = vo2.commonStake.thirdDowm + Convert.ToInt32(item.Score);
+                                        vo2.commonStake.thirdDowm = vo2.commonStake.thirdDowm + item.Score.ToInt();
                                         break;
                                     case '4':
-                                        vo2.commonStake.fourthDowm = vo2.commonStake.fourthDowm + Convert.ToInt32(item.Score);
+                                        vo2.commonStake.fourthDowm = vo2.commonStake.fourthDowm + item.Score.ToInt();
                                         break;
                                     case '5':
-                                        vo2.commonStake.fifthDowm = vo2.commonStake.fifthDowm + Convert.ToInt32(item.Score);
+                                        vo2.commonStake.fifthDowm = vo2.commonStake.fifthDowm + item.Score.ToInt();
                                         break;
                                 }
                             }

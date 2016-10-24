@@ -113,28 +113,20 @@ namespace WxGames
                     }
 
                     //计算剩余积分
-                    if ((contactScore.TotalScore - userScore * Convert.ToInt32(msg.Score)) < 0)
+                    if ((contactScore.TotalScore - userScore *msg.Score.ToInt()) < 0)
                     {
                         content.Clear();
                         content.Append("@" + msg.MsgFromName + " ");
                         content.Append("积分不足");
                         content.Append("\r\n当前积分：" + contactScore.TotalScore);
-                        //msg.IsDeal = "1";
-                        //msg.IsDelete = "1";
-                        //msg.IsSucc = 2;
-                        //List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
-                        //pkList2.Add(new KeyValuePair<string, object>("MsgId", msg.MsgId));
-                        //data.Update<NowMsg>(msg,pkList2, "");
+
+                        //删除指令
+                        data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
                     }
                     else
                     {
-                        //msg.IsDeal = "1";
-                        //msg.IsDelete = "1";
-                        //msg.IsSucc = 1;
-                        //List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
-                        //pkList2.Add(new KeyValuePair<string, object>("MsgId", msg.MsgId));
-                        //data.Update<NowMsg>(msg, pkList2, "");
-                        contactScore.TotalScore = contactScore.TotalScore - userScore * Convert.ToInt32(msg.Score);
+                        contactScore.TotalScore = contactScore.TotalScore - userScore * msg.Score.ToInt();
+                        contactScore.RunScore = contactScore.RunScore + userScore * msg.Score.ToInt();
                         List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
                         pkList3.Add(new KeyValuePair<string, object>("Uuid", contactScore.Uuid));
                         data.Update<ContactScore>(contactScore, pkList3, "");
@@ -145,29 +137,20 @@ namespace WxGames
                 case "名次大小单双龙虎":
                     content.Append("@" + msg.MsgFromName + " ");
                     content.Append(" 下注成功");
-                    content.Append("<br/>"+msg.CommandOne+"名 "+msg.CommandTwo+" "+msg.Score);
-                    if ((contactScore.TotalScore - Convert.ToInt32(msg.Score)) < 0)
+                    content.Append("\r\n" + msg.CommandOne+"名 "+msg.CommandTwo+" "+msg.Score);
+                    if ((contactScore.TotalScore - msg.Score.ToInt()) < 0)
                     {
                         content.Clear();
                         content.Append("@" + msg.MsgFromName + " ");
                         content.Append("积分不足");
                         content.Append("\r\n当前积分：" + contactScore.TotalScore);
-                        //msg.IsDeal = "1";
-                        //msg.IsDelete = "1";
-                        //msg.IsSucc = 2;
-                        //List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
-                        //pkList2.Add(new KeyValuePair<string, object>("MsgId", msg.MsgId));
-                        //data.Update<NowMsg>(msg, pkList2, "");
+                        //删除指令
+                        data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
                     }
                     else
                     {
-                        //msg.IsDeal = "1";
-                        //msg.IsDelete = "1";
-                        //msg.IsSucc = 1;
-                        //List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
-                        //pkList2.Add(new KeyValuePair<string, object>("MsgId", msg.MsgId));
-                        //data.Update<NowMsg>(msg, pkList2, "");
-                        contactScore.TotalScore = contactScore.TotalScore -Convert.ToInt32(msg.Score);
+                        contactScore.TotalScore = contactScore.TotalScore - msg.Score.ToInt();
+                        contactScore.RunScore = contactScore.RunScore + msg.Score.ToInt();
                         List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
                         pkList3.Add(new KeyValuePair<string, object>("Uuid", contactScore.Uuid));
                         data.Update<ContactScore>(contactScore, pkList3, "");
@@ -178,6 +161,13 @@ namespace WxGames
                     break;
                 case "冠亚和":
                     content.Append("@" + msg.MsgFromName + " ");
+                    if (string.IsNullOrEmpty(msg.CommandTwo))
+                    {
+                        content.Append("指令格式错误");
+                        data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                        break;
+                    }
+
                     content.Append(" 下注成功");
                     string[] commandTwos = msg.CommandTwo.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string item in commandTwos)
@@ -185,29 +175,20 @@ namespace WxGames
                         content.Append("\r\n" + msg.CommandOne + " " + item + " " + msg.Score);
                     }
                     
-                    if ((contactScore.TotalScore - Convert.ToInt32(msg.Score)) < 0)
+                    if ((contactScore.TotalScore - msg.Score.ToInt()) < 0)
                     {
                         content.Clear();
-                        content.Append("@" + msg.MsgFromName + " ");
+                        content.Append(msg.MsgFromName + " ");
                         content.Append("积分不足");
                         content.Append("\r\n当前积分：" + contactScore.TotalScore);
-                        //msg.IsDeal = "1";
-                        //msg.IsDelete = "1";
-                        //msg.IsSucc = 2;
-                        //List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
-                        //pkList2.Add(new KeyValuePair<string, object>("MsgId", msg.MsgId));
-                        //data.Update<NowMsg>(msg, pkList2, "");
+
+                        //删除指令
+                        data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
                     }
                     else
                     {
-                        
-                        //msg.IsDeal = "1";
-                        //msg.IsDelete = "1";
-                        //msg.IsSucc = 1;
-                        //List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
-                        //pkList2.Add(new KeyValuePair<string, object>("MsgId", msg.MsgId));
-                        //data.Update<NowMsg>(msg, pkList2, "");
-                        contactScore.TotalScore = contactScore.TotalScore - Convert.ToInt32(msg.Score);
+                        contactScore.TotalScore = contactScore.TotalScore - msg.Score.ToInt();
+                        contactScore.RunScore = contactScore.RunScore + msg.Score.ToInt();
                         List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
                         pkList3.Add(new KeyValuePair<string, object>("Uuid", contactScore.Uuid));
                         data.Update<ContactScore>(contactScore, pkList3, "");
@@ -216,17 +197,25 @@ namespace WxGames
                     break;
 
                 case "取消":
-                    content.Append("@" + msg.MsgFromName + " " + "暂不支持取消指令");
+                case "取消指令":
+                    content.Append("@" + msg.MsgFromName + " " + "取消下注成功");
+                    data.ExecuteSql("delete from Nowmsg  where uin=" + msg.MsgFromId +" and period="+msg.Period);
                     break;
 
                 case "指令格式错误":
                     content.Append("@" + msg.MsgFromName + " " + "指令格式错误");
-
-                    
+                    //删除指令
+                    data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
                     break;
-
+                case "下注积分范围错误":
+                    content.Append("@" + msg.MsgFromName + " " + "下注积分范围错误");
+                    //删除指令
+                    data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                    break;
                 default:
                     content.Append("@" + msg.MsgFromName + " " + "暂不支持此指令");
+                    //删除指令
+                    data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
                     break;
             }
 
@@ -238,6 +227,21 @@ namespace WxGames
             data.Update<NowMsg>(msg, pkList4, "");
 
             model.Msg = content.ToString();
+
+            if (msg.CommandType != "上下查")
+            {
+                if (frmMainForm.IsFengPan)
+                {
+                    data.ExecuteSql(" delete from nowmsg where msgid=" + msg.MsgId);
+                    model.Msg = "正在封盘";
+                }
+                else if (frmMainForm.IsKaiJian)
+                {
+                    data.ExecuteSql(" delete from nowmsg where msgid=" + msg.MsgId);
+                    model.Msg = "正在开奖";
+                }
+            }
+
             return model;
         }
 
@@ -343,27 +347,19 @@ namespace WxGames
                     }
 
                     //计算剩余积分
-                    if ((contactScore.TotalScore - userScore * Convert.ToInt32(msg.Score)) < 0)
+                    if ((contactScore.TotalScore - userScore * msg.Score.ToInt()) < 0)
                     {
                         content.Clear();
                         content.Append("@" + msg.MsgFromName + " ");
                         content.Append("积分不足");
-                        content.Append("\r\n当前积分：" + contactScore.TotalScore);
                     }
-                    else
-                    {
-                        //contactScore.TotalScore = contactScore.TotalScore - userScore * Convert.ToInt32(msg.Score);
-                        //List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
-                        //pkList3.Add(new KeyValuePair<string, object>("Uuid", contactScore.Uuid));
-                        //data.Update<ContactScore>(contactScore, pkList3, "");
-                        content.Append("\r\n当前积分：" + contactScore.TotalScore);
-                    }
+                    content.Append("\r\n当前积分：" + contactScore.TotalScore);
 
                     break;
-                case "买名次大小单双龙虎":
+                case "名次大小单双龙虎":
                     content.Append(msg.MsgFromName);
                     content.Append("\r\n" + msg.CommandOne + "名 " + msg.CommandTwo + " " + msg.Score);
-                    if ((contactScore.TotalScore - Convert.ToInt32(msg.Score)) < 0)
+                    if ((contactScore.TotalScore - msg.Score.ToInt()) < 0)
                     {
                         content.Clear();
                         content.Append("@" + msg.MsgFromName + " ");
@@ -372,10 +368,6 @@ namespace WxGames
                     }
                     else
                     {
-                        //contactScore.TotalScore = contactScore.TotalScore - Convert.ToInt32(msg.Score);
-                        //List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
-                        //pkList3.Add(new KeyValuePair<string, object>("Uuid", contactScore.Uuid));
-                        //data.Update<ContactScore>(contactScore, pkList3, "");
                         content.Append("\r\n当前积分：" + contactScore.TotalScore);
                     }
 
@@ -390,21 +382,13 @@ namespace WxGames
                         content.Append("\r\n" + msg.CommandOne + " " + item + " " + msg.Score);
                     }
 
-                    if ((contactScore.TotalScore - Convert.ToInt32(msg.Score)) < 0)
+                    if ((contactScore.TotalScore - msg.Score.ToInt()) < 0)
                     {
                         content.Clear();
                         content.Append("@" + msg.MsgFromName + " ");
                         content.Append("积分不足");
-                        content.Append("\r\n当前积分：" + contactScore.TotalScore);
                     }
-                    else
-                    {
-                        //contactScore.TotalScore = contactScore.TotalScore - Convert.ToInt32(msg.Score);
-                        //List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
-                        //pkList3.Add(new KeyValuePair<string, object>("Uuid", contactScore.Uuid));
-                        //data.Update<ContactScore>(contactScore, pkList3, "");
-                        content.Append("\r\n当前积分：" + contactScore.TotalScore);
-                    }
+                    content.Append("\r\n当前积分：" + contactScore.TotalScore);
                     break;
 
                 case "取消":

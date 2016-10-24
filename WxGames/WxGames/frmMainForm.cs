@@ -15,7 +15,7 @@ using WxGames.HTTP;
 using WxGames.Body;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
-using WxGames.Job;
+using System.IO;
 
 namespace WxGames
 {
@@ -69,14 +69,14 @@ namespace WxGames
         public bool IsLogin = false;
 
         /// <summary>
-        /// 是否处于押注状态，false是不可以押注的
-        /// </summary>
-        public static bool IsContinue = true;
-
-        /// <summary>
         /// 是否开奖
         /// </summary>
         public static bool IsKaiJian = false;
+
+        /// <summary>
+        /// 是否封盘
+        /// </summary>
+        public static bool IsFengPan = false;
 
         /// <summary>
         /// 当前开奖号
@@ -85,21 +85,60 @@ namespace WxGames
 
         private DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
 
+        /// <summary>
+        /// 消息配置
+        /// </summary>
         public static List<Config> Configs = new List<Config>();
+
+        /// <summary>
+        /// 指令配置
+        /// </summary>
+        public static List<Config> OrderConfig = new List<Config>();
 
         public string WxTuanDui = "";
 
-        public Thread t = new Thread(new ThreadStart(ReceiveMsg));
+        /// <summary>
+        /// 接受消息线程
+        /// </summary>
+        public Thread ThreadRece = new Thread(new ThreadStart(ReceiveMsg));
 
         private static void ReceiveMsg()
         {
-            Log.WriteLogByDate("调用1次");
             while (true)
             {
-                ReceiveMessageJob.NewMethod();
+                ReceiveMessage.Instance.Start();
                 Thread.Sleep(1000);
             }
         }
+
+        /// <summary>
+        /// 发送消息线程
+        /// </summary>
+        public Thread ThreadSend = new Thread(new ThreadStart(SendMsg));
+
+        private static void SendMsg()
+        {
+            while (true)
+            {
+                SendMessage.Instance.Start();
+                Thread.Sleep(1000);
+            }
+        }
+
+        /// <summary>
+        /// 上报消息线程
+        /// </summary>
+        public Thread ThreadLobby = new Thread(new ThreadStart(SendLobby));
+
+        private static void SendLobby()
+        {
+            while (true)
+            {
+                Lobby.Instance.Start();
+                Thread.Sleep(1000);
+            }
+        }
+
 
         /// <summary>
         /// 设置dgvUp的数据源
@@ -131,24 +170,6 @@ namespace WxGames
             ///请求服务器获取盘口数据
             List<LoginModel> list = new List<LoginModel>();
             list.Add(new LoginModel() { PankouId = "1", PankouName = "香港赛车PK10", IsLogin = 0, IsSum = 0 });
-            //list.Add(new LoginModel() { PankouId = "2", PankouName = "盘口B", IsLogin = 0, IsSum = 0 });
-
-            //DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
-            //foreach (var item in list)
-            //{
-            //    List<KeyValuePair<string, object>> pkList = new List<KeyValuePair<string, object>>();
-            //    pkList.Add(new KeyValuePair<string, object>("PankouId",item.PankouId));
-            //    LoginModel pankou=data.First<LoginModel>(pkList, "");
-            //    if (pankou == null)
-            //    {
-            //        data.Insert<LoginModel>(item, "");
-            //    }
-            //    else
-            //    {
-            //        data.Update<LoginModel>(item, pkList, "");
-            //    }
-            //}
-
             cmbPankou.DataSource = list;
             cmbPankou.DisplayMember = "PankouName";
             cmbPankou.ValueMember = "PankouId";
@@ -184,50 +205,53 @@ namespace WxGames
             {
                 QunInit();
                 Configs = data.GetList<Config>("type='MSG'", "");
-
+                OrderConfig = data.GetList<Config>("type='ORDER'","");
+               
                 //调用同步积分接口
-                List<ContactScore> list = data.GetList<ContactScore>("", "");
+                string url = "/members/point/all";
+                string authStake = PanKou.Instance.GetSha1("", url);
+                string jsonStake = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url, authStake, PanKou.accessKey);
 
-                if (list != null && list.Count > 0)
+                if (jsonStake != null)
                 {
-                    List<string> listUin = list.Select(p => p.Uin).Distinct().ToList();
-                    string url = "/members/point/batch";
-                    string strList = string.Join(",", listUin);
-                    string authStake = PanKou.Instance.GetSha1("", url + strList);
-
-                    string jsonStake = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url + "?wechatSns=" + strList, authStake, PanKou.accessKey);
-
-                    if (jsonStake != null)
+                    JObject jobject = JsonConvert.DeserializeObject(jsonStake) as JObject;
+                    if (jobject != null)
                     {
-                        JObject jobject = JsonConvert.DeserializeObject(jsonStake) as JObject;
-                        if (jobject != null)
+                        string data2 = jobject["data"].ToString();
+                        if (!string.IsNullOrEmpty(data2))
                         {
-                            string data2 = jobject["data"].ToString();
-                            if (!string.IsNullOrEmpty(data2))
+                            List<Members> listMembers = JsonConvert.DeserializeObject<List<Members>>(data2);
+
+                            foreach (Members member in listMembers)
                             {
-                                List<Members> listMembers = JsonConvert.DeserializeObject<List<Members>>(data2);
-
-                                foreach (Members member in listMembers)
+                                if (member != null && member.wechatSn != null)
                                 {
-                                    if (member != null && member.wechatSn != null)
-                                    {
-                                        data.ExecuteSql(string.Format(" update ContactScore set totalScore='{0}' where uin='{1}' ", member.points, member.wechatSn));
-                                    }
-                                }
-
-                                List<ContactScore> listContact = data.GetList<ContactScore>("", "");
-
-                                if (listContact != null &&listContact.Count >0)
-                                {
-                                    List<string> listCha = listContact.Select(p => p.Uin).Distinct().ToList().Except(listMembers.Select(p => p.wechatSn).ToList()).ToList();
-
-                                    foreach (string uin in listCha)
-                                    {
-                                        data.ExecuteSql(string.Format(" update ContactScore set totalScore=0 where uin='{0}' ", uin));
-                                    }
+                                    data.ExecuteSql(string.Format(" update ContactScore set totalScore='{0}' where uin='{1}' ", member.points, member.wechatSn));
                                 }
                             }
 
+                            List<ContactScore> listContact = data.GetList<ContactScore>("", "");
+
+                            if (listContact != null && listContact.Count >= 0)
+                            {
+                                //本地存在服务器没有的数据，则删除
+                                List<string> listCha = listContact.Select(p => p.Uin).Distinct().ToList().Except(listMembers.Select(p => p.wechatSn).ToList()).ToList();
+                                foreach (string uin in listCha)
+                                {
+                                    data.ExecuteSql(string.Format(" delete from ContactScore where uin='{0}' ", uin));
+                                }
+
+                                //服务器存在，本地不存在的数据，则添加
+                                List<string> listCha2 = listMembers.Select(p => p.wechatSn).ToList().Except(listContact.Select(p=>p.Uin).Distinct().ToList()).ToList();
+
+                                foreach (string memberId in listCha2)
+                                {
+                                    Members model = listMembers.FirstOrDefault(p => p.wechatSn == memberId);
+                                    if (model == null) continue;
+                                    ContactScore contactScore = new ContactScore() { Uuid=Guid.NewGuid().ToString(), Uin=model.wechatSn, NickName=model.nickName, TotalScore=model.points.ToString().ToInt() };
+                                    data.Insert<ContactScore>(contactScore, "");
+                                }
+                            }
                         }
                     }
                 }
@@ -236,6 +260,7 @@ namespace WxGames
             else
             {
                 MessageBox.Show(msg);
+                return;
             }
 
             ((Action)(delegate ()
@@ -296,6 +321,11 @@ namespace WxGames
                         }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("微信故障，请重新登陆");
+                    Environment.Exit(0);
+                }
               
 
                 //获取微信群，并存到数据库
@@ -335,28 +365,20 @@ namespace WxGames
                 CurrentQunNick = cmbQun.SelectedText;
                 cmbQun.Enabled = false;
                 btnRefresh.Enabled = false;
-                //开始定时处理消息
-                TaskManager.Instance.Start(true);
-                //开始更新dataGridView数据表
-                timeDgv.Start();
-                //账单信息显示
-                dgvZhanDan.DataSource = ScoreManager.Instance.GetZhanDan();
                 dgvUp.Enabled = true;
-
                 //删除微信团队
                 wxs.DeleteUser(CurrentQun, WxTuanDui);
 
                 string qun1 = frmMainForm.wxs.GetQun(frmMainForm.CurrentQun);
 
                 //在点开始按钮的时候，启动消息
-                List<Config> configs = data.GetList<Config>(" Type='MSG' and Key in ('CHKSTART','STARTCONTENT') ", "");
-                if (configs != null && configs.Count == 2)
+                if (Configs != null)
                 {
                     //发消息
-                    Config chkStart = configs.Find(p => p.Key == "CHKSTART");
+                    Config chkStart = Configs.Find(p => p.Key == "CHKSTART");
                     if (chkStart != null)
                     {
-                        Config content = configs.Find(p => p.Key == "STARTCONTENT");
+                        Config content = Configs.Find(p => p.Key == "STARTCONTENT");
                         if (content != null)
                         {
                             CurrentWX.SendMsg(new WXMsg() { From = CurrentWX.UserName, Msg = content.Value, Readed = false, Time = DateTime.Now, To = CurrentQun, Type = 1 }, false);
@@ -364,25 +386,61 @@ namespace WxGames
                     }
                 }
 
-                t.Start();
+
+
+
+
+                ///启动线程
+                timeDgv.Start();
+
+                if (ThreadRece.ThreadState == ThreadState.Suspended)
+                {
+                    ThreadRece.Resume();
+                }
+                else
+                {
+                    ThreadRece.Start();
+                }
+                // TaskManager.Instance.Start(Start);
+                if (ThreadSend.ThreadState == ThreadState.Suspended)
+                {
+                    ThreadSend.Resume();
+                }
+                else
+                {
+                    ThreadSend.Start();
+                }
+                if (ThreadLobby.ThreadState == ThreadState.Suspended)
+                {
+                    ThreadLobby.Resume();
+                }
+                else
+                {
+                    ThreadLobby.Start();
+                }
             }
             else
             {
                 Start = false;
                 btnStart.Text = "开始";
-                TaskManager.Instance.Start(false);
-                timeDgv.Stop();
+                
                 cmbQun.Enabled = true;
                 btnRefresh.Enabled = true;
                 dgvUp.Enabled = false;
 
+                //结束线程
                 try
                 {
-                    t.Abort();
+                    timeDgv.Stop();
+                    ThreadRece.Suspend();
+                    ThreadSend.Suspend();
+                    ThreadLobby.Suspend();
+                    //TaskManager.Instance.Start(Start);
                 }
                 catch (Exception ex)
                 {
                     //结束线程
+                    Log.WriteLogByDate("结束线程");
                 }
 
                 //在点结束按钮的时候，发送结束消息
@@ -393,8 +451,7 @@ namespace WxGames
                 data.ExecuteSql("update nowmsg set isdelete='1'");
 
                 data.ExecuteSql(" update game set issucc=1 ");//期数全部结束
-                data.ExecuteSql(" update gamemsg set issend=1");//期数消息全部发送
-
+                data.ExecuteSql(" delete from gamemsg");//期数消息全部全部删除
             }
 
             ((Action)(delegate ()
@@ -422,19 +479,36 @@ namespace WxGames
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            string where = "";
 
+            if (!string.IsNullOrWhiteSpace(txtNickName.Text))
+            {
+                where = where + string.Format(" t.msgfromname like '%{0}%'",txtNickName.Text);
+            }
+           
+            if (!string.IsNullOrWhiteSpace(where))
+            {
+                where = where + " and ";
+            }
+            where=where + " t.createdate>="+ dtpBegin.Value.DateTimeToUnixTimestamp();
+            where = where + "  and t.createdate<=" + dtpEnd.Value.DateTimeToUnixTimestamp();
+
+            List<History> msg = data.GetListNonTable<History>("select t.msgfromname,t.ordercontect,t.opdate,t.period,t.result from nowmsg t where "+where);
+
+            dgbHistory.DataSource =msg;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //结束线程
+
             List<UpDowModel> list = ScoreManager.Instance.GetUpDowModel();
 
             SetDgvPost(list);
+            //刷新账单
+            dgvZhanDan.DataSource = ScoreManager.Instance.GetZhanDan();
 
-            ////刷新界面展示开奖号码，倒计时，到期时间
-
-
-
+            //刷新界面展示开奖号码，倒计时，到期时间
             string urlConfiger = "/user/client/stake/configer";
             string auth = PanKou.Instance.GetSha1("", urlConfiger);
 
@@ -444,7 +518,6 @@ namespace WxGames
                 return;
             }
             JObject configHelper = JsonConvert.DeserializeObject(json) as JObject;
-            //if (IsContinue && configHelper != null)
             if (configHelper != null)
             {
                 try
@@ -461,48 +534,6 @@ namespace WxGames
                 }
             }
             lblKjhm.Text = PerioidString;
-
-            //else
-            //{
-            //    List<KeyValuePair<string, object>> queryString = new List<KeyValuePair<string, object>>();
-            //    queryString.Add(new KeyValuePair<string, object>("racingNum", frmMainForm.Perioid));
-
-            //    queryString = queryString.OrderBy(p => p.Key).ToList();
-
-            //    string queryValue = "";
-            //    foreach (KeyValuePair<string, object> item in queryString)
-            //    {
-            //        queryValue = queryValue + item.Value.ToString();
-            //    }
-
-            //    string urlConfiger2 = "/user/record/result";
-            //    string auth2 = PanKou.Instance.GetSha1("", urlConfiger2 + queryValue);
-
-            //    string json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2 + "?racingNum=" + frmMainForm.Perioid, auth2, PanKou.accessKey);
-            //    if (string.IsNullOrEmpty(json2))
-            //    {
-            //        return;
-            //    }
-            //    JObject configHelper2 = JsonConvert.DeserializeObject(json2) as JObject;
-            //    string result = configHelper2["result"].ToString();
-            //    string message = configHelper2["message"].ToString();
-            //    if (result == "SUCCESS")
-            //    {
-            //        string resultArray = configHelper2["data"]["result"].ToString();
-
-            //        string racingNum = configHelper2["data"]["racingNum"].ToString();
-            //        resultArray = resultArray.Replace("\r\n", "");
-            //        lblKjhm.Text = resultArray;
-            //        lblykj.Text = racingNum;
-            //    }
-            //    else
-            //    {
-            //        lblKjhm.Text = configHelper2["message"].ToString();
-            //        int racingTime = configHelper["data"]["startRacingTime"].ToString().ToInt();
-            //        toolStripStatusLabel3.Text = (racingTime / 1000).ToString();
-            //    }
-
-            //}
         }
 
         private void dgvUp_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -677,8 +708,8 @@ namespace WxGames
                 }
             }
 
-            ///刷新下
-            dgvZhanDan.DataSource = ScoreManager.Instance.GetZhanDan();
+            ///不再刷新下,Timer自动刷新
+            //dgvZhanDan.DataSource = ScoreManager.Instance.GetZhanDan();
         }
 
         private void 不同意ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -707,8 +738,6 @@ namespace WxGames
                 data.Update<NowMsg>(msg, pkMsgList, "");
                 row.Cells["Succ"].Value = "不同意";
             }
-
-
         }
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -766,8 +795,58 @@ namespace WxGames
                     {
                         InitMsgConfig();
                     }
+                    else if (tab.SelectedIndex == 2)
+                    {
+                        InitOrderConfig();
+                    }
                 }
             }
+        }
+
+        private void InitOrderConfig()
+        {
+            List<Config> list = data.GetList<Config>("type='ORDER'", "");
+            if (list == null || list.Count <= 0)
+            {
+                return;
+            }
+
+            //名次指令设置
+            txtMC1.Text = list.Find(p => p.Key == "MC1").Value;
+            txtMC2.Text = list.Find(p => p.Key == "MC2").Value;
+            txtMC3.Text = list.Find(p => p.Key == "MC3").Value;
+            txtMC4.Text = list.Find(p => p.Key == "MC4").Value;
+            txtMC5.Text = list.Find(p => p.Key == "MC5").Value;
+            txtMC6.Text = list.Find(p => p.Key == "MC6").Value;
+            txtMC7.Text = list.Find(p => p.Key == "MC7").Value;
+            txtMC8.Text = list.Find(p => p.Key == "MC8").Value;
+            txtMC9.Text = list.Find(p => p.Key == "MC9").Value;
+            txtMC10.Text = list.Find(p => p.Key == "MC10").Value;
+
+            //上下查，取消
+            txtShang.Text = list.Find(p => p.Key == "MCSHANG").Value;
+            txtXia.Text = list.Find(p => p.Key == "MCXIA").Value;
+            txtCha.Text = list.Find(p => p.Key == "MCCHA").Value;
+            txtQu.Text = list.Find(p => p.Key == "MCQU").Value;
+            txtHe.Text= list.Find(p => p.Key == "MCHE").Value;
+
+            //大小单双龙虎
+            txtDa.Text = list.Find(p => p.Key == "MCDA").Value;
+            txtXiao.Text = list.Find(p => p.Key == "MCXIAO").Value;
+            txtdan.Text = list.Find(p => p.Key == "MCDAN").Value;
+            txtshuang.Text = list.Find(p => p.Key == "MCSHUANG").Value;
+            txtLong.Text = list.Find(p => p.Key == "MCLONG").Value;
+            txtHu.Text = list.Find(p => p.Key == "MCHU").Value;
+
+            //下注高低限额设置
+            txtMCdi.Text = list.Find(p => p.Key == "MCDI").Value;
+            txtMCgao.Text = list.Find(p => p.Key == "MCGAO").Value;
+            txtLongDi.Text = list.Find(p => p.Key == "MCLONGDI").Value;
+            txtLongGao.Text = list.Find(p => p.Key == "MCLONGGAO").Value;
+            txtDanDi.Text = list.Find(p => p.Key == "MCDANDI").Value;
+            txtDanGao.Text = list.Find(p => p.Key == "MCDANGAO").Value;
+            txtDaDi.Text = list.Find(p => p.Key == "MCDADI").Value;
+            txtDaGao.Text = list.Find(p => p.Key == "MCDAGAO").Value;
         }
 
         private void InitMsgConfig()
@@ -1030,21 +1109,90 @@ namespace WxGames
             data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "KJHCHK", Value = kjhChk }, "");
 
             Configs = data.GetList<Config>("type='MSG'", "");
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
+            MessageBox.Show("保存成功");
         }
 
         private void frmMainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            System.Environment.Exit(0);
+            Environment.Exit(0);
         }
 
         private void frmMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            System.Environment.Exit(0);
+            Environment.Exit(0);
+        }
+
+        private void txtZhiLin_Click(object sender, EventArgs e)
+        {
+            data.ExecuteSql("delete from config where type='ORDER' ");
+
+            //名次指令设置
+            Config mc1 = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MC1", Value = txtMC1.Text };
+            data.Insert<Config>(mc1, "");
+            Config mc2 = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MC2", Value = txtMC2.Text };
+            data.Insert<Config>(mc2, "");
+            Config mc3 = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MC3", Value = txtMC3.Text };
+            data.Insert<Config>(mc3, "");
+            Config mc4 = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MC4", Value = txtMC4.Text };
+            data.Insert<Config>(mc4, "");
+            Config mc5 = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MC5", Value = txtMC5.Text };
+            data.Insert<Config>(mc5, "");
+            Config mc6 = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MC6", Value = txtMC6.Text };
+            data.Insert<Config>(mc6, "");
+            Config mc7 = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MC7", Value = txtMC7.Text };
+            data.Insert<Config>(mc7, "");
+            Config mc8 = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MC8", Value = txtMC8.Text };
+            data.Insert<Config>(mc8, "");
+            Config mc9 = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MC9", Value = txtMC9.Text };
+            data.Insert<Config>(mc9, "");
+            Config mc10 = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MC10", Value = txtMC10.Text };
+            data.Insert<Config>(mc10, "");
+            //上下查，取消
+            Config mcShang = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCSHANG", Value = txtShang.Text };
+            data.Insert<Config>(mcShang, "");
+            Config mcxia = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCXIA", Value = txtXia.Text };
+            data.Insert<Config>(mcxia, "");
+            Config mcCha = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCCHA", Value = txtCha.Text };
+            data.Insert<Config>(mcCha, "");
+            Config mcQu = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCQU", Value = txtQu.Text };
+            data.Insert<Config>(mcQu, "");
+            Config mcHe = new Config() {Uuid=Guid.NewGuid().ToString(),Type="ORDER",Key="MCHE",Value=txtHe.Text };
+            data.Insert<Config>(mcHe, "");
+
+            //大小单双龙虎
+            Config mcDa = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCDA", Value = txtDa.Text };
+            data.Insert<Config>(mcDa, "");
+            Config mcXiao = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCXIAO", Value = txtXiao.Text };
+            data.Insert<Config>(mcXiao, "");
+            Config mcDang = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCDAN", Value = txtdan.Text };
+            data.Insert<Config>(mcDang, "");
+            Config mcShuang = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCSHUANG", Value = txtshuang.Text };
+            data.Insert<Config>(mcShuang, "");
+            Config mcLong = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCLONG", Value = txtLong.Text };
+            data.Insert<Config>(mcLong, "");
+            Config mcHu = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCHU", Value = txtHu.Text };
+            data.Insert<Config>(mcHu, "");
+
+            //下注高低限额设置
+            Config mcDi = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCDI", Value = txtMCdi.Text.ToInt().ToString() };
+            data.Insert<Config>(mcDi, "");
+            Config mcGao = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCGAO", Value = txtMCgao.Text.ToInt().ToString() };
+            data.Insert<Config>(mcGao, "");
+            Config longDi = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCLONGDI", Value = txtLongDi.Text.ToInt().ToString() };
+            data.Insert<Config>(longDi, "");
+            Config longGao = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCLONGGAO", Value =txtLongGao.Text.ToInt().ToString() };
+            data.Insert<Config>(longGao, "");
+            Config danDi = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCDANDI", Value = txtDanDi .Text.ToInt().ToString() };
+            data.Insert<Config>(danDi, "");
+            Config danGao = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCDANGAO", Value = txtDanGao.Text.ToInt().ToString() };
+            data.Insert<Config>(danGao, "");
+            Config daDi = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCDADI", Value = txtDaDi.Text.ToInt().ToString() };
+            data.Insert<Config>(daDi, "");
+            Config daGao = new Config() { Uuid = Guid.NewGuid().ToString(), Type = "ORDER", Key = "MCDAGAO", Value = txtDaGao.Text.ToInt().ToString() };
+            data.Insert<Config>(daGao, "");
+
+            OrderConfig = data.GetList<Config>("type='ORDER'", "");
+            MessageBox.Show("保存成功");
         }
     }
 }
