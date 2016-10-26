@@ -66,6 +66,11 @@ namespace WxGames
         /// </summary>
         public int CurrentRow = 0;
 
+        /// <summary>
+        /// 账单选中行
+        /// </summary>
+        public int CurrentZDRow = 0;
+
         public bool IsLogin = false;
 
         /// <summary>
@@ -164,6 +169,28 @@ namespace WxGames
                 }
             }
         }
+
+        private void SetDgvZDPost(List<ZhanDan> list)
+        {
+            if (dgvZhanDan.Rows.Count >= CurrentZDRow && CurrentZDRow >= 0)
+            {
+                this.dgvZhanDan.DataSource = list;
+
+                if (CurrentZDRow >= dgvZhanDan.Rows.Count)
+                {
+                    CurrentZDRow = dgvZhanDan.Rows.Count - 1;
+                }
+                if (CurrentZDRow <= 0)
+                {
+                    CurrentZDRow = 0;
+                }
+                if (dgvZhanDan.Rows.Count > 0)
+                {
+                    this.dgvZhanDan.CurrentCell = dgvZhanDan.Rows[CurrentZDRow].Cells[0];
+                }
+            }
+        }
+
 
         private void frmMainForm_Load(object sender, EventArgs e)
         {
@@ -386,10 +413,6 @@ namespace WxGames
                     }
                 }
 
-
-
-
-
                 ///启动线程
                 timeDgv.Start();
 
@@ -500,13 +523,11 @@ namespace WxGames
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //结束线程
-
             List<UpDowModel> list = ScoreManager.Instance.GetUpDowModel();
 
             SetDgvPost(list);
             //刷新账单
-            dgvZhanDan.DataSource = ScoreManager.Instance.GetZhanDan();
+            SetDgvZDPost(ScoreManager.Instance.GetZhanDan());
 
             //刷新界面展示开奖号码，倒计时，到期时间
             string urlConfiger = "/user/client/stake/configer";
@@ -605,7 +626,7 @@ namespace WxGames
                 else if (command == "下")
                 {
                     //先检查这期有没有参与，有参与不能下分
-                    List<NowMsg> listMsg = data.GetList<NowMsg>(string.Format(" period='{0}' and CommandType not in ('上下查','指令格式错误') ", Perioid), "");
+                    List<NowMsg> listMsg = data.GetList<NowMsg>(string.Format(" period='{0}' and CommandType in ('买名次','冠亚和','名次大小单双龙虎') ", Perioid), "");
                     if (listMsg != null && listMsg.Count <= 0)
                     {
                         if (model.TotalScore >= Convert.ToInt32(score))
@@ -979,7 +1000,7 @@ namespace WxGames
                 return;
             }
 
-            List<NowMsg> listMsg = data.GetList<NowMsg>(string.Format(" period='{0}' ", Perioid), "");
+            List<NowMsg> listMsg = data.GetList<NowMsg>(string.Format(" period='{0}' and CommandType in('名次大小单双龙虎','买名次','冠亚和')", Perioid), "");
             if (listMsg != null && listMsg.Count <= 0)
             {
 
@@ -1193,6 +1214,11 @@ namespace WxGames
 
             OrderConfig = data.GetList<Config>("type='ORDER'", "");
             MessageBox.Show("保存成功");
+        }
+
+        private void dgvZhanDan_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CurrentZDRow = e.RowIndex;
         }
     }
 }

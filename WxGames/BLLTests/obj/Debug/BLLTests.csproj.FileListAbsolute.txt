@@ -118,10 +118,8 @@ E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\webbrowsers\WebKit.dll
 E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\webbrowsers\WebKit.Interop.dll
 E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\webbrowsers\WebKitBrowser.dll
 E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\webbrowsers\WebKitBrowser.dll.manifest
-E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\EnvDTE.dll
 E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\Newtonsoft.Json.dll
 E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\SQLite.Designer.dll
-E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\stdole.dll
 E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\System.Data.SQLite.dll
 E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\x64\SQLite.Interop.dll
 E:\C#\WxGame1021\WxGames\BLLTests\bin\Debug\lib\x86\SQLite.Interop.dll

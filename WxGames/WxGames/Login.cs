@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -25,6 +26,14 @@ namespace WxGames
 
         private void DoLogin()
         {
+            //检查配置文件是否存在，不存在，提示后退出
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\\Config.config"))
+            {
+                MessageBox.Show("缺少配置文件，请配置后再启动");
+                Environment.Exit(0);
+            }
+
+
             ////先check客户端是否合法
             //string msg = PanKou.Instance.Check();
 

@@ -27,12 +27,36 @@ namespace WxGames
                 //处理非UI线程异常   
                 AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-                Application.Run(new Login());
+                //获得当前登录的Windows用户标示
+                System.Security.Principal.WindowsIdentity identity = System.Security.Principal.WindowsIdentity.GetCurrent();
+                System.Security.Principal.WindowsPrincipal principal = new System.Security.Principal.WindowsPrincipal(identity);
+                if (principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
+                {
+                    Application.Run(new Login());
+                }
+                else
+                {
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.UseShellExecute = true;
+                    startInfo.WorkingDirectory = Environment.CurrentDirectory;
+                    startInfo.FileName = Application.ExecutablePath;
+                    startInfo.Verb = "runas";
+                    try
+                    {
+                        System.Diagnostics.Process.Start(startInfo);
+                    }
+                    catch
+                    {
+                        return;
+                    }
+                    //退出
+                    Application.Exit();
+                }
             }
             catch (Exception ex)
             {
                 Log.WriteLog(ex);
-               // MessageBox.Show("系统出现未知异常，请重启系统！");
+                // MessageBox.Show("系统出现未知异常，请重启系统！");
             }
         }
 
@@ -52,7 +76,7 @@ namespace WxGames
             var ex = e.Exception;
             if (ex != null)
             {
-               Log.WriteLog(ex);
+                Log.WriteLog(ex);
             }
 
             //MessageBox.Show("系统出现未知异常，请重启系统！");

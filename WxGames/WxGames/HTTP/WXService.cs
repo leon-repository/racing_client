@@ -320,8 +320,24 @@ namespace WxGames.HTTP
             if (sid != null && uin != null)
             {
 
-                byte[] bytes = BaseService.SendPostRequest(_sync_url + sid.Value + "&lang=zh_CN&skey=" + LoginService.SKey + "&pass_ticket=" + LoginService.Pass_Ticket, sync_json);
+                List<string> listCheckUrl = new List<string>();
+                listCheckUrl.Add("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid=");
+                listCheckUrl.Add("https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid=");
 
+                byte[] bytes = null;
+                foreach (var item in listCheckUrl)
+                {
+                    try
+                    {
+                        bytes = BaseService.SendPostRequest(item + sid.Value + "&lang=zh_CN&skey=" + LoginService.SKey + "&pass_ticket=" + LoginService.Pass_Ticket, sync_json);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+
+               
                 if (bytes == null || bytes.Length == 0)
                 {
                     return null;

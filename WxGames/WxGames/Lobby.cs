@@ -64,7 +64,7 @@ namespace WxGames
 
             string nextStartTime = configHelper["data"]["startRacingTime"].ToString();
             string stage = configHelper["data"]["stage"].ToString();//stage=1,押注阶段；stage=2,上报阶段；stage=3,封盘阶段
-            if (stage=="1")
+            if (stage == "1")
             {
                 frmMainForm.Perioid = gameId;
                 frmMainForm.IsFengPan = false;
@@ -156,12 +156,19 @@ namespace WxGames
                         {
                             content = msg.Content.Replace("[下注信息]", "");
                             List<NowMsg> nowMsgList = data.GetList<NowMsg>(string.Format(" CommandType not in ('上下查','下注积分范围错误','取消','指令格式错误') and isdelete='2' and period='{0}' ", frmMainForm.Perioid), "");
-                            foreach (NowMsg nowMsg in nowMsgList)
+                            List<string> listUin = nowMsgList.Select(p => p.MsgFromId).Distinct().ToList();
+                            foreach (string uin in listUin)
                             {
-                                //1,处理指令
-                                WXMsg model = Msg2WxMsg.Instance.GetMsg2(nowMsg);
-                                string msgMessage = model.Msg;
-                                content = content + "\r\n" + msgMessage;
+                                List<NowMsg> listUinMsg = nowMsgList.Where(p => p.MsgFromId == uin).ToList();
+                                string msgMessage = "";
+                                msgMessage += "[" + listUinMsg.Find(p => p.MsgFromId == uin).MsgFromName + "]";
+                                msgMessage += "[";
+                                foreach (var message in listUinMsg)
+                                {
+                                    msgMessage += message.OrderContect + "#";
+                                }
+                                msgMessage += "]\r\n";
+                                content += msgMessage;
                             }
                         }
                         catch (Exception ex)
@@ -203,9 +210,9 @@ namespace WxGames
                         image.Draw(jData);
                         image.Save();
                         FileInfo file = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
-                        frmMainForm.wxs.SendImage("DramImage.png", AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png", file.Length.ToString(),frmMainForm.CurrentWX.UserName, frmMainForm.CurrentQun, Log.GetMD5HashFromFile(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png"));
+                        frmMainForm.wxs.SendImage("DramImage.png", AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png", file.Length.ToString(), frmMainForm.CurrentWX.UserName, frmMainForm.CurrentQun, Log.GetMD5HashFromFile(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png"));
 
-                        content= content.Replace("[历史]", "");
+                        content = content.Replace("[历史]", "");
                     }
                     if (content.Contains("[冠军走势]"))
                     {
@@ -215,7 +222,7 @@ namespace WxGames
 
                         if (!string.IsNullOrEmpty(jsonStake2))
                         {
-                            JObject jobject= JsonConvert.DeserializeObject(jsonStake2) as JObject;
+                            JObject jobject = JsonConvert.DeserializeObject(jsonStake2) as JObject;
                             if (jobject != null)
                             {
                                 content = content.Replace("[冠军走势]", "冠军走势：" + jobject["message"].ToString());
@@ -233,12 +240,12 @@ namespace WxGames
             {
                 frmMainForm.IsFengPan = true;
                 List<NowMsg> msgList = new List<NowMsg>();
-                msgList = data.GetList<NowMsg>(" isdelete=1 and CommandType in ('买名次','冠亚和','名次大小单双龙虎') and period= " + frmMainForm.Perioid, "");
+                msgList = data.GetList<NowMsg>(" isdelete=1 and CommandType in ('买名次','冠亚和','名次大小单双龙虎','和大','和小','和单','和双') and period= " + frmMainForm.Perioid, "");
                 //下注信息解析成押注信息上传到服务器
                 List<string> msgFromIdList = msgList.Select(p => p.MsgFromId).Distinct<string>().ToList();
                 foreach (string fromId in msgFromIdList)
                 {
-                    if (string.IsNullOrEmpty(fromId))
+                    if (string.IsNullOrEmpty(fromId) || fromId == "0")
                     {
                         continue;
                     }
@@ -322,8 +329,8 @@ namespace WxGames
                                 {
                                     data.ExecuteSql(string.Format(" update contactscore set totalScore={0} where uin={1}", item.members.points, item.members.wechatSn));
 
-                                    strYinKui += "\r\n" + item.members.nickName + "剩余积分：" + item.members.points;
-                                    strYinKui += "盈亏：" + item.memberStake.totalDeficitAmount;
+                                    strYinKui += "[" + item.members.nickName + "][剩余积分：" + item.members.points;
+                                    strYinKui += "][盈亏：" + item.memberStake.totalDeficitAmount + "]\r\n";
                                 }
                             }
 
@@ -381,7 +388,7 @@ namespace WxGames
             foreach (NowMsg item in msgMinList)
             {
                 vo2.racingNum = item.Period;
-                //'买名次','冠亚和','名次大小单双龙虎'
+                //'买名次','冠亚和','名次大小单双龙虎','和大','和小','和单','和双'
                 NewMethod1(vo2, item);
 
                 data.ExecuteSql("update Nowmsg set isdelete='2' where msgid=" + item.MsgId);
@@ -410,6 +417,24 @@ namespace WxGames
                     item.CommandOne = item.CommandOne.Replace("冠", "1");
                     item.CommandOne = item.CommandOne.Replace("亚", "2");
                     item.CommandOne = item.CommandOne.Replace("季", "3");
+
+                    item.CommandOne = item.CommandOne.Replace("一", "1");
+                    item.CommandOne = item.CommandOne.Replace("二", "2");
+                    item.CommandOne = item.CommandOne.Replace("三", "3");
+                    item.CommandOne = item.CommandOne.Replace("四", "4");
+                    item.CommandOne = item.CommandOne.Replace("五", "5");
+                    item.CommandOne = item.CommandOne.Replace("六", "6");
+                    item.CommandOne = item.CommandOne.Replace("七", "7");
+                    item.CommandOne = item.CommandOne.Replace("八", "8");
+                    item.CommandOne = item.CommandOne.Replace("九", "9");
+                    item.CommandOne = item.CommandOne.Replace("十", "0");
+
+                    //如果依然存在汉字，就是有问题，break掉
+                    if (item.CommandOne.ExitHanZi())
+                    {
+                        break;
+                    }
+
                     foreach (char comdTwo in item.CommandTwo)
                     {
                         switch (comdTwo)
@@ -464,7 +489,7 @@ namespace WxGames
                                             }
                                             else
                                             {
-                                                vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString())-1].tenth = vo2.appointStakeList[9].tenth + item.Score.ToInt();
+                                                vo2.appointStakeList[Convert.ToInt32(comdTwo.ToString()) - 1].tenth = vo2.appointStakeList[9].tenth + item.Score.ToInt();
 
                                             }
 
@@ -580,6 +605,7 @@ namespace WxGames
                     else
                     {
                         //多条和指令
+                        #region 注掉
                         //foreach (char comTwoIn in comTwo)
                         //{
                         //    string commanTwo = comTwoIn.ToString();
@@ -638,6 +664,89 @@ namespace WxGames
                         //            break;
                         //    }
                         //}
+                        #endregion
+
+                        while (comTwo.Length > 0)
+                        {
+                            char first = comTwo.First();
+
+                            if (first.ToString().ToInt() >= 3 && first.ToString().ToInt() <= 9)
+                            {
+                                switch (first.ToString())
+                                {
+                                    case "3":
+                                        vo2.commonStake.firstSecond3 = vo2.commonStake.firstSecond3 + item.Score.ToInt();
+                                        break;
+                                    case "4":
+                                        vo2.commonStake.firstSecond4 = vo2.commonStake.firstSecond4 + item.Score.ToInt();
+                                        break;
+                                    case "5":
+                                        vo2.commonStake.firstSecond5 = vo2.commonStake.firstSecond5 + item.Score.ToInt();
+                                        break;
+                                    case "6":
+                                        vo2.commonStake.firstSecond6 = vo2.commonStake.firstSecond6 + item.Score.ToInt();
+                                        break;
+                                    case "7":
+                                        vo2.commonStake.firstSecond7 = vo2.commonStake.firstSecond7 + item.Score.ToInt();
+                                        break;
+                                    case "8":
+                                        vo2.commonStake.firstSecond8 = vo2.commonStake.firstSecond8 + item.Score.ToInt();
+                                        break;
+                                    case "9":
+                                        vo2.commonStake.firstSecond9 = vo2.commonStake.firstSecond9 + item.Score.ToInt();
+                                        break;
+                                }
+
+                                comTwo = string.Join("", comTwo.Reverse());
+                                comTwo = comTwo.Remove(comTwo.Length - 1, 1);
+                                comTwo = string.Join("", comTwo.Reverse());
+                            }
+                            else
+                            {
+                                if (comTwo.Length >= 2)
+                                {
+                                    string str = comTwo.Substring(0, 2);
+
+                                    switch (str)
+                                    {
+                                        case "10":
+                                            vo2.commonStake.firstSecond10 = vo2.commonStake.firstSecond10 + item.Score.ToInt();
+                                            break;
+                                        case "11":
+                                            vo2.commonStake.firstSecond11 = vo2.commonStake.firstSecond11 + item.Score.ToInt();
+                                            break;
+                                        case "12":
+                                            vo2.commonStake.firstSecond12 = vo2.commonStake.firstSecond12 + item.Score.ToInt();
+                                            break;
+                                        case "13":
+                                            vo2.commonStake.firstSecond13 = vo2.commonStake.firstSecond13 + item.Score.ToInt();
+                                            break;
+                                        case "14":
+                                            vo2.commonStake.firstSecond14 = vo2.commonStake.firstSecond14 + item.Score.ToInt();
+                                            break;
+                                        case "15":
+                                            vo2.commonStake.firstSecond15 = vo2.commonStake.firstSecond15 + item.Score.ToInt();
+                                            break;
+                                        case "16":
+                                            vo2.commonStake.firstSecond16 = vo2.commonStake.firstSecond16 + item.Score.ToInt();
+                                            break;
+                                        case "17":
+                                            vo2.commonStake.firstSecond17 = vo2.commonStake.firstSecond17 + item.Score.ToInt();
+                                            break;
+                                        case "18":
+                                            vo2.commonStake.firstSecond18 = vo2.commonStake.firstSecond18 + item.Score.ToInt();
+                                            break;
+                                        case "19":
+                                            vo2.commonStake.firstSecond19 = vo2.commonStake.firstSecond19 + item.Score.ToInt();
+                                            break;
+                                    }
+
+                                    comTwo = string.Join("", comTwo.Reverse());
+                                    comTwo = comTwo.Remove(0, 2);
+                                    comTwo = string.Join("", comTwo.Reverse());
+                                }
+                            }
+                        }
                     }
                     break;
                 case "名次大小单双龙虎":
@@ -844,7 +953,18 @@ namespace WxGames
                             }
                             break;
                     }
-
+                    break;
+                case "和大":
+                    vo2.commonStake.firstSecondBig = vo2.commonStake.firstSecondBig + item.Score.ToInt();
+                    break;
+                case "和小":
+                    vo2.commonStake.firstSecondSmall = vo2.commonStake.firstSecondSmall + item.Score.ToInt();
+                    break;
+                case "和单":
+                    vo2.commonStake.firstSecondOdd = vo2.commonStake.firstSecondOdd + item.Score.ToInt();
+                    break;
+                case "和双":
+                    vo2.commonStake.firstSecondSmall = vo2.commonStake.firstSecondSmall + item.Score.ToInt();
                     break;
                 default:
                     Log.WriteLogByDate("押注信息上传错误指令：不应该出现" + item.CommandType);

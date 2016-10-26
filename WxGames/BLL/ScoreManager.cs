@@ -18,7 +18,7 @@ namespace BLL
         {
             List<UpDowModel> list = new List<UpDowModel>();
 
-            string sql = "select t.msgId,t.msgFromName as NickName,t.OrderContect,case t.issucc when 0 then '未处理' when 1 then '同意' when 2 then '不同意' else '未知' end as succ,t.IsSucc,t.Score,t.msgFromid as uin,t.CommandOne from nowMsg t where t.IsSucc = 0 and t.CommandType in ('上下查') and isDelete=0";
+            string sql = "select t.msgId,t.msgFromName as NickName,t.OrderContect,case t.issucc when 0 then '未处理' when 1 then '同意' when 2 then '不同意' else '未知' end as succ,t.IsSucc,t.Score,t.msgFromid as uin,t.CommandOne from nowMsg t where t.IsSucc = 0 and t.CommandType in ('上下查') and isDelete=0 and msgFromid<>'0'";
             list = data.GetListNonTable<UpDowModel>(sql);
             return list;
         }

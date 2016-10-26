@@ -82,5 +82,11 @@ namespace BLL
                 return 0;
             }
         }
+
+        public static bool IsNum(this string str)
+        {
+            Regex reg = new Regex(@"^[-]?[1-9]{1}\d*$|^[0]{1}$");
+            return reg.IsMatch(str);
+        }
     }
 }

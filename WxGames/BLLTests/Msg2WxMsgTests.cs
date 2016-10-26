@@ -278,7 +278,7 @@ namespace WxGames.Tests
             msg.Period = null;
             msg.CommandOne = "冠";
 
-            WXMsg wxMsg4 = Msg2WxMsg.Instance.GetMsg2(msg);
+            //WXMsg wxMsg4 = Msg2WxMsg.Instance.GetMsg2(msg);
             //Assert.IsTrue(wxMsg4.Msg.ToString() == "@厚德载物  下注成功<br/>冠军[2]6 <br/>当前积分：488".ToString());
 
             //Assert.Fail();

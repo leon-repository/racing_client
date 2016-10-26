@@ -63,7 +63,7 @@ namespace WxGames
                     {
                         string uin = member["Uin"].ToString();
                         string userName = member["UserName"].ToString();
-                        string nickName = member["NickName"].ToString();
+                        string nickName = member["NickName"].ToString().String2HanZi();
                         string pyQuanPin = member["PYQuanPin"].ToString();
                         string remark = member["RemarkPYQuanPin"].ToString();
 
@@ -163,7 +163,10 @@ namespace WxGames
                             OriginMsg orginMsg2 = data.First<OriginMsg>(pkList4, "");
                             if (orginMsg2 == null)
                             {
-                                data.Insert<OriginMsg>(msg, "");
+                                if(msg.FromUin!="0")
+                                {
+                                    data.Insert<OriginMsg>(msg, "");
+                                }
                             }
                             else
                             {

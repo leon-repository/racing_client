@@ -37,19 +37,16 @@ namespace BLL
 
         public Order ToOrder(string order)
         {
-            if (OrderConfig == null)
-            {
-                OrderConfig= data.GetList<Config>("type='ORDER'", "");
-            }
+            OrderConfig = data.GetList<Config>("type='ORDER'", "");
 
             Order result = new Order();
             //下注高低限额设置
-            Config modelDi=OrderConfig.Find(p => p.Key == "MCDI");
+            Config modelDi = OrderConfig.Find(p => p.Key == "MCDI");
             if (modelDi != null)
             {
                 McDi = modelDi.Value.ToInt();
             }
-            Config modelGao=OrderConfig.Find(p => p.Key == "MCGAO");
+            Config modelGao = OrderConfig.Find(p => p.Key == "MCGAO");
             if (modelGao != null)
             {
                 McGao = modelGao.Value.ToInt();
@@ -61,25 +58,25 @@ namespace BLL
                 LongDi = modelLongDi.Value.ToInt();
             }
 
-            Config modelLongGao=OrderConfig.Find(p => p.Key == "MCLONGGAO");
+            Config modelLongGao = OrderConfig.Find(p => p.Key == "MCLONGGAO");
             if (modelLongGao != null)
             {
                 LongGao = modelLongGao.Value.ToInt();
             }
 
-            Config modelDanDi=OrderConfig.Find(p => p.Key == "MCDANDI");
+            Config modelDanDi = OrderConfig.Find(p => p.Key == "MCDANDI");
             if (modelDanDi != null)
             {
                 DanDi = modelDanDi.Value.ToInt();
             }
 
-            Config modelDanGao=OrderConfig.Find(p => p.Key == "MCDANGAO");
+            Config modelDanGao = OrderConfig.Find(p => p.Key == "MCDANGAO");
             if (modelDanGao != null)
             {
                 DanGao = modelDanGao.Value.ToInt();
             }
 
-            Config modelDaDi= OrderConfig.Find(p => p.Key == "MCDADI");
+            Config modelDaDi = OrderConfig.Find(p => p.Key == "MCDADI");
             if (modelDaDi != null)
             {
                 DaDi = modelDaDi.Value.ToInt();
@@ -159,26 +156,82 @@ namespace BLL
                         result.CommandOne = key[i];
                         result.Score = order.GetNumber();
                         result.CommandType = OrderType.上下查;
-
-                        if (!string.IsNullOrEmpty(result.Score))
-                        {
-                            if (result.Score.ToInt() >= 100000)
-                            {
-                                result.CommandType = OrderType.下注积分范围错误;
-                            }
-                            if (result.Score.ToInt() <= 0)
-                            {
-                                result.CommandType = OrderType.下注积分范围错误;
-                            }
-                        }
-
                         return result;
                     }
                 }
             }
 
+            //和大,和小,和单,和双
+            List<KeyValuePair<string, string>> heDaKey = new List<KeyValuePair<string, string>>();
+            heDaKey.Add(new KeyValuePair<string, string>("和大", "和大"));
+            heDaKey.Add(new KeyValuePair<string, string>("和小", "和小"));
+            heDaKey.Add(new KeyValuePair<string, string>("和单", "和单"));
+            heDaKey.Add(new KeyValuePair<string, string>("和双", "和双"));
+
+            foreach (KeyValuePair<string,string> item in heDaKey)
+            {
+                if(!order.Contains(item.Value))
+                {
+                    continue;
+                }
+                string[] arr = order.Split(new string[] { item.Value }, StringSplitOptions.RemoveEmptyEntries);
+                if (arr.Length != 1)
+                {
+                    result.CommandType = OrderType.指令格式错误;
+                    return result;
+                }
+                else
+                {
+                    result.CommandOne = item.Value;
+                    result.Score = arr[0].ToString();
+                    if (result.Score.IsNum())
+                    {
+                        switch (item.Value)
+                        {
+                            case "和大":
+                                result.CommandType = OrderType.和大;
+                                if (result.Score.ToInt() < DaDi || result.Score.ToInt() > DaGao)
+                                {
+                                    result.CommandType = OrderType.下注积分范围错误;
+                                }
+                                break;
+                            case "和小":
+                                result.CommandType = OrderType.和小;
+                                if (result.Score.ToInt() < DaDi || result.Score.ToInt() > DaGao)
+                                {
+                                    result.CommandType = OrderType.下注积分范围错误;
+                                }
+                                break;
+                            case "和单":
+                                result.CommandType = OrderType.和单;
+                                if (result.Score.ToInt() < DanDi || result.Score.ToInt() > DanGao)
+                                {
+                                    result.CommandType = OrderType.下注积分范围错误;
+                                }
+                                break;
+                            case "和双":
+                                result.CommandType = OrderType.和双;
+                                if (result.Score.ToInt() < DanDi || result.Score.ToInt() > DanGao)
+                                {
+                                    result.CommandType = OrderType.下注积分范围错误;
+                                }
+                                break;
+                            default:
+                                result.CommandType = OrderType.指令格式错误;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        result.CommandType = OrderType.指令格式错误;
+                    }
+                    return result;
+                }
+            }
+
+
             ///大小单双龙虎
-            List<KeyValuePair<string, string>> longKey = new List<KeyValuePair<string, string>>();
+             List<KeyValuePair<string, string>> longKey = new List<KeyValuePair<string, string>>();
 
             Config modelDa = OrderConfig.Find(p => p.Key == "MCDA");
             if (modelDa == null)
@@ -233,7 +286,7 @@ namespace BLL
             }
             else
             {
-                longKey.Add(new KeyValuePair<string, string>("虎",modelHu.Value));
+                longKey.Add(new KeyValuePair<string, string>("虎", modelHu.Value));
             }
 
             foreach (KeyValuePair<string, string> pair in longKey)
@@ -247,15 +300,27 @@ namespace BLL
                         result.OrderContent = order;
 
                         string[] command = order.Split(new string[] { key[i].ToString() }, StringSplitOptions.RemoveEmptyEntries);
-                        if (command.Length != 2)
+
+                        if (command.Length == 1)
+                        {
+                            result.CommandOne = "1";
+                        }
+                        else if (command.Length == 2)
+                        {
+                            if (!command[0].IsNum())
+                            {
+                                continue;
+                            }
+
+                            result.CommandOne = command[0];
+                            result.CommandTwo = key[i];
+                            result.Score = command[1];
+                            result.CommandType = OrderType.名次大小单双龙虎;
+                        }
+                        else
                         {
                             continue;
                         }
-                        result.CommandOne = command[0];
-                        result.CommandTwo = key[i];
-                        result.Score = command[1];
-                        result.CommandType = OrderType.名次大小单双龙虎;
-
                         //判断积分范围是否正确
                         if (result.CommandTwo == "大" || result.CommandTwo == "小")
                         {
@@ -286,7 +351,6 @@ namespace BLL
                                 result.CommandType = OrderType.指令格式错误;
                             }
                         }
-
                         return result;
                     }
                 }
@@ -319,14 +383,21 @@ namespace BLL
                 result.CommandOne = command[0];
                 result.CommandTwo = command[1];
                 result.Score = command[2];
-                result.CommandType = OrderType.买名次;
+                if (result.Score.ToInt() < McDi || result.Score.ToInt() > McGao)
+                {
+                    result.CommandType = OrderType.下注积分范围错误;
+                }
+                else
+                {
+                    result.CommandType = OrderType.买名次;
+                }
                 return result;
             }
 
             //指令类型二
             List<KeyValuePair<string, string>> guanKey2 = new List<KeyValuePair<string, string>>();
 
-            Config model1= OrderConfig.Find(p => p.Key == "MC1");
+            Config model1 = OrderConfig.Find(p => p.Key == "MC1");
             if (model1 == null)
             {
                 guanKey2.Add(new KeyValuePair<string, string>("冠", "冠|冠军"));
@@ -354,7 +425,7 @@ namespace BLL
             {
                 guanKey2.Add(new KeyValuePair<string, string>("三", model3.Value));
             }
-            Config model4= OrderConfig.Find(p => p.Key == "MC4");
+            Config model4 = OrderConfig.Find(p => p.Key == "MC4");
             if (model4 == null)
             {
                 guanKey2.Add(new KeyValuePair<string, string>("四", "四"));
@@ -380,7 +451,7 @@ namespace BLL
             }
             else
             {
-                guanKey2.Add(new KeyValuePair<string, string>("六",model6.Value));
+                guanKey2.Add(new KeyValuePair<string, string>("六", model6.Value));
             }
 
             Config model7 = OrderConfig.Find(p => p.Key == "MC7");
@@ -423,6 +494,8 @@ namespace BLL
             {
                 string[] keyA = key.Value.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 
+                keyA = keyA.OrderByDescending(p => p.Length).ToArray();
+
                 for (int i = 0; i < keyA.Length; i++)
                 {
                     if (order.Contains(keyA[i]))
@@ -441,7 +514,15 @@ namespace BLL
                         result.CommandOne = keyA[i];
                         result.CommandTwo = commanPair[0];
                         result.Score = commanPair[1];
-                        result.CommandType = OrderType.买名次;
+
+                        if (result.Score.ToInt() < McDi || result.Score.ToInt() > McGao)
+                        {
+                            result.CommandType = OrderType.下注积分范围错误;
+                        }
+                        else
+                        {
+                            result.CommandType = OrderType.买名次;
+                        }
 
                         return result;
                     }
@@ -475,7 +556,15 @@ namespace BLL
                     result.CommandOne = "冠";
                     result.CommandTwo = command[0];
                     result.Score = command[1];
-                    result.CommandType = OrderType.买名次;
+
+                    if (result.Score.ToInt() < McDi || result.Score.ToInt() > McGao)
+                    {
+                        result.CommandType = OrderType.下注积分范围错误;
+                    }
+                    else
+                    {
+                        result.CommandType = OrderType.买名次;
+                    }
                     result.OrderContent = order;
                     return result;
                 }
@@ -510,30 +599,31 @@ namespace BLL
                         {
                             continue;
                         }
+                        if (commandA.Length != 2)
+                        {
+                            result.CommandType = OrderType.指令格式错误;
+                            return result;
+                        }
                         result.OrderContent = order;
                         result.CommandOne = keyA[i];
-                        for (int j = 0; j < commandA.Length - 1; j++)
-                        {
-                            if (commandA[j].Replace("/", "").ToInt() < 3||commandA[j].Replace("/","").ToInt()>19)
-                            {
-                                result.CommandType = OrderType.指令格式错误;
-                                return result;
-                            }
-                            result.CommandTwo += commandA[j] + "/";
-                        }
+                        result.CommandTwo = commandA[0];
+                        result.Score = commandA[1];
 
-                        result.Score = commandA[commandA.Length - 1];
-                        result.CommandType = OrderType.冠亚和;
+                        if (result.Score.IsNum())
+                        {
+                            result.CommandType = OrderType.冠亚和;
+                        }
+                        else
+                        {
+                            result.CommandType = OrderType.指令格式错误;
+                        }
                         return result;
                     }
                 }
             }
 
-            if (string.IsNullOrEmpty(result.OrderContent))
-            {
-                result.OrderContent = order;
-                result.CommandType = OrderType.指令格式错误;
-            }
+            result.OrderContent = order;
+            result.CommandType = OrderType.指令格式错误;
             return result;
         }
     }

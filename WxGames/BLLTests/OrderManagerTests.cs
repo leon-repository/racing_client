@@ -37,19 +37,19 @@ namespace BLL.Tests
             #endregion
 
             //#region 名次大小单双龙虎
-            //Order order4 = OrderManager.Instance.ToOrder("三虎100");
-            //Assert.IsTrue(order4.CommandOne=="三");
-            //Assert.IsTrue(order4.CommandTwo == "虎");
-            //Assert.IsTrue(order4.CommandType== OrderType.名次大小单双龙虎);
-            //Assert.IsTrue(order4.OrderContent == "三虎100");
-            //Assert.IsTrue(order4.Score == "100");
+            Order order4 = OrderManager.Instance.ToOrder("5虎1");
+            Assert.IsTrue(order4.CommandOne == "3");
+            Assert.IsTrue(order4.CommandTwo == "虎");
+            Assert.IsTrue(order4.CommandType == OrderType.名次大小单双龙虎);
+            Assert.IsTrue(order4.OrderContent == "3虎100");
+            Assert.IsTrue(order4.Score == "100");
 
-            //Order order5 = OrderManager.Instance.ToOrder("五双100");
-            //Assert.IsTrue(order5.CommandOne == "五");
-            //Assert.IsTrue(order5.CommandTwo == "双");
-            //Assert.IsTrue(order5.CommandType == OrderType.名次大小单双龙虎);
-            //Assert.IsTrue(order5.OrderContent == "五双100");
-            //Assert.IsTrue(order5.Score == "100");
+            Order order5 = OrderManager.Instance.ToOrder("五双100");
+            Assert.IsTrue(order5.CommandOne == "五");
+            Assert.IsTrue(order5.CommandTwo == "双");
+            Assert.IsTrue(order5.CommandType == OrderType.名次大小单双龙虎);
+            Assert.IsTrue(order5.OrderContent == "五双100");
+            Assert.IsTrue(order5.Score == "100");
             //#endregion
 
             //#region 买名次
