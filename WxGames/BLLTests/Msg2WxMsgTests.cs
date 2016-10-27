@@ -201,28 +201,28 @@ namespace WxGames.Tests
             //Assert.IsTrue(wxMsg8.Msg.ToString() == "@浅雪沁心  下注成功<br/>和 13 50<br/>和 19 50<br/>当前积分：350".ToString());
 
             //9,取消
-            msg = new NowMsg();
-            msg.MsgId = "8564475898164854124";
-            msg.MsgFromId = "437364022";
-            msg.MsgFromName = "浅雪沁心";
-            msg.ReciveId = "@2b0c0c0c27c7075e3c092b6d159bcacb126bd42afb8d2c5ec877439c2ced00fd";
-            msg.ReciveName = "@2b0c0c0c27c7075e3c092b6d159bcacb126bd42afb8d2c5ec877439c2ced00fd";
-            msg.MsgContent = "";
-            msg.CreateDate = "1475163056";
-            msg.OpDate = "星期四 2016-9-29 23:58:49";
-            msg.IsSucc = 0;
-            msg.IsDelete = "0";
-            msg.IsMsg = "取消";
-            msg.IsDeal = "0";
-            msg.Result = null;
-            msg.OrderContect = "和13/19/50";
-            msg.CommandTwo = "13/19/";
-            msg.Score = "50";
-            msg.CommandType = "取消";
-            msg.Period = null;
-            msg.CommandOne = "和";
-            WXMsg wxMsg8 = Msg2WxMsg.Instance.GetMsg(msg);
-            Assert.IsTrue(wxMsg8.Msg.ToString() == "@浅雪沁心 暂不支持取消指令".ToString());
+            //msg = new NowMsg();
+            //msg.MsgId = "8564475898164854124";
+            //msg.MsgFromId = "437364022";
+            //msg.MsgFromName = "浅雪沁心";
+            //msg.ReciveId = "@2b0c0c0c27c7075e3c092b6d159bcacb126bd42afb8d2c5ec877439c2ced00fd";
+            //msg.ReciveName = "@2b0c0c0c27c7075e3c092b6d159bcacb126bd42afb8d2c5ec877439c2ced00fd";
+            //msg.MsgContent = "";
+            //msg.CreateDate = "1475163056";
+            //msg.OpDate = "星期四 2016-9-29 23:58:49";
+            //msg.IsSucc = 0;
+            //msg.IsDelete = "0";
+            //msg.IsMsg = "取消";
+            //msg.IsDeal = "0";
+            //msg.Result = null;
+            //msg.OrderContect = "和13/19/50";
+            //msg.CommandTwo = "13/19/";
+            //msg.Score = "50";
+            //msg.CommandType = "取消";
+            //msg.Period = null;
+            //msg.CommandOne = "和";
+            //WXMsg wxMsg8 = Msg2WxMsg.Instance.GetMsg(msg);
+            //Assert.IsTrue(wxMsg8.Msg.ToString() == "@浅雪沁心 暂不支持取消指令".ToString());
 
 
             //10,指令格式错误
@@ -251,6 +251,32 @@ namespace WxGames.Tests
 
 
             //11,暂不支持此指令，异常情况
+
+
+            //12
+
+            msg = new NowMsg();
+            msg.MsgId = "8564475898164854124";
+            msg.MsgFromId = "437364022";
+            msg.MsgFromName = "浅雪沁心";
+            msg.ReciveId = "@2b0c0c0c27c7075e3c092b6d159bcacb126bd42afb8d2c5ec877439c2ced00fd";
+            msg.ReciveName = "@2b0c0c0c27c7075e3c092b6d159bcacb126bd42afb8d2c5ec877439c2ced00fd";
+            msg.MsgContent = "";
+            msg.CreateDate = "1475163056";
+            msg.OpDate = "星期四 2016-9-29 23:58:49";
+            msg.IsSucc = 0;
+            msg.IsDelete = "0";
+            msg.IsMsg = "冠亚和";
+            msg.IsDeal = "0";
+            msg.Result = null;
+            msg.OrderContect = "和345678910111213141516171819/50";
+            msg.CommandTwo = "345678910111213141516171819";
+            msg.Score = "50";
+            msg.CommandType = "冠亚和";
+            msg.Period = null;
+            msg.CommandOne = "和";
+            WXMsg wxMsg8 = Msg2WxMsg.Instance.GetMsg(msg);
+            Assert.IsTrue(wxMsg8.Msg.ToString() == "@浅雪沁心  下注成功<br/>和 13 50<br/>和 19 50<br/>当前积分：350".ToString());
         }
 
         [TestMethod()]

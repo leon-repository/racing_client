@@ -346,9 +346,23 @@ namespace BLL
 
                         if (result.CommandTwo == "龙" || result.CommandTwo == "虎")
                         {
-                            if (result.CommandOne.ToInt() >= 6 || result.CommandOne.ToInt() <= 0)
+                            if (result.CommandOne.Length == 1)
                             {
-                                result.CommandType = OrderType.指令格式错误;
+                                if (result.CommandOne.ToInt() >= 6 || result.CommandOne.ToInt() <= 0)
+                                {
+                                    result.CommandType = OrderType.指令格式错误;
+                                }
+                            }
+                            else
+                            {
+                                foreach (char item in result.CommandOne)
+                                {
+                                    if (item.ToString().ToInt() >= 6 || item.ToString().ToInt() <= 0)
+                                    {
+                                        result.CommandType = OrderType.指令格式错误;
+                                        break;
+                                    }
+                                }
                             }
                         }
                         return result;
@@ -555,6 +569,11 @@ namespace BLL
                     }
                     result.CommandOne = "冠";
                     result.CommandTwo = command[0];
+
+                    if (!command[0].IsNum())
+                    {
+                        continue;
+                    }
                     result.Score = command[1];
 
                     if (result.Score.ToInt() < McDi || result.Score.ToInt() > McGao)

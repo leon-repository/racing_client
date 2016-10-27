@@ -130,7 +130,7 @@ namespace WxGames
                     }
 
                     //计算剩余积分
-                    if ((contactScore.TotalScore - userScore *msg.Score.ToInt()) < 0)
+                    if ((contactScore.TotalScore - userScore * msg.Score.ToInt()) < 0)
                     {
                         content.Clear();
                         content.Append("@" + msg.MsgFromName + " ");
@@ -165,15 +165,16 @@ namespace WxGames
                     dicMC.Add("7", "七名");
                     dicMC.Add("8", "八名");
                     dicMC.Add("9", "九名");
+                    int n2 = 0;
                     foreach (char item in msg.CommandOne)
                     {
                         if (dicMC.ContainsKey(item.ToString()))
                         {
-                            content.Append("\r\n" + dicMC[item.ToString()] + " ");
                             content.AppendFormat("\r\n{0} {1} {2}", dicMC[item.ToString()], msg.CommandTwo, msg.Score);
+                            n2++;
                         }
                     }
-                    if ((contactScore.TotalScore - msg.Score.ToInt()) < 0)
+                    if ((contactScore.TotalScore - n2*msg.Score.ToInt()) < 0)
                     {
                         content.Clear();
                         content.Append("@" + msg.MsgFromName + " ");
@@ -184,15 +185,15 @@ namespace WxGames
                     }
                     else
                     {
-                        contactScore.TotalScore = contactScore.TotalScore - msg.Score.ToInt();
-                        contactScore.RunScore = contactScore.RunScore + msg.Score.ToInt();
+                        contactScore.TotalScore = contactScore.TotalScore - n2*msg.Score.ToInt();
+                        contactScore.RunScore = contactScore.RunScore + n2*msg.Score.ToInt();
                         List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
                         pkList3.Add(new KeyValuePair<string, object>("Uuid", contactScore.Uuid));
                         data.Update<ContactScore>(contactScore, pkList3, "");
                         content.Append("\r\n当前积分：" + contactScore.TotalScore);
                     }
 
-                    
+
                     break;
                 case "冠亚和":
                     content.Append("@" + msg.MsgFromName + " ");
@@ -203,14 +204,98 @@ namespace WxGames
                         break;
                     }
 
+                    int n = 0;
+
+                    string comTwo = msg.CommandTwo.Replace("/", "");
+                    if (comTwo.Length<=11&&Convert.ToInt32(comTwo) <= 19)
+                    {
+                        switch (comTwo)
+                        {
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                            case "7":
+                            case "8":
+                            case "9":
+                            case "10":
+                            case "11":
+                            case "12":
+                            case "13":
+                            case "14":
+                            case "15":
+                            case "16":
+                            case "17":
+                            case "18":
+                            case "19":
+                                n++;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        //多条和指令
+                        while (comTwo.Length > 0)
+
+                        {
+                            char first = comTwo.First();
+
+                            if (first.ToString().ToInt() >= 3 && first.ToString().ToInt() <= 9)
+                            {
+                                switch (first.ToString())
+                                {
+                                    case "3":
+                                    case "4":
+                                    case "5":
+                                    case "6":
+                                    case "7":
+                                    case "8":
+                                    case "9":
+                                        n++;
+                                        break;
+                                }
+
+                                comTwo = string.Join("", comTwo.Reverse());
+                                comTwo = comTwo.Remove(comTwo.Length - 1, 1);
+                                comTwo = string.Join("", comTwo.Reverse());
+                            }
+                            else
+                            {
+                                if (comTwo.Length >= 2)
+                                {
+                                    string str = comTwo.Substring(0, 2);
+
+                                    switch (str)
+                                    {
+                                        case "10":
+                                        case "11":
+                                        case "12":
+                                        case "13":
+                                        case "14":
+                                        case "15":
+                                        case "16":
+                                        case "17":
+                                        case "18":
+                                        case "19":
+                                            n++;
+                                            break;
+                                    }
+
+                                    comTwo = string.Join("", comTwo.Reverse());
+                                    comTwo = comTwo.Remove(0, 2);
+                                    comTwo = string.Join("", comTwo.Reverse());
+                                }
+                            }
+                        }
+                    }
                     content.Append(" 下注成功");
                     string[] commandTwos = msg.CommandTwo.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string item in commandTwos)
                     {
                         content.Append("\r\n" + msg.CommandOne + " " + item + " " + msg.Score);
                     }
-                    
-                    if ((contactScore.TotalScore - msg.Score.ToInt()) < 0)
+
+                    if ((contactScore.TotalScore - n * msg.Score.ToInt()) < 0)
                     {
                         content.Clear();
                         content.Append(msg.MsgFromName + " ");
@@ -222,8 +307,8 @@ namespace WxGames
                     }
                     else
                     {
-                        contactScore.TotalScore = contactScore.TotalScore - msg.Score.ToInt();
-                        contactScore.RunScore = contactScore.RunScore + msg.Score.ToInt();
+                        contactScore.TotalScore = contactScore.TotalScore - n * msg.Score.ToInt();
+                        contactScore.RunScore = contactScore.RunScore + n * msg.Score.ToInt();
                         List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
                         pkList3.Add(new KeyValuePair<string, object>("Uuid", contactScore.Uuid));
                         data.Update<ContactScore>(contactScore, pkList3, "");
@@ -235,13 +320,21 @@ namespace WxGames
                 case "和单":
                 case "和双":
                     content.Append("@" + msg.MsgFromName + " " + "下注成功");
-                    content.Append("\r\n"+msg.CommandType+ " "+msg.Score);
+                    content.Append("\r\n" + msg.CommandType + " " + msg.Score);
+                    contactScore.TotalScore = contactScore.TotalScore - msg.Score.ToInt();
+                    contactScore.RunScore = contactScore.RunScore + msg.Score.ToInt();
+
+                    List<KeyValuePair<string, object>> pkList5 = new List<KeyValuePair<string, object>>();
+                    pkList5.Add(new KeyValuePair<string, object>("Uuid", contactScore.Uuid));
+                    data.Update<ContactScore>(contactScore, pkList5, "");
+                    content.Append("\r\n当前积分：" + contactScore.TotalScore);
+
                     break;
 
                 case "取消":
                 case "取消指令":
                     content.Append("@" + msg.MsgFromName + " " + "取消下注成功");
-                    data.ExecuteSql("delete from Nowmsg  where msgfromid=" + msg.MsgFromId +" and period="+msg.Period);
+                    data.ExecuteSql("delete from Nowmsg  where msgfromid=" + msg.MsgFromId + " and period=" + msg.Period);
                     data.ExecuteSql(string.Format("update contactscore set totalscore=totalscore+runscore where uin={0}", msg.MsgFromId));
                     data.ExecuteSql(string.Format("update contactscore set runscore=0 where uin={0}", msg.MsgFromId));
                     break;
@@ -274,184 +367,5 @@ namespace WxGames
 
             return model;
         }
-
-        ///// <summary>
-        ///// 获取下注信息
-        ///// </summary>
-        ///// <param name="msg"></param>
-        ///// <returns></returns>
-        //public WXMsg GetMsg2(NowMsg msg)
-        //{
-        //    string conn = ConfigurationManager.AppSettings["conn"].ToString();
-        //    DataHelper data = new DataHelper(conn);
-
-        //    WXMsg model = null;
-
-        //    //处理消息
-        //    if (msg == null)
-        //    {
-        //        return model;
-        //    }
-
-        //    if (msg.MsgFromId == null)
-        //    {
-        //        return model;
-        //    }
-
-        //    model = new WXMsg();
-
-        //    List<KeyValuePair<string, object>> pkList = new List<KeyValuePair<string, object>>();
-        //    pkList.Add(new KeyValuePair<string, object>("Uin", msg.MsgFromId));
-        //    ContactScore contactScore = data.First<ContactScore>(pkList, "");
-        //    if (contactScore == null)
-        //    {
-        //        contactScore = new ContactScore();
-        //        contactScore.Uuid = Guid.NewGuid().ToString();
-        //        contactScore.SyScore = 0;
-        //        contactScore.TotalScore = 0;
-        //        contactScore.RunScore = 0;
-        //        contactScore.Uin = msg.MsgFromId;
-        //        contactScore.NickName = msg.MsgFromName;
-        //        data.Insert<ContactScore>(contactScore, "");
-        //    }
-
-        //    if (String.IsNullOrEmpty(frmMainForm.CurrentQun))
-        //    {
-        //        model.To = "@";
-        //    }
-        //    else
-        //    {
-        //        model.To = frmMainForm.CurrentQun;
-        //    }
-        //    if (frmMainForm.CurrentWX == null)
-        //    {
-        //        Log.WriteLogByDate("当前微信未登陆");
-        //        model.From = "@";
-        //    }
-        //    else
-        //    {
-        //        model.From = frmMainForm.CurrentWX.UserName;
-        //    }
-        //    model.Type = 1;
-        //    model.Time = DateTime.Now;
-        //    StringBuilder content = new StringBuilder();
-        //    switch (msg.CommandType)
-        //    {
-        //        case "上下查":
-        //            //判断是不是托，
-        //            //托自动回复
-        //            break;
-        //        case "买名次":
-        //            content.Append(msg.MsgFromName);
-        //            Dictionary<string, string> dic = new Dictionary<string, string>();
-        //            dic.Add("0", "十名");
-        //            dic.Add("1", "冠军");
-        //            dic.Add("2", "亚军");
-        //            dic.Add("3", "季军");
-        //            dic.Add("4", "四名");
-        //            dic.Add("5", "五名");
-        //            dic.Add("6", "六名");
-        //            dic.Add("7", "七名");
-        //            dic.Add("8", "八名");
-        //            dic.Add("9", "九名");
-
-        //            int userScore = 0;
-        //            if (msg.CommandOne.ExitHanZi())
-        //            {
-        //                string mc = "冠军";
-        //                Dictionary<string, string> dicMc = new Dictionary<string, string>();
-        //                dicMc.Add("十", "十名");
-        //                dicMc.Add("一", "冠军");
-        //                dicMc.Add("二", "二名");
-        //                dicMc.Add("三", "三名");
-        //                dicMc.Add("四", "四名");
-        //                dicMc.Add("五", "五名");
-        //                dicMc.Add("六", "六名");
-        //                dicMc.Add("七", "七名");
-        //                dicMc.Add("八", "八名");
-        //                dicMc.Add("九", "九名");
-        //                if (dicMc.ContainsKey(msg.CommandOne))
-        //                {
-        //                    mc = dicMc[msg.CommandOne];
-        //                }
-
-        //                foreach (Char item in msg.CommandTwo)
-        //                {
-        //                    content.AppendFormat("\r\n{0}[{0}]{1} ", mc,item, msg.Score);
-        //                    userScore++;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                foreach (Char item in msg.CommandOne)
-        //                {
-        //                    foreach (Char item2 in msg.CommandTwo)
-        //                    {
-        //                        content.AppendFormat("\r\n{0}[{1}]{2}", dic[item.ToString()], item2, msg.Score);
-        //                        userScore++;
-        //                    }
-        //                }
-        //            }
-
-        //            //计算剩余积分
-        //            if ((contactScore.TotalScore - userScore * msg.Score.ToInt()) < 0)
-        //            {
-        //                content.Clear();
-        //                content.Append("@" + msg.MsgFromName + " ");
-        //                content.Append("积分不足");
-        //            }
-        //            content.Append("\r\n当前积分：" + contactScore.TotalScore);
-
-        //            break;
-        //        case "名次大小单双龙虎":
-        //            content.Append(msg.MsgFromName);
-        //            content.Append("\r\n" + msg.CommandOne + "名 " + msg.CommandTwo + " " + msg.Score);
-        //            if ((contactScore.TotalScore - msg.Score.ToInt()) < 0)
-        //            {
-        //                content.Clear();
-        //                content.Append("@" + msg.MsgFromName + " ");
-        //                content.Append("积分不足");
-        //                content.Append("\r\n当前积分：" + contactScore.TotalScore);
-        //            }
-        //            else
-        //            {
-        //                content.Append("\r\n当前积分：" + contactScore.TotalScore);
-        //            }
-
-
-        //            break;
-        //        case "冠亚和":
-        //            content.Append("@" + msg.MsgFromName + " ");
-        //            content.Append(" 下注成功");
-        //            string[] commandTwos = msg.CommandTwo.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
-        //            foreach (string item in commandTwos)
-        //            {
-        //                content.Append("\r\n" + msg.CommandOne + " " + item + " " + msg.Score);
-        //            }
-
-        //            if ((contactScore.TotalScore - msg.Score.ToInt()) < 0)
-        //            {
-        //                content.Clear();
-        //                content.Append("@" + msg.MsgFromName + " ");
-        //                content.Append("积分不足");
-        //            }
-        //            content.Append("\r\n当前积分：" + contactScore.TotalScore);
-        //            break;
-
-        //        case "取消":
-        //            content.Append("@" + msg.MsgFromName + " " + "暂不支持取消指令");
-        //            break;
-
-        //        case "指令格式错误":
-        //            content.Append("@" + msg.MsgFromName + " " + "指令格式错误");
-        //            break;
-
-        //        default:
-        //            content.Append("@" + msg.MsgFromName + " " + "暂不支持此指令");
-        //            break;
-        //    }
-        //    model.Msg = content.ToString();
-        //    return model;
-        //}
     }
 }

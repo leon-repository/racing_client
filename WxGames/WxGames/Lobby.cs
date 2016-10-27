@@ -169,6 +169,8 @@ namespace WxGames
                                 }
                                 msgMessage += "]\r\n";
                                 content += msgMessage;
+
+                                data.ExecuteSql(string.Format("update contactscore set runscore=0 where uin={0}", uin));
                             }
                         }
                         catch (Exception ex)
@@ -545,7 +547,7 @@ namespace WxGames
                     break;
                 case "冠亚和":
                     string comTwo = item.CommandTwo.Replace("/", "");
-                    if (Convert.ToInt32(comTwo) <= 19)
+                    if (comTwo.Length <= 11 && Convert.ToInt32(comTwo) <= 19)
                     {
                         switch (comTwo)
                         {
@@ -605,67 +607,6 @@ namespace WxGames
                     else
                     {
                         //多条和指令
-                        #region 注掉
-                        //foreach (char comTwoIn in comTwo)
-                        //{
-                        //    string commanTwo = comTwoIn.ToString();
-                        //    switch (commanTwo)
-                        //    {
-                        //        case "3":
-                        //            vo2.commonStake.firstSecond3 = vo2.commonStake.firstSecond3 + item.Score.ToInt();
-                        //            break;
-                        //        case "4":
-                        //            vo2.commonStake.firstSecond4 = vo2.commonStake.firstSecond4 + item.Score.ToInt();
-                        //            break;
-                        //        case "5":
-                        //            vo2.commonStake.firstSecond5 = vo2.commonStake.firstSecond5 + item.Score.ToInt();
-                        //            break;
-                        //        case "6":
-                        //            vo2.commonStake.firstSecond6 = vo2.commonStake.firstSecond6 + item.Score.ToInt();
-                        //            break;
-                        //        case "7":
-                        //            vo2.commonStake.firstSecond7 = vo2.commonStake.firstSecond7 + item.Score.ToInt();
-                        //            break;
-                        //        case "8":
-                        //            vo2.commonStake.firstSecond8 = vo2.commonStake.firstSecond8 + item.Score.ToInt();
-                        //            break;
-                        //        case "9":
-                        //            vo2.commonStake.firstSecond9 = vo2.commonStake.firstSecond9 + item.Score.ToInt();
-                        //            break;
-                        //        case "10":
-                        //            vo2.commonStake.firstSecond10 = vo2.commonStake.firstSecond10 + item.Score.ToInt();
-                        //            break;
-                        //        case "11":
-                        //            vo2.commonStake.firstSecond11 = vo2.commonStake.firstSecond11 + item.Score.ToInt();
-                        //            break;
-                        //        case "12":
-                        //            vo2.commonStake.firstSecond12 = vo2.commonStake.firstSecond12 + item.Score.ToInt();
-                        //            break;
-                        //        case "13":
-                        //            vo2.commonStake.firstSecond13 = vo2.commonStake.firstSecond13 + item.Score.ToInt();
-                        //            break;
-                        //        case "14":
-                        //            vo2.commonStake.firstSecond14 = vo2.commonStake.firstSecond14 + item.Score.ToInt();
-                        //            break;
-                        //        case "15":
-                        //            vo2.commonStake.firstSecond15 = vo2.commonStake.firstSecond15 + item.Score.ToInt();
-                        //            break;
-                        //        case "16":
-                        //            vo2.commonStake.firstSecond16 = vo2.commonStake.firstSecond16 + item.Score.ToInt();
-                        //            break;
-                        //        case "17":
-                        //            vo2.commonStake.firstSecond17 = vo2.commonStake.firstSecond17 + item.Score.ToInt();
-                        //            break;
-                        //        case "18":
-                        //            vo2.commonStake.firstSecond18 = vo2.commonStake.firstSecond18 + item.Score.ToInt();
-                        //            break;
-                        //        case "19":
-                        //            vo2.commonStake.firstSecond19 = vo2.commonStake.firstSecond19 + item.Score.ToInt();
-                        //            break;
-                        //    }
-                        //}
-                        #endregion
-
                         while (comTwo.Length > 0)
                         {
                             char first = comTwo.First();
@@ -742,7 +683,7 @@ namespace WxGames
                                     }
 
                                     comTwo = string.Join("", comTwo.Reverse());
-                                    comTwo = comTwo.Remove(0, 2);
+                                    comTwo = comTwo.Remove(comTwo.Length - 2, 2);
                                     comTwo = string.Join("", comTwo.Reverse());
                                 }
                             }
@@ -964,7 +905,7 @@ namespace WxGames
                     vo2.commonStake.firstSecondOdd = vo2.commonStake.firstSecondOdd + item.Score.ToInt();
                     break;
                 case "和双":
-                    vo2.commonStake.firstSecondSmall = vo2.commonStake.firstSecondSmall + item.Score.ToInt();
+                    vo2.commonStake.firstSecondEven = vo2.commonStake.firstSecondEven + item.Score.ToInt();
                     break;
                 default:
                     Log.WriteLogByDate("押注信息上传错误指令：不应该出现" + item.CommandType);
