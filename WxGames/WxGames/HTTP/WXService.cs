@@ -329,10 +329,12 @@ namespace WxGames.HTTP
                 {
                     try
                     {
-                        bytes = BaseService.SendPostRequest(item + sid.Value + "&lang=zh_CN&skey=" + LoginService.SKey + "&pass_ticket=" + LoginService.Pass_Ticket, sync_json);
+                         bytes = BaseService.SendPostRequest(item + sid.Value + "&lang=zh_CN&skey=" + LoginService.SKey + "&pass_ticket=" + LoginService.Pass_Ticket, sync_json);
+                        //bytes = BaseService.SendPostRequest(item + sid.Value + "&skey=" + LoginService.SKey, sync_json);
                     }
                     catch (Exception ex)
                     {
+                        Log.WriteLog(ex);
                         continue;
                     }
                 }
@@ -344,6 +346,7 @@ namespace WxGames.HTTP
                 }
                 string sync_str = Encoding.UTF8.GetString(bytes);
 
+                Log.WriteLogByDate("同步的消息是：" + sync_str);
 
                 JObject sync_resul = JsonConvert.DeserializeObject(sync_str) as JObject;
 

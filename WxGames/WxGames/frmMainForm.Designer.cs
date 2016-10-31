@@ -54,6 +54,8 @@
             this.NickName2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Uid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuDel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除玩家ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label35 = new System.Windows.Forms.Label();
             this.txtUin = new System.Windows.Forms.TextBox();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -175,6 +177,7 @@
             this.txtMulStart = new System.Windows.Forms.TextBox();
             this.txtMulPt3 = new System.Windows.Forms.TextBox();
             this.txtPt3 = new System.Windows.Forms.TextBox();
+            this.txtFpx = new System.Windows.Forms.TextBox();
             this.txtMulKj = new System.Windows.Forms.TextBox();
             this.txtMulPt2 = new System.Windows.Forms.TextBox();
             this.txtkjh = new System.Windows.Forms.TextBox();
@@ -183,6 +186,7 @@
             this.txtPt = new System.Windows.Forms.TextBox();
             this.label47 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
             this.txtMulFp = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
@@ -250,6 +254,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvZhanDan)).BeginInit();
+            this.menuDel.SuspendLayout();
             this.tabZhiling.SuspendLayout();
             this.tabXiaoxi.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -343,7 +348,7 @@
             this.tab.Location = new System.Drawing.Point(0, 0);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
-            this.tab.Size = new System.Drawing.Size(1250, 977);
+            this.tab.Size = new System.Drawing.Size(1220, 977);
             this.tab.TabIndex = 1;
             this.tab.SelectedIndexChanged += new System.EventHandler(this.tab_SelectedIndexChanged);
             // 
@@ -360,7 +365,7 @@
             this.tabPankou.Location = new System.Drawing.Point(4, 28);
             this.tabPankou.Name = "tabPankou";
             this.tabPankou.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPankou.Size = new System.Drawing.Size(1242, 945);
+            this.tabPankou.Size = new System.Drawing.Size(1212, 945);
             this.tabPankou.TabIndex = 0;
             this.tabPankou.Text = "盘口登陆";
             this.tabPankou.UseVisualStyleBackColor = true;
@@ -441,7 +446,7 @@
             this.tabZhangDan.Location = new System.Drawing.Point(4, 28);
             this.tabZhangDan.Name = "tabZhangDan";
             this.tabZhangDan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabZhangDan.Size = new System.Drawing.Size(1242, 945);
+            this.tabZhangDan.Size = new System.Drawing.Size(1212, 945);
             this.tabZhangDan.TabIndex = 1;
             this.tabZhangDan.Text = "账单";
             this.tabZhangDan.UseVisualStyleBackColor = true;
@@ -499,7 +504,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label5);
             this.splitContainer2.Panel2.Controls.Add(this.txtWxUserName);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Size = new System.Drawing.Size(1236, 939);
+            this.splitContainer2.Size = new System.Drawing.Size(1206, 939);
             this.splitContainer2.SplitterDistance = 668;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -512,6 +517,7 @@
             this.NickName2,
             this.Uid,
             this.TotalScore});
+            this.dgvZhanDan.ContextMenuStrip = this.menuDel;
             this.dgvZhanDan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvZhanDan.Location = new System.Drawing.Point(0, 0);
             this.dgvZhanDan.MultiSelect = false;
@@ -519,7 +525,7 @@
             this.dgvZhanDan.ReadOnly = true;
             this.dgvZhanDan.RowTemplate.Height = 30;
             this.dgvZhanDan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvZhanDan.Size = new System.Drawing.Size(1236, 668);
+            this.dgvZhanDan.Size = new System.Drawing.Size(1206, 668);
             this.dgvZhanDan.TabIndex = 0;
             this.dgvZhanDan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvZhanDan_CellClick);
             this.dgvZhanDan.DoubleClick += new System.EventHandler(this.dgvZhanDan_DoubleClick);
@@ -544,6 +550,21 @@
             this.TotalScore.HeaderText = "余额";
             this.TotalScore.Name = "TotalScore";
             this.TotalScore.ReadOnly = true;
+            // 
+            // menuDel
+            // 
+            this.menuDel.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuDel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除玩家ToolStripMenuItem});
+            this.menuDel.Name = "menuDel";
+            this.menuDel.Size = new System.Drawing.Size(153, 32);
+            // 
+            // 删除玩家ToolStripMenuItem
+            // 
+            this.删除玩家ToolStripMenuItem.Name = "删除玩家ToolStripMenuItem";
+            this.删除玩家ToolStripMenuItem.Size = new System.Drawing.Size(152, 28);
+            this.删除玩家ToolStripMenuItem.Text = "删除玩家";
+            this.删除玩家ToolStripMenuItem.Click += new System.EventHandler(this.删除玩家ToolStripMenuItem_Click);
             // 
             // label35
             // 
@@ -1005,7 +1026,7 @@
             this.tabZhiling.Location = new System.Drawing.Point(4, 28);
             this.tabZhiling.Name = "tabZhiling";
             this.tabZhiling.Padding = new System.Windows.Forms.Padding(3);
-            this.tabZhiling.Size = new System.Drawing.Size(1248, 945);
+            this.tabZhiling.Size = new System.Drawing.Size(1218, 945);
             this.tabZhiling.TabIndex = 2;
             this.tabZhiling.Text = "指令设置";
             this.tabZhiling.UseVisualStyleBackColor = true;
@@ -1600,7 +1621,7 @@
             this.tabXiaoxi.Location = new System.Drawing.Point(4, 28);
             this.tabXiaoxi.Name = "tabXiaoxi";
             this.tabXiaoxi.Padding = new System.Windows.Forms.Padding(3);
-            this.tabXiaoxi.Size = new System.Drawing.Size(1248, 945);
+            this.tabXiaoxi.Size = new System.Drawing.Size(1218, 945);
             this.tabXiaoxi.TabIndex = 3;
             this.tabXiaoxi.Text = "消息设置";
             this.tabXiaoxi.UseVisualStyleBackColor = true;
@@ -1619,6 +1640,7 @@
             this.groupBox1.Controls.Add(this.txtMulStart);
             this.groupBox1.Controls.Add(this.txtMulPt3);
             this.groupBox1.Controls.Add(this.txtPt3);
+            this.groupBox1.Controls.Add(this.txtFpx);
             this.groupBox1.Controls.Add(this.txtMulKj);
             this.groupBox1.Controls.Add(this.txtMulPt2);
             this.groupBox1.Controls.Add(this.txtkjh);
@@ -1627,6 +1649,7 @@
             this.groupBox1.Controls.Add(this.txtPt);
             this.groupBox1.Controls.Add(this.label47);
             this.groupBox1.Controls.Add(this.label45);
+            this.groupBox1.Controls.Add(this.label36);
             this.groupBox1.Controls.Add(this.txtMulFp);
             this.groupBox1.Controls.Add(this.label46);
             this.groupBox1.Controls.Add(this.label43);
@@ -1642,7 +1665,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 134);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1242, 808);
+            this.groupBox1.Size = new System.Drawing.Size(1212, 808);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "消息设置";
@@ -1670,7 +1693,7 @@
             // ckbStart
             // 
             this.ckbStart.AutoSize = true;
-            this.ckbStart.Location = new System.Drawing.Point(671, 537);
+            this.ckbStart.Location = new System.Drawing.Point(671, 433);
             this.ckbStart.Name = "ckbStart";
             this.ckbStart.Size = new System.Drawing.Size(52, 22);
             this.ckbStart.TabIndex = 4;
@@ -1690,7 +1713,7 @@
             // ckbkj
             // 
             this.ckbkj.AutoSize = true;
-            this.ckbkj.Location = new System.Drawing.Point(149, 541);
+            this.ckbkj.Location = new System.Drawing.Point(149, 437);
             this.ckbkj.Name = "ckbkj";
             this.ckbkj.Size = new System.Drawing.Size(52, 22);
             this.ckbkj.TabIndex = 4;
@@ -1740,15 +1763,15 @@
             // 
             // txtMulStart
             // 
-            this.txtMulStart.Location = new System.Drawing.Point(775, 527);
+            this.txtMulStart.Location = new System.Drawing.Point(810, 423);
             this.txtMulStart.Multiline = true;
             this.txtMulStart.Name = "txtMulStart";
-            this.txtMulStart.Size = new System.Drawing.Size(346, 167);
+            this.txtMulStart.Size = new System.Drawing.Size(311, 167);
             this.txtMulStart.TabIndex = 3;
             // 
             // txtMulPt3
             // 
-            this.txtMulPt3.Location = new System.Drawing.Point(810, 265);
+            this.txtMulPt3.Location = new System.Drawing.Point(810, 235);
             this.txtMulPt3.Multiline = true;
             this.txtMulPt3.Name = "txtMulPt3";
             this.txtMulPt3.Size = new System.Drawing.Size(311, 167);
@@ -1761,9 +1784,18 @@
             this.txtPt3.Size = new System.Drawing.Size(75, 28);
             this.txtPt3.TabIndex = 2;
             // 
+            // txtFpx
+            // 
+            this.txtFpx.Location = new System.Drawing.Point(264, 596);
+            this.txtFpx.Multiline = true;
+            this.txtFpx.Name = "txtFpx";
+            this.txtFpx.Size = new System.Drawing.Size(274, 108);
+            this.txtFpx.TabIndex = 3;
+            this.txtFpx.Text = "----封盘线-----";
+            // 
             // txtMulKj
             // 
-            this.txtMulKj.Location = new System.Drawing.Point(264, 527);
+            this.txtMulKj.Location = new System.Drawing.Point(264, 423);
             this.txtMulKj.Multiline = true;
             this.txtMulKj.Name = "txtMulKj";
             this.txtMulKj.Size = new System.Drawing.Size(274, 167);
@@ -1771,7 +1803,7 @@
             // 
             // txtMulPt2
             // 
-            this.txtMulPt2.Location = new System.Drawing.Point(264, 265);
+            this.txtMulPt2.Location = new System.Drawing.Point(264, 235);
             this.txtMulPt2.Multiline = true;
             this.txtMulPt2.Name = "txtMulPt2";
             this.txtMulPt2.Size = new System.Drawing.Size(274, 167);
@@ -1810,7 +1842,7 @@
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(581, 541);
+            this.label47.Location = new System.Drawing.Point(581, 437);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(80, 18);
             this.label47.TabIndex = 1;
@@ -1825,6 +1857,15 @@
             this.label45.TabIndex = 1;
             this.label45.Text = "普通";
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(39, 607);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(80, 18);
+            this.label36.TabIndex = 1;
+            this.label36.Text = "封盘提示";
+            // 
             // txtMulFp
             // 
             this.txtMulFp.Location = new System.Drawing.Point(264, 62);
@@ -1836,7 +1877,7 @@
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(39, 538);
+            this.label46.Location = new System.Drawing.Point(39, 434);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(80, 18);
             this.label46.TabIndex = 1;
@@ -1916,11 +1957,11 @@
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(26, 72);
+            this.label38.Location = new System.Drawing.Point(8, 68);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(62, 18);
+            this.label38.Size = new System.Drawing.Size(80, 18);
             this.label38.TabIndex = 1;
-            this.label38.Text = "封盘：";
+            this.label38.Text = "下注信息";
             // 
             // label37
             // 
@@ -1950,7 +1991,7 @@
             this.pnlBianLiang.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBianLiang.Location = new System.Drawing.Point(3, 3);
             this.pnlBianLiang.Name = "pnlBianLiang";
-            this.pnlBianLiang.Size = new System.Drawing.Size(1242, 131);
+            this.pnlBianLiang.Size = new System.Drawing.Size(1212, 131);
             this.pnlBianLiang.TabIndex = 0;
             // 
             // label32
@@ -2088,7 +2129,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.tabPanel);
             this.splitContainer1.Panel2MinSize = 0;
             this.splitContainer1.Size = new System.Drawing.Size(1678, 979);
-            this.splitContainer1.SplitterDistance = 1252;
+            this.splitContainer1.SplitterDistance = 1222;
             this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -2100,7 +2141,7 @@
             this.tabPanel.Location = new System.Drawing.Point(0, 0);
             this.tabPanel.Name = "tabPanel";
             this.tabPanel.SelectedIndex = 0;
-            this.tabPanel.Size = new System.Drawing.Size(414, 977);
+            this.tabPanel.Size = new System.Drawing.Size(444, 977);
             this.tabPanel.TabIndex = 0;
             // 
             // tabUp
@@ -2109,7 +2150,7 @@
             this.tabUp.Location = new System.Drawing.Point(4, 28);
             this.tabUp.Name = "tabUp";
             this.tabUp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUp.Size = new System.Drawing.Size(406, 945);
+            this.tabUp.Size = new System.Drawing.Size(436, 945);
             this.tabUp.TabIndex = 0;
             this.tabUp.Text = "上下分操作";
             this.tabUp.UseVisualStyleBackColor = true;
@@ -2137,7 +2178,7 @@
             this.dgvUp.ReadOnly = true;
             this.dgvUp.RowTemplate.Height = 30;
             this.dgvUp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUp.Size = new System.Drawing.Size(400, 939);
+            this.dgvUp.Size = new System.Drawing.Size(430, 939);
             this.dgvUp.TabIndex = 0;
             this.dgvUp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUp_CellClick);
             // 
@@ -2210,26 +2251,26 @@
             this.不同意ToolStripMenuItem,
             this.删除ToolStripMenuItem});
             this.menuRight.Name = "menuRight";
-            this.menuRight.Size = new System.Drawing.Size(148, 94);
+            this.menuRight.Size = new System.Drawing.Size(135, 88);
             // 
             // 同意ToolStripMenuItem
             // 
             this.同意ToolStripMenuItem.Name = "同意ToolStripMenuItem";
-            this.同意ToolStripMenuItem.Size = new System.Drawing.Size(147, 30);
+            this.同意ToolStripMenuItem.Size = new System.Drawing.Size(134, 28);
             this.同意ToolStripMenuItem.Text = "同意";
             this.同意ToolStripMenuItem.Click += new System.EventHandler(this.同意ToolStripMenuItem_Click);
             // 
             // 不同意ToolStripMenuItem
             // 
             this.不同意ToolStripMenuItem.Name = "不同意ToolStripMenuItem";
-            this.不同意ToolStripMenuItem.Size = new System.Drawing.Size(147, 30);
+            this.不同意ToolStripMenuItem.Size = new System.Drawing.Size(134, 28);
             this.不同意ToolStripMenuItem.Text = "不同意";
             this.不同意ToolStripMenuItem.Click += new System.EventHandler(this.不同意ToolStripMenuItem_Click);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(147, 30);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(134, 28);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
@@ -2240,7 +2281,7 @@
             this.tabSearch.Location = new System.Drawing.Point(4, 28);
             this.tabSearch.Name = "tabSearch";
             this.tabSearch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSearch.Size = new System.Drawing.Size(400, 945);
+            this.tabSearch.Size = new System.Drawing.Size(430, 945);
             this.tabSearch.TabIndex = 1;
             this.tabSearch.Text = "操作记录";
             this.tabSearch.UseVisualStyleBackColor = true;
@@ -2261,7 +2302,7 @@
             this.dgbHistory.MultiSelect = false;
             this.dgbHistory.Name = "dgbHistory";
             this.dgbHistory.ReadOnly = true;
-            this.dgbHistory.Size = new System.Drawing.Size(394, 839);
+            this.dgbHistory.Size = new System.Drawing.Size(424, 839);
             this.dgbHistory.TabIndex = 6;
             // 
             // ChaNickName
@@ -2311,7 +2352,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(394, 100);
+            this.panel1.Size = new System.Drawing.Size(424, 100);
             this.panel1.TabIndex = 5;
             // 
             // dtpEnd
@@ -2407,6 +2448,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvZhanDan)).EndInit();
+            this.menuDel.ResumeLayout(false);
             this.tabZhiling.ResumeLayout(false);
             this.tabZhiling.PerformLayout();
             this.tabXiaoxi.ResumeLayout(false);
@@ -2645,5 +2687,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Uid;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalScore;
         private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.TextBox txtFpx;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.ContextMenuStrip menuDel;
+        private System.Windows.Forms.ToolStripMenuItem 删除玩家ToolStripMenuItem;
     }
 }

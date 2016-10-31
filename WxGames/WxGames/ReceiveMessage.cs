@@ -17,6 +17,8 @@ namespace WxGames
     {
         public static readonly ReceiveMessage Instance = new ReceiveMessage();
 
+        public List<string> OrderKey = new List<string>() { "大","小","单","双","龙","虎","和","0","1","2","3","4","5","6","7","8","9","取消"};
+
         public void Start()
         {
             try
@@ -30,9 +32,10 @@ namespace WxGames
             }
         }
 
-        public static void NewMethod()
+        public void NewMethod()
         {
             JObject sync_result = frmMainForm.wxs.WxSync();//进行同步
+
             if (sync_result == null)
             {
                 return;
@@ -126,6 +129,8 @@ namespace WxGames
             //获取到消息
             if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")
             {
+                Log.WriteLogByDate("获取消息：");
+
                 foreach (JObject m in sync_result["AddMsgList"])
                 {
                     if (m["FromUserName"].ToString() != frmMainForm.CurrentQun)
@@ -136,6 +141,8 @@ namespace WxGames
                     string[] content = m["Content"].ToString().Split(new string[] { "<br/>" }, StringSplitOptions.RemoveEmptyEntries);
                     if (content != null && content.Length == 2)
                     {
+                        Log.WriteLogByDate("获取消息："+ content[1]);
+
                         OriginMsg msg = new OriginMsg();
                         msg.MsgId = m["MsgId"].ToString();
                         string userName = content[0].Replace(":", "");
@@ -165,7 +172,37 @@ namespace WxGames
                             {
                                 if(msg.FromUin!="0")
                                 {
-                                    data.Insert<OriginMsg>(msg, "");
+                                    //简单检查指令
+                                    if (OrderFirstCheck.Instance.CheckOne(msg.Content))
+                                    {
+                                        data.Insert<OriginMsg>(msg, "");
+                                    }
+                                    else
+                                    {
+                                        //检查是否封盘
+                                        //获取开奖信息，并将开奖信息保存到数据库
+
+                                        if (frmMainForm.IsComplete && frmMainForm.IsJieDan)
+                                        {
+                                            //简单检查指令是否存在关键字，
+                                            foreach (string item in OrderKey)
+                                            {
+                                                if (msg.Content.Contains(item))
+                                                {
+                                                    data.Insert<OriginMsg>(msg, "");
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            //封盘阶段
+                                            WXMsg model = new WXMsg() { To = frmMainForm.CurrentQun, From = frmMainForm.CurrentWX.UserName, Msg = "正在封盘" };
+                                            frmMainForm.CurrentWX.SendMsg(model, false);
+                                            continue;
+                                        }
+
+                                    }
                                 }
                             }
                             else

@@ -83,6 +83,19 @@ namespace BLL
             }
         }
 
+        public static double ToDouble(this string s)
+        {
+            try
+            {
+                return Convert.ToDouble(s);
+            }
+            catch (Exception e)
+            {
+                Log.WriteLog(e);
+                return -1;
+            }
+        }
+
         public static bool IsNum(this string str)
         {
             Regex reg = new Regex(@"^[-]?[0-9]{1}\d*$|^[0]{1}$");

@@ -30,7 +30,7 @@ namespace WxGames
             }
         }
 
-        private static void NewMethod()
+        private void NewMethod()
         {
             string conn = ConfigurationManager.AppSettings["conn"].ToString();
             DataHelper data = new DataHelper(conn);
@@ -40,7 +40,17 @@ namespace WxGames
 
             foreach (OriginMsg msg in orginList)
             {
-                Order order = OrderManager.Instance.ToOrder(msg.Content);
+                Order order = new Order();
+                try
+                {
+                    order = OrderManager.Instance.ToOrder(msg.Content);
+                }
+                catch (Exception ex)
+                {
+                    //删除msg
+                    data.ExecuteSql(string.Format("delete from originmsg where msgid={0}", msg.MsgId));
+                    continue;
+                }
                 NowMsg nowMsg = new NowMsg();
                 nowMsg.MsgId = msg.MsgId.ToString();
                 nowMsg.MsgFromId = msg.FromUin;
@@ -85,7 +95,17 @@ namespace WxGames
             foreach (NowMsg msg in nowMsgList)
             {
                 //1,处理指令
-                WXMsg model = Msg2WxMsg.Instance.GetMsg(msg);
+                WXMsg model = null;
+
+                try
+                {
+                    model = Msg2WxMsg.Instance.GetMsg(msg);
+                }
+                catch (Exception ex)
+                {
+                    data.ExecuteSql(string.Format("delete from nowmsg where msgid={0}",msg.MsgId));
+                    continue;
+                }
 
                 //2,判断是否发送消息（如果返回的消息不为空）
                 //成功提示，错误格式提示，余额不足提示，投注限制提示，封盘提示，

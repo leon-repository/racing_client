@@ -96,6 +96,41 @@ namespace BLL
             }
         }
 
+        public static string SendDeleteRequest2(string url, string auth, string acckey)
+        {
+            try
+            {
+                System.Net.ServicePointManager.DefaultConnectionLimit = 512;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "Delete";
+
+                if (CookiesContainer == null)
+                {
+                    CookiesContainer = new CookieContainer();
+                }
+                request.Headers.Add("Client:" + ConfigHelper.GetXElementNodeValue("Client", "id"));
+                request.Headers.Add("Accesskey:" + acckey);
+                request.Headers.Add("Authorization:" + auth);
+
+
+                request.CookieContainer = CookiesContainer;  //启用cookie
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+
+                //response.Close();
+
+                return sr.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLogByDate("请求url:" + url);
+                Log.WriteLogByDate("请求acckey:" + acckey);
+                Log.WriteLog(ex);
+                return null;
+            }
+        }
+
 
         /// <summary>
         /// 向服务器发送post请求 返回服务器回复数据

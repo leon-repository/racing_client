@@ -70,7 +70,7 @@ namespace WxGames.Tests
 
             NowMsg now = new NowMsg();
             now.CommandOne = "和";
-            now.CommandTwo = "20/";
+            now.CommandTwo = "345678910111213141516171819";
             now.CommandType = "冠亚和";
             now.Score = "10";
 

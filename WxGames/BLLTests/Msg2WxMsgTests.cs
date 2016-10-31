@@ -269,8 +269,8 @@ namespace WxGames.Tests
             msg.IsMsg = "冠亚和";
             msg.IsDeal = "0";
             msg.Result = null;
-            msg.OrderContect = "和345678910111213141516171819/50";
-            msg.CommandTwo = "345678910111213141516171819";
+            msg.OrderContect = "和111213345/10";
+            msg.CommandTwo = "111213345";
             msg.Score = "50";
             msg.CommandType = "冠亚和";
             msg.Period = null;

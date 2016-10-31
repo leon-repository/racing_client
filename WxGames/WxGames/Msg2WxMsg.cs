@@ -71,22 +71,6 @@ namespace WxGames
             model.Time = DateTime.Now;
             StringBuilder content = new StringBuilder();
 
-            if (msg.CommandType != "上下查")
-            {
-                if (frmMainForm.IsFengPan)
-                {
-                    data.ExecuteSql(" delete from nowmsg where msgid=" + msg.MsgId);
-                    model.Msg = "正在封盘";
-                    return model;
-                }
-                else if (frmMainForm.IsKaiJian)
-                {
-                    data.ExecuteSql(" delete from nowmsg where msgid=" + msg.MsgId);
-                    model.Msg = "正在开奖";
-                    return model;
-                }
-            }
-
             switch (msg.CommandType)
             {
                 case "上下查":
@@ -207,7 +191,7 @@ namespace WxGames
                     int n = 0;
 
                     string comTwo = msg.CommandTwo.Replace("/", "");
-                    if (comTwo.Length<=11&&Convert.ToInt32(comTwo) <= 19)
+                    if (comTwo.Length<=2&&Convert.ToInt32(comTwo) <= 19)
                     {
                         switch (comTwo)
                         {
@@ -235,7 +219,7 @@ namespace WxGames
                     else
                     {
                         //多条和指令
-                        while (comTwo.Length > 0)
+                        while (comTwo.Length > 0&&comTwo!="0"&& comTwo != "1"&&comTwo != "2")
 
                         {
                             char first = comTwo.First();
@@ -282,7 +266,7 @@ namespace WxGames
                                     }
 
                                     comTwo = string.Join("", comTwo.Reverse());
-                                    comTwo = comTwo.Remove(0, 2);
+                                    comTwo = comTwo.Remove(comTwo.Length-2, 2);
                                     comTwo = string.Join("", comTwo.Reverse());
                                 }
                             }

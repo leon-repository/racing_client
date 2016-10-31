@@ -304,6 +304,13 @@ namespace BLL
                         if (command.Length == 1)
                         {
                             result.CommandOne = "1";
+                            if (!command[0].IsNum())
+                            {
+                                continue;
+                            }
+                            result.Score = command[0];
+                            result.CommandTwo= key[i];
+                            result.CommandType = OrderType.名次大小单双龙虎;
                         }
                         else if (command.Length == 2)
                         {
@@ -392,6 +399,16 @@ namespace BLL
                     continue;
                 }
 
+                if (command[0].ToDouble() < 0)
+                {
+                    result.CommandType = OrderType.指令格式错误;
+                    return result;
+                }
+                if (command[1].ToDouble() < 0)
+                {
+                    result.CommandType = OrderType.指令格式错误;
+                    return result;
+                }
 
                 result.OrderContent = order;
                 result.CommandOne = command[0];
@@ -568,6 +585,13 @@ namespace BLL
                         continue;
                     }
                     result.CommandOne = "冠";
+
+                    if (command[0].ToDouble() < 0)
+                    {
+                        result.CommandType = OrderType.指令格式错误;
+                        return result;
+                    }
+
                     result.CommandTwo = command[0];
 
                     if (!command[0].IsNum())
@@ -625,6 +649,21 @@ namespace BLL
                         }
                         result.OrderContent = order;
                         result.CommandOne = keyA[i];
+
+                        if (commandA[0].ToDouble() < 0)
+                        {
+                            result.CommandType = OrderType.指令格式错误;
+                            return result;
+                        }
+
+
+                        if (!ExitHe(commandA[0]))
+                        {
+                            result.CommandType = OrderType.指令格式错误;
+                            return result;
+                        }
+
+
                         result.CommandTwo = commandA[0];
                         result.Score = commandA[1];
 
@@ -644,6 +683,109 @@ namespace BLL
             result.OrderContent = order;
             result.CommandType = OrderType.指令格式错误;
             return result;
+        }
+
+
+        public bool ExitHe(string comTwo)
+        {
+            bool succ = false;
+            int n = 0;
+            if (comTwo.Length <= 2 && Convert.ToInt32(comTwo) <= 19)
+            {
+                switch (comTwo)
+                {
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "8":
+                    case "9":
+                    case "10":
+                    case "11":
+                    case "12":
+                    case "13":
+                    case "14":
+                    case "15":
+                    case "16":
+                    case "17":
+                    case "18":
+                    case "19":
+                        n++;
+                        succ = true;
+                        break;
+                    default:
+                        return false;
+                }
+            }
+            else
+            {
+                //多条和指令
+                while (comTwo.Length > 0 && comTwo != "0" && comTwo != "1" && comTwo != "2")
+
+                {
+                    char first = comTwo.First();
+
+                    if (first.ToString().ToInt() >= 3 && first.ToString().ToInt() <= 9)
+                    {
+                        switch (first.ToString())
+                        {
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                            case "7":
+                            case "8":
+                            case "9":
+                                n++;
+                                succ = true;
+                                break;
+                            default:
+                                return false;
+                        }
+
+                        comTwo = string.Join("", comTwo.Reverse());
+                        comTwo = comTwo.Remove(comTwo.Length - 1, 1);
+                        comTwo = string.Join("", comTwo.Reverse());
+                    }
+                    else
+                    {
+                        if (comTwo.Length >= 2)
+                        {
+                            string str = comTwo.Substring(0, 2);
+
+                            switch (str)
+                            {
+                                case "10":
+                                case "11":
+                                case "12":
+                                case "13":
+                                case "14":
+                                case "15":
+                                case "16":
+                                case "17":
+                                case "18":
+                                case "19":
+                                    n++;
+                                    succ = true;
+                                    break;
+                                default:
+                                    return false;
+                            }
+
+                            comTwo = string.Join("", comTwo.Reverse());
+                            comTwo = comTwo.Remove(comTwo.Length - 2, 2);
+                            comTwo = string.Join("", comTwo.Reverse());
+                        }
+                    }
+                }
+            }
+            if (comTwo.Length > 0)
+            {
+                return false;
+            }
+
+            return succ;
         }
     }
 }

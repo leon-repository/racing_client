@@ -52,6 +52,7 @@
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="DrawImage.cs" />
     <Compile Include="History.cs" />
+    <Compile Include="OrderFirstCheck.cs" />
     <Compile Include="RandomOrder.cs" />
     <Compile Include="WebService.cs" />
     <Compile Include="DataHelper.cs" />

@@ -114,5 +114,11 @@ namespace BLL.Tests
             Assert.IsTrue(order11.CommandType == OrderType.指令格式错误);
 
         }
+
+        [TestMethod()]
+        public void ExitHeTest()
+        {
+            bool succ=OrderManager.Instance.ExitHe("345104561012451023");
+        }
     }
 }

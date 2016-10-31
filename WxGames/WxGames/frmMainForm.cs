@@ -74,6 +74,11 @@ namespace WxGames
         public bool IsLogin = false;
 
         /// <summary>
+        /// 是否接单
+        /// </summary>
+        public static bool IsJieDan = false;
+
+        /// <summary>
         /// 是否开奖
         /// </summary>
         public static bool IsKaiJian = false;
@@ -82,6 +87,12 @@ namespace WxGames
         /// 是否封盘
         /// </summary>
         public static bool IsFengPan = false;
+
+
+        /// <summary>
+        /// 是否完成比赛
+        /// </summary>
+        public static bool IsComplete = true;
 
         /// <summary>
         /// 当前开奖号
@@ -395,9 +406,9 @@ namespace WxGames
                 dgvUp.Enabled = true;
                 //删除微信团队
                 wxs.DeleteUser(CurrentQun, WxTuanDui);
-
+                Log.WriteLogByDate("移除微信团队成功");
                 string qun1 = frmMainForm.wxs.GetQun(frmMainForm.CurrentQun);
-
+                Log.WriteLogByDate("获取群信息成功");
                 //在点开始按钮的时候，启动消息
                 if (Configs != null)
                 {
@@ -412,7 +423,48 @@ namespace WxGames
                         }
                     }
                 }
+                Log.WriteLogByDate("发送游戏开始信息成功");
 
+                DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
+                //获取开奖信息，并将开奖信息保存到数据库
+                string urlConfiger = "/user/client/stake/configer";
+                string auth = PanKou.Instance.GetSha1("", urlConfiger);
+
+                string json = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger, auth, PanKou.accessKey);
+                if (string.IsNullOrEmpty(json))
+                {
+                    return;
+                }
+                JObject configHelper = JsonConvert.DeserializeObject(json) as JObject;
+                if (configHelper == null)
+                {
+                    MessageBox.Show("未获取到比赛信息");
+                    return;
+                }
+                if (configHelper["result"].ToString() != "SUCCESS")
+                {
+                    MessageBox.Show("未获取到比赛信息");
+                    return;
+                }
+                string gameId = configHelper["data"]["racingNum"].ToString();
+                if (string.IsNullOrEmpty(gameId))
+                {
+                    Log.WriteLogByDate("发生异常：当前期号为空，上期期号为" + configHelper["data"]["preRacingNum"].ToString());
+                    return;
+                }
+
+                string nextStartTime = configHelper["data"]["startRacingTime"].ToString();
+                string stage = configHelper["data"]["stage"].ToString();//stage=1,押注阶段；stage=2,上报阶段；stage=3,封盘阶段
+
+                if (stage == "1")
+                {
+                    CurrentWX.SendMsg(new WXMsg() { From = CurrentWX.UserName, Msg = "---接收下单---", Readed = false, Time = DateTime.Now, To = CurrentQun, Type = 1 }, false);
+                }
+                else
+                {
+                    CurrentWX.SendMsg(new WXMsg() { From = CurrentWX.UserName, Msg = "---正在封盘---", Readed = false, Time = DateTime.Now, To = CurrentQun, Type = 1 }, false);
+                }
+                Log.WriteLogByDate("发送当前游戏信息成功");
                 ///启动线程
                 timeDgv.Start();
 
@@ -458,7 +510,6 @@ namespace WxGames
                     ThreadRece.Suspend();
                     ThreadSend.Suspend();
                     ThreadLobby.Suspend();
-                    //TaskManager.Instance.Start(Start);
                 }
                 catch (Exception ex)
                 {
@@ -1079,7 +1130,7 @@ namespace WxGames
             //删除消息配置
             data.ExecuteSql("delete from config where type='MSG' ");
 
-            ///封盘
+            ///下注信息核对提示
             string fpTime = txtFp.Text;
             string fpChk = ckbFp.Checked.ToString();
             string fpContent = txtMulFp.Text;
@@ -1128,6 +1179,10 @@ namespace WxGames
             string kjhChk = ckbkjh.Checked.ToString();
             data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "KJHTIME", Value = kjhTime }, "");
             data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "KJHCHK", Value = kjhChk }, "");
+
+            //封盘提示
+            string fpx = txtFpx.Text;
+            data.Insert<Config>(new Config() { Uuid = Guid.NewGuid().ToString(), Type = "MSG", Typetwo = "", Key = "FPX", Value = fpx }, "");
 
             Configs = data.GetList<Config>("type='MSG'", "");
             MessageBox.Show("保存成功");
@@ -1219,6 +1274,36 @@ namespace WxGames
         private void dgvZhanDan_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             CurrentZDRow = e.RowIndex;
+        }
+
+        private void 删除玩家ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //删除玩家
+            DataGridViewRow row = dgvZhanDan.CurrentRow;
+            if (row == null)
+            {
+                MessageBox.Show("请选中一行");
+                return;
+            }
+
+            string nickName = row.Cells["NickName2"].Value.ToString();
+            string uin = row.Cells["Uid"].Value.ToString();
+            //删除用户积分信息，有下注
+            List<NowMsg> listMsg = data.GetList<NowMsg>(string.Format(" period='{0}' and CommandType in ('买名次','冠亚和','名次大小单双龙虎') ", Perioid), "");
+            if (listMsg != null && listMsg.Count > 0)
+            {
+                MessageBox.Show("玩家有下注，不能删除");
+                return;
+            }
+            else
+            {
+                data.ExecuteSql(string.Format("delete from contactscore t where t.Uin={0}",uin));
+                string urlConfiger = "/user/members/";
+                string auth = PanKou.Instance.GetSha1(uin, urlConfiger);
+                string json = WebService.SendDeleteRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger+uin, auth, PanKou.accessKey);
+                Log.WriteLogByDate("删除玩家：" + uin);
+                Log.WriteLogByDate("删除结果："+json);
+            }
         }
     }
 }
