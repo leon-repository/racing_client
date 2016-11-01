@@ -47,6 +47,7 @@ namespace WxGames
             picLogin.SizeMode = PictureBoxSizeMode.Zoom;
 
             ((Action)delegate () {
+                Log.WriteLogByDate("登陆开始");
                 //异步加载二维码
                 LoginService ls = new LoginService();
                 Image qrcode = ls.GetQRCode();

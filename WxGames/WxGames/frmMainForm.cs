@@ -430,40 +430,40 @@ namespace WxGames
                 string urlConfiger = "/user/client/stake/configer";
                 string auth = PanKou.Instance.GetSha1("", urlConfiger);
 
-                string json = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger, auth, PanKou.accessKey);
-                if (string.IsNullOrEmpty(json))
-                {
-                    return;
-                }
-                JObject configHelper = JsonConvert.DeserializeObject(json) as JObject;
-                if (configHelper == null)
-                {
-                    MessageBox.Show("未获取到比赛信息");
-                    return;
-                }
-                if (configHelper["result"].ToString() != "SUCCESS")
-                {
-                    MessageBox.Show("未获取到比赛信息");
-                    return;
-                }
-                string gameId = configHelper["data"]["racingNum"].ToString();
-                if (string.IsNullOrEmpty(gameId))
-                {
-                    Log.WriteLogByDate("发生异常：当前期号为空，上期期号为" + configHelper["data"]["preRacingNum"].ToString());
-                    return;
-                }
+                //string json = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger, auth, PanKou.accessKey);
+                //if (!string.IsNullOrEmpty(json))
+                //{
+                //    return;
+                //}
+                //JObject configHelper = JsonConvert.DeserializeObject(json) as JObject;
+                //if (configHelper == null)
+                //{
+                //    MessageBox.Show("未获取到比赛信息");
+                //    return;
+                //}
+                //if (configHelper["result"].ToString() != "SUCCESS")
+                //{
+                //    MessageBox.Show("未获取到比赛信息");
+                //    return;
+                //}
+                //string gameId = configHelper["data"]["racingNum"].ToString();
+                //if (string.IsNullOrEmpty(gameId))
+                //{
+                //    Log.WriteLogByDate("发生异常：当前期号为空，上期期号为" + configHelper["data"]["preRacingNum"].ToString());
+                //    return;
+                //}
 
-                string nextStartTime = configHelper["data"]["startRacingTime"].ToString();
-                string stage = configHelper["data"]["stage"].ToString();//stage=1,押注阶段；stage=2,上报阶段；stage=3,封盘阶段
+                //string nextStartTime = configHelper["data"]["startRacingTime"].ToString();
+                //string stage = configHelper["data"]["stage"].ToString();//stage=1,押注阶段；stage=2,上报阶段；stage=3,封盘阶段
 
-                if (stage == "1")
-                {
-                    CurrentWX.SendMsg(new WXMsg() { From = CurrentWX.UserName, Msg = "---接收下单---", Readed = false, Time = DateTime.Now, To = CurrentQun, Type = 1 }, false);
-                }
-                else
-                {
-                    CurrentWX.SendMsg(new WXMsg() { From = CurrentWX.UserName, Msg = "---正在封盘---", Readed = false, Time = DateTime.Now, To = CurrentQun, Type = 1 }, false);
-                }
+                //if (stage == "1")
+                //{
+                //    CurrentWX.SendMsg(new WXMsg() { From = CurrentWX.UserName, Msg = "---接收下单---", Readed = false, Time = DateTime.Now, To = CurrentQun, Type = 1 }, false);
+                //}
+                //else
+                //{
+                //    CurrentWX.SendMsg(new WXMsg() { From = CurrentWX.UserName, Msg = "---正在封盘---", Readed = false, Time = DateTime.Now, To = CurrentQun, Type = 1 }, false);
+                //}
                 Log.WriteLogByDate("发送当前游戏信息成功");
                 ///启动线程
                 timeDgv.Start();
@@ -492,6 +492,18 @@ namespace WxGames
                 else
                 {
                     ThreadLobby.Start();
+                }
+
+
+                string json = "";
+                while (true)
+                {
+                    json = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger, auth, PanKou.accessKey);
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        break;
+                    }
+                    Thread.Sleep(1000);
                 }
             }
             else

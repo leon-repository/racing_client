@@ -34,7 +34,7 @@ namespace WxGames.HTTP
                 System.Net.ServicePointManager.DefaultConnectionLimit = 512;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "get";
-                
+
                 if (CookiesContainer == null)
                 {
                     CookiesContainer = new CookieContainer();
@@ -42,7 +42,24 @@ namespace WxGames.HTTP
                 request.CookieContainer = CookiesContainer;  //启用cookie
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream response_stream = response.GetResponseStream();
-                
+
+                //输出cookieContainer
+                Log.WriteLogByDate("GetUrl:" + url);
+                List<Cookie> list = GetAllCookies(CookiesContainer);
+                foreach (Cookie item in list)
+                {
+                    Log.WriteLogByDate("Name:" + item.Name + "  Value: " + item.Value);
+                }
+
+                //输出header
+                WebHeaderCollection headers=request.Headers;
+
+                foreach (var key in headers.AllKeys)
+                {
+                    Log.WriteLogByDate("Header: key="+key+" value:"+headers.GetValues(key)[0]);
+                } 
+
+
                 int count = (int)response.ContentLength;
                 int offset = 0;
                 byte[] buf = new byte[count];

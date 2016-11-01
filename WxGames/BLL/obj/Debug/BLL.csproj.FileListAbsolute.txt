@@ -92,4 +92,3 @@ E:\C#\WxGame1021\WxGames\BLL\bin\Debug\System.Data.SQLite.dll
 E:\C#\WxGame1021\WxGames\BLL\bin\Debug\Model.pdb
 E:\C#\WxGame1021\WxGames\BLL\obj\Debug\BLL.dll
 E:\C#\WxGame1021\WxGames\BLL\obj\Debug\BLL.pdb
-E:\C#\WxGame1021\WxGames\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache

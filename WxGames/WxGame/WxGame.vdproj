@@ -16,7 +16,7 @@
         "Entry"
         {
         "MsmKey" = "8:_37EF9352B218FC185C1BE953996E9A92"
-        "OwnerKey" = "8:_7E2749A80A474C89B8C2ECD997787BD5"
+        "OwnerKey" = "8:_7B68A27F5FFB435393F4CC96FA38CFFA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -34,36 +34,42 @@
         "Entry"
         {
         "MsmKey" = "8:_72B7116B30F295DEC35DDD28E91A8123"
-        "OwnerKey" = "8:_37EF9352B218FC185C1BE953996E9A92"
+        "OwnerKey" = "8:_7B68A27F5FFB435393F4CC96FA38CFFA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_72B7116B30F295DEC35DDD28E91A8123"
-        "OwnerKey" = "8:_7E2749A80A474C89B8C2ECD997787BD5"
+        "OwnerKey" = "8:_37EF9352B218FC185C1BE953996E9A92"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7E2749A80A474C89B8C2ECD997787BD5"
+        "MsmKey" = "8:_7B68A27F5FFB435393F4CC96FA38CFFA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_892068559EA8A612C4B9D4F906BAC8C3"
-        "OwnerKey" = "8:_37EF9352B218FC185C1BE953996E9A92"
+        "OwnerKey" = "8:_7B68A27F5FFB435393F4CC96FA38CFFA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_892068559EA8A612C4B9D4F906BAC8C3"
-        "OwnerKey" = "8:_7E2749A80A474C89B8C2ECD997787BD5"
+        "OwnerKey" = "8:_37EF9352B218FC185C1BE953996E9A92"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8C7D5289412542E58B3CAC37FB5C06BA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A1942D3D7AF24460A43748216A8E9793"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -87,26 +93,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F99C1B1084E34A39BBF4A74052C576F8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_892068559EA8A612C4B9D4F906BAC8C3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7E2749A80A474C89B8C2ECD997787BD5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_37EF9352B218FC185C1BE953996E9A92"
+        "OwnerKey" = "8:_7B68A27F5FFB435393F4CC96FA38CFFA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -119,6 +107,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_72B7116B30F295DEC35DDD28E91A8123"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_892068559EA8A612C4B9D4F906BAC8C3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_37EF9352B218FC185C1BE953996E9A92"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -329,14 +329,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7E2749A80A474C89B8C2ECD997787BD5"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7B68A27F5FFB435393F4CC96FA38CFFA"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:WxGames, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_7E2749A80A474C89B8C2ECD997787BD5"
+                    "_7B68A27F5FFB435393F4CC96FA38CFFA"
                     {
                     "Name" = "8:WxGames.exe"
                     "Attributes" = "3:512"
@@ -411,6 +411,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A1942D3D7AF24460A43748216A8E9793"
+            {
+            "SourcePath" = "8:..\\WxGames\\bin\\Debug\\WxGames.exe.config"
+            "TargetName" = "8:WxGames.exe.config"
+            "Tag" = "8:"
+            "Folder" = "8:_DCA8AE9E643F431FBC65814143895EF8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DE497F52918E4F0E91DED45F8A4CDCC0"
             {
             "SourcePath" = "8:..\\WxGames\\bin\\Debug\\system"
@@ -457,26 +477,6 @@
             "TargetName" = "8:勿删.txt"
             "Tag" = "8:"
             "Folder" = "8:_D105DB60080241F487CF6EF1F8504023"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F99C1B1084E34A39BBF4A74052C576F8"
-            {
-            "SourcePath" = "8:..\\WxGames\\bin\\Debug\\WxGames.exe.config"
-            "TargetName" = "8:WxGames.exe.config"
-            "Tag" = "8:"
-            "Folder" = "8:_DCA8AE9E643F431FBC65814143895EF8"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -701,7 +701,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_30FC7DC036D244378E7A54CEDF1799BF"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5F28B470344842728281B5BF6546AA91"
             {
             "Name" = "8:客户端"
             "Arguments" = "8:"
@@ -709,7 +709,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_7E2749A80A474C89B8C2ECD997787BD5"
+            "Target" = "8:_7B68A27F5FFB435393F4CC96FA38CFFA"
             "Folder" = "8:_1C76C0C4814E43D48BC5F3E3454A2427"
             "WorkingFolder" = "8:_DCA8AE9E643F431FBC65814143895EF8"
             "Icon" = "8:"

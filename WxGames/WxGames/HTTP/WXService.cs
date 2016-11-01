@@ -272,14 +272,14 @@ namespace WxGames.HTTP
                     string url = "https://" + item + "/cgi-bin/mmwebwx-bin/synccheck?sid={0}&uin={1}&synckey={2}&r={3}&skey={4}&deviceid={5}";
                     _synccheck_url = string.Format(url, sid.Value, uin.Value, sync_key, (long)(DateTime.Now.ToUniversalTime() - new System.DateTime(1970, 1, 1)).TotalMilliseconds, LoginService.SKey.Replace("@", "%40"), "e1615250492");
 
-                    //string url = "https://" + item + "/cgi-bin/mmwebwx-bin/synccheck?sid={0}&skey={1}";
-                    // _synccheck_url = string.Format(url, sid.Value,LoginService.SKey.Replace("@", "%40"));
+                    Log.WriteLogByDate("请求的url:" + _synccheck_url);
                     bytes = BaseService.SendGetRequest(_synccheck_url + "&_=" + DateTime.Now.Ticks);
+
                     //bytes = BaseService.SendGetRequest(_synccheck_url);
                     if (bytes != null)
                     {
                         ret_msg = Encoding.UTF8.GetString(bytes);
-
+                        Log.WriteLogByDate("ret_msg:"+ret_msg);
                         if (ret_msg.Contains("1100") || ret_msg.Contains("1101") || ret_msg.Contains("1102"))
                         {
                             continue;
@@ -288,6 +288,7 @@ namespace WxGames.HTTP
                     }
                     else
                     {
+                        Log.WriteLogByDate("返回值是空");   
                         continue;
                     }
 
@@ -305,7 +306,14 @@ namespace WxGames.HTTP
         /// <returns></returns>
         public JObject WxSync()
         {
-            string sync_json = "{{\"BaseRequest\" : {{\"DeviceID\":\"e1615250492\",\"Sid\":\"{1}\", \"Skey\":\"{5}\", \"Uin\":\"{0}\"}},\"SyncKey\" : {{\"Count\":{2},\"List\":[{3}]}},\"rr\" :{4}}}";
+            StringBuilder s = new StringBuilder();//s数组中存放着需要的数字
+            Random ra = new Random();
+            for (int i = 0; i < 15; i++)//遍历数组显示结果
+            {
+                s.Append(ra.Next(1, 10));
+            }
+
+            string sync_json = "{{\"BaseRequest\" : {{\"DeviceID\":\"e"+s.ToString()+"\",\"Sid\":\"{1}\", \"Skey\":\"{5}\", \"Uin\":\"{0}\"}},\"SyncKey\" : {{\"Count\":{2},\"List\":[{3}]}},\"rr\" :{4}}}";
             Cookie sid = BaseService.GetCookie("wxsid");
             Cookie uin = BaseService.GetCookie("wxuin");
 
@@ -374,9 +382,16 @@ namespace WxGames.HTTP
         /// <param name="type"></param>
         public void SendMsg(string msg, string from, string to, int type)
         {
+            StringBuilder s = new StringBuilder();//s数组中存放着需要的数字
+            Random ra = new Random();
+            for (int i = 0; i < 15; i++)//遍历数组显示结果
+            {
+                s.Append(ra.Next(1, 10));
+            }
+
             string msg_json = "{{" +
             "\"BaseRequest\":{{" +
-                "\"DeviceID\" : \"e441551176\"," +
+                "\"DeviceID\" : \"e"+s.ToString()+"\"," +
                 "\"Sid\" : \"{0}\"," +
                 "\"Skey\" : \"{6}\"," +
                 "\"Uin\" : \"{1}\"" +
