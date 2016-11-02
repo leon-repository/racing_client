@@ -72,7 +72,14 @@ namespace WxGames.HTTP
         /// </summary>
         public void GetSidUid(string login_redirect)
         {
-            byte[] bytes = BaseService.SendGetRequest(login_redirect + "&fun=new&version=v2&lang=zh_CN");
+            string r = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds.ToString().Split(new char[] { '.' })[0];
+            //可以正常运行的
+            //byte[] bytes = BaseService.SendGetRequest(login_redirect + "&fun=new&version=v2&lang=zh_CN");
+
+            //byte[] bytes = BaseService.SendGetRequest(login_redirect + "&fun=new&version=v2&r="+r+ "_ = " + DateTime.Now.Ticks);
+
+            byte[] bytes = BaseService.SendGetRequestAndSetCookies(login_redirect + "&fun=new&version=v2&r=" + r + "&_ = " + DateTime.Now.Ticks);
+
             if (bytes == null || bytes.Length == 0)
             {
                 return;
@@ -82,7 +89,7 @@ namespace WxGames.HTTP
             Pass_Ticket = pass_ticket.Split(new string[] { "pass_ticket" }, StringSplitOptions.None)[1].TrimStart('>').TrimEnd('<', '/');
             Log.WriteLogByDate("Pass_ticket:" + Pass_Ticket);
 
-            Pass_Ticket = System.Web.HttpUtility.UrlEncode(Pass_Ticket);
+            //Pass_Ticket = System.Web.HttpUtility.UrlEncode(Pass_Ticket);
 
             Log.WriteLogByDate("Pass_ticket2:" + Pass_Ticket);
 

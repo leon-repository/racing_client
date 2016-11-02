@@ -144,7 +144,7 @@ namespace WxGames
                         Log.WriteLogByDate("获取消息："+ content[1]);
 
                         OriginMsg msg = new OriginMsg();
-                        msg.MsgId = m["MsgId"].ToString();
+                        msg.MsgId = m["MsgId"].ToString()+ m["CreateTime"].ToString();//用msgId和createTime
                         string userName = content[0].Replace(":", "");
                         msg.FromUserName = userName;
                         msg.ToUserName = m["ToUserName"].ToString();

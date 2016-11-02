@@ -264,6 +264,7 @@ namespace WxGames.HTTP
                 listCheckUrl.Add("webpush1.wechatapp.com");
                 listCheckUrl.Add("webpush.wx2.qq.com");
                 listCheckUrl.Add("webpush2.wx2.qq.com");
+                listCheckUrl.Add("webpush.wx.qq.com");
 
                 byte[] bytes = null;
                 string ret_msg = "";
@@ -322,8 +323,15 @@ namespace WxGames.HTTP
             {
                 sync_keys += "{\"Key\":" + p.Key + ",\"Val\":" + p.Value + "},";
             }
+
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1, 0, 0, 0, 0));
+            long t = (DateTime.Now.Ticks - startTime.Ticks) / 10000;   //除10000调整为13位      
+
+            int n = (int)t;
+            n = ~n;
+
             sync_keys = sync_keys.TrimEnd(',');
-            sync_json = string.Format(sync_json, uin.Value, sid.Value, _syncKey.Count, sync_keys, (long)(DateTime.Now.ToUniversalTime() - new System.DateTime(1970, 1, 1)).TotalMilliseconds, LoginService.SKey);
+            sync_json = string.Format(sync_json, uin.Value, sid.Value, _syncKey.Count, sync_keys, n, LoginService.SKey);
 
             if (sid != null && uin != null)
             {
@@ -337,8 +345,22 @@ namespace WxGames.HTTP
                 {
                     try
                     {
-                         bytes = BaseService.SendPostRequest(item + sid.Value + "&lang=zh_CN&skey=" + LoginService.SKey + "&pass_ticket=" + LoginService.Pass_Ticket, sync_json);
+                        
+                        string url = item + sid.Value + "&lang=zh_CN&skey=" + LoginService.SKey + "&pass_ticket=" + LoginService.Pass_Ticket;
+                        Log.WriteLogByDate("微信同步url:" + url);
+                        bytes = BaseService.SendPostRequest(url, sync_json);
                         //bytes = BaseService.SendPostRequest(item + sid.Value + "&skey=" + LoginService.SKey, sync_json);
+
+                        string sync_str2 = Encoding.UTF8.GetString(bytes);
+                        Log.WriteLogByDate("微信返回结果："+sync_str2);
+                        if (sync_str2.Contains("1100"))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                     catch (Exception ex)
                     {

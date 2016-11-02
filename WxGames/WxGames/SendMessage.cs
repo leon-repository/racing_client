@@ -77,7 +77,11 @@ namespace WxGames
                 NowMsg exitNowMsg = data.First<NowMsg>(pkList, "");
                 if (exitNowMsg == null)
                 {
-                    if (!string.IsNullOrWhiteSpace(nowMsg.Period))
+                    if (nowMsg.CommandType == "上下查")
+                    {
+                        data.Insert<NowMsg>(nowMsg, "");
+                    }
+                    else if (!string.IsNullOrWhiteSpace(nowMsg.Period))
                     {
                         data.Insert<NowMsg>(nowMsg, "");
                     }
