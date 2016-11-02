@@ -118,11 +118,19 @@ namespace WxGames.HTTP
                     if (bytes != null)
                     {
                         init_str = Encoding.UTF8.GetString(bytes);
-                        if (init_str.Contains("1100"))
+                        //if (init_str.Contains("1100"))
+                        //{
+                        //    continue;
+                        //}
+                        //break;
+                        if (init_str.Contains("\"Ret\": 0"))
+                        {
+                            break;
+                        }
+                        else
                         {
                             continue;
                         }
-                        break;
                     }
                 }
                 JObject init_result = JsonConvert.DeserializeObject(init_str) as JObject;
@@ -353,13 +361,21 @@ namespace WxGames.HTTP
 
                         string sync_str2 = Encoding.UTF8.GetString(bytes);
                         Log.WriteLogByDate("微信返回结果："+sync_str2);
-                        if (sync_str2.Contains("1100"))
+                        //if (sync_str2.Contains("1100"))
+                        //{
+                        //    continue;
+                        //}
+                        //else
+                        //{
+                        //    break;
+                        //}
+                        if (sync_str2.Contains("\"Ret\": 0"))
                         {
-                            continue;
+                            break;
                         }
                         else
                         {
-                            break;
+                            continue;
                         }
                     }
                     catch (Exception ex)
