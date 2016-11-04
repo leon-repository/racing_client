@@ -319,18 +319,27 @@ namespace WxGames
                 case "和小":
                 case "和单":
                 case "和双":
-                    content.Append("@" + msg.MsgFromName + " " + "下注成功");
-                    content.Append("\r\n" + msg.CommandType + " " + msg.Score);
-                    contactScore.TotalScore = contactScore.TotalScore - msg.Score.ToInt();
-                    contactScore.RunScore = contactScore.RunScore + msg.Score.ToInt();
 
+                    if ((contactScore.TotalScore - msg.Score.ToInt()) < 0)
+                    {
+                        content.Clear();
+                        content.Append("@" + msg.MsgFromName + " ");
+                        content.Append("积分不足");
+                        //删除指令
+                        data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                    }
+                    else
+                    {
+                        content.Append("@" + msg.MsgFromName + " " + "下注成功");
+                        content.Append("\r\n" + msg.CommandType + " " + msg.Score);
+                        contactScore.TotalScore = contactScore.TotalScore - msg.Score.ToInt();
+                        contactScore.RunScore = contactScore.RunScore + msg.Score.ToInt();
+                    }
                     List<KeyValuePair<string, object>> pkList5 = new List<KeyValuePair<string, object>>();
                     pkList5.Add(new KeyValuePair<string, object>("Uuid", contactScore.Uuid));
                     data.Update<ContactScore>(contactScore, pkList5, "");
                     content.Append("\r\n当前积分：" + contactScore.TotalScore);
-
                     break;
-
                 case "取消":
                 case "取消指令":
                     content.Append("@" + msg.MsgFromName + " " + "取消下注成功");
