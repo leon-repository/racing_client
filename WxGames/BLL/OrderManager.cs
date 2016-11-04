@@ -779,11 +779,12 @@ namespace BLL
                         }
                     }
                 }
+                if (comTwo.Length > 0)
+                {
+                    return false;
+                }
             }
-            if (comTwo.Length > 0)
-            {
-                return false;
-            }
+           
 
             return succ;
         }

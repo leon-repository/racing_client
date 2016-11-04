@@ -281,14 +281,14 @@ namespace WxGames.HTTP
                     string url = "https://" + item + "/cgi-bin/mmwebwx-bin/synccheck?sid={0}&uin={1}&synckey={2}&r={3}&skey={4}&deviceid={5}";
                     _synccheck_url = string.Format(url, sid.Value, uin.Value, sync_key, (long)(DateTime.Now.ToUniversalTime() - new System.DateTime(1970, 1, 1)).TotalMilliseconds, LoginService.SKey.Replace("@", "%40"), "e1615250492");
 
-                    Log.WriteLogByDate("请求的url:" + _synccheck_url);
+                    //Log.WriteLogByDate("请求的url:" + _synccheck_url);
                     bytes = BaseService.SendGetRequest(_synccheck_url + "&_=" + DateTime.Now.Ticks);
 
                     //bytes = BaseService.SendGetRequest(_synccheck_url);
                     if (bytes != null)
                     {
                         ret_msg = Encoding.UTF8.GetString(bytes);
-                        Log.WriteLogByDate("ret_msg:"+ret_msg);
+                        //Log.WriteLogByDate("ret_msg:"+ret_msg);
                         if (ret_msg.Contains("1100") || ret_msg.Contains("1101") || ret_msg.Contains("1102"))
                         {
                             continue;
@@ -297,7 +297,7 @@ namespace WxGames.HTTP
                     }
                     else
                     {
-                        Log.WriteLogByDate("返回值是空");   
+                        //Log.WriteLogByDate("返回值是空");   
                         continue;
                     }
 
@@ -355,12 +355,12 @@ namespace WxGames.HTTP
                     {
                         
                         string url = item + sid.Value + "&lang=zh_CN&skey=" + LoginService.SKey + "&pass_ticket=" + LoginService.Pass_Ticket;
-                        Log.WriteLogByDate("微信同步url:" + url);
+                        //Log.WriteLogByDate("微信同步url:" + url);
                         bytes = BaseService.SendPostRequest(url, sync_json);
                         //bytes = BaseService.SendPostRequest(item + sid.Value + "&skey=" + LoginService.SKey, sync_json);
 
                         string sync_str2 = Encoding.UTF8.GetString(bytes);
-                        Log.WriteLogByDate("微信返回结果："+sync_str2);
+                       // Log.WriteLogByDate("微信返回结果："+sync_str2);
                         //if (sync_str2.Contains("1100"))
                         //{
                         //    continue;
@@ -392,7 +392,7 @@ namespace WxGames.HTTP
                 }
                 string sync_str = Encoding.UTF8.GetString(bytes);
 
-                Log.WriteLogByDate("同步的消息是：" + sync_str);
+                //Log.WriteLogByDate("同步的消息是：" + sync_str);
 
                 JObject sync_resul = JsonConvert.DeserializeObject(sync_str) as JObject;
 

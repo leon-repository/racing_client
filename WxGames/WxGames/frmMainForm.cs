@@ -1311,12 +1311,15 @@ namespace WxGames
             }
             else
             {
-                data.ExecuteSql(string.Format("delete from contactscore t where t.Uin={0}",uin));
-                string urlConfiger = "/user/members/";
-                string auth = PanKou.Instance.GetSha1(uin, urlConfiger);
-                string json = WebService.SendDeleteRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger+uin, auth, PanKou.accessKey);
+                data.ExecuteSql(string.Format("delete from contactscore where Uin='{0}'",uin));
+                string urlConfiger = "/user/members/"+uin;
+                string auth = PanKou.Instance.GetSha1("", urlConfiger);
+                string json = WebService.SendPutRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger,"", auth, PanKou.accessKey);
                 Log.WriteLogByDate("删除玩家：" + uin);
                 Log.WriteLogByDate("删除结果："+json);
+
+                JObject delJson = JsonConvert.DeserializeObject(json) as JObject;
+                MessageBox.Show(delJson["message"].ToString());
             }
         }
     }

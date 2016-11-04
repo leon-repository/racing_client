@@ -74,8 +74,24 @@ namespace WxGames
             switch (msg.CommandType)
             {
                 case "上下查":
-                    //判断是不是托，
-                    //托自动回复
+                    if (msg.CommandOne.Contains("查"))
+                    {
+                        List<KeyValuePair<string, object>> pkContact = new List<KeyValuePair<string, object>>();
+                        pkContact.Add(new KeyValuePair<string, object>("Uin", msg.MsgFromId));
+                        ContactScore contactScore2 = data.First<ContactScore>(pkList, "");
+                        if (contactScore != null)
+                        {
+                            content.Append("@" + msg.MsgFromName + " ");
+                            content.Append(" 当前积分：" + contactScore2.TotalScore);
+                        }
+                    }
+                    else
+                    {
+                        model = null;
+                        return model;
+                    }
+
+
                     break;
                 case "买名次":
                     content.Append("@" + msg.MsgFromName + " ");

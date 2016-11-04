@@ -486,12 +486,12 @@ namespace WxGames
                     //'买名次','冠亚和','名次大小单双龙虎','和大','和小','和单','和双'
                     NewMethod1(vo2, item);
 
-                    data.ExecuteSql("update Nowmsg set isdelete='2' where msgid=" + item.MsgId);
+                    data.ExecuteSql(string.Format("update Nowmsg set isdelete='2' where msgid='{0}'", item.MsgId));
                 }
                 catch (Exception ex)
                 {
                     //发生异常，删除消息
-                    data.ExecuteSql("delete from Nowmsg where msgid=" + item.MsgId);
+                    data.ExecuteSql(string.Format("delete from Nowmsg where msgid='{0}'",item.MsgId));
                 }
             }
 

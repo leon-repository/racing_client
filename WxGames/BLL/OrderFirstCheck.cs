@@ -16,7 +16,7 @@ namespace BLL
         /// <returns></returns>
         public bool CheckOne(string msg)
         {
-            if (msg == "查" || msg == "查分")
+            if (msg == "查" || msg == "查分"||msg=="查询")
             {
                 return true;
             }

@@ -110,13 +110,13 @@ namespace WxGames.HTTP
                 //    Log.WriteLogByDate("Name:" + item.Name + "  Value: " + item.Value);
                 //}
 
-                //输出header
-                WebHeaderCollection headers = request.Headers;
+                ////输出header
+                //WebHeaderCollection headers = request.Headers;
 
-                foreach (var key in headers.AllKeys)
-                {
-                    Log.WriteLogByDate("Header: key=" + key + " value:" + headers.GetValues(key)[0]);
-                }
+                //foreach (var key in headers.AllKeys)
+                //{
+                //    Log.WriteLogByDate("Header: key=" + key + " value:" + headers.GetValues(key)[0]);
+                //}
 
 
                 int count = (int)response.ContentLength;
@@ -301,21 +301,21 @@ namespace WxGames.HTTP
 
                 Stream response_stream = response.GetResponseStream();
 
-                //输出cookieContainer
-                Log.WriteLogByDate("GetUrl:" + url);
-                List<Cookie> list = GetAllCookies(CookiesContainer);
-                foreach (Cookie item in list)
-                {
-                    Log.WriteLogByDate("Name:" + item.Name + "  Value: " + item.Value);
-                }
+                ////输出cookieContainer
+                //Log.WriteLogByDate("GetUrl:" + url);
+                //List<Cookie> list = GetAllCookies(CookiesContainer);
+                //foreach (Cookie item in list)
+                //{
+                //    Log.WriteLogByDate("Name:" + item.Name + "  Value: " + item.Value);
+                //}
 
-                //输出header
-                WebHeaderCollection headers = request.Headers;
+                ////输出header
+                //WebHeaderCollection headers = request.Headers;
 
-                foreach (var key in headers.AllKeys)
-                {
-                    Log.WriteLogByDate("Header: key=" + key + " value:" + headers.GetValues(key)[0]);
-                }
+                //foreach (var key in headers.AllKeys)
+                //{
+                //    Log.WriteLogByDate("Header: key=" + key + " value:" + headers.GetValues(key)[0]);
+                //}
 
 
                 int count = (int)response.ContentLength;
@@ -361,7 +361,10 @@ namespace WxGames.HTTP
         private static List<Cookie> GetAllCookies(CookieContainer cc)
         {
             List<Cookie> lstCookies = new List<Cookie>();
-
+            if (cc == null)
+            {
+                throw new Exception("系统错误，请重新登陆");
+            }
             Hashtable table = (Hashtable)cc.GetType().InvokeMember("m_domainTable",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.GetField |
                 System.Reflection.BindingFlags.Instance, null, cc, new object[] { });

@@ -85,13 +85,13 @@ namespace WxGames.HTTP
                 return;
             }
             string pass_ticket = Encoding.UTF8.GetString(bytes);
-            Log.WriteLogByDate("pass_ticket:"+pass_ticket);
+            //Log.WriteLogByDate("pass_ticket:"+pass_ticket);
             Pass_Ticket = pass_ticket.Split(new string[] { "pass_ticket" }, StringSplitOptions.None)[1].TrimStart('>').TrimEnd('<', '/');
-            Log.WriteLogByDate("Pass_ticket:" + Pass_Ticket);
+           // Log.WriteLogByDate("Pass_ticket:" + Pass_Ticket);
 
             //Pass_Ticket = System.Web.HttpUtility.UrlEncode(Pass_Ticket);
 
-            Log.WriteLogByDate("Pass_ticket2:" + Pass_Ticket);
+            //Log.WriteLogByDate("Pass_ticket2:" + Pass_Ticket);
 
             SKey = pass_ticket.Split(new string[] { "skey" }, StringSplitOptions.None)[1].TrimStart('>').TrimEnd('<', '/');
         }

@@ -95,7 +95,7 @@ namespace WxGames
 
 
             //处理指令，（下注指令要回复，错误指令要回复）
-            List<NowMsg> nowMsgList = data.GetList<NowMsg>(" CommandType not in ('上下查') and isdelete='0' ", "");
+            List<NowMsg> nowMsgList = data.GetList<NowMsg>(" isdelete='0' ", "");
             foreach (NowMsg msg in nowMsgList)
             {
                 //1,处理指令

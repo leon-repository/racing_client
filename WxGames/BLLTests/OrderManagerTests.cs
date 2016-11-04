@@ -103,7 +103,7 @@ namespace BLL.Tests
             //Assert.IsTrue(order12.CommandType == OrderType.指令格式错误);
             //#endregion
 
-            Order order4 = OrderManager.Instance.ToOrder("和345678910111213141516171819/10");
+            Order order4 = OrderManager.Instance.ToOrder("和13/5");
             Assert.IsTrue(order4.CommandOne == "3");
             Assert.IsTrue(order4.CommandTwo == "虎");
             Assert.IsTrue(order4.CommandType == OrderType.名次大小单双龙虎);
@@ -118,7 +118,7 @@ namespace BLL.Tests
         [TestMethod()]
         public void ExitHeTest()
         {
-            bool succ=OrderManager.Instance.ExitHe("345104561012451023");
+            bool succ=OrderManager.Instance.ExitHe("1213141516345");
         }
     }
 }

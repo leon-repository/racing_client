@@ -129,7 +129,7 @@ namespace WxGames
             //获取到消息
             if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")
             {
-                Log.WriteLogByDate("获取消息：");
+               // Log.WriteLogByDate("获取消息：");
 
                 foreach (JObject m in sync_result["AddMsgList"])
                 {
@@ -141,7 +141,7 @@ namespace WxGames
                     string[] content = m["Content"].ToString().Split(new string[] { "<br/>" }, StringSplitOptions.RemoveEmptyEntries);
                     if (content != null && content.Length == 2)
                     {
-                        Log.WriteLogByDate("获取消息："+ content[1]);
+                        //Log.WriteLogByDate("获取消息："+ content[1]);
 
                         OriginMsg msg = new OriginMsg();
                         msg.MsgId = m["MsgId"].ToString()+ m["CreateTime"].ToString();//用msgId和createTime
