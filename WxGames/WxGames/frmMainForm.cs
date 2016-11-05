@@ -73,6 +73,9 @@ namespace WxGames
 
         public bool IsLogin = false;
 
+
+        public static bool IsAllowDown = false;
+
         /// <summary>
         /// 是否接单
         /// </summary>
@@ -581,7 +584,7 @@ namespace WxGames
             where=where + " t.createdate>="+ dtpBegin.Value.DateTimeToUnixTimestamp();
             where = where + "  and t.createdate<=" + dtpEnd.Value.DateTimeToUnixTimestamp();
 
-            List<History> msg = data.GetListNonTable<History>("select t.msgfromname,t.ordercontect,t.opdate,t.period,t.result from nowmsg t where "+where);
+            List<History> msg = data.GetListNonTable<History>("select t.msgfromname,t.ordercontect,t.opdate,t.period,t.result from nowmsg t where "+where+ " order by createdate desc ");
 
             dgbHistory.DataSource =msg;
         }
@@ -692,7 +695,7 @@ namespace WxGames
                 {
                     //先检查这期有没有参与，有参与不能下分
                     List<NowMsg> listMsg = data.GetList<NowMsg>(string.Format(" period='{0}' and CommandType in ('买名次','冠亚和','名次大小单双龙虎') ", Perioid), "");
-                    if (listMsg != null && listMsg.Count <= 0)
+                    if ((listMsg != null && listMsg.Count <= 0)|| frmMainForm.IsAllowDown)
                     {
                         if (model.TotalScore >= Convert.ToInt32(score))
                         {

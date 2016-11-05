@@ -15,14 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_12D6209ECCAC4B9F8BB3D14E2ABF5B08"
+        "MsmKey" = "8:_2A6E1F74632D4099A47F8FEEA4E67624"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_37EF9352B218FC185C1BE953996E9A92"
-        "OwnerKey" = "8:_87126DD77C3F45838E2C7DE7AD4122EB"
+        "OwnerKey" = "8:_94DFC9FB680646B881A18BC9C6B12DBF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -52,13 +52,7 @@
         "Entry"
         {
         "MsmKey" = "8:_72B7116B30F295DEC35DDD28E91A8123"
-        "OwnerKey" = "8:_87126DD77C3F45838E2C7DE7AD4122EB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_87126DD77C3F45838E2C7DE7AD4122EB"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_94DFC9FB680646B881A18BC9C6B12DBF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -70,12 +64,18 @@
         "Entry"
         {
         "MsmKey" = "8:_892068559EA8A612C4B9D4F906BAC8C3"
-        "OwnerKey" = "8:_87126DD77C3F45838E2C7DE7AD4122EB"
+        "OwnerKey" = "8:_94DFC9FB680646B881A18BC9C6B12DBF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8C7D5289412542E58B3CAC37FB5C06BA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_94DFC9FB680646B881A18BC9C6B12DBF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -100,7 +100,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_87126DD77C3F45838E2C7DE7AD4122EB"
+        "OwnerKey" = "8:_94DFC9FB680646B881A18BC9C6B12DBF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -216,7 +216,7 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_12D6209ECCAC4B9F8BB3D14E2ABF5B08"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2A6E1F74632D4099A47F8FEEA4E67624"
             {
             "SourcePath" = "8:..\\WxGames\\bin\\Debug\\WxGames.exe.config"
             "TargetName" = "8:WxGames.exe.config"
@@ -369,37 +369,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_87126DD77C3F45838E2C7DE7AD4122EB"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:WxGames, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_87126DD77C3F45838E2C7DE7AD4122EB"
-                    {
-                    "Name" = "8:WxGames.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\WxGames\\bin\\Debug\\WxGames.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_DCA8AE9E643F431FBC65814143895EF8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_892068559EA8A612C4B9D4F906BAC8C3"
             {
             "AssemblyRegister" = "3:1"
@@ -437,6 +406,37 @@
             "TargetName" = "8:SQLite.Interop.dll"
             "Tag" = "8:"
             "Folder" = "8:_1C32E1F3FBDE4B74BC8FEB23306278F3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_94DFC9FB680646B881A18BC9C6B12DBF"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:WxGames, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_94DFC9FB680646B881A18BC9C6B12DBF"
+                    {
+                    "Name" = "8:WxGames.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\WxGames\\bin\\Debug\\WxGames.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_DCA8AE9E643F431FBC65814143895EF8"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -581,7 +581,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WxGame"
         "ProductCode" = "8:{C68D813A-9AB6-411D-842A-57478B103BC0}"
-        "PackageCode" = "8:{A9280107-821B-47EE-B035-BFCE78B0BE9B}"
+        "PackageCode" = "8:{2ECE5CFF-BB9C-4E58-978C-45ABB5E52EC7}"
         "UpgradeCode" = "8:{22E9DDAE-38FF-4774-B862-A1D5190C9F67}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -701,7 +701,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_449CA003B2434BD0BE19C125ABF5E0E4"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_91CC3F16F72F4E41917B520A37134A29"
             {
             "Name" = "8:客户端"
             "Arguments" = "8:"
@@ -709,7 +709,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_87126DD77C3F45838E2C7DE7AD4122EB"
+            "Target" = "8:_94DFC9FB680646B881A18BC9C6B12DBF"
             "Folder" = "8:_1C76C0C4814E43D48BC5F3E3454A2427"
             "WorkingFolder" = "8:_DCA8AE9E643F431FBC65814143895EF8"
             "Icon" = "8:"

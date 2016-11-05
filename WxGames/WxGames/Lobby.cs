@@ -61,6 +61,7 @@ namespace WxGames
             if (string.IsNullOrEmpty(gameId))
             {
                 Log.WriteLogByDate("发生异常：当前期号为空，上期期号为" + configHelper["data"]["preRacingNum"].ToString());
+                frmMainForm.IsAllowDown = true;
                 //return;
             }
             string nextStartTime = configHelper["data"]["startRacingTime"].ToString();
