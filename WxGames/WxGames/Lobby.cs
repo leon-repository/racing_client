@@ -146,6 +146,15 @@ namespace WxGames
                         gameMsgFpx.Content = list.Find(p => p.Type == "MSG" && p.Key == "FPX").Value;
                         gameMsgFpx.IsSend = "0";
                         data.Insert<GameMsg>(gameMsgFpx, "");
+
+
+                        GameMsg gameMsgJs = new GameMsg();
+                        gameMsgJs.Uuid = Guid.NewGuid().ToString();
+                        gameMsgJs.GameId = game.GameId;
+                        gameMsgJs.SendTime = -2;
+                        gameMsgJs.Content = "----接收下单---";
+                        gameMsgJs.IsSend = "0";
+                        data.Insert<GameMsg>(gameMsgJs, "");
                     }
                 }
             }
@@ -369,7 +378,7 @@ namespace WxGames
                         frmMainForm.IsKaiJian = false;
                         frmMainForm.IsFengPan = false;
 
-                        frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = "----接收下单---", To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
+                        //frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = "----接收下单---", To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
                         frmMainForm.IsComplete = true;
 
                         return;
@@ -441,8 +450,6 @@ namespace WxGames
 
                         frmMainForm.IsKaiJian = false;
                         frmMainForm.IsFengPan = false;
-
-                        frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = "----接收下单---", To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
                         frmMainForm.IsComplete = true;
                     }
                 }
