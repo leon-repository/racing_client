@@ -138,7 +138,7 @@ namespace WxGames
                         content.Append("\r\n当前积分：" + contactScore.TotalScore);
 
                         //删除指令
-                        data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                        data.ExecuteSql(string.Format(" delete from nowmsg where MsgId='{0}'", msg.MsgId));
                     }
                     else
                     {
@@ -181,7 +181,7 @@ namespace WxGames
                         content.Append("积分不足");
                         content.Append("\r\n当前积分：" + contactScore.TotalScore);
                         //删除指令
-                        data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                        data.ExecuteSql(string.Format(" delete from nowmsg where MsgId='{0}'", msg.MsgId));
                     }
                     else
                     {
@@ -200,7 +200,7 @@ namespace WxGames
                     if (string.IsNullOrEmpty(msg.CommandTwo))
                     {
                         content.Append("指令格式错误");
-                        data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                        data.ExecuteSql(string.Format(" delete from nowmsg where MsgId='{0}'", msg.MsgId));
                         break;
                     }
 
@@ -303,7 +303,7 @@ namespace WxGames
                         content.Append("\r\n当前积分：" + contactScore.TotalScore);
 
                         //删除指令
-                        data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                        data.ExecuteSql(string.Format(" delete from nowmsg where MsgId='{0}'", msg.MsgId));
                     }
                     else
                     {
@@ -326,7 +326,7 @@ namespace WxGames
                         content.Append("@" + msg.MsgFromName + " ");
                         content.Append("积分不足");
                         //删除指令
-                        data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                        data.ExecuteSql(string.Format(" delete from nowmsg where MsgId='{0}'", msg.MsgId));
                     }
                     else
                     {
@@ -351,17 +351,17 @@ namespace WxGames
                 case "指令格式错误":
                     content.Append("@" + msg.MsgFromName + " " + "指令格式错误");
                     //删除指令
-                    data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                    data.ExecuteSql(string.Format(" delete from nowmsg where MsgId='{0}'", msg.MsgId));
                     break;
                 case "下注积分范围错误":
                     content.Append("@" + msg.MsgFromName + " " + "下注积分范围错误");
                     //删除指令
-                    data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                    data.ExecuteSql(string.Format(" delete from nowmsg where MsgId='{0}'", msg.MsgId));
                     break;
                 default:
                     content.Append("@" + msg.MsgFromName + " " + "暂不支持此指令");
                     //删除指令
-                    data.ExecuteSql(" delete from nowmsg where MsgId=" + msg.MsgId);
+                    data.ExecuteSql(string.Format(" delete from nowmsg where MsgId='{0}'",msg.MsgId));
                     break;
             }
 

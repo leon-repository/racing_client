@@ -363,7 +363,7 @@ namespace WxGames.HTTP
             List<Cookie> lstCookies = new List<Cookie>();
             if (cc == null)
             {
-                throw new Exception("系统错误，请重新登陆");
+                //throw new Exception("系统错误，请重新登陆");
             }
             Hashtable table = (Hashtable)cc.GetType().InvokeMember("m_domainTable",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.GetField |

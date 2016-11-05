@@ -41,130 +41,6 @@ namespace WxGames
             //获取开奖信息，并将开奖信息保存到数据库
             string urlConfiger = "/user/client/stake/configer";
 
-
-            if (frmMainForm.IsKaiJian)
-            {
-                try
-                {
-                    if (string.IsNullOrWhiteSpace(frmMainForm.Perioid))
-                    {
-                        return;
-                    }
-
-                    List<KeyValuePair<string, object>> queryString = new List<KeyValuePair<string, object>>();
-                    queryString.Add(new KeyValuePair<string, object>("racingNum", frmMainForm.Perioid));
-
-                    queryString = queryString.OrderBy(p => p.Key).ToList();
-
-                    string queryValue = "";
-                    foreach (KeyValuePair<string, object> item in queryString)
-                    {
-                        queryValue = queryValue + item.Value.ToString();
-                    }
-
-                    string urlConfiger2 = "/user/record/result";
-                    string auth2 = PanKou.Instance.GetSha1("", urlConfiger2 + queryValue);
-
-                    string json2 = "";
-
-                    while (string.IsNullOrEmpty(json2))
-                    {
-                        json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2 + "?racingNum=" + frmMainForm.Perioid, auth2, PanKou.accessKey);
-                        Thread.Sleep(1000);
-                    }
-
-                    if (string.IsNullOrEmpty(json2))
-                    {
-                        frmMainForm.IsKaiJian = false;
-                        frmMainForm.IsFengPan = false;
-
-                        frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = "----接收下单---", To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
-                        frmMainForm.IsComplete = true;
-
-                        return;
-                    }
-                    JObject configHelper2 = JsonConvert.DeserializeObject(json2) as JObject;
-                    string result = configHelper2["result"].ToString();
-                    string message = configHelper2["message"].ToString();
-                    if (result == "SUCCESS")
-                    {
-                        string resultArray = configHelper2["data"]["result"].ToString();
-                        resultArray = resultArray.Replace("\r\n", "");
-                        string racingNum = configHelper2["data"]["racingNum"].ToString();
-                        List<Config> list = frmMainForm.Configs;
-                        //发送开奖结果
-                        string msg = list.Find(p => p.Type == "MSG" && p.Key == "KJCONTENT").Value;
-
-                        frmMainForm.PerioidString = resultArray;
-                        msg = msg.Replace("[期号]", "期号：" + racingNum);
-                        msg = msg.Replace("[开奖结果]", resultArray);
-
-
-                        //获取本期参与押注的人员
-                        string strYinKui = "";
-                        List<NowMsg> msgList = new List<NowMsg>();
-                        msgList = data.GetList<NowMsg>(" isdelete=2 and CommandType in ('买名次','冠亚和','名次大小单双龙虎') and period= " + frmMainForm.Perioid, "");
-                        List<string> listUin = msgList.Select(p => p.MsgFromId).Distinct().ToList();
-
-                        if (listUin != null && listUin.Count > 0)
-                        {
-                            string url = "/members/stake";
-                            string strList = string.Join(",", listUin);
-
-                            string authStake = PanKou.Instance.GetSha1("", url + frmMainForm.Perioid + strList);
-                            //请求开奖结果
-                            string jsonStake = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url + "?racingNum=" + frmMainForm.Perioid + "&wechatSns=" + strList, authStake, PanKou.accessKey);
-
-                            Log.WriteLogByDate("开奖结果是：" + jsonStake);
-                            if (string.IsNullOrEmpty(jsonStake))
-                            {
-
-                            }
-                            else
-                            {
-                                JObject jobject = JsonConvert.DeserializeObject(jsonStake) as JObject;
-
-                                List<KaiJianBody> listBody = JsonConvert.DeserializeObject<List<KaiJianBody>>(jobject["data"].ToString());
-                                //更新本地用户积分
-                                foreach (KaiJianBody item in listBody)
-                                {
-                                    //更新本地积分
-                                    if (item.members != null)
-                                    {
-                                        data.ExecuteSql(string.Format(" update contactscore set totalScore={0} where uin={1}", item.members.points, item.members.wechatSn));
-
-                                        strYinKui += "[" + item.members.nickName + "][剩余积分：" + item.members.points;
-                                        strYinKui += "][盈亏：" + item.memberStake.totalDeficitAmount + "]\r\n";
-                                    }
-                                }
-
-                                msg = msg.Replace("[盈亏]", strYinKui);
-                            }
-                        }
-
-                        frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = msg, To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
-
-                        //把所有未处理的指令，全部失效
-                        data.ExecuteSql(" update OriginMsg set issucc='9' where issucc=0 ");
-                        data.ExecuteSql(" update NowMsg set issucc=2 where issucc=1 ");
-
-                        frmMainForm.IsKaiJian = false;
-                        frmMainForm.IsFengPan = false;
-
-                        frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = "----接收下单---", To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
-                        frmMainForm.IsComplete = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.WriteLogByDate("开奖结果消息：");
-                    Log.WriteLog(ex);
-                }
-            }
-
-
-
-
             string auth = PanKou.Instance.GetSha1("", urlConfiger);
 
             string json = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger, auth, PanKou.accessKey);
@@ -185,11 +61,11 @@ namespace WxGames
             if (string.IsNullOrEmpty(gameId))
             {
                 Log.WriteLogByDate("发生异常：当前期号为空，上期期号为" + configHelper["data"]["preRacingNum"].ToString());
-                return;
+                //return;
             }
-
             string nextStartTime = configHelper["data"]["startRacingTime"].ToString();
             string stage = configHelper["data"]["stage"].ToString();//stage=1,押注阶段；stage=2,上报阶段；stage=3,封盘阶段
+
             if (stage == "1")
             {
                 frmMainForm.IsJieDan = true;
@@ -457,6 +333,126 @@ namespace WxGames
             }
             //查询开奖结果，发送本期开奖结果
 
+            if (frmMainForm.IsKaiJian)
+            {
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(frmMainForm.Perioid))
+                    {
+                        return;
+                    }
+
+                    List<KeyValuePair<string, object>> queryString = new List<KeyValuePair<string, object>>();
+                    queryString.Add(new KeyValuePair<string, object>("racingNum", frmMainForm.Perioid));
+
+                    queryString = queryString.OrderBy(p => p.Key).ToList();
+
+                    string queryValue = "";
+                    foreach (KeyValuePair<string, object> item in queryString)
+                    {
+                        queryValue = queryValue + item.Value.ToString();
+                    }
+
+                    string urlConfiger2 = "/user/record/result";
+                    string auth2 = PanKou.Instance.GetSha1("", urlConfiger2 + queryValue);
+
+                    string json2 = "";
+
+                    while (string.IsNullOrEmpty(json2))
+                    {
+                        json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2 + "?racingNum=" + frmMainForm.Perioid, auth2, PanKou.accessKey);
+                        Thread.Sleep(1000);
+                    }
+
+                    if (string.IsNullOrEmpty(json2))
+                    {
+                        frmMainForm.IsKaiJian = false;
+                        frmMainForm.IsFengPan = false;
+
+                        frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = "----接收下单---", To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
+                        frmMainForm.IsComplete = true;
+
+                        return;
+                    }
+                    JObject configHelper2 = JsonConvert.DeserializeObject(json2) as JObject;
+                    string result = configHelper2["result"].ToString();
+                    string message = configHelper2["message"].ToString();
+                    if (result == "SUCCESS")
+                    {
+                        string resultArray = configHelper2["data"]["result"].ToString();
+                        resultArray = resultArray.Replace("\r\n", "");
+                        string racingNum = configHelper2["data"]["racingNum"].ToString();
+                        List<Config> list = frmMainForm.Configs;
+                        //发送开奖结果
+                        string msg = list.Find(p => p.Type == "MSG" && p.Key == "KJCONTENT").Value;
+
+                        frmMainForm.PerioidString = resultArray;
+                        msg = msg.Replace("[期号]", "期号：" + racingNum);
+                        msg = msg.Replace("[开奖结果]", resultArray);
+
+
+                        //获取本期参与押注的人员
+                        string strYinKui = "";
+                        List<NowMsg> msgList = new List<NowMsg>();
+                        msgList = data.GetList<NowMsg>(" isdelete=2 and CommandType in ('买名次','冠亚和','名次大小单双龙虎') and period= " + frmMainForm.Perioid, "");
+                        List<string> listUin = msgList.Select(p => p.MsgFromId).Distinct().ToList();
+
+                        if (listUin != null && listUin.Count > 0)
+                        {
+                            string url = "/members/stake";
+                            string strList = string.Join(",", listUin);
+
+                            string authStake = PanKou.Instance.GetSha1("", url + frmMainForm.Perioid + strList);
+                            //请求开奖结果
+                            string jsonStake = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url + "?racingNum=" + frmMainForm.Perioid + "&wechatSns=" + strList, authStake, PanKou.accessKey);
+
+                            Log.WriteLogByDate("开奖结果是：" + jsonStake);
+                            if (string.IsNullOrEmpty(jsonStake))
+                            {
+
+                            }
+                            else
+                            {
+                                JObject jobject = JsonConvert.DeserializeObject(jsonStake) as JObject;
+
+                                List<KaiJianBody> listBody = JsonConvert.DeserializeObject<List<KaiJianBody>>(jobject["data"].ToString());
+                                //更新本地用户积分
+                                foreach (KaiJianBody item in listBody)
+                                {
+                                    //更新本地积分
+                                    if (item.members != null)
+                                    {
+                                        data.ExecuteSql(string.Format(" update contactscore set totalScore={0} where uin={1}", item.members.points, item.members.wechatSn));
+
+                                        strYinKui += "[" + item.members.nickName + "][剩余积分：" + item.members.points;
+                                        strYinKui += "][盈亏：" + item.memberStake.totalDeficitAmount + "]\r\n";
+                                    }
+                                }
+
+                                msg = msg.Replace("[盈亏]", strYinKui);
+                            }
+                        }
+
+                        frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = msg, To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
+
+                        //把所有未处理的指令，全部失效
+                        data.ExecuteSql(" update OriginMsg set issucc='9' where issucc=0 ");
+                        data.ExecuteSql(" update NowMsg set issucc=2 where issucc=1 ");
+
+                        frmMainForm.IsKaiJian = false;
+                        frmMainForm.IsFengPan = false;
+
+                        frmMainForm.CurrentWX.SendMsg(new WXMsg() { From = frmMainForm.CurrentWX.UserName, Msg = "----接收下单---", To = frmMainForm.CurrentQun, Time = DateTime.Now, Type = 1, Readed = false }, false);
+                        frmMainForm.IsComplete = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLogByDate("开奖结果消息：");
+                    Log.WriteLog(ex);
+                }
+            }
+
         }
 
         public static StakeVoMax NewMethod(DataHelper data, List<NowMsg> msgList, string fromId)
@@ -503,7 +499,7 @@ namespace WxGames
                 catch (Exception ex)
                 {
                     //发生异常，删除消息
-                    data.ExecuteSql(string.Format("delete from Nowmsg where msgid='{0}'",item.MsgId));
+                    data.ExecuteSql(string.Format("delete from Nowmsg where msgid='{0}'", item.MsgId));
                 }
             }
 

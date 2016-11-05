@@ -48,7 +48,7 @@ namespace WxGames
                 catch (Exception ex)
                 {
                     //删除msg
-                    data.ExecuteSql(string.Format("delete from originmsg where msgid={0}", msg.MsgId));
+                    data.ExecuteSql(string.Format("delete from originmsg where msgid='{0}'", msg.MsgId));
                     continue;
                 }
                 NowMsg nowMsg = new NowMsg();
@@ -107,7 +107,7 @@ namespace WxGames
                 }
                 catch (Exception ex)
                 {
-                    data.ExecuteSql(string.Format("delete from nowmsg where msgid={0}",msg.MsgId));
+                    data.ExecuteSql(string.Format("delete from nowmsg where msgid='{0}'",msg.MsgId));
                     continue;
                 }
 
