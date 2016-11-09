@@ -64,6 +64,10 @@ namespace WxGames
                 frmMainForm.IsAllowDown = true;
                 //return;
             }
+            else
+            {
+                frmMainForm.Perioid = gameId;
+            }
             string nextStartTime = configHelper["data"]["startRacingTime"].ToString();
             string stage = configHelper["data"]["stage"].ToString();//stage=1,押注阶段；stage=2,上报阶段；stage=3,封盘阶段
 
@@ -233,6 +237,7 @@ namespace WxGames
                         string urlConfiger2 = "/racing/web/history";
                         string json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2, "", PanKou.accessKey);
                         string strJson = json2;
+                        Log.WriteLogByDate("获取到的历史开奖信息是："+json2);
                         DrawImage image = new DrawImage(1400, 700);
                         image.SetSavePath(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
                         image.SetFramePen(Color.Gray);
@@ -250,6 +255,7 @@ namespace WxGames
                         jData = DataFormat.FormatString(strJson);
                         image.Draw(jData);
                         image.Save();
+                        Thread.Sleep(1000);
                         FileInfo file = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
                         frmMainForm.wxs.SendImage("DramImage.png", AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png", file.Length.ToString(), frmMainForm.CurrentWX.UserName, frmMainForm.CurrentQun, Log.GetMD5HashFromFile(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png"));
 
@@ -279,6 +285,7 @@ namespace WxGames
             //上报阶段 下注信息上传
             if (stage == "2")
             {
+                Thread.Sleep(5000);
                 frmMainForm.IsJieDan = false;
                 frmMainForm.IsFengPan = true;
                 List<NowMsg> msgList = new List<NowMsg>();
@@ -404,8 +411,12 @@ namespace WxGames
                         //获取本期参与押注的人员
                         string strYinKui = "";
                         List<NowMsg> msgList = new List<NowMsg>();
-                        msgList = data.GetList<NowMsg>(" isdelete=2 and CommandType in ('买名次','冠亚和','名次大小单双龙虎') and period= " + frmMainForm.Perioid, "");
-                        List<string> listUin = msgList.Select(p => p.MsgFromId).Distinct().ToList();
+                        List<string> listUin = new List<string>();
+                        if (!string.IsNullOrEmpty(frmMainForm.Perioid))
+                        {
+                            msgList = data.GetList<NowMsg>(" isdelete=2 and CommandType in ('买名次','冠亚和','名次大小单双龙虎','和大','和小','和单','和双') and period= " + frmMainForm.Perioid, "");
+                        }
+                        listUin = msgList.Select(p => p.MsgFromId).Distinct().ToList();
 
                         if (listUin != null && listUin.Count > 0)
                         {

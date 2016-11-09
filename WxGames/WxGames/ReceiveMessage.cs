@@ -23,6 +23,7 @@ namespace WxGames
         {
             try
             {
+                Log.WriteLogByDate("接受消息调用成功");
                 NewMethod();
             }
             catch (Exception ex)
@@ -102,29 +103,28 @@ namespace WxGames
 
             //获取群里所有联系人，无uuin，根据昵称来更新userName和uin
             string qun1 = frmMainForm.wxs.GetQun(frmMainForm.CurrentQun);
-            if (string.IsNullOrEmpty(qun1))
+            if (!string.IsNullOrEmpty(qun1))
             {
-                return;
-            }
-            JObject qunObj = JsonConvert.DeserializeObject(qun1) as JObject;
+                JObject qunObj = JsonConvert.DeserializeObject(qun1) as JObject;
 
-            if (qunObj["MemberList"] != null)
-            {
-                foreach (JObject member in qunObj["MemberList"])
+                if (qunObj["MemberList"] != null)
                 {
-                    List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
-                    pkList2.Add(new KeyValuePair<string, object>("NickName", member["NickName"].ToString()));
-                    Contact modelOne = data.First<Contact>(pkList2, "");
-                    if (modelOne != null)
+                    foreach (JObject member in qunObj["MemberList"])
                     {
-                        modelOne.UserName = member["UserName"].ToString();
-                        List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
-                        pkList3.Add(new KeyValuePair<string, object>("Uin", modelOne.Uin));
-                        data.Update<Contact>(modelOne, pkList3, "");
+                        List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
+                        pkList2.Add(new KeyValuePair<string, object>("NickName", member["NickName"].ToString()));
+                        Contact modelOne = data.First<Contact>(pkList2, "");
+                        if (modelOne != null)
+                        {
+                            modelOne.UserName = member["UserName"].ToString();
+                            List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
+                            pkList3.Add(new KeyValuePair<string, object>("Uin", modelOne.Uin));
+                            data.Update<Contact>(modelOne, pkList3, "");
+                        }
                     }
                 }
             }
-
+            
 
             //获取到消息
             if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")

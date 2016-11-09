@@ -98,7 +98,8 @@ namespace BLL
 
         public static bool IsNum(this string str)
         {
-            Regex reg = new Regex(@"^[-]?[0-9]{1}\d*$|^[0]{1}$");
+            //Regex reg = new Regex(@"^[-]?[0-9]{1}\d*$|^[0]{1}$");
+            Regex reg = new Regex(@"^[0-9]{1}\d*$|^[0]{1}$");
             return reg.IsMatch(str);
         }
     }

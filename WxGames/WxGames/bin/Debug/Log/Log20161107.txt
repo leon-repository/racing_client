@@ -1,0 +1,2443 @@
+发生时间：
+星期一 2016-11-7 20:59:39
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 20:59:39
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 20:59:41
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 20:59:41
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 20:59:42
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 20:59:42
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 20:59:44
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 20:59:44
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 20:59:55
+移除微信团队成功
+发生时间：
+星期一 2016-11-7 20:59:56
+获取群信息成功
+发生时间：
+星期一 2016-11-7 20:59:56
+发送游戏开始信息成功
+发生时间：
+星期一 2016-11-7 20:59:56
+发送当前游戏信息成功
+发生时间：
+星期一 2016-11-7 21:00:11
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 21:00:37
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 22:35:12
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 22:35:13
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 22:35:14
+移除微信团队成功
+发生时间：
+星期一 2016-11-7 22:35:14
+获取群信息成功
+发生时间：
+星期一 2016-11-7 22:35:14
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 22:35:14
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 22:35:14
+发送游戏开始信息成功
+发生时间：
+星期一 2016-11-7 22:35:14
+发送当前游戏信息成功
+发生时间：
+星期一 2016-11-7 22:35:27
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 22:37:05
+提示信息：
+操作超时
+
+发生时间：
+星期一 2016-11-7 23:14:28
+提示信息：
+远程服务器返回错误: (503) 服务器不可用。
+
+发生时间：
+星期一 2016-11-7 23:14:44
+提示信息：
+未将对象引用设置到对象的实例。
+
+发生时间：
+星期一 2016-11-7 23:15:25
+移除微信团队成功
+发生时间：
+星期一 2016-11-7 23:15:25
+获取群信息成功
+发生时间：
+星期一 2016-11-7 23:15:25
+发送游戏开始信息成功
+发生时间：
+星期一 2016-11-7 23:15:25
+发送当前游戏信息成功
+发生时间：
+星期一 2016-11-7 23:15:27
+获取到的历史开奖信息是：{
+  "result" : "SUCCESS",
+  "data" : [ {
+    "racingNum" : "201611070170",
+    "racingResult" : [ 4, 7, 5, 1, 6, 3, 10, 8, 2, 9 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : true,
+    "racingTime" : "23:12"
+  }, {
+    "racingNum" : "201611070169",
+    "racingResult" : [ 1, 7, 9, 10, 4, 2, 3, 8, 6, 5 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:07"
+  }, {
+    "racingNum" : "201611070168",
+    "racingResult" : [ 9, 7, 3, 6, 10, 1, 2, 5, 8, 4 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:02"
+  }, {
+    "racingNum" : "201611070167",
+    "racingResult" : [ 6, 5, 10, 9, 8, 2, 4, 1, 3, 7 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:57"
+  }, {
+    "racingNum" : "201611070166",
+    "racingResult" : [ 10, 6, 7, 8, 3, 5, 4, 2, 9, 1 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:52"
+  }, {
+    "racingNum" : "201611070165",
+    "racingResult" : [ 3, 9, 10, 1, 4, 7, 5, 2, 8, 6 ],
+    "firstAddSecond" : 12,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:47"
+  }, {
+    "racingNum" : "201611070164",
+    "racingResult" : [ 6, 2, 1, 7, 5, 9, 3, 4, 10, 8 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:42"
+  }, {
+    "racingNum" : "201611070163",
+    "racingResult" : [ 6, 9, 7, 1, 2, 8, 10, 3, 4, 5 ],
+    "firstAddSecond" : 15,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:37"
+  }, {
+    "racingNum" : "201611070162",
+    "racingResult" : [ 8, 5, 1, 4, 3, 6, 10, 9, 7, 2 ],
+    "firstAddSecond" : 13,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:32"
+  }, {
+    "racingNum" : "201611070161",
+    "racingResult" : [ 7, 10, 9, 3, 2, 6, 1, 8, 5, 4 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:27"
+  }, {
+    "racingNum" : "201611070160",
+    "racingResult" : [ 3, 5, 8, 10, 4, 9, 2, 1, 6, 7 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:22"
+  }, {
+    "racingNum" : "201611070159",
+    "racingResult" : [ 7, 3, 9, 2, 5, 4, 6, 8, 10, 1 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:17"
+  }, {
+    "racingNum" : "201611070158",
+    "racingResult" : [ 4, 1, 8, 7, 3, 10, 5, 2, 9, 6 ],
+    "firstAddSecond" : 5,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:12"
+  }, {
+    "racingNum" : "201611070157",
+    "racingResult" : [ 10, 7, 2, 4, 5, 1, 3, 9, 6, 8 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:07"
+  }, {
+    "racingNum" : "201611070156",
+    "racingResult" : [ 4, 10, 2, 3, 6, 1, 7, 8, 5, 9 ],
+    "firstAddSecond" : 14,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:02"
+  }, {
+    "racingNum" : "201611070155",
+    "racingResult" : [ 4, 5, 6, 8, 2, 3, 7, 1, 10, 9 ],
+    "firstAddSecond" : 9,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:57"
+  }, {
+    "racingNum" : "201611070154",
+    "racingResult" : [ 7, 2, 4, 9, 5, 10, 8, 6, 1, 3 ],
+    "firstAddSecond" : 9,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:52"
+  }, {
+    "racingNum" : "201611070153",
+    "racingResult" : [ 3, 10, 8, 4, 1, 7, 9, 5, 2, 6 ],
+    "firstAddSecond" : 13,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:47"
+  }, {
+    "racingNum" : "201611070152",
+    "racingResult" : [ 4, 3, 10, 9, 1, 6, 2, 5, 8, 7 ],
+    "firstAddSecond" : 7,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:42"
+  }, {
+    "racingNum" : "201611070151",
+    "racingResult" : [ 3, 4, 2, 5, 6, 9, 10, 1, 8, 7 ],
+    "firstAddSecond" : 7,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:37"
+  } ],
+  "message" : null,
+  "page" : 0,
+  "pageSize" : 0,
+  "totalPage" : 0,
+  "count" : 0
+}
+发生时间：
+星期一 2016-11-7 23:15:33
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:15:40
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:18:50
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:19:04
+移除微信团队成功
+发生时间：
+星期一 2016-11-7 23:19:04
+获取群信息成功
+发生时间：
+星期一 2016-11-7 23:19:05
+发送游戏开始信息成功
+发生时间：
+星期一 2016-11-7 23:19:05
+发送当前游戏信息成功
+发生时间：
+星期一 2016-11-7 23:26:27
+移除微信团队成功
+发生时间：
+星期一 2016-11-7 23:26:27
+获取群信息成功
+发生时间：
+星期一 2016-11-7 23:26:28
+发送游戏开始信息成功
+发生时间：
+星期一 2016-11-7 23:26:28
+发送当前游戏信息成功
+发生时间：
+星期一 2016-11-7 23:26:51
+获取到的历史开奖信息是：{
+  "result" : "SUCCESS",
+  "data" : [ {
+    "racingNum" : "201611070172",
+    "racingResult" : [ 3, 1, 9, 7, 5, 6, 8, 2, 4, 10 ],
+    "firstAddSecond" : 4,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : true,
+    "racingTime" : "23:22"
+  }, {
+    "racingNum" : "201611070171",
+    "racingResult" : [ 1, 9, 4, 10, 2, 6, 5, 3, 7, 8 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:17"
+  }, {
+    "racingNum" : "201611070170",
+    "racingResult" : [ 4, 7, 5, 1, 6, 3, 10, 8, 2, 9 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:12"
+  }, {
+    "racingNum" : "201611070169",
+    "racingResult" : [ 1, 7, 9, 10, 4, 2, 3, 8, 6, 5 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:07"
+  }, {
+    "racingNum" : "201611070168",
+    "racingResult" : [ 9, 7, 3, 6, 10, 1, 2, 5, 8, 4 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:02"
+  }, {
+    "racingNum" : "201611070167",
+    "racingResult" : [ 6, 5, 10, 9, 8, 2, 4, 1, 3, 7 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:57"
+  }, {
+    "racingNum" : "201611070166",
+    "racingResult" : [ 10, 6, 7, 8, 3, 5, 4, 2, 9, 1 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:52"
+  }, {
+    "racingNum" : "201611070165",
+    "racingResult" : [ 3, 9, 10, 1, 4, 7, 5, 2, 8, 6 ],
+    "firstAddSecond" : 12,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:47"
+  }, {
+    "racingNum" : "201611070164",
+    "racingResult" : [ 6, 2, 1, 7, 5, 9, 3, 4, 10, 8 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:42"
+  }, {
+    "racingNum" : "201611070163",
+    "racingResult" : [ 6, 9, 7, 1, 2, 8, 10, 3, 4, 5 ],
+    "firstAddSecond" : 15,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:37"
+  }, {
+    "racingNum" : "201611070162",
+    "racingResult" : [ 8, 5, 1, 4, 3, 6, 10, 9, 7, 2 ],
+    "firstAddSecond" : 13,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:32"
+  }, {
+    "racingNum" : "201611070161",
+    "racingResult" : [ 7, 10, 9, 3, 2, 6, 1, 8, 5, 4 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:27"
+  }, {
+    "racingNum" : "201611070160",
+    "racingResult" : [ 3, 5, 8, 10, 4, 9, 2, 1, 6, 7 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:22"
+  }, {
+    "racingNum" : "201611070159",
+    "racingResult" : [ 7, 3, 9, 2, 5, 4, 6, 8, 10, 1 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:17"
+  }, {
+    "racingNum" : "201611070158",
+    "racingResult" : [ 4, 1, 8, 7, 3, 10, 5, 2, 9, 6 ],
+    "firstAddSecond" : 5,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:12"
+  }, {
+    "racingNum" : "201611070157",
+    "racingResult" : [ 10, 7, 2, 4, 5, 1, 3, 9, 6, 8 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:07"
+  }, {
+    "racingNum" : "201611070156",
+    "racingResult" : [ 4, 10, 2, 3, 6, 1, 7, 8, 5, 9 ],
+    "firstAddSecond" : 14,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:02"
+  }, {
+    "racingNum" : "201611070155",
+    "racingResult" : [ 4, 5, 6, 8, 2, 3, 7, 1, 10, 9 ],
+    "firstAddSecond" : 9,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:57"
+  }, {
+    "racingNum" : "201611070154",
+    "racingResult" : [ 7, 2, 4, 9, 5, 10, 8, 6, 1, 3 ],
+    "firstAddSecond" : 9,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:52"
+  }, {
+    "racingNum" : "201611070153",
+    "racingResult" : [ 3, 10, 8, 4, 1, 7, 9, 5, 2, 6 ],
+    "firstAddSecond" : 13,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:47"
+  } ],
+  "message" : null,
+  "page" : 0,
+  "pageSize" : 0,
+  "totalPage" : 0,
+  "count" : 0
+}
+发生时间：
+星期一 2016-11-7 23:27:37
+移除微信团队成功
+发生时间：
+星期一 2016-11-7 23:27:37
+获取群信息成功
+发生时间：
+星期一 2016-11-7 23:27:38
+发送游戏开始信息成功
+发生时间：
+星期一 2016-11-7 23:27:38
+发送当前游戏信息成功
+发生时间：
+星期一 2016-11-7 23:27:58
+获取到的历史开奖信息是：{
+  "result" : "SUCCESS",
+  "data" : [ {
+    "racingNum" : "201611070173",
+    "racingResult" : [ 9, 7, 5, 8, 4, 6, 3, 2, 1, 10 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : true,
+    "racingTime" : "23:27"
+  }, {
+    "racingNum" : "201611070172",
+    "racingResult" : [ 3, 1, 9, 7, 5, 6, 8, 2, 4, 10 ],
+    "firstAddSecond" : 4,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:22"
+  }, {
+    "racingNum" : "201611070171",
+    "racingResult" : [ 1, 9, 4, 10, 2, 6, 5, 3, 7, 8 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:17"
+  }, {
+    "racingNum" : "201611070170",
+    "racingResult" : [ 4, 7, 5, 1, 6, 3, 10, 8, 2, 9 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:12"
+  }, {
+    "racingNum" : "201611070169",
+    "racingResult" : [ 1, 7, 9, 10, 4, 2, 3, 8, 6, 5 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:07"
+  }, {
+    "racingNum" : "201611070168",
+    "racingResult" : [ 9, 7, 3, 6, 10, 1, 2, 5, 8, 4 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:02"
+  }, {
+    "racingNum" : "201611070167",
+    "racingResult" : [ 6, 5, 10, 9, 8, 2, 4, 1, 3, 7 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:57"
+  }, {
+    "racingNum" : "201611070166",
+    "racingResult" : [ 10, 6, 7, 8, 3, 5, 4, 2, 9, 1 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:52"
+  }, {
+    "racingNum" : "201611070165",
+    "racingResult" : [ 3, 9, 10, 1, 4, 7, 5, 2, 8, 6 ],
+    "firstAddSecond" : 12,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:47"
+  }, {
+    "racingNum" : "201611070164",
+    "racingResult" : [ 6, 2, 1, 7, 5, 9, 3, 4, 10, 8 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:42"
+  }, {
+    "racingNum" : "201611070163",
+    "racingResult" : [ 6, 9, 7, 1, 2, 8, 10, 3, 4, 5 ],
+    "firstAddSecond" : 15,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:37"
+  }, {
+    "racingNum" : "201611070162",
+    "racingResult" : [ 8, 5, 1, 4, 3, 6, 10, 9, 7, 2 ],
+    "firstAddSecond" : 13,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:32"
+  }, {
+    "racingNum" : "201611070161",
+    "racingResult" : [ 7, 10, 9, 3, 2, 6, 1, 8, 5, 4 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:27"
+  }, {
+    "racingNum" : "201611070160",
+    "racingResult" : [ 3, 5, 8, 10, 4, 9, 2, 1, 6, 7 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:22"
+  }, {
+    "racingNum" : "201611070159",
+    "racingResult" : [ 7, 3, 9, 2, 5, 4, 6, 8, 10, 1 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:17"
+  }, {
+    "racingNum" : "201611070158",
+    "racingResult" : [ 4, 1, 8, 7, 3, 10, 5, 2, 9, 6 ],
+    "firstAddSecond" : 5,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:12"
+  }, {
+    "racingNum" : "201611070157",
+    "racingResult" : [ 10, 7, 2, 4, 5, 1, 3, 9, 6, 8 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:07"
+  }, {
+    "racingNum" : "201611070156",
+    "racingResult" : [ 4, 10, 2, 3, 6, 1, 7, 8, 5, 9 ],
+    "firstAddSecond" : 14,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:02"
+  }, {
+    "racingNum" : "201611070155",
+    "racingResult" : [ 4, 5, 6, 8, 2, 3, 7, 1, 10, 9 ],
+    "firstAddSecond" : 9,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:57"
+  }, {
+    "racingNum" : "201611070154",
+    "racingResult" : [ 7, 2, 4, 9, 5, 10, 8, 6, 1, 3 ],
+    "firstAddSecond" : 9,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:52"
+  } ],
+  "message" : null,
+  "page" : 0,
+  "pageSize" : 0,
+  "totalPage" : 0,
+  "count" : 0
+}
+发生时间：
+星期一 2016-11-7 23:29:09
+移除微信团队成功
+发生时间：
+星期一 2016-11-7 23:29:09
+获取群信息成功
+发生时间：
+星期一 2016-11-7 23:29:10
+发送游戏开始信息成功
+发生时间：
+星期一 2016-11-7 23:29:10
+发送当前游戏信息成功
+发生时间：
+星期一 2016-11-7 23:31:01
+移除微信团队成功
+发生时间：
+星期一 2016-11-7 23:31:01
+获取群信息成功
+发生时间：
+星期一 2016-11-7 23:31:01
+发送游戏开始信息成功
+发生时间：
+星期一 2016-11-7 23:31:01
+发送当前游戏信息成功
+发生时间：
+星期一 2016-11-7 23:31:07
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:31:12
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:31:15
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:33:52
+移除微信团队成功
+发生时间：
+星期一 2016-11-7 23:33:52
+获取群信息成功
+发生时间：
+星期一 2016-11-7 23:33:53
+发送游戏开始信息成功
+发生时间：
+星期一 2016-11-7 23:33:53
+发送当前游戏信息成功
+发生时间：
+星期一 2016-11-7 23:34:11
+提示信息：
+远程服务器返回错误: (503) 服务器不可用。
+
+发生时间：
+星期一 2016-11-7 23:34:11
+提示信息：
+数组不能为空。
+参数名: bytes
+
+发生时间：
+星期一 2016-11-7 23:34:12
+获取到的历史开奖信息是：{
+  "result" : "SUCCESS",
+  "data" : [ {
+    "racingNum" : "201611070174",
+    "racingResult" : [ 9, 2, 8, 1, 3, 6, 7, 5, 4, 10 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : true,
+    "racingTime" : "23:32"
+  }, {
+    "racingNum" : "201611070173",
+    "racingResult" : [ 9, 7, 5, 8, 4, 6, 3, 2, 1, 10 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:27"
+  }, {
+    "racingNum" : "201611070172",
+    "racingResult" : [ 3, 1, 9, 7, 5, 6, 8, 2, 4, 10 ],
+    "firstAddSecond" : 4,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:22"
+  }, {
+    "racingNum" : "201611070171",
+    "racingResult" : [ 1, 9, 4, 10, 2, 6, 5, 3, 7, 8 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:17"
+  }, {
+    "racingNum" : "201611070170",
+    "racingResult" : [ 4, 7, 5, 1, 6, 3, 10, 8, 2, 9 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:12"
+  }, {
+    "racingNum" : "201611070169",
+    "racingResult" : [ 1, 7, 9, 10, 4, 2, 3, 8, 6, 5 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:07"
+  }, {
+    "racingNum" : "201611070168",
+    "racingResult" : [ 9, 7, 3, 6, 10, 1, 2, 5, 8, 4 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:02"
+  }, {
+    "racingNum" : "201611070167",
+    "racingResult" : [ 6, 5, 10, 9, 8, 2, 4, 1, 3, 7 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:57"
+  }, {
+    "racingNum" : "201611070166",
+    "racingResult" : [ 10, 6, 7, 8, 3, 5, 4, 2, 9, 1 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:52"
+  }, {
+    "racingNum" : "201611070165",
+    "racingResult" : [ 3, 9, 10, 1, 4, 7, 5, 2, 8, 6 ],
+    "firstAddSecond" : 12,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:47"
+  }, {
+    "racingNum" : "201611070164",
+    "racingResult" : [ 6, 2, 1, 7, 5, 9, 3, 4, 10, 8 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:42"
+  }, {
+    "racingNum" : "201611070163",
+    "racingResult" : [ 6, 9, 7, 1, 2, 8, 10, 3, 4, 5 ],
+    "firstAddSecond" : 15,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:37"
+  }, {
+    "racingNum" : "201611070162",
+    "racingResult" : [ 8, 5, 1, 4, 3, 6, 10, 9, 7, 2 ],
+    "firstAddSecond" : 13,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:32"
+  }, {
+    "racingNum" : "201611070161",
+    "racingResult" : [ 7, 10, 9, 3, 2, 6, 1, 8, 5, 4 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:27"
+  }, {
+    "racingNum" : "201611070160",
+    "racingResult" : [ 3, 5, 8, 10, 4, 9, 2, 1, 6, 7 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:22"
+  }, {
+    "racingNum" : "201611070159",
+    "racingResult" : [ 7, 3, 9, 2, 5, 4, 6, 8, 10, 1 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:17"
+  }, {
+    "racingNum" : "201611070158",
+    "racingResult" : [ 4, 1, 8, 7, 3, 10, 5, 2, 9, 6 ],
+    "firstAddSecond" : 5,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:12"
+  }, {
+    "racingNum" : "201611070157",
+    "racingResult" : [ 10, 7, 2, 4, 5, 1, 3, 9, 6, 8 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:07"
+  }, {
+    "racingNum" : "201611070156",
+    "racingResult" : [ 4, 10, 2, 3, 6, 1, 7, 8, 5, 9 ],
+    "firstAddSecond" : 14,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:02"
+  }, {
+    "racingNum" : "201611070155",
+    "racingResult" : [ 4, 5, 6, 8, 2, 3, 7, 1, 10, 9 ],
+    "firstAddSecond" : 9,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "21:57"
+  } ],
+  "message" : null,
+  "page" : 0,
+  "pageSize" : 0,
+  "totalPage" : 0,
+  "count" : 0
+}
+发生时间：
+星期一 2016-11-7 23:34:54
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:35:23
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:35:35
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:36:04
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:36:04
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 23:36:16
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:36:44
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:37:16
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:37:24
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:37:26
+获取到的历史开奖信息是：{
+  "result" : "SUCCESS",
+  "data" : [ {
+    "racingNum" : "201611070175",
+    "racingResult" : [ 6, 10, 5, 7, 9, 8, 4, 3, 1, 2 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : true,
+    "racingTime" : "23:37"
+  }, {
+    "racingNum" : "201611070174",
+    "racingResult" : [ 9, 2, 8, 1, 3, 6, 7, 5, 4, 10 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:32"
+  }, {
+    "racingNum" : "201611070173",
+    "racingResult" : [ 9, 7, 5, 8, 4, 6, 3, 2, 1, 10 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:27"
+  }, {
+    "racingNum" : "201611070172",
+    "racingResult" : [ 3, 1, 9, 7, 5, 6, 8, 2, 4, 10 ],
+    "firstAddSecond" : 4,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:22"
+  }, {
+    "racingNum" : "201611070171",
+    "racingResult" : [ 1, 9, 4, 10, 2, 6, 5, 3, 7, 8 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:17"
+  }, {
+    "racingNum" : "201611070170",
+    "racingResult" : [ 4, 7, 5, 1, 6, 3, 10, 8, 2, 9 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:12"
+  }, {
+    "racingNum" : "201611070169",
+    "racingResult" : [ 1, 7, 9, 10, 4, 2, 3, 8, 6, 5 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:07"
+  }, {
+    "racingNum" : "201611070168",
+    "racingResult" : [ 9, 7, 3, 6, 10, 1, 2, 5, 8, 4 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:02"
+  }, {
+    "racingNum" : "201611070167",
+    "racingResult" : [ 6, 5, 10, 9, 8, 2, 4, 1, 3, 7 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:57"
+  }, {
+    "racingNum" : "201611070166",
+    "racingResult" : [ 10, 6, 7, 8, 3, 5, 4, 2, 9, 1 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:52"
+  }, {
+    "racingNum" : "201611070165",
+    "racingResult" : [ 3, 9, 10, 1, 4, 7, 5, 2, 8, 6 ],
+    "firstAddSecond" : 12,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:47"
+  }, {
+    "racingNum" : "201611070164",
+    "racingResult" : [ 6, 2, 1, 7, 5, 9, 3, 4, 10, 8 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:42"
+  }, {
+    "racingNum" : "201611070163",
+    "racingResult" : [ 6, 9, 7, 1, 2, 8, 10, 3, 4, 5 ],
+    "firstAddSecond" : 15,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:37"
+  }, {
+    "racingNum" : "201611070162",
+    "racingResult" : [ 8, 5, 1, 4, 3, 6, 10, 9, 7, 2 ],
+    "firstAddSecond" : 13,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:32"
+  }, {
+    "racingNum" : "201611070161",
+    "racingResult" : [ 7, 10, 9, 3, 2, 6, 1, 8, 5, 4 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:27"
+  }, {
+    "racingNum" : "201611070160",
+    "racingResult" : [ 3, 5, 8, 10, 4, 9, 2, 1, 6, 7 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:22"
+  }, {
+    "racingNum" : "201611070159",
+    "racingResult" : [ 7, 3, 9, 2, 5, 4, 6, 8, 10, 1 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:17"
+  }, {
+    "racingNum" : "201611070158",
+    "racingResult" : [ 4, 1, 8, 7, 3, 10, 5, 2, 9, 6 ],
+    "firstAddSecond" : 5,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:12"
+  }, {
+    "racingNum" : "201611070157",
+    "racingResult" : [ 10, 7, 2, 4, 5, 1, 3, 9, 6, 8 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:07"
+  }, {
+    "racingNum" : "201611070156",
+    "racingResult" : [ 4, 10, 2, 3, 6, 1, 7, 8, 5, 9 ],
+    "firstAddSecond" : 14,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:02"
+  } ],
+  "message" : null,
+  "page" : 0,
+  "pageSize" : 0,
+  "totalPage" : 0,
+  "count" : 0
+}
+发生时间：
+星期一 2016-11-7 23:37:56
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:37:56
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 23:38:21
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:38:37
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:39:01
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:39:01
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 23:39:41
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:40:21
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:40:38
+提示信息：
+操作超时
+
+发生时间：
+星期一 2016-11-7 23:40:40
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:40:56
+body:[{"wechatSn":"2039521281","stakeVo":{"racingNum":"201611070176","appointStakeList":[{"carNum":1,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":2,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":3,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":4,"first":5,"second":10,"third":5,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":5,"first":5,"second":10,"third":5,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":6,"first":5,"second":5,"third":5,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":7,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":8,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":9,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0},{"carNum":10,"first":0,"second":0,"third":0,"fourth":0,"fifth":0,"sixth":0,"seventh":0,"eighth":0,"ninth":0,"tenth":0}],"commonStake":{"firstUp":0,"firstDowm":0,"secondUp":0,"secondDowm":0,"thirdUp":0,"thirdDowm":0,"fourthUp":0,"fourthDowm":0,"fifthUp":0,"fifthDowm":0,"firstSecondOdd":0,"firstSecondEven":0,"firstSecondBig":0,"firstSecondSmall":0,"firstSecond3":0,"firstSecond4":0,"firstSecond5":0,"firstSecond6":0,"firstSecond7":0,"firstSecond8":0,"firstSecond9":0,"firstSecond10":0,"firstSecond11":0,"firstSecond12":0,"firstSecond13":0,"firstSecond14":0,"firstSecond15":0,"firstSecond16":0,"firstSecond17":0,"firstSecond18":0,"firstSecond19":0},"rankingStakeList":[{"rankingNum":1,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":2,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":3,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":4,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":5,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":6,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":7,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":8,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":9,"big":0,"small":0,"odd":0,"even":0},{"rankingNum":10,"big":0,"small":0,"odd":0,"even":0}]}}]
+发生时间：
+星期一 2016-11-7 23:40:58
+押注接口：{
+  "result" : "SUCCESS",
+  "data" : null,
+  "message" : null,
+  "page" : 0,
+  "pageSize" : 0,
+  "totalPage" : 0,
+  "count" : 0
+}
+发生时间：
+星期一 2016-11-7 23:41:02
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:41:05
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:41:22
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:42:02
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:42:06
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:42:06
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 23:42:11
+开奖结果是：{
+  "result" : "SUCCESS",
+  "data" : [ {
+    "members" : {
+      "id" : 1,
+      "userId" : 5,
+      "wechatClientId" : null,
+      "wechatSn" : "2039521281",
+      "nickName" : "当机游戏",
+      "points" : 866.00
+    },
+    "memberStake" : {
+      "id" : 72,
+      "membersId" : 1,
+      "racingNum" : "201611070176",
+      "totalStakeAmount" : 55.00,
+      "totalIncomeAmount" : 0.00,
+      "totalDeficitAmount" : -55.00,
+      "totalStakeCount" : 9,
+      "isComplateStatistics" : true,
+      "createTime" : 1478533257000
+    }
+  } ],
+  "message" : null,
+  "page" : 0,
+  "pageSize" : 0,
+  "totalPage" : 0,
+  "count" : 0
+}
+发生时间：
+星期一 2016-11-7 23:42:12
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:42:26
+获取到的历史开奖信息是：{
+  "result" : "SUCCESS",
+  "data" : [ {
+    "racingNum" : "201611070176",
+    "racingResult" : [ 8, 1, 7, 6, 2, 5, 9, 10, 4, 3 ],
+    "firstAddSecond" : 9,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : true,
+    "racingTime" : "23:42"
+  }, {
+    "racingNum" : "201611070175",
+    "racingResult" : [ 6, 10, 5, 7, 9, 8, 4, 3, 1, 2 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:37"
+  }, {
+    "racingNum" : "201611070174",
+    "racingResult" : [ 9, 2, 8, 1, 3, 6, 7, 5, 4, 10 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:32"
+  }, {
+    "racingNum" : "201611070173",
+    "racingResult" : [ 9, 7, 5, 8, 4, 6, 3, 2, 1, 10 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:27"
+  }, {
+    "racingNum" : "201611070172",
+    "racingResult" : [ 3, 1, 9, 7, 5, 6, 8, 2, 4, 10 ],
+    "firstAddSecond" : 4,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:22"
+  }, {
+    "racingNum" : "201611070171",
+    "racingResult" : [ 1, 9, 4, 10, 2, 6, 5, 3, 7, 8 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:17"
+  }, {
+    "racingNum" : "201611070170",
+    "racingResult" : [ 4, 7, 5, 1, 6, 3, 10, 8, 2, 9 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:12"
+  }, {
+    "racingNum" : "201611070169",
+    "racingResult" : [ 1, 7, 9, 10, 4, 2, 3, 8, 6, 5 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:07"
+  }, {
+    "racingNum" : "201611070168",
+    "racingResult" : [ 9, 7, 3, 6, 10, 1, 2, 5, 8, 4 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:02"
+  }, {
+    "racingNum" : "201611070167",
+    "racingResult" : [ 6, 5, 10, 9, 8, 2, 4, 1, 3, 7 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:57"
+  }, {
+    "racingNum" : "201611070166",
+    "racingResult" : [ 10, 6, 7, 8, 3, 5, 4, 2, 9, 1 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:52"
+  }, {
+    "racingNum" : "201611070165",
+    "racingResult" : [ 3, 9, 10, 1, 4, 7, 5, 2, 8, 6 ],
+    "firstAddSecond" : 12,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:47"
+  }, {
+    "racingNum" : "201611070164",
+    "racingResult" : [ 6, 2, 1, 7, 5, 9, 3, 4, 10, 8 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:42"
+  }, {
+    "racingNum" : "201611070163",
+    "racingResult" : [ 6, 9, 7, 1, 2, 8, 10, 3, 4, 5 ],
+    "firstAddSecond" : 15,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:37"
+  }, {
+    "racingNum" : "201611070162",
+    "racingResult" : [ 8, 5, 1, 4, 3, 6, 10, 9, 7, 2 ],
+    "firstAddSecond" : 13,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:32"
+  }, {
+    "racingNum" : "201611070161",
+    "racingResult" : [ 7, 10, 9, 3, 2, 6, 1, 8, 5, 4 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:27"
+  }, {
+    "racingNum" : "201611070160",
+    "racingResult" : [ 3, 5, 8, 10, 4, 9, 2, 1, 6, 7 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:22"
+  }, {
+    "racingNum" : "201611070159",
+    "racingResult" : [ 7, 3, 9, 2, 5, 4, 6, 8, 10, 1 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:17"
+  }, {
+    "racingNum" : "201611070158",
+    "racingResult" : [ 4, 1, 8, 7, 3, 10, 5, 2, 9, 6 ],
+    "firstAddSecond" : 5,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:12"
+  }, {
+    "racingNum" : "201611070157",
+    "racingResult" : [ 10, 7, 2, 4, 5, 1, 3, 9, 6, 8 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:07"
+  } ],
+  "message" : null,
+  "page" : 0,
+  "pageSize" : 0,
+  "totalPage" : 0,
+  "count" : 0
+}
+发生时间：
+星期一 2016-11-7 23:42:46
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:42:52
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:42:52
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 23:43:26
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:43:30
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:43:33
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:45:44
+移除微信团队成功
+发生时间：
+星期一 2016-11-7 23:45:45
+获取群信息成功
+发生时间：
+星期一 2016-11-7 23:45:45
+发送游戏开始信息成功
+发生时间：
+星期一 2016-11-7 23:45:45
+发送当前游戏信息成功
+发生时间：
+星期一 2016-11-7 23:45:53
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:46:46
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:47:26
+提示信息：
+操作超时
+
+发生时间：
+星期一 2016-11-7 23:47:26
+获取到的历史开奖信息是：{
+  "result" : "SUCCESS",
+  "data" : [ {
+    "racingNum" : "201611070177",
+    "racingResult" : [ 2, 3, 8, 7, 6, 5, 9, 1, 10, 4 ],
+    "firstAddSecond" : 5,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : true,
+    "racingTime" : "23:47"
+  }, {
+    "racingNum" : "201611070176",
+    "racingResult" : [ 8, 1, 7, 6, 2, 5, 9, 10, 4, 3 ],
+    "firstAddSecond" : 9,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:42"
+  }, {
+    "racingNum" : "201611070175",
+    "racingResult" : [ 6, 10, 5, 7, 9, 8, 4, 3, 1, 2 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:37"
+  }, {
+    "racingNum" : "201611070174",
+    "racingResult" : [ 9, 2, 8, 1, 3, 6, 7, 5, 4, 10 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:32"
+  }, {
+    "racingNum" : "201611070173",
+    "racingResult" : [ 9, 7, 5, 8, 4, 6, 3, 2, 1, 10 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:27"
+  }, {
+    "racingNum" : "201611070172",
+    "racingResult" : [ 3, 1, 9, 7, 5, 6, 8, 2, 4, 10 ],
+    "firstAddSecond" : 4,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:22"
+  }, {
+    "racingNum" : "201611070171",
+    "racingResult" : [ 1, 9, 4, 10, 2, 6, 5, 3, 7, 8 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "23:17"
+  }, {
+    "racingNum" : "201611070170",
+    "racingResult" : [ 4, 7, 5, 1, 6, 3, 10, 8, 2, 9 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:12"
+  }, {
+    "racingNum" : "201611070169",
+    "racingResult" : [ 1, 7, 9, 10, 4, 2, 3, 8, 6, 5 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:07"
+  }, {
+    "racingNum" : "201611070168",
+    "racingResult" : [ 9, 7, 3, 6, 10, 1, 2, 5, 8, 4 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "23:02"
+  }, {
+    "racingNum" : "201611070167",
+    "racingResult" : [ 6, 5, 10, 9, 8, 2, 4, 1, 3, 7 ],
+    "firstAddSecond" : 11,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:57"
+  }, {
+    "racingNum" : "201611070166",
+    "racingResult" : [ 10, 6, 7, 8, 3, 5, 4, 2, 9, 1 ],
+    "firstAddSecond" : 16,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:52"
+  }, {
+    "racingNum" : "201611070165",
+    "racingResult" : [ 3, 9, 10, 1, 4, 7, 5, 2, 8, 6 ],
+    "firstAddSecond" : 12,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : false,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:47"
+  }, {
+    "racingNum" : "201611070164",
+    "racingResult" : [ 6, 2, 1, 7, 5, 9, 3, 4, 10, 8 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:42"
+  }, {
+    "racingNum" : "201611070163",
+    "racingResult" : [ 6, 9, 7, 1, 2, 8, 10, 3, 4, 5 ],
+    "firstAddSecond" : 15,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:37"
+  }, {
+    "racingNum" : "201611070162",
+    "racingResult" : [ 8, 5, 1, 4, 3, 6, 10, 9, 7, 2 ],
+    "firstAddSecond" : 13,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : false,
+    "isFourthUp" : false,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:32"
+  }, {
+    "racingNum" : "201611070161",
+    "racingResult" : [ 7, 10, 9, 3, 2, 6, 1, 8, 5, 4 ],
+    "firstAddSecond" : 17,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : true,
+    "isFirstUp" : true,
+    "isSecondUp" : true,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:27"
+  }, {
+    "racingNum" : "201611070160",
+    "racingResult" : [ 3, 5, 8, 10, 4, 9, 2, 1, 6, 7 ],
+    "firstAddSecond" : 8,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:22"
+  }, {
+    "racingNum" : "201611070159",
+    "racingResult" : [ 7, 3, 9, 2, 5, 4, 6, 8, 10, 1 ],
+    "firstAddSecond" : 10,
+    "isFirstSecondOdd" : false,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : true,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : false,
+    "isFifthUp" : true,
+    "isLastResult" : false,
+    "racingTime" : "22:17"
+  }, {
+    "racingNum" : "201611070158",
+    "racingResult" : [ 4, 1, 8, 7, 3, 10, 5, 2, 9, 6 ],
+    "firstAddSecond" : 5,
+    "isFirstSecondOdd" : true,
+    "isFirstSecondBig" : false,
+    "isFirstUp" : false,
+    "isSecondUp" : false,
+    "isThirdUp" : true,
+    "isFourthUp" : true,
+    "isFifthUp" : false,
+    "isLastResult" : false,
+    "racingTime" : "22:12"
+  } ],
+  "message" : null,
+  "page" : 0,
+  "pageSize" : 0,
+  "totalPage" : 0,
+  "count" : 0
+}
+发生时间：
+星期一 2016-11-7 23:47:26
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:47:26
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 23:47:27
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:48:06
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:48:08
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:48:08
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 23:48:47
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:48:48
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:48:50
+提示信息：
+远程服务器返回错误: (404) 未找到。
+
+发生时间：
+星期一 2016-11-7 23:49:29
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:49:31
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:49:31
+提示信息：
+未能解析此远程名称: 'webpush2.wx2.qq.com'
+
+发生时间：
+星期一 2016-11-7 23:50:09
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:50:11
+提示信息：
+基础连接已经关闭: 连接被意外关闭。
+
+发生时间：
+星期一 2016-11-7 23:50:15
+提示信息：
+远程服务器返回错误: (404) 未找到。
+

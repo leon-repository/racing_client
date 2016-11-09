@@ -20,64 +20,6 @@ namespace WxGames.HTTP
         /// 访问服务器时的cookies
         /// </summary>
         public static CookieContainer CookiesContainer;
-        ///// <summary>
-        ///// 向服务器发送get请求  返回服务器回复数据
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <returns></returns>
-        //public static byte[] SendGetRequest(string url)
-        //{
-        //    try
-        //    {
-        //        System.Net.ServicePointManager.ServerCertificateValidationCallback =
-        //                new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
-        //        System.Net.ServicePointManager.DefaultConnectionLimit = 512;
-        //        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        //        request.Method = "get";
-
-        //        if (CookiesContainer == null)
-        //        {
-        //            CookiesContainer = new CookieContainer();
-        //        }
-        //        request.CookieContainer = CookiesContainer;  //启用cookie
-        //        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        //        Stream response_stream = response.GetResponseStream();
-
-        //        //输出cookieContainer
-        //        Log.WriteLogByDate("GetUrl:" + url);
-        //        List<Cookie> list = GetAllCookies(CookiesContainer);
-        //        foreach (Cookie item in list)
-        //        {
-        //            Log.WriteLogByDate("Name:" + item.Name + "  Value: " + item.Value);
-        //        }
-
-        //        //输出header
-        //        WebHeaderCollection headers=request.Headers;
-
-        //        foreach (var key in headers.AllKeys)
-        //        {
-        //            Log.WriteLogByDate("Header: key="+key+" value:"+headers.GetValues(key)[0]);
-        //        } 
-
-
-        //        int count = (int)response.ContentLength;
-        //        int offset = 0;
-        //        byte[] buf = new byte[count];
-        //        while (count > 0)  //读取返回数据
-        //        {
-        //            int n = response_stream.Read(buf, offset, count);
-        //            if (n == 0) break;
-        //            count -= n;
-        //            offset += n;
-        //        }
-        //        return buf;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.WriteLog(ex);
-        //        return null;
-        //    }
-        //}
 
         public static byte[] SendGetRequest(string url)
         {
@@ -88,16 +30,19 @@ namespace WxGames.HTTP
                 System.Net.ServicePointManager.DefaultConnectionLimit = 512;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "get";
-                if (CookiesContainer != null)
+                //if (CookiesContainer != null)
+                //{
+                //    request.CookieContainer = CookiesContainer;
+                //}
+                //else
+                //{
+                //    request.CookieContainer = new CookieContainer();
+                //}
+                if (CookiesContainer == null)
                 {
-                    request.CookieContainer = CookiesContainer;
+                    CookiesContainer = new CookieContainer();
                 }
-                else
-                {
-                    request.CookieContainer = new CookieContainer();
-                }
-
-                //request.CookieContainer = CookiesContainer;  //启用cookie
+                request.CookieContainer = CookiesContainer;  //启用cookie
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
                 Stream response_stream = response.GetResponseStream();
@@ -174,6 +119,9 @@ namespace WxGames.HTTP
                 }
                 request.CookieContainer = CookiesContainer;  //启用cookie
 
+
+                
+
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream response_stream = response.GetResponseStream();
 
@@ -197,6 +145,86 @@ namespace WxGames.HTTP
                 return null;
             }
         }
+
+
+        public static byte[] SendPostRequestAndSetCookies(string url, string body)
+        {
+            try
+            {
+                //Log.WriteLogByDate("调用URL:" + url);
+                //Log.WriteLogByDate(body);
+
+                byte[] request_body = Encoding.UTF8.GetBytes(body);
+                System.Net.ServicePointManager.DefaultConnectionLimit = 512;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                //request.Headers.Add(HttpRequestHeader.UserAgent.ToString(), "Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5");
+                request.Method = "post";
+                request.ContentLength = request_body.Length;
+
+                Stream request_stream = request.GetRequestStream();
+
+                request_stream.Write(request_body, 0, request_body.Length);
+
+                if (CookiesContainer == null)
+                {
+                    CookiesContainer = new CookieContainer();
+                }
+                request.CookieContainer = CookiesContainer;  //启用cookie
+
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Stream response_stream = response.GetResponseStream();
+
+                if (CookiesContainer == null)
+                {
+                    CookiesContainer = new CookieContainer();
+                    CookiesContainer.Add(response.Cookies);
+                }
+
+                //foreach (Cookie cookie in response.Cookies)
+                //{
+                //    CookiesContainer.SetCookies(cookie.CommentUri);
+                //}
+
+
+                if (response.StatusCode.ToString() == "OK")
+                {
+                    string setCookie = response.Headers.Get("Set-Cookie");
+
+                    if (setCookie != null)
+                    {
+                        if (setCookie.Contains("wx.qq.com"))
+                        {
+                            CookiesContainer.SetCookies(new Uri("https://wx.qq.com"), setCookie);
+                        }
+                        if (setCookie.Contains("wx2.qq.com"))
+                        {
+                            CookiesContainer.SetCookies(new Uri("https://wx2.qq.com"), setCookie);
+                        }
+                    }
+                }
+
+                int count = (int)response.ContentLength;
+                int offset = 0;
+                byte[] buf = new byte[count];
+                while (count > 0)  //读取返回数据
+                {
+                    int n = response_stream.Read(buf, offset, count);
+                    if (n == 0) break;
+                    count -= n;
+                    offset += n;
+                }
+
+                //response.Close();
+
+                return buf;
+            }
+            catch(Exception ex)
+            {
+                Log.WriteLog(ex);
+                return null;
+            }
+        }
+
 
         public static string HttpUploadFile(string url, string file, string paramName, string contentType, NameValueCollection nvc)
         {
@@ -282,16 +310,24 @@ namespace WxGames.HTTP
                 System.Net.ServicePointManager.DefaultConnectionLimit = 512;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "get";
-                if (CookiesContainer != null)
-                {
-                    request.CookieContainer = CookiesContainer;
-                }
-                else
-                {
-                    request.CookieContainer = new CookieContainer();
-                }
+                //if (CookiesContainer != null)
+                //{
+                //    request.CookieContainer = CookiesContainer;
+                //}
+                //else
+                //{
+                //    request.CookieContainer = new CookieContainer();
+                //}
 
                 //request.CookieContainer = CookiesContainer;  //启用cookie
+
+                if (CookiesContainer == null)
+                {
+                    CookiesContainer = new CookieContainer();
+                }
+
+                request.CookieContainer = CookiesContainer;  //启用cookie
+
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 if (CookiesContainer == null)
                 {

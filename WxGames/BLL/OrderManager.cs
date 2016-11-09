@@ -399,12 +399,17 @@ namespace BLL
                     continue;
                 }
 
-                if (command[0].ToDouble() < 0)
+                if (!command[0].IsNum())
                 {
                     result.CommandType = OrderType.指令格式错误;
                     return result;
                 }
-                if (command[1].ToDouble() < 0)
+                if (!command[1].IsNum())
+                {
+                    result.CommandType = OrderType.指令格式错误;
+                    return result;
+                }
+                if (!command[2].IsNum())
                 {
                     result.CommandType = OrderType.指令格式错误;
                     return result;
@@ -541,6 +546,13 @@ namespace BLL
                         {
                             continue;
                         }
+
+                        if (!commanPair[1].IsNum())
+                        {
+                            result.CommandType = OrderType.指令格式错误;
+                            return result;
+                        }
+
                         result.OrderContent = order;
                         result.CommandOne = keyA[i];
                         result.CommandTwo = commanPair[0];
@@ -650,7 +662,7 @@ namespace BLL
                         result.OrderContent = order;
                         result.CommandOne = keyA[i];
 
-                        if (commandA[0].ToDouble() < 0)
+                        if (!commandA[0].IsNum())
                         {
                             result.CommandType = OrderType.指令格式错误;
                             return result;

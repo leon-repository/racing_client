@@ -21,6 +21,7 @@ namespace WxGames
         {
             try
             {
+                Log.WriteLogByDate("发送消息调用成功");
                 NewMethod();
             }
             catch (Exception ex)

@@ -356,7 +356,7 @@ namespace WxGames.HTTP
                         
                         string url = item + sid.Value + "&lang=zh_CN&skey=" + LoginService.SKey + "&pass_ticket=" + LoginService.Pass_Ticket;
                         //Log.WriteLogByDate("微信同步url:" + url);
-                        bytes = BaseService.SendPostRequest(url, sync_json);
+                        bytes = BaseService.SendPostRequestAndSetCookies(url, sync_json);
                         //bytes = BaseService.SendPostRequest(item + sid.Value + "&skey=" + LoginService.SKey, sync_json);
 
                         string sync_str2 = Encoding.UTF8.GetString(bytes);
@@ -371,6 +371,7 @@ namespace WxGames.HTTP
                         //}
                         if (sync_str2.Contains("\"Ret\": 0"))
                         {
+                           // Log.WriteLogByDate("消息同步返回结果是："+sync_str2);
                             break;
                         }
                         else

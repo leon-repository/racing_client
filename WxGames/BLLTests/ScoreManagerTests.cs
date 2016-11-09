@@ -27,5 +27,13 @@ namespace BLL.Tests
             
 
         }
+
+        [TestMethod()]
+        public void IsNum()
+        {
+            Assert.IsTrue("123".IsNum());
+            //Assert.IsTrue("+123".IsNum());
+            Assert.IsTrue("-123".IsNum());
+        }
     }
 }

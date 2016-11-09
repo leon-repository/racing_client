@@ -322,6 +322,13 @@ namespace WxGames
             //并将微信的用户列表，群列表存放在系统数据库中
             JObject init_result = wxs.WxInit();  //初始化
 
+            // "Ret": 1101,
+            if (init_result["BaseResponse"]["Ret"].ToString() == "1100" || init_result["BaseResponse"]["Ret"].ToString() == "1101")
+            {
+                MessageBox.Show("微信登陆失败，系统将退出，请点击确定");
+                Environment.Exit(0);
+            }
+
             List<object> contact_all = new List<object>();
             if (init_result != null)
             {
@@ -509,6 +516,7 @@ namespace WxGames
                 else
                 {
                     CurrentWX.SendMsg(new WXMsg() { From = CurrentWX.UserName, Msg = "---正在封盘---", Readed = false, Time = DateTime.Now, To = CurrentQun, Type = 1 }, false);
+                    frmMainForm.IsKaiJian = true;
                 }
             }
             else
