@@ -176,6 +176,78 @@ namespace WxGames
 
                 if (msg.SendTime <= DateTime.Now.DateTimeToUnixTimestamp())
                 {
+                    //判断是否是接受下单的消息
+                    if (msg.SendTime == -2)
+                    {
+                        //同步积分库
+
+                        //调用同步积分接口
+                        string url = "/members/point/all";
+                        string authStake = PanKou.Instance.GetSha1("", url);
+                        string jsonStake = "";
+                        while (string.IsNullOrEmpty(jsonStake))
+                        {
+                            jsonStake = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url, authStake, PanKou.accessKey);
+                            if (jsonStake == null)
+                            {
+                                Thread.Sleep(500);
+                            }
+                        }
+                        try
+                        {
+                            if (jsonStake != null)
+                            {
+                                JObject jobject = JsonConvert.DeserializeObject(jsonStake) as JObject;
+                                if (jobject != null)
+                                {
+                                    string data2 = jobject["data"].ToString();
+                                    if (!string.IsNullOrEmpty(data2))
+                                    {
+                                        List<Members> listMembers = JsonConvert.DeserializeObject<List<Members>>(data2);
+
+                                        foreach (Members member in listMembers)
+                                        {
+                                            if (member != null && member.wechatSn != null)
+                                            {
+                                                data.ExecuteSql(string.Format(" update ContactScore set totalScore='{0}' where uin='{1}' ", member.points, member.wechatSn));
+                                            }
+                                        }
+
+                                        List<ContactScore> listContact = data.GetList<ContactScore>("", "");
+
+                                        if (listContact != null && listContact.Count >= 0)
+                                        {
+                                            //本地存在服务器没有的数据，则删除
+                                            List<string> listCha = listContact.Select(p => p.Uin).Distinct().ToList().Except(listMembers.Select(p => p.wechatSn).ToList()).ToList();
+                                            foreach (string uin in listCha)
+                                            {
+                                                data.ExecuteSql(string.Format(" delete from ContactScore where uin='{0}' ", uin));
+                                            }
+
+                                            //服务器存在，本地不存在的数据，则添加
+                                            List<string> listCha2 = listMembers.Select(p => p.wechatSn).ToList().Except(listContact.Select(p => p.Uin).Distinct().ToList()).ToList();
+
+                                            foreach (string memberId in listCha2)
+                                            {
+                                                Members model = listMembers.FirstOrDefault(p => p.wechatSn == memberId);
+                                                if (model == null) continue;
+                                                ContactScore contactScore = new ContactScore() { Uuid = Guid.NewGuid().ToString(), Uin = model.wechatSn, NickName = model.nickName, TotalScore = model.points.ToString().ToInt() };
+                                                data.Insert<ContactScore>(contactScore, "");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            //同步消息
+                            Log.WriteLogByDate("同步积分出错：");
+                            Log.WriteLog(ex);
+                        }
+                    }
+
+
                     //先检查有没有未处理完的信息
                     //有的话，跳过
                     string content = msg.Content;
@@ -237,8 +309,8 @@ namespace WxGames
                         string urlConfiger2 = "/racing/web/history";
                         string json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2, "", PanKou.accessKey);
                         string strJson = json2;
-                        Log.WriteLogByDate("获取到的历史开奖信息是："+json2);
-                        DrawImage image = new DrawImage(1400, 700);
+                        //Log.WriteLogByDate("获取到的历史开奖信息是："+json2);
+                        DrawImage image = new DrawImage(550, 500);
                         image.SetSavePath(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
                         image.SetFramePen(Color.Gray);
                         image.SetNumberBackgroundColor(1, Color.FromArgb(245, 245, 245));
@@ -285,9 +357,11 @@ namespace WxGames
             //上报阶段 下注信息上传
             if (stage == "2")
             {
-                Thread.Sleep(5000);
+                
                 frmMainForm.IsJieDan = false;
                 frmMainForm.IsFengPan = true;
+
+                Thread.Sleep(5000);
                 List<NowMsg> msgList = new List<NowMsg>();
 
 

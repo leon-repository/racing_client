@@ -52,7 +52,15 @@ namespace DrawTool
         //行高比例
         public double[] rowHeightRatio = { 2, 1 };
         //列宽比例
-        public double[] colHeightRatio = { 4, 6, 2, 2, 2, 1, 1, 1, 1, 1 };
+        //public double[] colHeightRatio = { 4, 6, 2, 2, 2, 1, 1, 1, 1, 1 };20161111A
+
+        //public double[] colHeightRatio = { 3, 5, 0.8, 1, 1, 1, 1, 1, 1, 1 };
+
+        //public double[] colHeightRatio = { 2.5, 4, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 };////11A
+
+        //public double[] colHeightRatio = { 1.7, 3, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 };////11B
+
+        public double[] colHeightRatio = { 1.4, 2, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3 };
 
         //文件保存路径,绝对路径
         private string _savePath;
@@ -72,7 +80,7 @@ namespace DrawTool
         //设置主体边框颜色
         public void SetFramePen(Color color)
         {
-            if(color == null)
+            if (color == null)
                 color = Color.DarkGray;
             _framePen = new Pen(color);
         }
@@ -148,6 +156,8 @@ namespace DrawTool
         //绘制主体框架
         private void drawFrame()
         {
+            _gr.FillRectangle(Brushes.WhiteSmoke, 0, 0, _map.Width, _map.Height);
+
             //横线
             _gr.DrawLine(_framePen, new Point(0, _rowHeight[0]), new Point(_map.Width, _rowHeight[0]));
             for (int i = 1; i <= 19; i++)
@@ -173,9 +183,11 @@ namespace DrawTool
             StringFormat format = new StringFormat();
             format.LineAlignment = StringAlignment.Center;  // 更正： 垂直居中
             format.Alignment = StringAlignment.Center;      // 水平居中
-            Font font = new Font("宋体", 12, FontStyle.Regular);
+            Font font = new Font("微软雅黑", 12, FontStyle.Regular);
             Brush brush = Brushes.Black;
+
             _gr.FillRectangle(Brushes.WhiteSmoke, 0, 0, _map.Width, _rowHeight[0]);
+
             PositionContent[] title = new PositionContent[4];
             title[0] = new PositionContent("时间", new Rectangle(_colWidth.Take<int>(0).Sum() + 0, 0, _colWidth[0], _rowHeight[0]));
             title[1] = new PositionContent("开奖号码", new Rectangle(_colWidth.Take<int>(1).Sum() + 1, 0, _colWidth[1], _rowHeight[0]));
@@ -199,10 +211,10 @@ namespace DrawTool
             StringFormat format = new StringFormat();
             format.LineAlignment = StringAlignment.Center;  // 更正： 垂直居中
             format.Alignment = StringAlignment.Center;      // 水平居中
-            Font font = new Font("宋体", 12, FontStyle.Regular);
+            Font font = new Font("微软雅黑", 12, FontStyle.Regular);
             Brush brush = Brushes.Black;
 
-            int RowCount = jData.Count > 20 ? 20:jData.Count;
+            int RowCount = jData.Count > 20 ? 20 : jData.Count;
             for (int rowIndex = 0; rowIndex < RowCount; rowIndex++)
             {
                 JObject jRow = (JObject)jData[rowIndex];
@@ -230,7 +242,7 @@ namespace DrawTool
                     else
                     {
                         Rectangle codeRect = cols[i].Rect;
-                        int padding = 20;
+                        int padding = 5;
                         Bitmap numImage = drawNumber(cols[i].Content, cols[i].Rect.Width - padding * 2);
                         _gr.DrawImage(numImage, codeRect.Left + padding, codeRect.Top, cols[i].Rect.Width - padding * 2, _rowHeight[i]);
                     }
@@ -247,25 +259,37 @@ namespace DrawTool
             StringFormat format = new StringFormat();
             format.LineAlignment = StringAlignment.Center;  // 更正： 垂直居中
             format.Alignment = StringAlignment.Center;      // 水平居中
-            Font font = new Font("宋体", 12, FontStyle.Bold);
-            Brush brush = Brushes.Black;
+            Font font = new Font("微软雅黑", 9, FontStyle.Regular);
+            Brush brush = Brushes.White;
 
             int quWidth = (int)(_rowHeight[1] * 0.8);
             int sepWidth = (int)((width - quWidth * 10) / 9);
             Bitmap numMap = new Bitmap(width, _rowHeight[1]);
             string[] numStrList = numText.Split(' ');
             Graphics _grNum = Graphics.FromImage(numMap);
-            //_grNum.SmoothingMode= System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            //_grNum.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-            //_grNum.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-
             quWidth = quWidth >= (int)(_rowHeight[1] * 0.9) ? (int)(_rowHeight[1] * 0.9) : quWidth;
             for (int i = 0; i < numStrList.Length; i++)
             {
                 string numStr = numStrList[i];
                 Rectangle curRect = new Rectangle(i * (sepWidth + quWidth), (_rowHeight[1] - quWidth) / 2, quWidth, quWidth);
-                _grNum.FillRectangle(_numBrush[Int32.Parse(numStr)], curRect);
-                _grNum.DrawString(numStr, font, brush, curRect, format);
+                if (numStr.Length == 2)
+                {
+                    Font font2 = new Font("微软雅黑", 6, FontStyle.Regular);
+                    _grNum.FillRectangle(_numBrush[Int32.Parse(numStr)], curRect);
+                    _grNum.DrawString(numStr, font2, brush, curRect, format);
+                }
+                else if (numStr == "4" || numStr == "1")
+                {
+                    Font font2 = new Font("微软雅黑", 9, FontStyle.Regular);
+                    _grNum.FillRectangle(_numBrush[Int32.Parse(numStr)], curRect);
+                    Brush brush2 = Brushes.Black;
+                    _grNum.DrawString(numStr, font2, brush2, curRect, format);
+                }
+                else
+                {
+                    _grNum.FillRectangle(_numBrush[Int32.Parse(numStr)], curRect);
+                    _grNum.DrawString(numStr, font, brush, curRect, format);
+                }
             }
             _grNum.Dispose();
             return numMap;
@@ -298,22 +322,22 @@ namespace DrawTool
         {
             JArray res = null;
             JObject jData = new JObject();
-            try 
-	        {
+            try
+            {
                 jData = JObject.Parse(jsonData);
-	        }
-	        catch (Exception)
-	        {
-                throw new Exception("JSON字符串反序列化失败") ;
-	        };
-            try 
-	        {	        
-		        res = FormatJObject(jData);
-	        }
-	        catch (Exception ex)
-	        {
-		        throw new Exception("数据解析失败");
-	        }
+            }
+            catch (Exception)
+            {
+                throw new Exception("JSON字符串反序列化失败");
+            };
+            try
+            {
+                res = FormatJObject(jData);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("数据解析失败");
+            }
             return res;
         }
 

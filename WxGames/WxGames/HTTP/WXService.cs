@@ -556,6 +556,8 @@ namespace WxGames.HTTP
                 nav.Add("type", "image/png");
                 //nav.Add("type", "application/octet-stream");
                 nav.Add("lastModifiedDate", date+" "+time);
+                //nav.Add("chunks", "2");
+                //nav.Add("chunk", "1");
                 nav.Add("size", fileSize);
                 nav.Add("mediatype", "pic");
 
@@ -568,7 +570,8 @@ namespace WxGames.HTTP
                 nav.Add("webwx_data_ticket", webwx_data_ticket);
                 nav.Add("pass_ticket", LoginService.Pass_Ticket);
 
-                ret = BaseService.HttpUploadFile(url, fileName, fileName, "image/png", nav);
+               ret = BaseService.HttpUploadFile(url, fileName, fileName, "image/png", nav);
+                //ret = BaseService.HttpUploadFile(url, fileName, fileName, "application/octet-stream", nav);
 
                 if (!ret.Contains("\"Ret\": 0"))
                 {
