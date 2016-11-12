@@ -17,6 +17,8 @@ using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using System.IO;
 using DrawTool;
+using System.Web;
+using System.Media;
 
 namespace WxGames
 {
@@ -182,6 +184,12 @@ namespace WxGames
                 {
                     this.dgvUp.CurrentCell = dgvUp.Rows[CurrentRow].Cells[0];
                 }
+
+                if (list.Count > 0)
+                {
+                    SoundPlayer sndPlayer = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"/19.wav");
+                    sndPlayer.Play();
+                }
             }
         }
 
@@ -252,8 +260,9 @@ namespace WxGames
                 //调用同步积分接口
                 string url = "/members/point/all";
                 string authStake = PanKou.Instance.GetSha1("", url);
+                Log.WriteLogByDate("登陆后，开始调用积分同步接口");
                 string jsonStake = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url, authStake, PanKou.accessKey);
-
+                Log.WriteLogByDate("登陆后，结束调用积分同步接口");
                 if (jsonStake != null)
                 {
                     JObject jobject = JsonConvert.DeserializeObject(jsonStake) as JObject;
@@ -309,10 +318,11 @@ namespace WxGames
             {
                 while (true)
                 {
+                    Log.WriteLogByDate("登陆的同步检查开始");
                     //获取消息列表，并原样输出
                     string sync_flag = frmMainForm.wxs.WxSyncCheck();//同步检查
-
-                    Thread.Sleep(1);
+                    Log.WriteLogByDate("登陆的同步检查结束");
+                    Thread.Sleep(1000);
                 }
 
             })).BeginInvoke(null, null);
@@ -510,9 +520,12 @@ namespace WxGames
                 string json = "";
                 while (true)
                 {
+                    Log.WriteLogByDate("开始按钮，获取configer接口数据");
                     json = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger, auth, PanKou.accessKey);
+                    Log.WriteLogByDate("开始按钮，获取configer接口数据是："+json);
                     if (!string.IsNullOrEmpty(json))
                     {
+                        Log.WriteLogByDate("开始按钮，获取configer接口数据结束");
                         break;
                     }
                     Thread.Sleep(1000);
@@ -587,9 +600,10 @@ namespace WxGames
             {
                 while (Start)
                 {
+                    Log.WriteLogByDate("同步检查开始");
                     //获取消息列表，并原样输出
                     string sync_flag = frmMainForm.wxs.WxSyncCheck();//同步检查
-
+                    Log.WriteLogByDate("同步检查结束");
                     Thread.Sleep(1000);
                 }
 
@@ -731,8 +745,10 @@ namespace WxGames
                 }
                 else if (command == "下")
                 {
+                    Log.WriteLogByDate("昵称是："+nickName);
+
                     //先检查这期有没有参与，有参与不能下分
-                    List<NowMsg> listMsg = data.GetList<NowMsg>(string.Format(" period='{0}' and CommandType in ('买名次','冠亚和','名次大小单双龙虎') ", Perioid), "");
+                    List<NowMsg> listMsg = data.GetList<NowMsg>(string.Format(" period='{0}' and CommandType in ('买名次','冠亚和','名次大小单双龙虎','和大','和小','和单','和双') and msgFromId='{1}' ", Perioid, uin), "");
                     if ((listMsg != null && listMsg.Count <= 0)|| frmMainForm.IsAllowDown)
                     {
                         if (model.TotalScore >= Convert.ToInt32(score))

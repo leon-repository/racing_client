@@ -102,5 +102,51 @@ namespace BLL
             Regex reg = new Regex(@"^[0-9]{1}\d*$|^[0]{1}$");
             return reg.IsMatch(str);
         }
+
+        public static string ClearHtml(this string Content)
+        {
+            Content = Zxj_ReplaceHtml("&#[^>]*;", "*", Content);
+            Content = Zxj_ReplaceHtml("</?marquee[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?object[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?param[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?embed[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?table[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml(" ", "*", Content);
+            Content = Zxj_ReplaceHtml("</?tr[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?th[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?p[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?a[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?img[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?tbody[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?li[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?span[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?div[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?th[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?td[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?script[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("(javascript|jscript|vbscript|vbs):", "*", Content);
+            Content = Zxj_ReplaceHtml("on(mouse|exit|error|click|key)", "*", Content);
+            Content = Zxj_ReplaceHtml("<\\?xml[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("<\\/?[a-z]+:[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?font[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?b[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?u[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?i[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml("</?strong[^>]*>", "*", Content);
+            Content = Zxj_ReplaceHtml(@"\p{Cs}", "*", Content);
+            string clearHtml = Content;
+            return clearHtml;
+        }
+
+        private static string Zxj_ReplaceHtml(string patrn, string strRep, string content)
+        {
+            if (string.IsNullOrEmpty(content))
+            {
+                content = "";
+            }
+            Regex rgEx = new Regex(patrn, RegexOptions.IgnoreCase);
+            string strTxt = rgEx.Replace(content, strRep);
+            return strTxt;
+        }
     }
 }

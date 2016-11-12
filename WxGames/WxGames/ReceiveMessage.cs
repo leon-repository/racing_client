@@ -23,8 +23,9 @@ namespace WxGames
         {
             try
             {
-                Log.WriteLogByDate("接受消息调用成功");
+                Log.WriteLogByDate("接受消息调用开始");
                 NewMethod();
+                Log.WriteLogByDate("接受消息调用结束");
             }
             catch (Exception ex)
             {
@@ -59,7 +60,7 @@ namespace WxGames
                         continue;
                     }
                     qUserName = qun["UserName"].ToString();
-                    qNickName = qun["NickName"].ToString();
+                    qNickName = qun["NickName"].ToString().ClearHtml();
                     qChatRoomOwner = qun["ChatRoomOwner"].ToString();
 
                     JToken memberList = qun["MemberList"];
@@ -67,7 +68,7 @@ namespace WxGames
                     {
                         string uin = member["Uin"].ToString();
                         string userName = member["UserName"].ToString();
-                        string nickName = member["NickName"].ToString().String2HanZi();
+                        string nickName = member["NickName"].ToString().ClearHtml();
                         string pyQuanPin = member["PYQuanPin"].ToString();
                         string remark = member["RemarkPYQuanPin"].ToString();
 
@@ -97,6 +98,16 @@ namespace WxGames
                             modelOrgin.Remark = remark;
                             data.Update<Contact>(modelOrgin, pkList, "");
                         }
+
+                        //根据userName更新nickName
+                        List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
+                        pkList2.Add(new KeyValuePair<string, object>("UserName", userName));
+                        Contact modelOrgin2 = data.First<Contact>(pkList2, "");
+                        if (modelOrgin2 != null)
+                        {
+                            modelOrgin2.NickName = nickName;
+                            data.Update<Contact>(modelOrgin2, pkList2, "");
+                        }
                     }
                 }
             }
@@ -112,7 +123,7 @@ namespace WxGames
                     foreach (JObject member in qunObj["MemberList"])
                     {
                         List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
-                        pkList2.Add(new KeyValuePair<string, object>("NickName", member["NickName"].ToString()));
+                        pkList2.Add(new KeyValuePair<string, object>("NickName", member["NickName"].ToString().ClearHtml()));
                         Contact modelOne = data.First<Contact>(pkList2, "");
                         if (modelOne != null)
                         {
@@ -124,7 +135,56 @@ namespace WxGames
                     }
                 }
             }
-            
+
+            if (!string.IsNullOrEmpty(qun1))//更新本地昵称
+            {
+                JObject qunObj = JsonConvert.DeserializeObject(qun1) as JObject;
+
+                //if (qunObj["MemberList"] != null)
+                //{
+                //    foreach (JObject member in qunObj["MemberList"])
+                //    {
+                //        List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
+                //        pkList2.Add(new KeyValuePair<string, object>("UserName", member["UserName"].ToString()));
+                //        Contact modelOne = data.First<Contact>(pkList2, "");
+                //        if (modelOne != null)
+                //        {
+                //            modelOne.NickName = member["NickName"].ToString().ClearHtml();
+                //            List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
+                //            pkList3.Add(new KeyValuePair<string, object>("UserName", modelOne.UserName));
+                //            data.Update<Contact>(modelOne, pkList3, "");
+                //        }
+                //    }
+                //}
+                if (qunObj["ContactList"][0]["MemberList"] != null)
+                {
+                    foreach (JObject member in qunObj["ContactList"][0]["MemberList"])
+                    {
+                        List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
+                        pkList2.Add(new KeyValuePair<string, object>("UserName", member["UserName"].ToString()));
+                        Contact modelOne = data.First<Contact>(pkList2, "");
+                        if (modelOne != null)
+                        {
+                            modelOne.NickName = member["NickName"].ToString().ClearHtml();
+                            List<KeyValuePair<string, object>> pkList3 = new List<KeyValuePair<string, object>>();
+                            pkList3.Add(new KeyValuePair<string, object>("UUID", modelOne.Uuid));
+                            data.Update<Contact>(modelOne, pkList3, "");
+
+                            //更新contactScore的昵称
+                            List<KeyValuePair<string, object>> pkList4 = new List<KeyValuePair<string, object>>();
+                            pkList4.Add(new KeyValuePair<string, object>("UIN", modelOne.Uin));
+                            ContactScore score = data.First<ContactScore>(pkList4, "");
+                            //score.NickName = modelOne.NickName;
+                            //List<KeyValuePair<string, object>> pkList5 = new List<KeyValuePair<string, object>>();
+                            //pkList5.Add(new KeyValuePair<string, object>("UUID", score.Uuid));
+                            //data.Update<ContactScore>(score, pkList5, "");
+
+                            data.ExecuteSql(string.Format("update contactScore set nickname='{0}' where uuid='{1}'",modelOne.NickName, score.Uuid));
+                        }
+                    }
+                }
+            }
+
 
             //获取到消息
             if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")

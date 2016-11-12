@@ -26,7 +26,9 @@ namespace WxGames
         {
             try
             {
+                Log.WriteLogByDate("Lobby线程开始");
                 Begin();
+                Log.WriteLogByDate("Lobby线程结束");
             }
             catch (Exception ex)
             {
@@ -43,14 +45,18 @@ namespace WxGames
 
             string auth = PanKou.Instance.GetSha1("", urlConfiger);
 
+            Log.WriteLogByDate("开奖线程：获取configer接口");
             string json = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger, auth, PanKou.accessKey);
             if (string.IsNullOrEmpty(json))
             {
+                Log.WriteLogByDate("开奖线程：获取configer接口为空");
                 return;
             }
+            Log.WriteLogByDate("开奖线程：获取configer接口结束");
             JObject configHelper = JsonConvert.DeserializeObject(json) as JObject;
             if (configHelper == null)
             {
+                Log.WriteLogByDate("开奖线程：获取configer接口反序列化失败");
                 return;
             }
             if (configHelper["result"].ToString() != "SUCCESS")
@@ -187,12 +193,15 @@ namespace WxGames
                         string jsonStake = "";
                         while (string.IsNullOrEmpty(jsonStake))
                         {
+                            Log.WriteLogByDate("开奖接口：调用同步积分接口开始");
                             jsonStake = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url, authStake, PanKou.accessKey);
                             if (jsonStake == null)
                             {
                                 Thread.Sleep(500);
+                                Log.WriteLogByDate("调用同步积分接口失败，正在做死循环");
                             }
                         }
+                        Log.WriteLogByDate("开奖接口：调用同步积分接口结束");
                         try
                         {
                             if (jsonStake != null)
@@ -307,8 +316,10 @@ namespace WxGames
                         }
                         //生成图片，并发送
                         string urlConfiger2 = "/racing/web/history";
+                        Log.WriteLogByDate("开始调用历史开奖信息");
                         string json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2, "", PanKou.accessKey);
                         string strJson = json2;
+                        Log.WriteLogByDate("结束调用历史开奖信息");
                         //Log.WriteLogByDate("获取到的历史开奖信息是："+json2);
                         DrawImage image = new DrawImage(550, 500);
                         image.SetSavePath(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
@@ -328,6 +339,7 @@ namespace WxGames
                         image.Draw(jData);
                         image.Save();
                         Thread.Sleep(1000);
+                        Log.WriteLogByDate("生成图片成功");
                         FileInfo file = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
                         frmMainForm.wxs.SendImage("DramImage.png", AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png", file.Length.ToString(), frmMainForm.CurrentWX.UserName, frmMainForm.CurrentQun, Log.GetMD5HashFromFile(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png"));
 
@@ -337,8 +349,9 @@ namespace WxGames
                     {
                         string url2 = "/user/client/history/champion";
                         string authStake2 = PanKou.Instance.GetSha1("" + 10, url2);
+                        Log.WriteLogByDate("开始调用冠军走势接口");
                         string jsonStake2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + url2 + "?nper=10", authStake2, PanKou.accessKey);
-
+                        Log.WriteLogByDate("结束调用冠军走势接口");
                         if (!string.IsNullOrEmpty(jsonStake2))
                         {
                             JObject jobject = JsonConvert.DeserializeObject(jsonStake2) as JObject;
@@ -453,6 +466,7 @@ namespace WxGames
                     {
                         json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2 + "?racingNum=" + frmMainForm.Perioid, auth2, PanKou.accessKey);
                         Thread.Sleep(1000);
+                        Log.WriteLogByDate("获取开奖信息失败，正在做死循环");
                     }
 
                     if (string.IsNullOrEmpty(json2))
@@ -519,7 +533,16 @@ namespace WxGames
                                     {
                                         data.ExecuteSql(string.Format(" update contactscore set totalScore={0} where uin={1}", item.members.points, item.members.wechatSn));
 
-                                        strYinKui += "[" + item.members.nickName + "][剩余积分：" + item.members.points;
+                                        //获取本地昵称
+                                        List<KeyValuePair<string, object>> pkList2 = new List<KeyValuePair<string, object>>();
+                                        pkList2.Add(new KeyValuePair<string, object>("Uin", item.members.wechatSn));
+                                        Contact modelOne = data.First<Contact>(pkList2, "");
+                                        string nickName = item.members.nickName;
+                                        if (modelOne != null)
+                                        {
+                                            nickName = modelOne.NickName;
+                                        }
+                                        strYinKui += "[" + nickName + "][剩余积分：" + item.members.points;
                                         strYinKui += "][盈亏：" + item.memberStake.totalDeficitAmount + "]\r\n";
                                     }
                                 }
