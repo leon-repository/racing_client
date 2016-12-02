@@ -108,6 +108,11 @@ namespace WxGames
         private DataHelper data = new DataHelper(ConfigurationManager.AppSettings["conn"].ToString());
 
         /// <summary>
+        /// 文件序号
+        /// </summary>
+        public static int Count = 0;
+
+        /// <summary>
         /// 消息配置
         /// </summary>
         public static List<Config> Configs = new List<Config>();

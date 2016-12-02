@@ -314,36 +314,45 @@ namespace WxGames
                         {
                             Log.WriteLog(ex);
                         }
-                        //生成图片，并发送
-                        string urlConfiger2 = "/racing/web/history";
-                        Log.WriteLogByDate("开始调用历史开奖信息");
-                        string json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2, "", PanKou.accessKey);
-                        string strJson = json2;
-                        Log.WriteLogByDate("结束调用历史开奖信息");
-                        //Log.WriteLogByDate("获取到的历史开奖信息是："+json2);
-                        DrawImage image = new DrawImage(550, 500);
-                        image.SetSavePath(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
-                        image.SetFramePen(Color.Gray);
-                        image.SetNumberBackgroundColor(1, Color.FromArgb(245, 245, 245));
-                        image.SetNumberBackgroundColor(2, Color.FromArgb(249, 140, 21));
-                        image.SetNumberBackgroundColor(3, Color.FromArgb(40, 83, 141));
-                        image.SetNumberBackgroundColor(4, Color.FromArgb(251, 227, 24));
-                        image.SetNumberBackgroundColor(5, Color.FromArgb(102, 102, 102));
-                        image.SetNumberBackgroundColor(6, Color.FromArgb(41, 134, 73));
-                        image.SetNumberBackgroundColor(7, Color.FromArgb(162, 163, 164));
-                        image.SetNumberBackgroundColor(8, Color.FromArgb(60, 214, 233));
-                        image.SetNumberBackgroundColor(9, Color.FromArgb(224, 57, 58));
-                        image.SetNumberBackgroundColor(10, Color.FromArgb(46, 52, 180));
-                        JArray jData = new JArray();
-                        jData = DataFormat.FormatString(strJson);
-                        image.Draw(jData);
-                        image.Save();
-                        Thread.Sleep(1000);
-                        Log.WriteLogByDate("生成图片成功");
-                        FileInfo file = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
-                        frmMainForm.wxs.SendImage("DramImage.png", AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png", file.Length.ToString(), frmMainForm.CurrentWX.UserName, frmMainForm.CurrentQun, Log.GetMD5HashFromFile(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png"));
+                        try
+                        {
+                            //生成图片，并发送
+                            string urlConfiger2 = "/racing/web/history";
+                            Log.WriteLogByDate("开始调用历史开奖信息");
+                            string json2 = WebService.SendGetRequest2(ConfigHelper.GetXElementNodeValue("Client", "url") + urlConfiger2, "", PanKou.accessKey);
+                            string strJson = json2;
+                            Log.WriteLogByDate("结束调用历史开奖信息");
+                            //Log.WriteLogByDate("获取到的历史开奖信息是："+json2);
+                            DrawImage image = new DrawImage(550, 500);
+                            image.SetSavePath(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
+                            image.SetFramePen(Color.Gray);
+                            image.SetNumberBackgroundColor(1, Color.FromArgb(245, 245, 245));
+                            image.SetNumberBackgroundColor(2, Color.FromArgb(249, 140, 21));
+                            image.SetNumberBackgroundColor(3, Color.FromArgb(40, 83, 141));
+                            image.SetNumberBackgroundColor(4, Color.FromArgb(251, 227, 24));
+                            image.SetNumberBackgroundColor(5, Color.FromArgb(102, 102, 102));
+                            image.SetNumberBackgroundColor(6, Color.FromArgb(41, 134, 73));
+                            image.SetNumberBackgroundColor(7, Color.FromArgb(162, 163, 164));
+                            image.SetNumberBackgroundColor(8, Color.FromArgb(60, 214, 233));
+                            image.SetNumberBackgroundColor(9, Color.FromArgb(224, 57, 58));
+                            image.SetNumberBackgroundColor(10, Color.FromArgb(46, 52, 180));
+                            JArray jData = new JArray();
+                            jData = DataFormat.FormatString(strJson);
+                            image.Draw(jData);
+                            image.Save();
+                            Thread.Sleep(1500);
+                            Log.WriteLogByDate("生成图片成功");
+                            FileInfo file = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png");
+                            frmMainForm.wxs.SendImage("DramImage.png", AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png", file.Length.ToString(), frmMainForm.CurrentWX.UserName, frmMainForm.CurrentQun, Log.GetMD5HashFromFile(AppDomain.CurrentDomain.BaseDirectory + "\\DramImage.png"));
 
-                        content = content.Replace("[历史]", "");
+                            content = content.Replace("[历史]", "");
+                        }
+                        catch (Exception ex)
+                        {
+                            //生成图片失败
+                            Log.WriteLogByDate("发送图片失败100");
+                            Log.WriteLog(ex);
+                        }
                     }
                     if (content.Contains("[冠军走势]"))
                     {

@@ -228,76 +228,96 @@ namespace WxGames.HTTP
 
         public static string HttpUploadFile(string url, string file, string paramName, string contentType, NameValueCollection nvc)
         {
-            string result = string.Empty;
-            string boundary = "----WebKitFormBoundary4506GCImvIQDt1jF";
-            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
-
-            HttpWebRequest wr = (HttpWebRequest)WebRequest.Create(url);
-            wr.ContentType = "multipart/form-data; boundary=" + boundary;
-            wr.Method = "POST";
-            wr.KeepAlive = true;
-            wr.Credentials = System.Net.CredentialCache.DefaultCredentials;
-
-            if (CookiesContainer == null)
-            {
-                CookiesContainer = new CookieContainer();
-            }
-            wr.CookieContainer = CookiesContainer;  //启用cookie
-
-            Stream rs = wr.GetRequestStream();
-
-            string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
-            foreach (string key in nvc.Keys)
-            {
-                rs.Write(boundarybytes, 0, boundarybytes.Length);
-                string formitem = string.Format(formdataTemplate, key, nvc[key]);
-                byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
-                rs.Write(formitembytes, 0, formitembytes.Length);
-            }
-            rs.Write(boundarybytes, 0, boundarybytes.Length);
-
-            string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
-            string header = string.Format(headerTemplate, "filename", file, contentType);
-            byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
-            rs.Write(headerbytes, 0, headerbytes.Length);
-
-            FileStream fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
-            byte[] buffer = new byte[4096];
-            int bytesRead = 0;
-            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
-            {
-                rs.Write(buffer, 0, bytesRead);
-            }
-            fileStream.Close();
-
-            byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
-            rs.Write(trailer, 0, trailer.Length);
-            rs.Close();
-
-            WebResponse wresp = null;
             try
             {
+                Log.WriteLogByDate("参数列表：url=" + url + ",file=" + file + ",paramName=" + paramName + ",contentType=" + contentType + ",");
 
-                wresp = wr.GetResponse();
-                Stream stream2 = wresp.GetResponseStream();
-                StreamReader reader2 = new StreamReader(stream2);
+                string result = string.Empty;
+                Log.WriteLogByDate("执行1");
+                string boundary = "----WebKitFormBoundary4506GCImvIQDt1jF";
+                byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+                Log.WriteLogByDate("执行2");
+                HttpWebRequest wr = (HttpWebRequest)WebRequest.Create(url);
+                Log.WriteLogByDate("执行3");
+                wr.ContentType = "multipart/form-data; boundary=" + boundary;
+                wr.Method = "POST";
+                wr.KeepAlive = true;
+                wr.Credentials = System.Net.CredentialCache.DefaultCredentials;
 
-                result = reader2.ReadToEnd();
+                if (CookiesContainer == null)
+                {
+                    CookiesContainer = new CookieContainer();
+                }
+                wr.CookieContainer = CookiesContainer;  //启用cookie
+                Log.WriteLogByDate("执行4");
+                Stream rs = wr.GetRequestStream();
+                Log.WriteLogByDate("执行5");
+                string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
+                foreach (string key in nvc.Keys)
+                {
+                    rs.Write(boundarybytes, 0, boundarybytes.Length);
+                    string formitem = string.Format(formdataTemplate, key, nvc[key]);
+                    byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+                    rs.Write(formitembytes, 0, formitembytes.Length);
+                }
+
+                Log.WriteLogByDate("执行6");
+                rs.Write(boundarybytes, 0, boundarybytes.Length);
+                Log.WriteLogByDate("执行7");
+                string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
+                string header = string.Format(headerTemplate, "filename", file, contentType);
+                byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+                Log.WriteLogByDate("执行8");
+                rs.Write(headerbytes, 0, headerbytes.Length);
+                Log.WriteLogByDate("执行9");
+                FileStream fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
+                Log.WriteLogByDate("执行10");
+                byte[] buffer = new byte[4096];
+                int bytesRead = 0;
+                while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+                {
+                    rs.Write(buffer, 0, bytesRead);
+                }
+                Log.WriteLogByDate("执行11");
+                fileStream.Close();
+                Log.WriteLogByDate("执行12");
+                byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+                Log.WriteLogByDate("执行13");
+                rs.Write(trailer, 0, trailer.Length);
+                rs.Close();
+                Log.WriteLogByDate("执行14");
+                WebResponse wresp = null;
+                try
+                {
+
+                    wresp = wr.GetResponse();
+                    Stream stream2 = wresp.GetResponseStream();
+                    StreamReader reader2 = new StreamReader(stream2);
+
+                    result = reader2.ReadToEnd();
+                }
+                catch (Exception ex)
+                {
+                    if (wresp != null)
+                    {
+                        wresp.Close();
+                        wresp = null;
+                    }
+                }
+                finally
+                {
+                    wr = null;
+                }
+
+                return result;
             }
             catch (Exception ex)
             {
-                if (wresp != null)
-                {
-                    wresp.Close();
-                    wresp = null;
-                }
+                Log.WriteLogByDate("发生图片：发生异常");
+                Log.WriteLog(ex);
+                return "";
             }
-            finally
-            {
-                wr = null;
-            }
-
-            return result;
+            
         }
 
 

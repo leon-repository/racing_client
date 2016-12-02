@@ -360,7 +360,7 @@ namespace WxGames.HTTP
                         //bytes = BaseService.SendPostRequest(item + sid.Value + "&skey=" + LoginService.SKey, sync_json);
 
                         string sync_str2 = Encoding.UTF8.GetString(bytes);
-                       // Log.WriteLogByDate("微信返回结果："+sync_str2);
+                        Log.WriteLogByDate("微信返回结果："+sync_str2);
                         //if (sync_str2.Contains("1100"))
                         //{
                         //    continue;
@@ -381,6 +381,7 @@ namespace WxGames.HTTP
                     }
                     catch (Exception ex)
                     {
+                        
                         Log.WriteLog(ex);
                         continue;
                     }
@@ -532,94 +533,111 @@ namespace WxGames.HTTP
         {
             string ret="";
             string send_result = "";
-            List<string> listCheckUrl = new List<string>();
-            listCheckUrl.Add("file.wx.qq.com");
-            listCheckUrl.Add("file2.wx.qq.com");
-            foreach (string item in listCheckUrl)
+            try
             {
-                StringBuilder s = new StringBuilder();//s数组中存放着需要的数字
-                Random ra = new Random();
-                for (int i = 0; i < 15; i++)//遍历数组显示结果
+                List<string> listCheckUrl = new List<string>();
+                listCheckUrl.Add("file.wx.qq.com");
+                listCheckUrl.Add("file2.wx.qq.com");
+                foreach (string item in listCheckUrl)
                 {
-                    s.Append(ra.Next(1, 10));
+                    StringBuilder s = new StringBuilder();//s数组中存放着需要的数字
+                    Random ra = new Random();
+                    for (int i = 0; i < 15; i++)//遍历数组显示结果
+                    {
+                        s.Append(ra.Next(1, 10));
+                    }
+
+                    string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxuploadmedia?f=json";
+
+                    string date = DateTime.Now.ToString("yyyy-MM-dd");
+                    date = date.Replace("-", "/");
+                    string time = DateTime.Now.ToString("ttH:mm:ss");
+
+                    NameValueCollection nav = new NameValueCollection();
+                    nav.Add("id", "WU_FILE_"+frmMainForm.Count);
+                    nav.Add("name", fileName);
+                    nav.Add("type", "image/png");
+                    //nav.Add("type", "application/octet-stream");
+                    nav.Add("lastModifiedDate", date + " " + time);
+                    //nav.Add("chunks", "2");
+                    //nav.Add("chunk", "1");
+                    nav.Add("size", fileSize);
+                    nav.Add("mediatype", "pic");
+
+                    Cookie sid = BaseService.GetCookie("wxsid");
+                    Cookie uin = BaseService.GetCookie("wxuin");
+                    string baseRequest = "{ \"UploadType\":2,\"BaseRequest\":{ \"Uin\":" + uin.Value + ",\"Sid\":\"" + sid.Value + "\",\"Skey\":\"" + LoginService.SKey + "\",\"DeviceID\":\"e" + s.ToString() + "\"},\"ClientMediaId\":" + DateTime.Now.DateTimeToUnixTimestamp() + ",\"TotalLen\":" + fileSize + ",\"StartPos\":0,\"DataLen\":" + fileSize + ",\"MediaType\":4,\"FromUserName\":\"" + fromUser + "\",\"ToUserName\":\"" + toUser + "\",\"FileMd5\":\"" + fileMD5 + "\"}";
+
+                    nav.Add("uploadmediarequest", baseRequest);
+                    string webwx_data_ticket = BaseService.GetCookie("webwx_data_ticket").Value;
+                    nav.Add("webwx_data_ticket", webwx_data_ticket);
+                    nav.Add("pass_ticket", LoginService.Pass_Ticket);
+
+                    ret = BaseService.HttpUploadFile(url, fileName, fileName, "image/png", nav);
+                    //ret = BaseService.HttpUploadFile(url, fileName, fileName, "application/octet-stream", nav);
+                    Log.WriteLogByDate("发送图片ret="+ret);
+                    if (string.IsNullOrEmpty(ret))
+                    {
+                        continue;
+                    }
+
+                    if (!ret.Contains("\"Ret\": 0"))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
 
-                string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxuploadmedia?f=json";
+               
 
-                string date = DateTime.Now.ToString("yyyy-MM-dd");
-                date = date.Replace("-", "/");
-                string time = DateTime.Now.ToString("ttH:mm:ss");
+                //发送图片
+                JObject jobject = JsonConvert.DeserializeObject(ret) as JObject;
+                string mediaId = jobject["MediaId"].ToString();
 
-                NameValueCollection nav = new NameValueCollection();
-                nav.Add("id", "WU_FILE_0");
-                nav.Add("name", fileName);
-                nav.Add("type", "image/png");
-                //nav.Add("type", "application/octet-stream");
-                nav.Add("lastModifiedDate", date+" "+time);
-                //nav.Add("chunks", "2");
-                //nav.Add("chunk", "1");
-                nav.Add("size", fileSize);
-                nav.Add("mediatype", "pic");
+                List<string> listCheckUrl2 = new List<string>();
+                listCheckUrl2.Add("wx.qq.com");
+                listCheckUrl2.Add("wx2.qq.com");
 
-                Cookie sid = BaseService.GetCookie("wxsid");
-                Cookie uin = BaseService.GetCookie("wxuin");
-                string baseRequest = "{ \"UploadType\":2,\"BaseRequest\":{ \"Uin\":" + uin.Value + ",\"Sid\":\"" + sid.Value + "\",\"Skey\":\"" + LoginService.SKey + "\",\"DeviceID\":\"e"+ s.ToString() + "\"},\"ClientMediaId\":" + DateTime.Now.DateTimeToUnixTimestamp() + ",\"TotalLen\":" + fileSize + ",\"StartPos\":0,\"DataLen\":" + fileSize + ",\"MediaType\":4,\"FromUserName\":\"" + fromUser + "\",\"ToUserName\":\"" + toUser + "\",\"FileMd5\":\"" + fileMD5 + "\"}";
-
-                nav.Add("uploadmediarequest", baseRequest);
-                string webwx_data_ticket = BaseService.GetCookie("webwx_data_ticket").Value;
-                nav.Add("webwx_data_ticket", webwx_data_ticket);
-                nav.Add("pass_ticket", LoginService.Pass_Ticket);
-
-               ret = BaseService.HttpUploadFile(url, fileName, fileName, "image/png", nav);
-                //ret = BaseService.HttpUploadFile(url, fileName, fileName, "application/octet-stream", nav);
-
-                if (!ret.Contains("\"Ret\": 0"))
+                foreach (string item in listCheckUrl2)
                 {
-                    continue;
-                }
-                else
-                {
-                    break;
+                    StringBuilder s = new StringBuilder();//s数组中存放着需要的数字
+                    Random ra = new Random();
+                    for (int i = 0; i < 15; i++)//遍历数组显示结果
+                    {
+                        s.Append(ra.Next(1, 10));
+                    }
+
+                    string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxsendmsgimg?fun=async&f=json&pass_ticket=" + LoginService.Pass_Ticket;
+
+                    Cookie sid = BaseService.GetCookie("wxsid");
+                    Cookie uin = BaseService.GetCookie("wxuin");
+                    string baseRequest = "{\"BaseRequest\":{ \"Uin\":" + uin.Value + ",\"Sid\":\"" + sid.Value + "\",\"Skey\":\"" + LoginService.SKey + "\",\"DeviceID\":\"e" + s.ToString() + "\"},\"Msg\":{\"Type\":3,\"MediaId\":\"" + mediaId + "\",\"FromUserName\":\"" + fromUser + "\",\"ToUserName\":\"" + toUser + "\",\"LocalID\":" + DateTime.Now.DateTimeToUnixTimestamp() + ",\"ClientMsgId\":" + DateTime.Now.DateTimeToUnixTimestamp() + "}}";
+
+                    byte[] bytes = null;
+                    bytes = BaseService.SendPostRequest(url, baseRequest);
+                    if (bytes == null)
+                    {
+                        continue;
+                    }
+                    send_result = Encoding.UTF8.GetString(bytes);
+                    if (!send_result.Contains("\"Ret\":0"))
+                    {
+                        continue;
+                    }
                 }
             }
-
-            //发送图片
-            JObject jobject = JsonConvert.DeserializeObject(ret) as JObject;
-            string mediaId = jobject["MediaId"].ToString();
-
-            List<string> listCheckUrl2 = new List<string>();
-            listCheckUrl2.Add("wx.qq.com");
-            listCheckUrl2.Add("wx2.qq.com");
-
-            foreach (string item in listCheckUrl2)
+            catch (Exception ex)
             {
-                StringBuilder s = new StringBuilder();//s数组中存放着需要的数字
-                Random ra = new Random();
-                for (int i = 0; i < 15; i++)//遍历数组显示结果
-                {
-                    s.Append(ra.Next(1, 10));
-                }
-
-                string url = "https://" + item + "/cgi-bin/mmwebwx-bin/webwxsendmsgimg?fun=async&f=json&pass_ticket="+LoginService.Pass_Ticket;
-
-                Cookie sid = BaseService.GetCookie("wxsid");
-                Cookie uin = BaseService.GetCookie("wxuin");
-                string baseRequest = "{\"BaseRequest\":{ \"Uin\":" + uin.Value + ",\"Sid\":\"" + sid.Value + "\",\"Skey\":\"" + LoginService.SKey + "\",\"DeviceID\":\"e" + s.ToString() + "\"},\"Msg\":{\"Type\":3,\"MediaId\":\""+ mediaId + "\",\"FromUserName\":\""+fromUser+"\",\"ToUserName\":\""+toUser+"\",\"LocalID\":"+ DateTime.Now.DateTimeToUnixTimestamp() + ",\"ClientMsgId\":"+ DateTime.Now.DateTimeToUnixTimestamp() + "}}";
-
-                byte[] bytes = null;
-                bytes = BaseService.SendPostRequest(url, baseRequest);
-                if (bytes == null)
-                {
-                    continue;
-                }
-                send_result = Encoding.UTF8.GetString(bytes);
-                if (!send_result.Contains("\"Ret\":0"))
-                {
-                    continue;
-                }
+                //发生图片
+                Log.WriteLogByDate("发送图片失败");
+                Log.WriteLog(ex);
             }
 
-
+            frmMainForm.Count++;
+            Log.WriteLogByDate("发送图片返回结果："+send_result);
             return send_result;
         }
     }

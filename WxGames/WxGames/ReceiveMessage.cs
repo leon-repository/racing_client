@@ -114,6 +114,8 @@ namespace WxGames
 
             //获取群里所有联系人，无uuin，根据昵称来更新userName和uin
             string qun1 = frmMainForm.wxs.GetQun(frmMainForm.CurrentQun);
+            //Log.WriteLogByDate("群成员列表json:"+qun1);
+
             if (!string.IsNullOrEmpty(qun1))
             {
                 JObject qunObj = JsonConvert.DeserializeObject(qun1) as JObject;
@@ -136,6 +138,7 @@ namespace WxGames
                 }
             }
 
+            Log.WriteLogByDate("开始更新本地昵称：qunObj[\"ContactList\"][0][\"MemberList\"]");
             if (!string.IsNullOrEmpty(qun1))//更新本地昵称
             {
                 JObject qunObj = JsonConvert.DeserializeObject(qun1) as JObject;
@@ -178,14 +181,16 @@ namespace WxGames
                             //List<KeyValuePair<string, object>> pkList5 = new List<KeyValuePair<string, object>>();
                             //pkList5.Add(new KeyValuePair<string, object>("UUID", score.Uuid));
                             //data.Update<ContactScore>(score, pkList5, "");
-
-                            data.ExecuteSql(string.Format("update contactScore set nickname='{0}' where uuid='{1}'",modelOne.NickName, score.Uuid));
-                        }
+                            if (score != null)
+                            {
+                                data.ExecuteSql(string.Format("update contactScore set nickname='{0}' where uuid='{1}'", modelOne.NickName, score.Uuid));
+                            }
+                         }
                     }
                 }
             }
 
-
+            Log.WriteLogByDate("开始保存消息");
             //获取到消息
             if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")
             {

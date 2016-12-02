@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="LobbyTests.cs" />
     <Compile Include="Msg2WxMsgTests.cs" />
+    <Compile Include="OrderFirstCheckTests.cs" />
     <Compile Include="OrderManagerTests.cs" />
     <Compile Include="PanKouTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
