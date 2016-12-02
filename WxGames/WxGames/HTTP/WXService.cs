@@ -322,7 +322,7 @@ namespace WxGames.HTTP
                 s.Append(ra.Next(1, 10));
             }
 
-            string sync_json = "{{\"BaseRequest\" : {{\"DeviceID\":\"e"+s.ToString()+"\",\"Sid\":\"{1}\", \"Skey\":\"{5}\", \"Uin\":\"{0}\"}},\"SyncKey\" : {{\"Count\":{2},\"List\":[{3}]}},\"rr\" :{4}}}";
+            string sync_json = "{{\"BaseRequest\" : {{\"DeviceID\":\"e" + s.ToString() + "\",\"Sid\":\"{1}\", \"Skey\":\"{5}\", \"Uin\":\"{0}\"}},\"SyncKey\" : {{\"Count\":{2},\"List\":[{3}]}},\"rr\" :{4}}}";
             Cookie sid = BaseService.GetCookie("wxsid");
             Cookie uin = BaseService.GetCookie("wxuin");
 
@@ -353,14 +353,14 @@ namespace WxGames.HTTP
                 {
                     try
                     {
-                        
+
                         string url = item + sid.Value + "&lang=zh_CN&skey=" + LoginService.SKey + "&pass_ticket=" + LoginService.Pass_Ticket;
                         //Log.WriteLogByDate("微信同步url:" + url);
                         bytes = BaseService.SendPostRequestAndSetCookies(url, sync_json);
                         //bytes = BaseService.SendPostRequest(item + sid.Value + "&skey=" + LoginService.SKey, sync_json);
 
                         string sync_str2 = Encoding.UTF8.GetString(bytes);
-                        Log.WriteLogByDate("微信返回结果："+sync_str2);
+                        Log.WriteLogByDate("微信返回结果：" + sync_str2);
                         //if (sync_str2.Contains("1100"))
                         //{
                         //    continue;
@@ -371,7 +371,7 @@ namespace WxGames.HTTP
                         //}
                         if (sync_str2.Contains("\"Ret\": 0"))
                         {
-                           // Log.WriteLogByDate("消息同步返回结果是："+sync_str2);
+                            // Log.WriteLogByDate("消息同步返回结果是："+sync_str2);
                             break;
                         }
                         else
@@ -381,13 +381,13 @@ namespace WxGames.HTTP
                     }
                     catch (Exception ex)
                     {
-                        
+
                         Log.WriteLog(ex);
                         continue;
                     }
                 }
 
-               
+
                 if (bytes == null || bytes.Length == 0)
                 {
                     return null;
@@ -431,7 +431,7 @@ namespace WxGames.HTTP
 
             string msg_json = "{{" +
             "\"BaseRequest\":{{" +
-                "\"DeviceID\" : \"e"+s.ToString()+"\"," +
+                "\"DeviceID\" : \"e" + s.ToString() + "\"," +
                 "\"Sid\" : \"{0}\"," +
                 "\"Skey\" : \"{6}\"," +
                 "\"Uin\" : \"{1}\"" +
@@ -531,7 +531,7 @@ namespace WxGames.HTTP
 
         public string SendImage(string fileName, string filePath, string fileSize, string fromUser, string toUser, string fileMD5)
         {
-            string ret="";
+            string ret = "";
             string send_result = "";
             try
             {
@@ -554,7 +554,7 @@ namespace WxGames.HTTP
                     string time = DateTime.Now.ToString("ttH:mm:ss");
 
                     NameValueCollection nav = new NameValueCollection();
-                    nav.Add("id", "WU_FILE_"+frmMainForm.Count);
+                    nav.Add("id", "WU_FILE_" + frmMainForm.Count);
                     nav.Add("name", fileName);
                     nav.Add("type", "image/png");
                     //nav.Add("type", "application/octet-stream");
@@ -566,16 +566,37 @@ namespace WxGames.HTTP
 
                     Cookie sid = BaseService.GetCookie("wxsid");
                     Cookie uin = BaseService.GetCookie("wxuin");
+
+                    if (sid == null)
+                    {
+                        Log.WriteLogByDate("sid为空了");
+                    }
+                    if (uin == null)
+                    {
+                        Log.WriteLogByDate("uin为空了");
+                    }
+
                     string baseRequest = "{ \"UploadType\":2,\"BaseRequest\":{ \"Uin\":" + uin.Value + ",\"Sid\":\"" + sid.Value + "\",\"Skey\":\"" + LoginService.SKey + "\",\"DeviceID\":\"e" + s.ToString() + "\"},\"ClientMediaId\":" + DateTime.Now.DateTimeToUnixTimestamp() + ",\"TotalLen\":" + fileSize + ",\"StartPos\":0,\"DataLen\":" + fileSize + ",\"MediaType\":4,\"FromUserName\":\"" + fromUser + "\",\"ToUserName\":\"" + toUser + "\",\"FileMd5\":\"" + fileMD5 + "\"}";
 
                     nav.Add("uploadmediarequest", baseRequest);
-                    string webwx_data_ticket = BaseService.GetCookie("webwx_data_ticket").Value;
-                    nav.Add("webwx_data_ticket", webwx_data_ticket);
+                    //string webwx_data_ticket = BaseService.GetCookie("webwx_data_ticket").Value;
+                    Cookie webwx_data_ticket = BaseService.GetCookie("webwx_data_ticket");
+
+                    if (webwx_data_ticket != null)
+                    {
+                        LoginService.webwx_data_ticket = webwx_data_ticket.Value;
+                    }
+                    else
+                    {
+                        Log.WriteLogByDate("webwx_data_ticket为空了");
+                    }
+
+                    nav.Add("webwx_data_ticket", LoginService.webwx_data_ticket);
                     nav.Add("pass_ticket", LoginService.Pass_Ticket);
 
                     ret = BaseService.HttpUploadFile(url, fileName, fileName, "image/png", nav);
                     //ret = BaseService.HttpUploadFile(url, fileName, fileName, "application/octet-stream", nav);
-                    Log.WriteLogByDate("发送图片ret="+ret);
+                    Log.WriteLogByDate("发送图片ret=" + ret);
                     if (string.IsNullOrEmpty(ret))
                     {
                         continue;
@@ -591,7 +612,7 @@ namespace WxGames.HTTP
                     }
                 }
 
-               
+
 
                 //发送图片
                 JObject jobject = JsonConvert.DeserializeObject(ret) as JObject;
@@ -637,7 +658,7 @@ namespace WxGames.HTTP
             }
 
             frmMainForm.Count++;
-            Log.WriteLogByDate("发送图片返回结果："+send_result);
+            Log.WriteLogByDate("发送图片返回结果：" + send_result);
             return send_result;
         }
     }

@@ -17,6 +17,8 @@ namespace WxGames.HTTP
         public static string SKey = "";
         private static string _session_id = null;
 
+        public static string webwx_data_ticket = "";
+
         //获取会话ID的URL
         private static string _session_id_url = "https://login.weixin.qq.com/jslogin?appid=wx782c26e4c19acffb";
         //获取二维码的URL
